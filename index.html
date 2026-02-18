@@ -1,0 +1,94 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acces formation</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; min-height:100vh; display:grid; place-items:center; background:#f5efe8; }
+    .card { width:min(92vw,500px); background:#fff; border:1px solid #e5d8cc; border-radius:12px; padding:22px; }
+    h1 { margin:0 0 10px; font-size:28px; }
+    p { margin:0 0 14px; color:#5f5148; }
+    input, button { width:100%; padding:11px 12px; border-radius:10px; font-size:16px; }
+    input { border:1px solid #ccb9a9; margin-bottom:10px; }
+    button { border:0; background:#b45c42; color:#fff; cursor:pointer; font-weight:700; }
+    .secondary { margin-top:8px; background:#2f6f7f; }
+    #error { margin-top:10px; min-height:20px; color:#8e2f2f; font-size:14px; }
+    #checkoutMsg { margin-top:10px; min-height:20px; color:#5f5148; font-size:14px; }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Formation Brand Studio</h1>
+    <p>Entre ton code d'acces.</p>
+    <form id="loginForm">
+      <input id="accessCode" type="password" autocomplete="off" required />
+      <button type="submit">Entrer</button>
+      <div id="error" aria-live="polite"></div>
+    </form>
+
+    <p style="margin-top:16px">Pas encore de code ?</p>
+    <button id="buyBtn" type="button" class="secondary">Souscrire à la formation</button>
+    <div id="checkoutMsg" aria-live="polite"></div>
+  </main>
+
+  <script>
+    const VALID_CODES_FALLBACK = ["MARINE2026", "BRANDVIP"];
+    const AUTH_KEY = "brandstudio_access_granted";
+    const TARGET_PAGE = "En route vers ta nouvelle stratégie de marque 295057792efe80aabdfeebdd4704fcac.html";
+
+    if (localStorage.getItem(AUTH_KEY) === "1") {
+      window.location.href = TARGET_PAGE;
+    }
+
+    async function validateCode(code) {
+      try {
+        const res = await fetch("/api/validate-code", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code })
+        });
+
+        if (!res.ok) return VALID_CODES_FALLBACK.includes(code);
+        const json = await res.json();
+        return !!json.valid;
+      } catch (e) {
+        return VALID_CODES_FALLBACK.includes(code);
+      }
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const input = document.getElementById("accessCode");
+      const error = document.getElementById("error");
+      const code = input.value.trim().toUpperCase();
+      error.textContent = "";
+
+      const ok = await validateCode(code);
+      if (ok) {
+        localStorage.setItem(AUTH_KEY, "1");
+        window.location.href = TARGET_PAGE;
+      } else {
+        error.textContent = "Code invalide.";
+        input.select();
+      }
+    });
+
+    document.getElementById("buyBtn").addEventListener("click", async function () {
+      const msg = document.getElementById("checkoutMsg");
+      msg.textContent = "Redirection vers le paiement...";
+      try {
+        const res = await fetch("/api/create-checkout-session", { method: "POST" });
+        const json = await res.json();
+        if (!res.ok || !json.url) {
+          msg.textContent = "Impossible de lancer le paiement pour l'instant.";
+          return;
+        }
+        window.location.href = json.url;
+      } catch (e) {
+        msg.textContent = "Erreur réseau pendant la création du paiement.";
+      }
+    });
+  </script>
+</body>
+</html>

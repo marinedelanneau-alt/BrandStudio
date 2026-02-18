@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiement confirme</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;min-height:100vh;display:grid;place-items:center;background:#f6f0e9;color:#2f2621;padding:20px}
+    .card{width:min(92vw,620px);background:#fff;border:1px solid #e7dbcf;border-radius:14px;padding:24px}
+    h1{margin:0 0 10px;font-size:30px}
+    p{margin:0 0 12px;color:#5f5148}
+    .code{margin:14px 0;padding:12px;border-radius:10px;background:#f8f3ed;border:1px dashed #cdb8a7;font-size:26px;font-weight:700;letter-spacing:.06em}
+    .muted{font-size:13px;color:#796b61}
+    .btn{display:inline-block;margin-top:14px;text-decoration:none;background:#2f6f7f;color:#fff;padding:10px 14px;border-radius:10px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Paiement confirmé</h1>
+    <p>Ton accès est en cours de création.</p>
+    <div id="code" class="code">Génération du code...</div>
+    <p class="muted">Conserve ce code, il te servira pour te connecter à la formation.</p>
+    <a class="btn" href="index.html">Retour à la connexion</a>
+  </main>
+
+  <script>
+    async function run() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get("session_id");
+      const codeEl = document.getElementById("code");
+
+      if (!sessionId) {
+        codeEl.textContent = "Session introuvable";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/issue-access-code", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ session_id: sessionId })
+        });
+
+        const json = await res.json();
+        if (!res.ok || !json.code) {
+          codeEl.textContent = "Erreur de génération";
+          return;
+        }
+
+        codeEl.textContent = json.code;
+      } catch (e) {
+        codeEl.textContent = "Erreur réseau";
+      }
+    }
+
+    run();
+  </script>
+</body>
+</html>
