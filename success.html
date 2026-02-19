@@ -43,7 +43,8 @@
 
         const json = await res.json();
         if (!res.ok || !json.code) {
-          codeEl.textContent = "Erreur de génération";
+          const detail = json && json.error ? `: ${json.error}` : "";
+          codeEl.textContent = "Erreur de génération" + detail;
           return;
         }
 
@@ -57,3 +58,5 @@
   </script>
 </body>
 </html>
+
+
