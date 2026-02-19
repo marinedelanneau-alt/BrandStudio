@@ -36,10 +36,13 @@ module.exports = async function handler(req, res) {
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ url: session.url }));
-  } catch (err) {
+    res.end(JSON.stringify({ url: session.url   } catch (err) {
+    console.error("Stripe checkout error:", err);
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Creation checkout impossible" }));
+    res.end(JSON.stringify({
+      error: "Creation checkout impossible",
+      details: err && err.message ? err.message : "unknown"
+    }));
   }
-};
+
