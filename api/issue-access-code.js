@@ -17,6 +17,10 @@ async function redisGet(redis, key) {
     method: "GET",
     headers: { Authorization: `Bearer ${redis.token}` }
   });
+  if (!resp.ok) {
+    const raw = await resp.text();
+    throw new Error(`Redis GET failed (${resp.status}): ${raw || "unknown"}`);
+  }
   const data = await resp.json();
   const raw = data ? data.result : null;
   if (raw == null) return null;
@@ -34,7 +38,10 @@ async function redisSet(redis, key, value) {
     method: "POST",
     headers: { Authorization: `Bearer ${redis.token}` }
   });
-  if (!resp.ok) throw new Error(`Redis set failed: ${resp.status}`);
+  if (!resp.ok) {
+    const body = await resp.text();
+    throw new Error(`Redis SET failed (${resp.status}): ${body || "unknown"}`);
+  }
 }
 
 function randomCode() {
@@ -144,6 +151,11 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Generation code impossible", details: (err && err.message) || "unknown" }));
+    res.end(
+      JSON.stringify({
+        error: "Generation code impossible",
+        details: (err && err.message) || "unknown"
+      })
+    );
   }
 };

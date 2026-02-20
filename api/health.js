@@ -44,15 +44,60 @@ async function stripeCheck(secretKey, priceId) {
   }
 }
 
+async function redisWriteCheck(redisUrl, redisToken) {
+  if (!redisUrl || !redisToken) {
+    return { redis_write_ok: false, redis_write_error: "missing_redis_config" };
+  }
+
+  const base = String(redisUrl).replace(/\/+$/, "");
+  const key = `healthcheck:${Date.now()}`;
+  const val = "ok";
+  try {
+    const setResp = await fetch(`${base}/set/${encodeURIComponent(key)}/${encodeURIComponent(val)}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${redisToken}` }
+    });
+    if (!setResp.ok) {
+      const setRaw = await setResp.text();
+      return {
+        redis_write_ok: false,
+        redis_write_error: `set_failed_${setResp.status}:${setRaw || "unknown"}`
+      };
+    }
+
+    const delResp = await fetch(`${base}/del/${encodeURIComponent(key)}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${redisToken}` }
+    });
+    if (!delResp.ok) {
+      const delRaw = await delResp.text();
+      return {
+        redis_write_ok: false,
+        redis_write_error: `del_failed_${delResp.status}:${delRaw || "unknown"}`
+      };
+    }
+
+    return { redis_write_ok: true };
+  } catch (e) {
+    return {
+      redis_write_ok: false,
+      redis_write_error: (e && e.message) || "redis_write_check_failed"
+    };
+  }
+}
+
 module.exports = async function handler(req, res) {
   const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET || "";
   const priceId = process.env.STRIPE_PRICE_ID || process.env.IDENTIFIANT_PRIX_BANDE || "";
+  const redisUrl = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || "";
+  const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN || "";
   const hasStripe = !!stripeKey;
   const hasPrice = !!priceId;
-  const hasRedisUrl = !!(process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL);
-  const hasRedisToken = !!(process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN);
+  const hasRedisUrl = !!redisUrl;
+  const hasRedisToken = !!redisToken;
   const hasAppBase = !!process.env.APP_BASE_URL;
   const stripe = await stripeCheck(stripeKey, priceId);
+  const redisWrite = await redisWriteCheck(redisUrl, redisToken);
 
   res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
@@ -66,7 +111,8 @@ module.exports = async function handler(req, res) {
       redis_url: hasRedisUrl,
       redis_token: hasRedisToken,
       app_base_url: hasAppBase,
-      ...stripe
+      ...stripe,
+      ...redisWrite
     })
   );
 };
