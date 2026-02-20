@@ -43,7 +43,10 @@
 
         const json = await res.json();
         if (!res.ok || !json.code) {
-          const detail = json && json.error ? `: ${json.error}` : "";
+          const parts = [];
+          if (json && json.error) parts.push(json.error);
+          if (json && json.details) parts.push(json.details);
+          const detail = parts.length ? `: ${parts.join(" - ")}` : "";
           codeEl.textContent = "Erreur de génération" + detail;
           return;
         }
