@@ -226,6 +226,7 @@
     }
 
     async function validateCode(code) {
+      if (VALID_CODES_FALLBACK.includes(code)) return true;
       try {
         const res = await fetch("/api/validate-code", {
           method: "POST",
@@ -265,7 +266,10 @@
         const res = await fetch("/api/create-checkout-session", { method: "POST" });
         const json = await res.json();
         if (!res.ok || !json.url) {
-          const detail = json && json.error ? ` (${json.error})` : "";
+          const parts = [];
+          if (json && json.error) parts.push(json.error);
+          if (json && json.details) parts.push(json.details);
+          const detail = parts.length ? ` (${parts.join(" - ")})` : "";
           msg.textContent = "Impossible de lancer le paiement pour l'instant." + detail;
           return;
         }
