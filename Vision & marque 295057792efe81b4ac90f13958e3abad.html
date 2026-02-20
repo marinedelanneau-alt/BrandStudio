@@ -1368,9 +1368,25 @@ summary {
 }
 
 #29505779-2efe-81b4-ac90-f13958e3abad .page-cover-image {
-  border-bottom-left-radius: 36px !important;
-  border-bottom-right-radius: 36px !important;
-  box-shadow: 0 26px 50px rgba(25, 20, 41, 0.12) !important;
+  display: block;
+  width: 100%;
+  border-radius: 26px !important;
+  border: 1px solid rgba(234, 223, 242, 0.9) !important;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.82) inset,
+    0 18px 34px rgba(23, 18, 36, 0.14) !important;
+}
+
+#29505779-2efe-81b4-ac90-f13958e3abad > header {
+  max-width: 1260px;
+  margin: 12px auto 16px;
+  padding: 14px;
+  border-radius: 32px;
+  border: 1px solid #e8e0ef;
+  background: linear-gradient(155deg, #fffdf8 0%, #f6f2ff 100%);
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.85) inset,
+    0 16px 34px rgba(27, 21, 41, 0.10);
 }
 
 #29505779-2efe-81b4-ac90-f13958e3abad .page-body {
@@ -1380,9 +1396,42 @@ summary {
 }
 
 #29505779-2efe-81b4-ac90-f13958e3abad .page-title {
-  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
-  letter-spacing: -0.01em;
-  color: #1f1b26;
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 6px !important;
+  padding: 12px 20px 14px !important;
+  border-radius: 18px !important;
+  border: 1px solid #e7d8b9 !important;
+  background: linear-gradient(155deg, #fff9ed 0%, #fff2d9 52%, #fff8ee 100%) !important;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,.92) inset,
+    0 14px 28px rgba(77, 48, 17, .16) !important;
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif !important;
+  font-size: clamp(2rem, 3.6vw, 3rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: .02em !important;
+  color: #2a2533 !important;
+  text-transform: uppercase !important;
+  line-height: 1.05 !important;
+}
+
+#29505779-2efe-81b4-ac90-f13958e3abad .page-title::before {
+  content: "🧠";
+  font-size: .9em;
+  filter: saturate(1.1);
+}
+
+#29505779-2efe-81b4-ac90-f13958e3abad .page-title::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -8px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c16f1f 0%, #e1bd55 55%, #b46fbc 100%);
 }
 
 #29505779-2efe-81b4-ac90-f13958e3abad h2,
