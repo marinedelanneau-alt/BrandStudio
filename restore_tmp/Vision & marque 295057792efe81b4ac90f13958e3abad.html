@@ -1,0 +1,797 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Vision &amp; marque</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="29505779-2efe-81b4-ac90-f13958e3abad" class="page serif"><header><img class="page-cover-image" src="LAB_(6).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(10).png"/></div><h1 class="page-title" dir="auto">Vision &amp; marque</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h2 id="29505779-2efe-81fc-a316-e73186a8a138" class="block-color-default_background"><mark class="highlight-default"><mark class="highlight-default_background">ADN de la marque</mark></mark></h2></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80ed-be54-e006b52c5ae6" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80c0-bb92-ec930516b99f"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-803e-ac68-f875659a4e52" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1533601017-dc61895e03c0?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:624px" src="https://images.unsplash.com/photo-1533601017-dc61895e03c0?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Dans cette section, on va travailler sur l’ADN de ta marque. L’ADN, c’est le socle de tout : pourquoi ta marque existe, ce qu’elle défend, et ce qui la rend unique. Sans ADN clair, une identité visuelle devient décorative et incohérente dans le temps. Avec un ADN solide, chaque choix graphique devient logique et aligné. Ici, je t’invite à répondre avec sincérité, pas avec ce que tu penses “qu’il faudrait dire”. Il n’y a pas de bonnes ou mauvaises réponses. Prends le temps de formuler ta mission, ta vision, tes valeurs et ta promesse : ce sont elles qui guideront tout le reste du guide.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b5-a03f-c145344408d8" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="29505779-2efe-81ae-ba49-fbe556fd9383" class="block-color-purple"><mark class="highlight-orange"><span style="border-bottom:0.05em solid">L’ADN de marque, quésaco</span></mark><mark class="highlight-orange"> ? </mark></h3></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d1-9214-f17b3becf748" class="">L’ADN de marque est la base de toute identité forte et cohérente.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80f3-b47f-c85fea7abd7f" class="">Il définit <strong>qui est la marque, pourquoi elle existe et comment elle se différencie</strong>.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-805e-9c16-e710a351ed48" class="">Sans ADN clair, l’identité visuelle devient décorative et incohérente dans le temps.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-804a-9f0b-eb98090010c2" class="">Avec un ADN solide, chaque choix graphique (couleurs, typographies, visuels) devient <strong>aligné, justifié et durable</strong>.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8049-b5c8-eeb446e7a584" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8001-b68f-c01d6fa9decf" class=""><strong>L’ADN de marque permet notamment :</strong></p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80b9-8c6d-f98937689b4d" class="bulleted-list"><li style="list-style-type:disc">de créer une identité visuelle cohérente et reconnaissable</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8000-87fb-d4cc44458948" class="bulleted-list"><li style="list-style-type:disc">d’aligner communication, discours et visuels</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-803e-ba59-e07fb2e02e2c" class="bulleted-list"><li style="list-style-type:disc">de prendre des décisions plus facilement</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8085-9450-d9f0a6cd400c" class="bulleted-list"><li style="list-style-type:disc">de faire évoluer la marque sans la dénaturer</li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80e5-89b7-db2ac448ccfa" class="">👉 Ce guide s’appuie sur cet ADN pour construire une identité visuelle qui a du sens.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b6-b82f-d8cf71ce3bc5" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="29505779-2efe-81de-b3d4-f7420dfb8f7f"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80c9-8210-de72a1057622" class=""><strong>Commençons par </strong><em><strong>(re)</strong></em><strong>poser les bases</strong></h3></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8015-8015-e27cb5b58435" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80a8-b9d9-e25aac9359e4" class="">Peux-tu décrire ton activité en quelques phrases ?</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8064-9fed-dc7526c7fe2f"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8085-bcc5-c79ff1159138" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-805d-bf75-f7f4493da6fb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-801f-9188-c41f6d3767c2" class="">Quel est ton objectif principal avec ce <em>(re)</em>branding ?</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8087-960e-fd5973362068"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8094-a164-d89df1367607" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8065-9161-cc40e8722285" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80e6-b210-fff3552c7e5f" class="">Et surtout, amuses toi ! 👇</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8094-bf03-e1e0ec2fc4a3" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8033-83b2-d471d87e758e"/></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">🔥 Mission</mark></summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80c3-a752-fee2512ef79f" class=""><strong>Ta mission exprime la raison d’être de ta marque.</strong></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800f-b00b-d78e6ef84b69" class="">Elle explique <span style="border-bottom:0.05em solid">pourquoi ton activité existe</span> et ce que tu cherches à apporter à tes clients.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8061-bcd1-e2ef04eb60d6" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8036-9a86-c63b6278e638"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80c3-b4a2-cca34f9dca51" class="">Beaucoup confondent mission et activité.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ce-b5a1-e2c0c77c164d" class="">❌ “Je suis graphiste et je crée des logos.”</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8028-a18f-c321353b2829" class="">❌ “Je propose des accompagnements personnalisés.”</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8007-968a-c96543d7afa0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8098-b89a-c3c98c247026" class="">La mission ne décrit pas ce que vous faites.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-801d-b2a8-fb98b8ea198a" class="">Elle explique <strong>pourquoi vous le faites et ce que cela change.</strong></p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8039-b4f5-ee65bb0297ea" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a4-84ed-e432c8bb2be4" class="">Une mission solide combine généralement :</p></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-8002-b2e2-fa0358f44621" class="numbered-list" start="1"><li><strong>Une cible claire</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80f4-b84e-f960f935010e" class="numbered-list" start="2"><li><strong>Un problème réel</strong></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-8019-9ff4-e077cab2eecc" class="numbered-list" start="3"><li><strong>Une transformation concrète</strong></li></ol></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ce-acd6-ce0430c98ce8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b6-814d-e3b3a060b62f" class="block-color-yellow_background">A toi de jouer</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8005-b657-f4cc0883366e" class="block-color-default_background bulleted-list"><li style="list-style-type:disc"><strong>Pourquoi la marque existe-t-elle ?</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8003-9526-c3e442a8b036" class="">Complète la phrase suivante :</p></div><div style="display:contents" dir="auto"><blockquote id="2ee05779-2efe-8023-878b-f13dd0db8b53" class="">« Ma marque existe pour aider [Zone de texte] à [Zone de texte] grâce à [Zone de texte]. »</blockquote></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8016-baeb-c2a100c2eae7" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80e7-b79f-f0fb090c00f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Pourquoi as-tu créé cette activité ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8065-9237-e826d1d369be"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809b-a039-face68a451d9" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-86db-f3d58d362d32" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-809d-9fb2-e9c4c1e3e593" class="bulleted-list"><li style="list-style-type:disc"><strong>Quel problème cherches-tu à résoudre pour tes clients ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8002-bb09-d0ef6a8d299d"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b2-b974-d4c921c2021d" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2fe05779-2efe-80e4-9d36-fb21f2c01db4" class="">
+</p></div><div style="display:contents" dir="auto"><blockquote id="2fe05779-2efe-805b-b6b8-d3ec5f58db39" class=""><em><strong>Exemple fictif avec : </strong></em><strong>Lumière Studio</strong><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8065-bc00-c7a225e2fac9" class="">Studio de design graphique spécialisé dans l’accompagnement des marques personnelles et créatives.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80df-bb0d-d74860b256fa" class="block-color-gray_background"><strong>Sa mission</strong> : <em>Ma marque existe pour aider les entrepreneurs créatifs à structurer leur communication grâce à une identité claire et cohérente.</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8053-b951-c72486a22c4f" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-orange_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e1-8e4d-c707deb63f25"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ea-94ea-c62f6da1cf96" class=""><strong>Votre mission doit pouvoir guider :</strong></p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8047-8a74-d0285b01b1fa" class="bulleted-list"><li style="list-style-type:disc">la création de vos offres</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80cb-910e-e3ea2fe598e4" class="bulleted-list"><li style="list-style-type:disc">votre communication</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e3-8d76-e76747351680" class="bulleted-list"><li style="list-style-type:disc">votre discours commercial</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e1-a6b8-ee2a7271b995" class="bulleted-list"><li style="list-style-type:disc">vos décisions de développement</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803d-9b3e-fb7fec990f02" class="">Test :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8086-9c94-c6623372d302" class="">Si je lance cette nouvelle offre, est-elle alignée avec ma mission ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809c-a160-c9785eb13c79" class="">Si la réponse est floue, la mission doit être clarifiée.</p></div><div style="display:contents" dir="auto"><p id="2fe05779-2efe-802e-b9f7-fe5517aab726" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80e6-997e-d735fbce754e" class="block-color-yellow_background"><strong>Exercice – La phrase essentielle</strong></p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8098-bdd0-ef4b6ae5d032" class="">Version explicative (3–4 lignes)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8002-94b8-c400ce1879c9" class="">Pour votre site ou présentation.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ec-8e35-c636ce9fff69"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8043-9bf5-e49939cb8b4e" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-807b-aad3-fc976ef01d1d" class="">Version synthétique (1 phrase)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b2-9fe1-c512c3cd397a" class="">Pour vos supports.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ff-aca1-d064edc6cc7c"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80bb-92f6-e8e9bfcc44f1" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8073-9c28-f59e706ad60f" class="">Version interne (ultra claire)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e6-a2c4-cf2d9830d749" class="">Pour guider vos décisions.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e5-a55b-d27f3b4cfad2"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-809a-99e7-ccf9e9313786" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-96c3-d3af0b6de91d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-801a-9630-ecd4575d0694" class="block-color-orange"><em>Une mission claire transforme votre activité en engagement.</em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c1-b11a-d7a39479a734"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="2fe05779-2efe-8020-bd03-fcdfb3e3daad" class="">Ta Mission ➡️ [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8019-8dfb-ec5174ffefd2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8096-a039-c8ad41ae525e" class=""><em>(garde-là bien au chaud, tu vas devoir la reporter plus tard dans le livrable)</em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802b-bbeb-c6c370212894" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">🔥 Vision</mark></summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8095-a211-c99ad59bce79" class=""><strong>Ta vision projette ta marque dans le futur.</strong></p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d2-8e43-c78a010277f4" class="">Elle donne une direction et une ambition à long terme.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80aa-bb5f-d89c0c35e3b5" class="">Ta vision agit comme une boussole.<br/>Elle t’aide à prendre des décisions cohérentes, à faire des choix stratégiques et à garder le cap, même lorsque ton activité évolue.</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8091-9dc7-d97194cc9542" class="bulleted-list"><li style="list-style-type:disc">Une marque sans vision avance.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80ad-8157-ec46dcdb7f7a" class="bulleted-list"><li style="list-style-type:disc">Une marque avec vision <strong><span style="border-bottom:0.05em solid">construit</span></strong>.</li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b7-988b-f5bd2322c85e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80a8-9b04-d29041224a3a" class="block-color-yellow_background">Où souhaite-t-elle aller ? <em>(écrit sans filtre)</em></p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80f4-95e8-db5b29f2e68f" class="bulleted-list"><li style="list-style-type:disc">Où aimerais-tu que ta marque soit dans 3 à 5 ans ?<div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8027-85c3-d1230892d0bc"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8097-b2bd-e348e7894171" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8049-b746-c43d8b2bef1e" class="bulleted-list"><li style="list-style-type:disc">Quel impact veux-tu avoir ?<div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-807f-a14c-d60b920ec575"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80d9-81db-e5af80a2462e" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80a0-ba67-e7671f4cb56e" class="bulleted-list"><li style="list-style-type:disc">Quelle place occupera t-elle sur son marché ?<div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8035-9906-e0adbdf82138"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80c8-85ec-f8267958beff" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80af-aa58-dbb8f5f5f7f2" class="bulleted-list"><li style="list-style-type:disc">Avec quel type de clients tu travaillera ?<div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-804a-80b9-f47e519d093f"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80cd-ad6f-e3888ff0866d" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8046-8dc1-e1cbe43f3470" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8057-8c8d-f6276c785cb6" class="">Une vision ne parle pas seulement de croissance.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d2-950c-d2bd66e7c589" class="">Elle parle d’impact.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f6-b1f8-c26d3e4febfd" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80c4-8a94-c04e6f588be9" class="block-color-yellow_background">🪄 Transformation, la phrase essentielle</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8026-acfa-cc0d9161f234" class="">Complète la phrase :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8068-88dc-caffa18dada1" class="">Grâce à ma marque, mes clients pourront [Zone de texte]</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bb-add6-d39a2a61cb5e" class="">Puis : </p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8004-b0e5-c13248a5fcf8" class="">Si ma marque réussit pleinement, cela changera [Zone de texte]</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8034-a8fa-c8ce82dcdd95" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-a4bf-c97db80ecd14" class="">Ici, on parle d’évolution, de transformation, de contribution.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e7-b25b-ed2a0cad67c6" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fb-acda-cc62f98aa4f9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8038-9dc2-d5fcc96cc84c" class="">Que souhaites-tu obtenir grâce à ce branding ?</p></div><div style="display:contents" dir="auto"><blockquote id="2ee05779-2efe-8018-8fb0-e136859702f5" class="block-color-gray_background"><strong>Exemple </strong>: <em>Devenir une référence reconnue dans l’accompagnement des marques personnelles.</em></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fd-bb6a-ebd39f4ced00" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c7-8950-c87085c52d33" class="">À partir des exercices précédents, formulez votre vision en 3 versions :</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807f-9c7a-ef0322e628ee" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-804d-a8bb-fc8d34c27fe3" class="block-color-yellow">Version longue </h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808d-8c6c-e5de2cc6fcd2" class="">En 3-4 lignes</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80df-8b3f-ef58727974ba" class="">Exemple – Vision Brand Studio (fictif)<div style="display:contents" dir="auto"><p id="30505779-2efe-8032-8709-c5e18c2a2857" class=""><em>Construire un studio de marque reconnu pour son approche pédagogique et stratégique, qui accompagne les entrepreneurs à structurer leur identité avec autonomie et cohérence.</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803a-a3e6-f7d0959cd0ae" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c6-8a89-f9d1a6b1a61d"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ad-bdd6-f387dfa71c4c" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e2-b1d0-fc4239fb20e4" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8033-86cf-e7829f3d719d" class="block-color-yellow">Version synthétique</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c6-bd41-c36a8793b3b7" class="">1 phrase claire.</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8053-a965-ffc4e8411096" class=""><em>Exemple – Rendre les entrepreneurs autonomes dans leur stratégie de marque.</em></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b6-8167-e924ead321ff" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c9-9ddf-d5e96f6bbe42"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-8a83-ca5d098144f9" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80ee-b1ab-d306e2550b6c" class="block-color-yellow">Version interne</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e7-9cf2-fff0be475d02" class="">Une phrase pour vous uniquement.</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8008-8695-ee6c31580bf3" class=""><em>Exemple - Créer un studio aligné, structuré et durable.</em></blockquote></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80d4-b08f-dbe98654f923"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8012-b017-e17f6c94a817" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8012-b409-fe3cf07493d3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ec-b2f4-e87317bfe3c7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d6-bb3c-e56106a065cb" class="block-color-orange"><em>Une vision claire transforme chaque décision en choix stratégique.</em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e2-ac9f-e23fb45f3371"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8010-ac2d-ea03945d04a8" class="">Ta Vision ➡️ [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80eb-b819-dc6c685a61fb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80c5-bac3-db08e85dbb44" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">🔥 Valeurs</mark></summary><div class="indented"><div style="display:contents" dir="auto"><p id="30505779-2efe-80c1-a776-df5bd2dc367a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80ac-b33f-e0797aac84ca" class=""><strong>Les valeurs guident ton comportement et ta communication.</strong></p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8035-bd11-f41ae9d31b96" class="">Elles doivent se ressentir dans ton ton, tes visuels et ta manière de travailler.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8045-aaae-c22c2b5f014d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80dc-8275-d90b0886152f" class="">Beaucoup d’entreprises affichent :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806f-a5a0-fb044386b231" class="bulleted-list"><li style="list-style-type:disc">Bienveillance</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e9-8675-c72c1bf4ada4" class="bulleted-list"><li style="list-style-type:disc">Authenticité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809f-9a77-fb6ae13d3e01" class="bulleted-list"><li style="list-style-type:disc">Qualité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-807c-a240-d68f0d19875a" class="bulleted-list"><li style="list-style-type:disc">Excellence</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808e-94aa-fd48f23f357b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a2-b9d3-e61a7f36754d" class="">Mais peu savent expliquer ce que cela signifie concrètement.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803b-9317-ffe16a1b5e89" class="">Une valeur n’existe que si elle influence un comportement.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ad-b17a-ca0d1128b6ba" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8071-9ebf-f7d7ec2ee92b" class="bulleted-list"><li style="list-style-type:disc">Quelles sont les valeurs importantes pour toi ?</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8083-8c34-cc4d8632194b" class="bulleted-list"><li style="list-style-type:disc">Lesquelles doivent absolument transparaître dans ta marque ?</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8030-86af-dbefafe65ae0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2fe05779-2efe-804c-aa62-fc41c9ac5c9c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-805a-8b35-f5c7ec4a8385" class=""><strong>Exercice – Tri des valeurs</strong></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807b-89cd-ea522db764eb" class="">Commencez par lister 10 mots qui résonnent avec vous.</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b9-abf6-f5d88ab6acb1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80cf-aa37-cb1b250bcb15" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80b6-ad59-deea5bfbe303" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-8097-ae32-e9822acd21e4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-8080-b853-ef960996a58c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-8034-a4f0-c043d970a10b" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-8071-8d79-fc9475bac72d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-8071-8f2d-d4d5969f8266" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80ea-8e15-fe89f495d87a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80dd-8066-c7c2d4a70b91" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8033-9cde-ed25a606772c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800c-9f4d-f07fef61955f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8093-88c5-f3b8115519ad" class="">Puis posez-vous ces questions pour chacun :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8027-a9cc-f24faeef5459" class="bulleted-list"><li style="list-style-type:disc">Est-ce que cette valeur influence mes décisions ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8017-b7fd-defd2d31ca23" class="bulleted-list"><li style="list-style-type:disc">Est-ce que je serais prêt(e) à perdre un client pour la respecter ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8054-a38a-dc7fca8bb84a" class="bulleted-list"><li style="list-style-type:disc">Est-ce que mes clients la perçoivent réellement ?</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8026-bccc-c88aaa584754" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805d-b7da-d20883d4f076" class=""><em><mark class="highlight-yellow_background">Cochez ensuite à 3 à 5 valeurs maximum.</mark></em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805b-98a6-d8aab8721be8" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80b3-97b3-e05364943e2f"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-807a-a0f2-d399c65f8dbd" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-8066-a532-e74a56c944b7" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8004-86fc-ea6905bd30eb" class="">🔍  Traduire les valeurs en actions</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8024-9c14-c7667c54c993" class="">Pour chaque valeur retenue, complétez :</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fb-8639-c3bd5274cb84" class="">Valeur : [Zone de texte]</h3></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8069-9f78-c6fb4010fe3a" class="bulleted-list"><li style="list-style-type:disc">Cela signifie que je [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8092-8487-cfc8803f01bb" class="bulleted-list"><li style="list-style-type:disc">Concrètement, cela se traduit par [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8086-aa79-e0af847767ae" class="bulleted-list"><li style="list-style-type:disc">Dans ma communication, cela donne [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807c-b7bb-d56e246cc4dc" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-808e-8fa9-e231572089d9" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8018-bc34-fb991afb3773" class="">Exemple (Brand Studio fictif)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806f-bbe1-f03838f70621" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8061-b170-d14d0fed028b" class=""><strong>Valeur : Clarté</strong></p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e3-b56e-c1fd2c44c41e" class="bulleted-list"><li style="list-style-type:disc">Cela signifie que je simplifie au lieu de complexifier.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8075-b714-d3d8370b8ceb" class="bulleted-list"><li style="list-style-type:disc">Je structure mes offres de manière lisible.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80a4-ab5d-ff38c6febc45" class="bulleted-list"><li style="list-style-type:disc">J’évite le jargon inutile.</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8068-8bdd-f9ef23ef0819" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80f3-bbf9-ff29935c7a65"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80ab-b40a-ca89b83b8d05" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-808c-bcad-cc2dcd52dc47" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80a6-bfc6-e59a881737cc" class="">✍️  Formulation finale</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802c-aca4-e4e08d01d659" class="">Présentez vos valeurs sous cette forme :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806b-83ec-d7053eee260d" class="bulleted-list"><li style="list-style-type:disc">Valeur 1 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-800f-ab11-d02e813cf404" class="bulleted-list"><li style="list-style-type:circle">Courte explication claire et concrète.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-807e-8539-efff09c068da"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-809f-a528-ddbd9291aa15" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8096-a4d2-ea7bb8451996" class="bulleted-list"><li style="list-style-type:disc">Valeur 2 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-80a6-ba44-eaf3232cfb6c" class="bulleted-list"><li style="list-style-type:circle">Explication orientée action.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-80dd-b64e-cfa29171b983"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-802f-b2ef-c137fad10076" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801b-89e3-d9e32a0f01db" class="bulleted-list"><li style="list-style-type:disc">Valeur 3 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-805e-8d35-d3a55b8684e8" class="bulleted-list"><li style="list-style-type:circle">Lien avec votre posture ou votre communication.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-8039-9af7-c0da5f3b8075"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-80e4-bded-fe8bd764324c" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-89b9-dabeda4d864e" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-805d-9c29-cb56eaddfb6d" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fb-b391-d91123b76562" class="">💬 Exemple complet (Brand Studio fictif)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805a-a3dd-eb9276cd6179" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8020-82d0-c9c9b83d4172" class="bulleted-list"><li style="list-style-type:disc"><strong>Clarté</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-80fd-8beb-eb286f70ee85" class="bulleted-list"><li style="list-style-type:circle">Nous simplifions pour mieux décider.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809c-993e-e5b6888bc7ef" class="bulleted-list"><li style="list-style-type:disc"><strong>Autonomie</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-8029-b7d6-c295bed905ef" class="bulleted-list"><li style="list-style-type:circle">Nous transmettons des méthodes, pas seulement des livrables.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8016-957b-fd61464e2e37" class="bulleted-list"><li style="list-style-type:disc"><strong>Cohérence</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-80d8-a219-e29be0133fcd" class="bulleted-list"><li style="list-style-type:circle">Chaque choix visuel est aligné avec la stratégie.</li></ul></div></li></ul></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800d-8030-c21ff104c93a" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">🔥 Promesse de la marque</mark></summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809d-8854-d5f7c96ff6af" class=""><strong>Ta promesse est l’engagement que tu prends envers tes clients.</strong></p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-805f-a2ef-d892157efc39" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas une intention.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8058-a36f-de06751db505" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas une ambition.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-804a-ac6b-ddeaf130506b" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas un slogan.</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8023-8d9b-e97bbc7307a3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809a-b297-d6c644dd4fbd" class="">C’est ce que votre client peut attendre de vous, de manière fiable et constante.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8082-9ff7-cdb53271d26a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bc-92fd-d333681f4e74" class="">Une promesse forte crée de la confiance.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-be4d-d95cfc2bb9be" class="">Une promesse floue crée de la déception.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800e-bcd6-fe95cad9a6c6" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80cf-9eeb-e3aa6e170aac"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8027-b8a7-d3455582bb79" class="">🧠 Promesse vs Mission vs Baseline</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802b-bee5-f3c5f7c63118" class="">Clarifions :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806d-bffe-e16a1292da1d" class="bulleted-list"><li style="list-style-type:disc"><strong>Mission</strong> → Pourquoi est-ce que tu agis </li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8083-b873-efd63bb18f5b" class="bulleted-list"><li style="list-style-type:disc"><strong>Vision</strong> → Où est-ce que tu vas</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80bf-82ca-e135886738d0" class="bulleted-list"><li style="list-style-type:disc"><strong>Baseline</strong> → Comment tu te résume</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8006-9fa7-fb28c0e6df34" class="bulleted-list"><li style="list-style-type:disc"><strong>Promesse</strong> → Ce que le client peut attendre de toi</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800c-a436-dc12fcee005e" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ea-b31d-ccff11aac3c9" class="">La promesse est concrète.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8074-94cc-fd50eec75e7b" class="">Elle doit pouvoir être vécue.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-804b-a3d3-cb47c307d1e7" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80b0-98ec-e809d9cfa6c7"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-804c-bb74-ca14433343a9" class="">✍️ Exercice — Avant / Après</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8090-8c71-f89f8d29d260" class="">A toi de compléter :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8048-92f7-ef5e9e174c11" class="">Avant moi, mes clients sont [Zone de texte]</blockquote></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-807a-a9d8-c20ac1a903de" class="">Après moi, mes clients sont [Zone de texte]</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80df-b530-f2a830d07691" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8080-a9e4-c3ec8efdd02f" class="">La promesse se situe dans l’écart entre ces deux états.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b3-bf24-d8f326ca8b2a" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80a3-b59d-da5039bf1474"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80f9-a835-d499382e4072" class="">🔎 3️⃣ Promesse tangible vs promesse vague</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ee-aafa-cf831c13b4a2" class="">❌ “Un accompagnement de qualité.”</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802c-9458-ef914dfb2832" class="">❌ “Un service personnalisé.”</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8042-b096-cfdcc05a27aa" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f0-afc8-ca4553a4e9f8" class="">Ces phrases sont attendues. Elles ne créent aucune différenciation.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c7-874d-d452432d2032" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c5-8b81-c0c608c7aa79" class="">Une promesse forte :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809b-83d1-cbf782941286" class="bulleted-list"><li style="list-style-type:disc">est spécifique</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-808e-afd5-c9d4a0512d07" class="bulleted-list"><li style="list-style-type:disc">est mesurable (même indirectement)</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-800e-9f5e-fcdf0025f311" class="bulleted-list"><li style="list-style-type:disc">est ressentie concrètement</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8032-b03a-fab22f130c9b" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fd-b044-e2ae2e98ae0f" class="">Exemple faible :</h3></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80ad-9ab1-efc303e9bc91" class="">Je vous aide à améliorer votre communication.</blockquote></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8043-b549-da8da85a9e2d" class="">Exemple plus fort :</h3></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80c6-a471-eb87e16b7fa7" class="">Je vous aide à structurer une identité de marque claire et exploitable en autonomie.</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8008-bd08-d6b82084b78d" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-800c-b4bb-e513128dca03"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80bc-9762-f0346e37b420" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-807f-b0a6-f7886daa3061" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8080-bd46-dca412be704e" class="">🎯  Les 3 dimensions d’une promesse solide</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8061-9aae-ff11028ddae9" class="">Une promesse peut agir sur :</p></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80ac-b24f-c13a1a851dd2" class="numbered-list" start="1"><li><strong>Le résultat</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-809e-b714-f3bd0673276c" class="">→ Ce que le client obtient</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80f0-97ff-f0599a178940" class="numbered-list" start="2"><li><strong>L’expérience</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-8059-8d5b-ebd41b7e2e14" class="">→ Comment il vit la collaboration</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-800d-b13c-f1cb312ed58d" class="numbered-list" start="3"><li><strong>La posture</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-ba14-f3d0a2f30cec" class="">→ Ce qui te distingue dans ton approche</p></div></li></ol></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8055-a227-f56560786645" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-809b-b414-cb7c87a4dd23" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8067-aad9-c51789539ada" class="">Exercice</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8058-908b-cda7519b1eed" class="">Réponds pour chacune :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8091-9c34-f84158f12036" class="bulleted-list"><li style="list-style-type:disc">Résultat promis :</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802c-8c41-e9d4bf58402c" class="bulleted-list"><li style="list-style-type:disc">Expérience promise :</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801e-a22c-f4209895866f" class="bulleted-list"><li style="list-style-type:disc">Posture promise :</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d5-b7f5-c1694ba13071" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80d2-8f7e-fdfb3d9754e8"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-803d-a4a0-d2fa852c40a5" class="">⚖️  Promesse réaliste vs promesse excessive</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f7-9a25-e0d0fbb1c361" class="">Une promesse trop ambitieuse crée une pression inutile.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8063-a2d6-e8617326d076" class="">Ta promesse doit être :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-803f-95de-d18e4a22cd62" class="bulleted-list"><li style="list-style-type:disc">alignée avec tes capacités actuelles</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b2-9f00-d8a8e33aa0f4" class="bulleted-list"><li style="list-style-type:disc">tenable dans le temps</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80f5-8b87-ec61b1bc4077" class="bulleted-list"><li style="list-style-type:disc">cohérente avec tes valeurs</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806c-851b-f2dbc234cc3d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80da-bcaf-f1b596673cc3" class="">Peux-tu répondre positivement à cette question  :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80c6-9f37-cd6335427ef2" class="">Est-ce que je peux garantir cela pour 100 % de mes clients ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8066-92ab-e7e8a556a09a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fa-9756-d285d38e982a" class="">Si non, il faut reformuler.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8007-9a38-ceeee4b5b4df" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80fc-96be-c09cffd58067"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80c2-a2de-fe67d443ab0a" class="">🧭  La promesse comme boussole interne</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b8-902b-cdb81e8f52f6" class="">Ta promesse doit guider :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8012-9932-eb2191a61d29" class="bulleted-list"><li style="list-style-type:disc">ta qualité de service</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8050-a01f-dbcec4355e09" class="bulleted-list"><li style="list-style-type:disc">tes livrables</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-807f-a2e7-fa5bfc364271" class="bulleted-list"><li style="list-style-type:disc">ta posture commerciale</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e0-9562-e4dbdbb474c0" class="bulleted-list"><li style="list-style-type:disc">ta communication</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d5-947b-c6a19fd1ae95" class="">Si tu promets “clarté” → ton process doit être clair.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-8b76-f663c2542ab9" class="">Si tu promets “autonomie” → ta méthode doit transmettre.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803a-9556-f2ed8b1a6ed0" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-808e-97ff-d9529fb5aa90"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-801d-bbc3-e98d8d9f3f68" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80f6-a6dc-fd13fce003dd" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8020-b1fe-e4d4be1f01e4" class="">✍️ Formulation finale</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8035-b837-d122f411880b" class="">Travaillez votre promesse en 2 formats :</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8087-8fd9-f01a9aed93e2" class="">Version explicite</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e5-abc2-d0b15fdb2481" class="">Une phrase claire et concrète.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-80d4-ac0d-e322489c37f4"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-8053-8177-f590fac9354c" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8059-8109-d759a9ed1dd0" class="">Version intégrée</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80da-8a5c-f36c78fdbd93" class="">Une formulation intégrée naturellement dans votre discours commercial.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-8005-914e-d5c653087e6c"><div style="font-size:1.5em"><span class="icon">📖</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-8066-8e4d-e9c8cee9aa14" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d3-ac4a-f4c950a4cc42" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c2-a252-f3760c614901" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-806e-8fc1-cb299b41191e" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8069-baa9-f3d9d148dac0" class="">💬 Exemple (Brand Studio fictif)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a6-b76b-e36e24278ba0" class="">Version explicite :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8053-b0a6-d295b28405ae" class="">Brand Studio vous permet de structurer votre identité de marque avec méthode afin de devenir autonome dans votre stratégie de communication.</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-801d-aba0-cb653ad15400" class="">Version intégrée :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80b4-a6f0-c45efc7b96b8" class="">Vous repartez avec un cadre clair et les outils pour piloter votre marque en toute autonomie.</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8085-92e2-e828da4a3886" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80ac-aadd-e956b6dba426"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8000-9561-e9c2dc298f27" class="">🧪  Test de cohérence</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8058-8400-d50418fe9c7c" class="">Vérifions maintenant que ta promesse est alignée avec <em>(coche si c’est ok)</em>  :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-805c-b77f-e497cc60650f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ta mission</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8008-aedc-ca4d07da81b2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ta vision</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80dd-8961-c3678bfa7c16" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">tes valeurs</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802a-8c9b-dbfecf102eb1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">ton positionnement</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803e-8007-c565f82e7d95" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806d-bdfb-f573fcd36649" class="">Si elle ne s’intègre pas naturellement, il y a un décalage à corriger.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808c-a93b-c9564becb589" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80e3-b1d3-eb1d5a3882c6"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809f-b85a-f35a63c40128" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803d-9f01-cf64071c9bfc" class=""><em><mark class="highlight-orange">Une promesse claire transforme la confiance en engagement.</mark></em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8094-8104-ccd7b42f7ba4"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-806f-a40d-cf0710648f56" class="">Ta Promesse ➡️ [Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80ab-8eb3-fa6ba8c5349f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81c4-8eef-e4a6437ae6f4" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ea-b372-da79881275cd" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f5-b70c-d940741cb459" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ab-901c-c0ce2c0b2a6c" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8020-804a-d99deb0ace91" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-8089-8020-efa89bb02333" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-8a91-e297f3c89055" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d2-823a-db8fc76f4ba5" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808e-abc0-cf657500d868" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8090-8b3f-c506c8d76820" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-8054-db1f031abc2c" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80a0-892a-eab96463a0ad" style="width:33.33333333333333%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"><p id="29505779-2efe-8186-814c-d5ed170290a3" class="">👉 <a href="Vision%20&amp;%20marque%20295057792efe81b4ac90f13958e3abad.html">C&#x27;est parti !</a> </p></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-bed1-e97d3927a9d2" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

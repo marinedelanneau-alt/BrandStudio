@@ -158,6 +158,31 @@ img {
 	padding-right: 0;
 }
 
+/* Baseline: enforce visible space between the two side-by-side columns */
+#30505779-2efe-8091-857b-d7c08a34117b.column-list {
+	display: flex !important;
+	gap: 0 !important;
+	align-items: flex-start;
+}
+#30505779-2efe-8091-857b-d7c08a34117b > div[style*="display:contents"] {
+	display: block !important;
+}
+#30505779-2efe-8091-857b-d7c08a34117b > div[style*="display:contents"]:first-child {
+	margin-right: 36px !important;
+}
+#30505779-2efe-80b1-9c40-d9f1bd0ac15a,
+#30505779-2efe-801a-ac1d-cac7d0783789 {
+	flex: 0 0 calc(50% - 18px) !important;
+	max-width: calc(50% - 18px) !important;
+	width: calc(50% - 18px) !important;
+	padding: 0 !important;
+}
+#30505779-2efe-8091-857b-d7c08a34117b blockquote {
+	background: #ffffff !important;
+	border: 1px solid #e4dccf !important;
+	border-left: 1px solid #e4dccf !important;
+}
+
 .table_of_contents-item {
 	display: block;
 	font-size: 0.875rem;
@@ -1572,11 +1597,10 @@ summary {
   function buildAvatarPrompt(profile) {
     var genderWord = profile.gender === "femme" ? "woman" : (profile.gender === "homme" ? "man" : "person");
     var p = [
-      "ULTRA DETAILED 3D STYLIZED REALISTIC CHARACTER PORTRAIT, ONE HUMAN ONLY",
-      "pixar-like character design, realistic skin shading, expressive eyes, natural smile",
-      "head and upper torso framing, centered composition, 85mm portrait lens look",
-      "soft cinematic daylight, creamy bokeh background, warm natural colors",
-      "high-end render quality, no text, no watermark, no logo, no extra person",
+      "PROFESSIONAL PHOTOREALISTIC PORTRAIT, SINGLE REAL HUMAN",
+      "head and shoulders, natural skin texture, sharp eyes, realistic hair strands",
+      "soft daylight, 85mm portrait lens look, clean bokeh background",
+      "not cartoon, not illustration, not 3d, no text, no logo, no watermark",
       "STRICTLY MATCH THESE ATTRIBUTES",
       "gender: " + genderWord,
       "age: " + profile.age,
@@ -1586,9 +1610,9 @@ summary {
       "worn colors: " + profile.couleurs,
       "accessories: " + profile.accessoires,
       "hair style and facial expression must reflect personality and tone",
-      "realistic 3d face proportions, detailed hair strands, soft skin subsurface scattering"
+      "NEGATIVE: extra people, duplicate face, deformed hands, blur, low resolution, over-smooth skin, plastic look"
     ].join(", ");
-    return clip(p, 680);
+    return clip(p, 460);
   }
 
   function avatarSeed(profile) {
@@ -1607,19 +1631,26 @@ summary {
   function buildAvatarImageUrls(profile) {
     var seed = Date.now().toString(36);
     var prompt = buildAvatarPrompt(profile);
+    var baseGender = profile.gender === "femme" ? "woman" : (profile.gender === "homme" ? "man" : "person");
     var main = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) +
-      "?model=flux&width=832&height=1088&nologo=true&enhance=true&seed=" + seed;
+      "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "a";
     var retry = "https://image.pollinations.ai/prompt/" + encodeURIComponent(
-      "3d stylized realistic portrait, pixar-like, " +
-      (profile.gender === "femme" ? "woman" : (profile.gender === "homme" ? "man" : "person")) + ", " +
-      profile.age + ", " + profile.style + ", outfit colors " + profile.couleurs + ", accessories " + profile.accessoires +
-      ", head and shoulders portrait, warm daylight, bokeh background, realistic 3d render"
-    ) + "?model=flux&width=832&height=1088&nologo=true&enhance=true&seed=" + seed + "b";
+      "professional editorial portrait photo, single " + baseGender + ", " +
+      "age " + profile.age + ", profession " + profile.profession + ", " +
+      "style " + profile.style + ", worn colors " + profile.couleurs + ", accessories " + profile.accessoires + ", " +
+      "natural expression, realistic skin pores, detailed hair, studio daylight, 85mm lens, bokeh, photorealistic"
+    ) + "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "b";
+    var retryAltDomain = "https://pollinations.ai/p/" + encodeURIComponent(
+      "professional portrait photography, single " + baseGender + ", " +
+      profile.age + ", " + profile.profession + ", " + profile.style + ", " + profile.couleurs + ", " + profile.accessoires +
+      ", realistic skin, natural expression, bokeh, no cartoon"
+    ) + "?width=960&height=1280&seed=" + seed + "bd";
     var retry2 = "https://image.pollinations.ai/prompt/" + encodeURIComponent(
-      "3d cartoon-realistic human portrait, detailed eyes, detailed curls, soft smile, premium rendering, " +
-      "single " + (profile.gender === "femme" ? "female" : (profile.gender === "homme" ? "male" : "human")) + " character"
-    ) + "?model=flux&width=832&height=1088&nologo=true&enhance=true&seed=" + seed + "c";
-    return [main, retry, retry2];
+      "premium linkedin-style portrait, single " + baseGender + ", confident and warm expression, " +
+      "head and shoulders framing, clean background blur, realistic face anatomy, high detail photograph, " +
+      "no illustration no cartoon no cgi"
+    ) + "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "c";
+    return [main, retry, retryAltDomain, retry2];
   }
 
   function buildLocalPortraitSvg(profile) {
@@ -1630,9 +1661,7 @@ summary {
     var accTxt = lower(profile.accessoires);
     var traitsTxt = lower((profile.traits || []).join(" "));
     var glasses = accTxt.indexOf("lunette") >= 0;
-    var hat = accTxt.indexOf("chapeau") >= 0;
     var elegant = styleTxt.indexOf("eleg") >= 0 || styleTxt.indexOf("chic") >= 0 || styleTxt.indexOf("raffin") >= 0;
-    var casual = styleTxt.indexOf("casual") >= 0 || styleTxt.indexOf("decontract") >= 0;
     var confident = traitsTxt.indexOf("lead") >= 0 || traitsTxt.indexOf("assur") >= 0 || traitsTxt.indexOf("direct") >= 0;
     var warm = traitsTxt.indexOf("bienve") >= 0 || traitsTxt.indexOf("chaleur") >= 0 || traitsTxt.indexOf("empat") >= 0;
 
@@ -1643,43 +1672,52 @@ summary {
     if (styleTxt.indexOf("roux") >= 0) hair = "#a85e3f";
 
     var cloth = bg;
-    var blazer = elegant ? "<path d='M205 505c12-52 58-95 115-95 57 0 103 43 115 95l22 118H183z' fill='" + cloth + "'/><path d='M287 500l33 48 33-48v143h-66z' fill='#ffffff' opacity='.95'/>" :
-      "<rect x='190' y='420' width='260' height='250' rx='80' fill='" + cloth + "'/>";
-    if (casual && !elegant) blazer = "<rect x='190' y='430' width='260' height='230' rx='70' fill='" + cloth + "'/><rect x='248' y='490' width='144' height='110' rx='24' fill='#ffffff' opacity='.12'/>";
-
-    var mouth = confident ? "<path d='M287 332c20 14 46 14 66 0' stroke='#934f59' stroke-width='6' fill='none' stroke-linecap='round'/>" :
-      (warm ? "<path d='M282 332c24 20 52 20 76 0' stroke='#a35460' stroke-width='6' fill='none' stroke-linecap='round'/>" :
-      "<path d='M292 334c18 8 38 8 56 0' stroke='#8d5a63' stroke-width='5' fill='none' stroke-linecap='round'/>");
-
-    var hairShape = isFemale
-      ? "<path d='M214 198c0-68 52-122 116-122s116 54 116 122v125H214z' fill='" + hair + "'/><path d='M224 240c4 112 18 172 42 205h-48c-26-42-34-114-28-205z' fill='" + hair + "' opacity='.95'/><path d='M416 240c-4 112-18 172-42 205h48c26-42 34-114 28-205z' fill='" + hair + "' opacity='.95'/>"
-      : "<path d='M220 192c0-64 48-116 108-116h-16c60 0 108 52 108 116v80H220z' fill='" + hair + "'/>";
-
+    var mood = confident ? "#2f486a" : (warm ? "#7f4a52" : "#5a4f64");
+    var jaw = isMale ? "86" : "80";
+    var faceTop = isFemale ? "232" : "226";
+    var faceToneA = isFemale ? "#f0c9af" : "#efc4a6";
+    var faceToneB = isFemale ? "#e5b297" : "#dfaa8d";
+    var coat = elegant
+      ? "<path d='M165 862c18-164 120-266 235-266s217 102 235 266z' fill='" + cloth + "'/><path d='M288 638l32 64 32-64v224h-64z' fill='#f7f7fa' opacity='.9'/>"
+      : "<path d='M165 862c24-154 114-252 235-252s211 98 235 252z' fill='" + cloth + "'/>";
     var glassesShape = glasses
-      ? "<g stroke='#2f2f2f' stroke-width='5' fill='none'><rect x='250' y='264' width='62' height='40' rx='10'/><rect x='328' y='264' width='62' height='40' rx='10'/><line x1='312' y1='284' x2='328' y2='284'/></g>"
+      ? "<g stroke='#2c2c2c' stroke-width='4' fill='none' opacity='.9'><rect x='248' y='340' width='76' height='46' rx='12'/><rect x='336' y='340' width='76' height='46' rx='12'/><line x1='324' y1='362' x2='336' y2='362'/></g>"
       : "";
-    var hatShape = hat
-      ? "<ellipse cx='320' cy='138' rx='118' ry='18' fill='#5a4740'/><rect x='256' y='80' width='128' height='58' rx='14' fill='#6a554d'/>"
-      : "";
-
-    var jaw = isMale ? "<ellipse cx='320' cy='282' rx='88' ry='96' fill='#f0c7a8'/>" : "<ellipse cx='320' cy='282' rx='82' ry='100' fill='#f1c9ad'/>";
-    var eyeColor = confident ? "#2f486a" : "#405d87";
-    var name = (profile.prenom || "Persona").replace(/&/g, "&amp;");
+    var mouth = confident
+      ? "<path d='M286 462c22 11 46 11 68 0' stroke='#7f474e' stroke-width='4' fill='none' stroke-linecap='round'/>"
+      : (warm
+      ? "<path d='M282 458c24 18 52 18 76 0' stroke='#91545c' stroke-width='4' fill='none' stroke-linecap='round'/>"
+      : "<path d='M292 462c18 6 38 6 56 0' stroke='#8a6268' stroke-width='3.5' fill='none' stroke-linecap='round'/>");
 
     var svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 860'>" +
-      "<defs><linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f7edf8'/><stop offset='1' stop-color='#eef3ff'/></linearGradient><linearGradient id='card' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#ffffff'/><stop offset='1' stop-color='#fbfbff'/></linearGradient></defs>" +
-      "<rect width='640' height='860' fill='url(#bg)'/>" +
-      "<circle cx='540' cy='120' r='96' fill='" + bg + "' opacity='.22'/><circle cx='104' cy='770' r='120' fill='" + bg + "' opacity='.14'/>" +
-      "<rect x='86' y='94' width='468' height='700' rx='54' fill='url(#card)' stroke='#e6deef'/>" +
-      hatShape + hairShape + jaw +
-      "<ellipse cx='286' cy='280' rx='11' ry='13' fill='#ffffff'/><ellipse cx='354' cy='280' rx='11' ry='13' fill='#ffffff'/>" +
-      "<circle cx='286' cy='282' r='7' fill='" + eyeColor + "'/><circle cx='354' cy='282' r='7' fill='" + eyeColor + "'/>" +
-      "<circle cx='289' cy='279' r='2' fill='#ffffff'/><circle cx='357' cy='279' r='2' fill='#ffffff'/>" +
-      "<path d='M300 314c8 7 32 7 40 0' stroke='#cb8d86' stroke-width='4' fill='none' stroke-linecap='round'/>" +
-      mouth + glassesShape +
-      blazer +
-      "<rect x='172' y='620' width='296' height='126' rx='24' fill='" + cloth + "' opacity='.92'/>" +
-      "<text x='320' y='776' text-anchor='middle' font-size='30' fill='#3a2f46' font-family='Arial, sans-serif' font-weight='700'>" + name + "</text>" +
+      "<defs>" +
+      "<linearGradient id='bgGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f6effa'/><stop offset='1' stop-color='#ecf1fb'/></linearGradient>" +
+      "<radialGradient id='backSpot' cx='50%' cy='30%' r='62%'><stop offset='0' stop-color='" + bg + "' stop-opacity='.30'/><stop offset='1' stop-color='" + bg + "' stop-opacity='0'/></radialGradient>" +
+      "<radialGradient id='faceLight' cx='48%' cy='36%' r='58%'><stop offset='0' stop-color='" + faceToneA + "'/><stop offset='1' stop-color='" + faceToneB + "'/></radialGradient>" +
+      "<linearGradient id='hairGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='" + hair + "'/><stop offset='1' stop-color='#2a2628'/></linearGradient>" +
+      "<filter id='softBlur'><feGaussianBlur stdDeviation='1.6'/></filter>" +
+      "<filter id='grain' x='-20%' y='-20%' width='140%' height='140%'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 .03 .05'/></feComponentTransfer></filter>" +
+      "<radialGradient id='vignette' cx='50%' cy='44%' r='62%'><stop offset='70%' stop-color='#000' stop-opacity='0'/><stop offset='100%' stop-color='#000' stop-opacity='.20'/></radialGradient>" +
+      "</defs>" +
+      "<rect width='640' height='860' fill='url(#bgGrad)'/>" +
+      "<rect width='640' height='860' fill='url(#backSpot)'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='#fff' opacity='.9'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='url(#vignette)'/>" +
+      "<ellipse cx='320' cy='324' rx='196' ry='230' fill='#ffffff' opacity='.44' filter='url(#softBlur)'/>" +
+      "<path d='M210 312c0-118 90-202 210-202s210 84 210 202v46H210z' fill='url(#hairGrad)' opacity='.98'/>" +
+      "<ellipse cx='320' cy='384' rx='" + jaw + "' ry='108' fill='url(#faceLight)'/>" +
+      "<ellipse cx='288' cy='382' rx='12' ry='8.5' fill='#2b2b2b'/><ellipse cx='352' cy='382' rx='12' ry='8.5' fill='#2b2b2b'/>" +
+      "<ellipse cx='288' cy='378' rx='2.1' ry='2.1' fill='#fff'/><ellipse cx='352' cy='378' rx='2.1' ry='2.1' fill='#fff'/>" +
+      "<path d='M318 " + faceTop + "c-11 22-14 40-12 66' stroke='#d79d84' stroke-width='3' fill='none' stroke-linecap='round' opacity='.65'/>" +
+      "<ellipse cx='265' cy='426' rx='18' ry='9' fill='#d58a87' opacity='.26'/><ellipse cx='374' cy='426' rx='18' ry='9' fill='#d58a87' opacity='.26'/>" +
+      mouth +
+      glassesShape +
+      "<path d='M228 336c19-22 52-35 88-35' stroke='#1d1c20' stroke-width='5' fill='none' opacity='.45'/>" +
+      "<path d='M412 336c-19-22-52-35-88-35' stroke='#1d1c20' stroke-width='5' fill='none' opacity='.45'/>" +
+      coat +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='none' stroke='#d8cfdf'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' filter='url(#grain)'/>" +
+      "<rect width='640' height='860' fill='" + mood + "' opacity='.06'/>" +
       "</svg>";
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
@@ -1714,10 +1752,9 @@ summary {
     card.className = "persona-ai-card";
     card.setAttribute("data-persona-ai-card", "1");
     card.innerHTML =
-      "<div class='persona-ai-head'><h3 class='persona-ai-title'>AI Persona - avatar virtuel</h3><button type='button' class='persona-ai-btn' data-persona-generate='1'>Generer l'avatar</button></div>" +
-      "<div class='persona-ai-output' data-persona-output='1'>Clique sur \"Generer l'avatar\" pour creer un avatar selon les reponses du persona.</div>" +
-      "<div class='persona-ai-meta' data-persona-meta='1' style='display:none;'></div>" +
-      "<section class='persona-id-card' data-persona-id='1' style='display:none;'><h4>Carte d'identite du persona</h4><div class='persona-id-grid'>" +
+      "<div class='persona-ai-head'><h3 class='persona-ai-title'>Carte d'identite du persona</h3></div>" +
+      "<div class='persona-ai-meta' data-persona-meta='1'></div>" +
+      "<section class='persona-id-card' data-persona-id='1'><div class='persona-id-grid'>" +
       "<div class='persona-id-item'><b>Nom :</b> <span data-id-name='1'>-</span></div>" +
       "<div class='persona-id-item'><b>Genre :</b> <span data-id-gender='1'>-</span></div>" +
       "<div class='persona-id-item'><b>Age :</b> <span data-id-age='1'>-</span></div>" +
@@ -1728,16 +1765,13 @@ summary {
       "<div class='persona-id-item'><b>Traits :</b> <span data-id-traits='1'>-</span></div>" +
       "<div class='persona-id-item'><b>Objet fetiche :</b> <span data-id-item='1'>-</span></div>" +
       "<div class='persona-id-item' style='grid-column:1 / -1;'><b>Citation :</b> <span data-id-quote='1'>-</span></div>" +
-      "</div></section>" +
-      "<p class='persona-ai-hint'>L'avatar prend en compte: genre, prenom, age, profession, style vestimentaire, couleurs, accessoires et traits dominants.</p>";
+      "</div></section>";
 
     var fallbackHost = document.querySelector(".page-body") || document.body;
     if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(card, anchor);
     else if (quoteFigure && quoteFigure.parentNode) quoteFigure.parentNode.insertBefore(card, quoteFigure.nextSibling);
     else fallbackHost.appendChild(card);
 
-    var output = card.querySelector("[data-persona-output='1']");
-    var btn = card.querySelector("[data-persona-generate='1']");
     var meta = card.querySelector("[data-persona-meta='1']");
     var idCard = card.querySelector("[data-persona-id='1']");
     var idName = card.querySelector("[data-id-name='1']");
@@ -1752,7 +1786,6 @@ summary {
     var idQuote = card.querySelector("[data-id-quote='1']");
 
     function fillId(profile) {
-      idCard.style.display = "block";
       idName.textContent = profile.prenom || "-";
       idGender.textContent = profile.gender || "-";
       idAge.textContent = profile.age || "-";
@@ -1765,93 +1798,78 @@ summary {
       idQuote.textContent = profile.citation || "-";
     }
 
-    try {
-      var savedRaw = localStorage.getItem(STORAGE_KEY);
-      if (savedRaw) {
-        var saved = JSON.parse(savedRaw);
-        if (saved && saved.url) {
-          output.textContent = "";
-          var img0 = document.createElement("img");
-          img0.className = "persona-ai-visual";
-          img0.alt = "Portrait IA du persona";
-          img0.src = saved.url;
-          output.appendChild(img0);
-          if (saved.meta) { meta.style.display = "block"; meta.textContent = saved.meta; }
-          if (saved.profile) fillId(saved.profile);
-        }
-      }
-    } catch (e) {}
-
-    btn.addEventListener("click", function () {
+    var refreshTimer = null;
+    function refreshIdCard() {
       var profile = buildProfile();
-      output.classList.add("is-loading");
-      output.textContent = "Generation de l'avatar virtuel en cours...";
       fillId(profile);
+      meta.textContent = "Mise a jour automatique depuis les champs du persona.";
+    }
 
-      function finish(urlUsed) {
-        output.classList.remove("is-loading");
-        meta.style.display = "block";
-        meta.textContent = profile.prenom + " - " + profile.age + " - " + profile.profession;
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ url: urlUsed, meta: meta.textContent, profile: profile })); } catch (e) {}
-      }
+    function scheduleRefresh() {
+      if (refreshTimer) clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(refreshIdCard, 120);
+    }
 
-      var localUrl = buildLocalPortraitSvg(profile);
-      var localImg = new Image();
-      localImg.className = "persona-ai-visual";
-      localImg.alt = "Avatar du persona";
-      localImg.onload = function () {
-        output.classList.remove("is-loading");
-        output.textContent = "";
-        output.appendChild(localImg);
-        finish(localUrl);
-        meta.style.display = "block";
-        meta.textContent = profile.prenom + " - " + profile.age + " - " + profile.profession + " (avatar)";
-      };
-      localImg.onerror = function () {
-        output.classList.remove("is-loading");
-        output.textContent = "Impossible de générer l'avatar pour le moment.";
-      };
-      localImg.src = localUrl;
-
-      var urls = buildAvatarImageUrls(profile);
-      function tryLoad(index) {
-        if (index >= urls.length) return;
-        var url = urls[index];
-        var img = new Image();
-        img.className = "persona-ai-visual";
-        img.alt = "Avatar virtuel du persona";
-        img.referrerPolicy = "no-referrer";
-        var done = false;
-        var timer = setTimeout(function () {
-          if (done) return;
-          done = true;
-          tryLoad(index + 1);
-        }, 12000);
-        img.onload = function () {
-          if (done) return;
-          done = true;
-          clearTimeout(timer);
-          output.classList.remove("is-loading");
-          output.textContent = "";
-          output.appendChild(img);
-          finish(url);
-          meta.style.display = "block";
-          meta.textContent = profile.prenom + " - " + profile.age + " - " + profile.profession + " (3D)";
-        };
-        img.onerror = function () {
-          if (done) return;
-          done = true;
-          clearTimeout(timer);
-          tryLoad(index + 1);
-        };
-        img.src = url;
-      }
-      tryLoad(0);
-    });
+    refreshIdCard();
+    document.addEventListener("input", scheduleRefresh, true);
+    document.addEventListener("change", scheduleRefresh, true);
   }
 
   window.addEventListener("DOMContentLoaded", function () { renderCard(); });
   window.addEventListener("DOMContentLoaded", function () { ensureGenderChooser(); });
+})();
+</script>
+<script data-baseline-layout-fix-v2="1">
+(function () {
+  function applyBaselineLayoutFix() {
+    var row = document.getElementById("30505779-2efe-8091-857b-d7c08a34117b");
+    if (!row) return;
+
+    row.style.display = "flex";
+    row.style.justifyContent = "flex-start";
+    row.style.alignItems = "flex-start";
+    row.style.gap = "36px";
+
+    var wrappers = row.children ? Array.prototype.slice.call(row.children) : [];
+    wrappers.forEach(function (w) {
+      w.style.display = "block";
+      w.style.width = "calc(50% - 18px)";
+      w.style.maxWidth = "calc(50% - 18px)";
+      w.style.flex = "0 0 calc(50% - 18px)";
+      w.style.padding = "0";
+      w.style.margin = "0";
+    });
+
+    var left = document.getElementById("30505779-2efe-80b1-9c40-d9f1bd0ac15a");
+    var right = document.getElementById("30505779-2efe-801a-ac1d-cac7d0783789");
+    [left, right].forEach(function (col) {
+      if (!col) return;
+      col.style.width = "100%";
+      col.style.maxWidth = "100%";
+      col.style.padding = "0";
+      col.style.margin = "0";
+    });
+
+    [
+      "30505779-2efe-80e1-965c-db3d06a83d17",
+      "30505779-2efe-80db-af32-e6f7ccd0c7a5",
+      "30505779-2efe-80f0-b4ff-daf6a379c5f5"
+    ].forEach(function (id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      card.style.background = "#ffffff";
+      card.style.border = "1px solid #e4dccf";
+      card.style.borderLeft = "1px solid #e4dccf";
+      card.style.borderRadius = "12px";
+      card.style.padding = "14px 16px";
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    applyBaselineLayoutFix();
+    setTimeout(applyBaselineLayoutFix, 60);
+    setTimeout(applyBaselineLayoutFix, 240);
+  });
 })();
 </script>
 <style data-response-card-style-v1="1">
@@ -1864,6 +1882,12 @@ summary {
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(0, 0, 0, 0.03) !important;
   transform: translateZ(0);
+}
+</style><style data-global-dotted-bg-v1="1">
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
+    #ffffff !important;
 }
 </style></head><body><article id="29505779-2efe-81e6-be2b-e44f4963e114" class="page serif"><header><img class="page-cover-image" src="LAB_(14).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(16).png"/></div><h1 class="page-title" dir="auto">Personnalité &amp; ton de marque</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-800e-9d61-d7727941c9f4" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:720px" src="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Script vidéo : Dans cette partie, on va donner une personnalité à ta marque. Une marque n’est pas neutre : elle parle, elle s’exprime, elle crée une relation. Pense à ta marque comme à une personne : comment parle t-elle ? quelle energie dégage t-elle ? Cette section est essentielle pour garantir une communication cohérente, notamment à l’écrit : réseaux sociaux, site web, emails. Prends le temps de remplie le tableau “est / n’est pas”, il t’aidera énormément à éviter les incohérences dans le ton utilisé par ta marque.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e4-a96d-e8627d619eef" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a5-88c2-c9befcdfcbcc" class="">
@@ -1936,6 +1960,7 @@ summary {
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8009-9f43-f3c61230b783" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8015-b51d-f105cd0da133" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 

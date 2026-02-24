@@ -1,0 +1,1975 @@
+﻿<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Personnalité &amp; ton de marque</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 0 auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+/* Baseline: enforce visible space between the two side-by-side columns */
+#30505779-2efe-8091-857b-d7c08a34117b.column-list {
+	display: flex !important;
+	gap: 0 !important;
+	align-items: flex-start;
+}
+#30505779-2efe-8091-857b-d7c08a34117b > div[style*="display:contents"] {
+	display: block !important;
+}
+#30505779-2efe-8091-857b-d7c08a34117b > div[style*="display:contents"]:first-child {
+	margin-right: 36px !important;
+}
+#30505779-2efe-80b1-9c40-d9f1bd0ac15a,
+#30505779-2efe-801a-ac1d-cac7d0783789 {
+	flex: 0 0 calc(50% - 18px) !important;
+	max-width: calc(50% - 18px) !important;
+	width: calc(50% - 18px) !important;
+	padding: 0 !important;
+}
+#30505779-2efe-8091-857b-d7c08a34117b blockquote {
+	background: #ffffff !important;
+	border: 1px solid #e4dccf !important;
+	border-left: 1px solid #e4dccf !important;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	max-height: 32vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style>
+<script>
+(function () {
+  var TOKEN = "[Zone de texte]";
+  var KEY = "brandstudio_zone_inputs_v1::" + location.pathname;
+  var store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
+
+  function save(id, val) {
+    store[id] = val;
+    localStorage.setItem(KEY, JSON.stringify(store));
+  }
+
+    function createBlockField(id) {
+    var ta = document.createElement("textarea");
+    ta.className = "brand-zone brand-zone-block";
+    ta.rows = 4;
+    ta.placeholder = "Ecris ta reponse ici...";
+    ta.value = store[id] || "";
+
+    function autoGrow() {
+      ta.style.height = "auto";
+      ta.style.height = (ta.scrollHeight + 2) + "px";
+    }
+
+    ta.addEventListener("input", function () {
+      save(id, ta.value);
+      autoGrow();
+    });
+    ta.addEventListener("change", autoGrow);
+    ta.addEventListener("keyup", autoGrow);
+    ta.addEventListener("paste", function () { setTimeout(autoGrow, 0); });
+
+    requestAnimationFrame(autoGrow);
+    setTimeout(autoGrow, 50);
+
+    return ta;
+  }
+
+  function createInlineField(id) {
+    var span = document.createElement("span");
+    span.className = "brand-zone brand-zone-inline";
+    span.contentEditable = "true";
+    span.setAttribute("data-placeholder", "Ta reponse");
+    span.setAttribute("role", "textbox");
+    span.setAttribute("aria-label", "Zone de reponse");
+    span.spellcheck = true;
+    span.textContent = store[id] || "";
+
+    span.addEventListener("input", function () {
+      save(id, span.textContent || "");
+    });
+
+    span.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") e.preventDefault();
+    });
+
+    return span;
+  }
+
+  function injectStyles() {
+    var css = [
+      ".brand-zone{font:inherit;color:#2f2621;background:transparent;border:0;outline:none;box-sizing:border-box;}",
+      ".brand-zone:focus{outline:none;}",
+      ".brand-zone-block{display:block;width:100%;min-height:92px;padding:0;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;}",
+      ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:0 4px;margin:0 3px;vertical-align:middle;border-bottom:1px dashed #a99889;cursor:text;}",
+      ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#9a8d82;}",
+      ".brand-zone-inline:focus{background:rgba(181,92,66,.08);}",
+      ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}"
+].join("");
+    var st = document.createElement("style");
+    st.textContent = css;
+    document.head.appendChild(st);
+  }
+
+  function replaceBlockToken(el, id) {
+    el.textContent = "";
+    el.appendChild(createBlockField(id));
+  }
+
+  function replaceInlineTokensInTextNode(node, startIndexRef) {
+    var txt = node.nodeValue;
+    if (!txt || txt.indexOf(TOKEN) === -1) return;
+
+    var frag = document.createDocumentFragment();
+    var parts = txt.split(TOKEN);
+
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i]) frag.appendChild(document.createTextNode(parts[i]));
+      if (i < parts.length - 1) {
+        var id = "inline::" + (startIndexRef.value++);
+        frag.appendChild(createInlineField(id));
+      }
+    }
+
+    node.parentNode.replaceChild(frag, node);
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    injectStyles();
+
+    var blockIndex = 0;
+    Array.from(document.querySelectorAll("p, div, li, blockquote, h1, h2, h3, h4, td, th")).forEach(function (el) {
+      if (el.children.length !== 0) return;
+      var t = (el.textContent || "").trim();
+      if (t === TOKEN) {
+        replaceBlockToken(el, "block::" + (blockIndex++));
+      }
+    });
+
+    var inlineIndexRef = { value: 0 };
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+    var textNodes = [];
+    while (walker.nextNode()) { textNodes.push(walker.currentNode); }
+
+    textNodes.forEach(function (n) {
+      if (!n.parentNode) return;
+      var tag = n.parentNode.nodeName;
+      if (tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT") return;
+      replaceInlineTokensInTextNode(n, inlineIndexRef);
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  var MENU_URL = "En route vers ta nouvelle stratégie de marque 295057792efe80aabdfeebdd4704fcac.html";
+  var MODULES = [
+    "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html",
+    "Vision & marque 295057792efe81b4ac90f13958e3abad.html",
+    "Positionnement 295057792efe810e98f4ffd60c74fad4.html",
+    "Personnalité & ton de marque 295057792efe81e6be2be44f4963e114.html",
+    "Création du document, à toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html",
+    "SUPPORTS BONUS 2fe057792efe801c9accfc2deb83190e.html"
+  ];
+
+  function norm(s) {
+    try { return decodeURIComponent(s || ""); } catch (e) { return s || ""; }
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    if (document.querySelector("a[data-bottom-nav='1']")) return;
+
+    var current = norm(location.pathname.split("/").pop());
+    var idx = MODULES.indexOf(current);
+
+    var back = document.createElement("a");
+    back.href = MENU_URL;
+    back.textContent = "Retour au menu";
+    back.setAttribute("data-bottom-nav", "1");
+    back.style.position = "fixed";
+    back.style.left = "14px";
+    back.style.bottom = "14px";
+    back.style.zIndex = "99999";
+    back.style.background = "#2f2621";
+    back.style.color = "#fff";
+    back.style.textDecoration = "none";
+    back.style.padding = "10px 14px";
+    back.style.borderRadius = "999px";
+    back.style.fontFamily = "Arial, sans-serif";
+    back.style.fontSize = "13px";
+    back.style.boxShadow = "0 8px 20px rgba(0,0,0,.15)";
+    document.body.appendChild(back);
+
+    if (idx >= 0 && idx < MODULES.length - 1) {
+      var next = document.createElement("a");
+      next.href = MODULES[idx + 1];
+      next.textContent = "Module suivant";
+      next.setAttribute("data-bottom-nav", "1");
+      next.style.position = "fixed";
+      next.style.right = "14px";
+      next.style.bottom = "14px";
+      next.style.zIndex = "99999";
+      next.style.background = "#b45c42";
+      next.style.color = "#fff";
+      next.style.textDecoration = "none";
+      next.style.padding = "10px 14px";
+      next.style.borderRadius = "999px";
+      next.style.fontFamily = "Arial, sans-serif";
+      next.style.fontSize = "13px";
+      next.style.boxShadow = "0 8px 20px rgba(0,0,0,.15)";
+      next.style.opacity = "0";
+      next.style.pointerEvents = "none";
+      next.style.transform = "translateY(8px)";
+      next.style.transition = "opacity .2s ease, transform .2s ease";
+      document.body.appendChild(next);
+
+      function updateNextVisibility() {
+        var scrollBottom = (window.scrollY || window.pageYOffset || 0) + window.innerHeight;
+        var docHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        var nearBottom = (docHeight - scrollBottom) <= 140;
+        if (nearBottom) {
+          next.style.opacity = "1";
+          next.style.pointerEvents = "auto";
+          next.style.transform = "translateY(0)";
+        } else {
+          next.style.opacity = "0";
+          next.style.pointerEvents = "none";
+          next.style.transform = "translateY(8px)";
+        }
+      }
+
+      updateNextVisibility();
+      window.addEventListener("scroll", updateNextVisibility, { passive: true });
+      window.addEventListener("resize", updateNextVisibility);
+    }
+  });
+})();
+</script>
+<script>
+(function () {
+  var KEY = "brandstudio_todo_v1::" + location.pathname;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
+
+  function save() {
+    localStorage.setItem(KEY, JSON.stringify(state));
+  }
+
+  function setChecked(li, checked) {
+    var box = li.querySelector(".checkbox");
+    if (!box) return;
+
+    box.classList.remove("checkbox-on", "checkbox-off");
+    box.classList.add(checked ? "checkbox-on" : "checkbox-off");
+
+    li.querySelectorAll(".to-do-children-unchecked, .to-do-children-checked").forEach(function (span) {
+      span.classList.remove("to-do-children-unchecked", "to-do-children-checked");
+      span.classList.add(checked ? "to-do-children-checked" : "to-do-children-unchecked");
+    });
+  }
+
+  function makeId(li, idx) {
+    var ul = li.closest("ul");
+    var ulId = ul && ul.id ? ul.id : "ul-" + idx;
+    return ulId + "::" + idx;
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    var css = document.createElement("style");
+    css.textContent = ".to-do-list .checkbox{cursor:pointer;}";
+    document.head.appendChild(css);
+
+    var items = Array.from(document.querySelectorAll("ul.to-do-list > li"));
+
+    items.forEach(function (li, idx) {
+      var box = li.querySelector(".checkbox");
+      if (!box) return;
+
+      var id = makeId(li, idx);
+      var isChecked = !!state[id];
+      setChecked(li, isChecked);
+
+      function toggle(e) {
+        if (e) e.preventDefault();
+        state[id] = !state[id];
+        setChecked(li, !!state[id]);
+        save();
+      }
+
+      box.addEventListener("click", toggle);
+
+      var label = li.querySelector(".to-do-children-unchecked, .to-do-children-checked");
+      if (label) {
+        label.style.cursor = "pointer";
+        label.addEventListener("click", toggle);
+      }
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  function toCanvaPreviewUrl(url) {
+    try {
+      var u = new URL(url);
+      var p = u.pathname || "";
+      p = p.replace(/\/edit$/, "/view");
+      p = p.replace(/\/edit\/$/, "/view/");
+      if (!/\/view\/?$/.test(p)) {
+        p = p.replace(/\/edit.*/, "/view");
+      }
+      u.pathname = p;
+      u.search = "embed";
+      return u.toString();
+    } catch (e) {
+      return url;
+    }
+  }
+
+  function injectStyles() {
+    var style = document.createElement("style");
+    style.textContent = [
+      ".canva-preview{margin-top:10px;border:1px solid #e2d7cb;border-radius:12px;background:#fffdf9;overflow:hidden;}",
+      ".canva-preview-head{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px;background:#f8efe6;border-bottom:1px solid #eadfd3;font-family:Arial,sans-serif;font-size:13px;}",
+      ".canva-preview-head a{color:#2f2621;font-weight:700;text-decoration:none;}",
+      ".canva-preview-frame{width:100%;height:360px;border:0;display:block;background:#fff;}",
+      ".canva-preview-note{padding:10px 12px;font-family:Arial,sans-serif;font-size:12px;color:#6a5b51;}"
+].join("");
+    document.head.appendChild(style);
+  }
+
+  function addPreviewForLink(link, index) {
+    if (!link || link.closest('.canva-preview')) return;
+
+    var href = link.getAttribute('href') || '';
+    if (!/canva\.com\/design\//i.test(href)) return;
+
+    var previewUrl = toCanvaPreviewUrl(href);
+
+    var sourceWrap = link.closest('.source');
+    if (sourceWrap) sourceWrap.style.display = 'none';
+    link.style.display = 'none';
+
+    var wrap = document.createElement('div');
+    wrap.className = 'canva-preview';
+    wrap.setAttribute('data-canva-preview', String(index));
+
+    var head = document.createElement('div');
+    head.className = 'canva-preview-head';
+
+    var title = document.createElement('strong');
+    title.textContent = 'Apercu Canva';
+
+    var open = document.createElement('a');
+    open.href = href;
+    open.target = '_blank';
+    open.rel = 'noopener noreferrer';
+    open.textContent = 'Ouvrir Canva';
+
+    head.appendChild(title);
+    head.appendChild(open);
+
+    var frame = document.createElement('iframe');
+    frame.className = 'canva-preview-frame';
+    frame.loading = 'lazy';
+    frame.referrerPolicy = 'no-referrer';
+    frame.src = previewUrl;
+
+    var note = document.createElement('div');
+    note.className = 'canva-preview-note';
+    note.textContent = "Si l'aperçu ne s'affiche pas, utilise le bouton Ouvrir Canva.";
+
+    wrap.appendChild(head);
+    wrap.appendChild(frame);
+    wrap.appendChild(note);
+
+    var anchor = link.closest('figure') || link.parentElement;
+    if (anchor && anchor.parentNode) {
+      anchor.parentNode.insertBefore(wrap, anchor.nextSibling);
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', function () {
+    injectStyles();
+    var links = Array.from(document.querySelectorAll('a[href*="canva.com/design/"]'));
+    links.forEach(addPreviewForLink);
+  });
+})();
+</script>
+<script>
+(function () {
+  var KEY = "brandstudio_image_slots_v1::" + location.pathname;
+  var store = {};
+  try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
+
+  function save() {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  }
+
+  function makeSlotId(figure, idx) {
+    return figure.id ? ("fig::" + figure.id) : ("idx::" + idx);
+  }
+
+  function buildUploadUI(figure, slotId) {
+    figure.innerHTML = "";
+    figure.classList.add("brand-upload-slot");
+
+    var box = document.createElement("div");
+    box.className = "brand-upload-box";
+
+    var preview = document.createElement("img");
+    preview.className = "brand-upload-preview";
+    preview.alt = "Apercu image";
+
+    var hint = document.createElement("div");
+    hint.className = "brand-upload-hint";
+    hint.textContent = "Ajoute une image d'inspiration";
+
+    var controls = document.createElement("div");
+    controls.className = "brand-upload-controls";
+
+    var label = document.createElement("label");
+    label.className = "brand-upload-btn";
+    label.textContent = "Ajouter une image";
+
+    var input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*";
+    input.style.display = "none";
+
+    label.appendChild(input);
+    controls.appendChild(label);
+
+    box.appendChild(preview);
+    box.appendChild(hint);
+    box.appendChild(controls);
+    figure.appendChild(box);
+
+    function renderSaved() {
+      var src = store[slotId] || "";
+      if (src) {
+        preview.src = src;
+        preview.style.display = "block";
+        hint.style.display = "none";
+        label.textContent = "Modifier l'image";
+        box.classList.add("has-image");
+      } else {
+        preview.removeAttribute("src");
+        preview.style.display = "none";
+        hint.style.display = "block";
+        label.textContent = "Ajouter une image";
+        box.classList.remove("has-image");
+      }
+    }
+
+    input.addEventListener("change", function () {
+      var file = input.files && input.files[0];
+      if (!file) return;
+      var reader = new FileReader();
+      reader.onload = function () {
+        store[slotId] = String(reader.result || "");
+        save();
+        renderSaved();
+      };
+      reader.readAsDataURL(file);
+    });
+
+
+    renderSaved();
+  }
+
+  function injectStyles() {
+    var st = document.createElement("style");
+    st.textContent = [
+      "figure.brand-upload-slot{margin:.9em .4em 1.1em;}",
+      ".brand-upload-box{border:1px solid transparent;border-radius:18px;background:transparent;padding:15px;box-shadow:none;transition:transform .2s ease, box-shadow .2s ease,border-color .2s ease;position:relative;overflow:hidden;}",
+      ".brand-upload-box:before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#c96e20 0%,#e3b347 100%);opacity:.92;}",
+      ".brand-upload-box:hover{transform:none;box-shadow:none;border-color:transparent;}",
+      ".brand-upload-box.has-image{background:transparent;border-color:transparent;box-shadow:none;padding:6px;}",
+      ".brand-upload-preview{display:none;width:100%;max-height:340px;object-fit:cover;border-radius:14px;background:#fff;border:1px solid #efdfce;box-shadow:0 6px 16px rgba(45,31,20,.08);}",
+      ".brand-upload-hint{font-size:13px;color:#6f5d50;margin-top:10px;font-weight:600;}",
+      ".brand-upload-controls{display:flex;gap:10px;margin-top:13px;align-items:center;justify-content:flex-start;}",
+      ".brand-upload-btn{font:inherit;border:0;border-radius:11px;padding:10px 14px;cursor:pointer;font-weight:700;}",
+      ".brand-upload-btn{background:#e3b347;color:#2a1d10;box-shadow:0 10px 20px rgba(164,117,30,.24);}",
+      ".brand-upload-btn:hover{background:#d9ab3f;transform:translateY(-1px);}",
+      ".brand-upload-box.has-image:before{opacity:0;}",
+      ".brand-upload-box.has-image .brand-upload-controls{position:absolute;top:10px;right:10px;margin:0;opacity:0;pointer-events:none;transition:opacity .15s ease;}",
+      ".brand-upload-box.has-image .brand-upload-btn{background:transparent;color:#7b6b5d;box-shadow:none;padding:1px 2px;border-radius:4px;font-size:12px;font-weight:500;text-decoration:none;letter-spacing:.01em;width:auto !important;text-align:right;}",
+      ".brand-upload-box.has-image:hover .brand-upload-controls,.brand-upload-box.has-image:focus-within .brand-upload-controls{opacity:1;pointer-events:auto;}.brand-upload-box.has-image .brand-upload-btn:hover{background:transparent;color:#5c4d3f;transform:none;text-decoration:underline;text-underline-offset:2px;}",
+      "",
+      "",
+      "@media (max-width:700px){figure.brand-upload-slot{margin:.7em 0 1em;}.brand-upload-controls{flex-wrap:wrap;}.brand-upload-btn{width:100%;text-align:center;}}"
+].join("");
+    document.head.appendChild(st);
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    injectStyles();
+
+    var figures = Array.from(document.querySelectorAll("figure.image"));
+    var targets = figures.filter(function (fig) {
+      var a = fig.querySelector("a[href='https://www.notion.so']");
+      var img = fig.querySelector("img[src='https://www.notion.so']");
+      return !!(a && img);
+    });
+
+    targets.forEach(function (fig, idx) {
+      var id = makeSlotId(fig, idx);
+      buildUploadUI(fig, id);
+    });
+  });
+})();
+</script>
+<script>
+(function () {
+  var AUTH_KEY = "brandstudio_access_granted";
+  window.addEventListener("DOMContentLoaded", function () {
+    if (document.querySelector("button[data-logout='1']")) return;
+
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Déconnexion";
+    btn.setAttribute("data-logout", "1");
+    btn.style.position = "fixed";
+    btn.style.top = "12px";
+    btn.style.right = "12px";
+    btn.style.zIndex = "100000";
+    btn.style.border = "0";
+    btn.style.borderRadius = "999px";
+    btn.style.padding = "8px 12px";
+    btn.style.cursor = "pointer";
+    btn.style.background = "#2f2621";
+    btn.style.color = "#fff";
+    btn.style.fontFamily = "Arial, sans-serif";
+    btn.style.fontSize = "12px";
+    btn.style.transition = "opacity .18s ease, transform .18s ease";
+
+    btn.addEventListener("click", function () {
+      localStorage.removeItem(AUTH_KEY);
+      window.location.href = "index.html";
+    });
+
+    document.body.appendChild(btn);
+
+    var lastY = window.scrollY || 0;
+    function show() {
+      btn.style.opacity = "1";
+      btn.style.pointerEvents = "auto";
+      btn.style.transform = "translateY(0)";
+    }
+    function hide() {
+      btn.style.opacity = "0";
+      btn.style.pointerEvents = "none";
+      btn.style.transform = "translateY(-8px)";
+    }
+
+    window.addEventListener("scroll", function () {
+      var y = window.scrollY || 0;
+      if (y <= 10) {
+        show();
+      } else if (y > lastY) {
+        hide();
+      } else {
+        show();
+      }
+      lastY = y;
+    }, { passive: true });
+  });
+})();
+</script>
+
+<script data-accordion-modern="1">
+(function () {
+  window.addEventListener("DOMContentLoaded", function () {
+    var st = document.createElement("style");
+    st.textContent = [
+      "details{margin:0 -10px 12px;border:1px solid #e8dacb;border-radius:14px;background:#ffffff;box-shadow:0 8px 22px rgba(62,40,22,.08);overflow:hidden;}",
+      "details:last-of-type{margin-bottom:0;}",
+      "details > summary{list-style:none;cursor:pointer;padding:14px 16px 14px 44px !important;margin:0 !important;position:relative;font-size:1.22rem !important;line-height:1.25 !important;font-weight:700 !important;color:#2c231d !important;background:#ffffff;}",
+      "details > summary::-webkit-details-marker{display:none;}",
+      "details > summary:before{content:'▸';position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;color:#9d6a3b;transition:transform .15s ease,color .15s ease;}",
+      "details[open] > summary:before{transform:translateY(-50%) rotate(90deg);color:#c07b2f;}",
+      "details > .indented{padding:12px 16px 16px;background:transparent;}",
+      "details > .indented > *:first-child{margin-top:0 !important;}",
+      "details > .indented > *:last-child{margin-bottom:0 !important;}",
+      "@media (max-width:700px){details > summary{font-size:1.08rem !important;padding:12px 12px 12px 40px !important;}details > .indented{padding:10px 12px 14px;}}"
+    ].join("");
+    document.head.appendChild(st);
+  });
+})();
+</script>
+<style data-image-shape-v1="1">
+.page-body figure.image,
+.page-body .img-card,
+.page-body .brand-upload-box.has-image {
+  border-radius: 28px !important;
+  overflow: hidden !important;
+}
+
+.page-body figure.image img,
+.page-body .img-card img,
+.page-body .brand-upload-preview {
+  border-radius: 28px !important;
+}
+</style>
+<style data-studio-global-v1="1">
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
+    linear-gradient(180deg, #f5f2ea 0%, #f2eee6 100%);
+}
+
+.page {
+  background: transparent;
+}
+
+.page-body {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 42px;
+}
+
+.page-title {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  letter-spacing: 0.01em;
+  color: #2c241d;
+}
+
+h2, h3 {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  color: #2e261e;
+  letter-spacing: 0.005em;
+}
+
+.block-color-yellow_background,
+.block-color-orange_background,
+.block-color-pink_background,
+.block-color-purple_background,
+.block-color-brown_background,
+.block-color-red_background {
+  border: 1px solid #eadbc5;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(68, 44, 23, 0.08);
+}
+
+.callout {
+  border: 1px solid #eadbc5;
+  border-radius: 16px !important;
+  background: #fffaf2 !important;
+  box-shadow: 0 10px 24px rgba(68, 44, 23, 0.08);
+}
+
+/* Cards de réponses */
+.block-color-gray_background.callout {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%) !important;
+  border: 0 !important;
+  box-shadow:
+    0 14px 28px rgba(30, 22, 15, 0.10),
+    0 3px 8px rgba(30, 22, 15, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03) !important;
+  transform: translateZ(0);
+}
+
+blockquote {
+  border-left: 5px solid #d58b2d !important;
+  border-radius: 12px;
+  background: #fff9ef;
+  border: 1px solid #ecddc8;
+  padding: 14px 16px;
+}
+
+figure.image,
+figure.image img {
+  border-radius: 20px !important;
+}
+
+.link-to-page {
+  border-radius: 14px !important;
+  border: 1px solid #ead8bf;
+  background: #fffaf1 !important;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.link-to-page:hover {
+  transform: translateY(-2px);
+  border-color: #dba45d;
+  box-shadow: 0 10px 20px rgba(73, 47, 23, 0.12);
+}
+
+.link-to-page a {
+  text-decoration: none !important;
+}
+
+details {
+  border: 1px solid #eadbc5;
+  border-radius: 14px;
+  background: #fffdf8;
+  box-shadow: 0 8px 20px rgba(68, 44, 23, 0.06);
+  padding: 8px 12px;
+}
+
+summary {
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  font-weight: 700;
+}
+
+.to-do-list li,
+.bulleted-list li,
+.numbered-list li {
+  margin: 4px 0;
+}
+
+@media (max-width: 980px) {
+  .page-body {
+    padding: 16px 14px 28px;
+  }
+}
+</style>
+<style data-persona-ai-v1="1">
+.persona-ai-card { margin:16px 0 8px; padding:14px 14px 12px; border:1px solid #e7dcef; border-radius:16px; background:linear-gradient(145deg,#ffffff 0%,#f8f4ff 100%); box-shadow:0 10px 24px rgba(34,24,52,0.08); }
+.persona-ai-head { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.persona-ai-title { margin:0; font-size:1.05em; font-weight:800; color:#2a2038; }
+.persona-ai-btn { border:1px solid #d9c6ea; background:#fff; color:#402a5a; border-radius:999px; padding:7px 12px; cursor:pointer; font:inherit; font-size:0.92em; font-weight:700; }
+.persona-ai-btn:hover { background:#f7f0ff; }
+.persona-ai-output { border:1px solid #e6d9f0; border-radius:12px; background:#fffeff; padding:10px; min-height:220px; color:#2f2639; line-height:1.45; display:flex; align-items:center; justify-content:center; }
+.persona-ai-output.is-loading { color:#6b5d7e; font-style:italic; }
+.persona-ai-visual { width:100%; max-width:460px; aspect-ratio:3/4; object-fit:cover; border-radius:14px; border:1px solid #e5d7f0; box-shadow:0 10px 22px rgba(34,24,52,0.10); background:#f8f3ff; }
+.persona-ai-meta { margin-top:10px; padding:9px 10px; border-radius:10px; border:1px solid #ece3f3; background:#fff; color:#4a3d5d; font-size:0.9em; }
+.persona-id-card { margin-top:10px; padding:10px; border:1px solid #e7d9f2; border-radius:12px; background:linear-gradient(145deg,#fff 0%,#f8f3ff 100%); }
+.persona-id-card h4 { margin:0 0 8px; font-size:0.95em; color:#3b2d52; }
+.persona-id-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px 10px; }
+.persona-id-item { font-size:0.9em; color:#32283f; }
+.persona-id-item b { color:#5a3a7f; }
+.persona-ai-hint { margin:8px 0 0; font-size:0.88em; color:#6b5d7e; }
+.persona-gender-box { margin:10px 0 12px; padding:10px 12px; border:1px solid #e8dff0; border-radius:12px; background:#fff; }
+.persona-gender-title { margin:0 0 8px; font-size:0.9em; color:#3d3150; font-weight:700; }
+.persona-gender-row { display:flex; gap:16px; flex-wrap:wrap; }
+.persona-gender-opt { display:inline-flex; align-items:center; gap:8px; color:#32283f; font-size:0.92em; }
+.persona-gender-opt input { width:16px; height:16px; accent-color:#7f5aa8; }
+</style>
+<script data-persona-ai-v1="1">
+(function () {
+  var STORAGE_KEY = "brandstudio_persona_visual_v6::" + location.pathname;
+  var QUOTE_INPUT_FIGURE_ID = "30b05779-2efe-802e-9cb9-e83d68368803";
+  var INSERT_BEFORE_ID = "30505779-2efe-800b-9bd6-d8bcccf47d71";
+  var PRENOM_FIGURE_ID = "30505779-2efe-806c-bd13-f0f43046e057";
+
+  function txtFromFigure(id) {
+    var fig = document.getElementById(id);
+    if (!fig) return "";
+    var chunks = [];
+    fig.querySelectorAll("textarea, .brand-zone-inline, [contenteditable='true']").forEach(function (el) {
+      var v = (el.value != null ? el.value : el.textContent || "").trim();
+      if (v) chunks.push(v);
+    });
+    return chunks.join(" ; ");
+  }
+
+  function listFromFigure(id) {
+    var fig = document.getElementById(id);
+    if (!fig) return [];
+    var out = [];
+    fig.querySelectorAll("textarea, .brand-zone-inline, [contenteditable='true']").forEach(function (el) {
+      var v = (el.value != null ? el.value : el.textContent || "").trim();
+      if (v) out.push(v);
+    });
+    return out;
+  }
+
+  function firstNonEmpty(arr, fallback) {
+    for (var i = 0; i < arr.length; i++) if (arr[i]) return arr[i];
+    return fallback || "";
+  }
+
+  function sanitizeAge(ageTxt) {
+    if (!ageTxt) return "30-40";
+    return ageTxt.replace(/\s+/g, " ").trim();
+  }
+
+  function clip(text, max) {
+    var t = (text || "").replace(/\s+/g, " ").trim();
+    if (!max || t.length <= max) return t;
+    return t.slice(0, max).trim();
+  }
+
+  function lower(s) { return (s || "").toLowerCase(); }
+
+  function detectGender(profile) {
+    if (profile && (profile.genderExplicit === "femme" || profile.genderExplicit === "homme")) {
+      return profile.genderExplicit;
+    }
+    var src = lower([profile.description, profile.prenom, profile.style, profile.traits.join(" ")].join(" "));
+    var f = 0, m = 0;
+    ["femme","feminin","féminin","woman","female","elle","her"].forEach(function (k) { if (src.indexOf(k) >= 0) f++; });
+    ["homme","masculin","man","male","il","him"].forEach(function (k) { if (src.indexOf(k) >= 0) m++; });
+    var prenom = lower(profile.prenom);
+    ["marie","marine","sarah","camille","emma","lea","chloe","claire","julia","laura"].forEach(function (n) { if (prenom.indexOf(n) >= 0) f += 2; });
+    ["alexandre","thomas","nicolas","julien","kevin","paul","antoine","mathieu","pierre","luc"].forEach(function (n) { if (prenom.indexOf(n) >= 0) m += 2; });
+    if (f > m) return "femme";
+    if (m > f) return "homme";
+    return "neutre";
+  }
+
+  function inferColor(text) {
+    var t = lower(text);
+    var map = [
+      ["rouge","#c95b63"], ["rose","#d78db3"], ["violet","#8e6cc8"], ["lilas","#a58cd8"],
+      ["bleu","#5f88cf"], ["turquoise","#4eb3b2"], ["vert","#6ba36e"], ["jaune","#d9b24e"],
+      ["orange","#d88a55"], ["marron","#9a735f"], ["beige","#c9b191"], ["noir","#4a4a4a"], ["blanc","#e8e8e8"]
+    ];
+    for (var i = 0; i < map.length; i++) if (t.indexOf(map[i][0]) >= 0) return map[i][1];
+    return "#8e6cc8";
+  }
+
+  function buildProfile() {
+    var profile = {
+      description: txtFromFigure("2ee05779-2efe-802b-947c-f74930bc3c0e"),
+      prenom: txtFromFigure("30505779-2efe-806c-bd13-f0f43046e057"),
+      age: sanitizeAge(txtFromFigure("30505779-2efe-8008-8900-cb7db36aa770")),
+      profession: txtFromFigure("30505779-2efe-80ae-905c-ca436e909e72"),
+      traits: listFromFigure("30505779-2efe-8032-a0df-ca0744044b72"),
+      styleCom: txtFromFigure("30505779-2efe-802b-960e-fd03d88b9e6b"),
+      tone: txtFromFigure("30505779-2efe-80a1-b0e2-e1f6f64bfd83"),
+      style: txtFromFigure("30505779-2efe-8055-bf73-c236799d74c7"),
+      couleurs: txtFromFigure("30505779-2efe-80ae-9bd6-e08de8335552"),
+      accessoires: txtFromFigure("30505779-2efe-8036-a76d-da1e3fe413f5"),
+      valeurs: txtFromFigure("30505779-2efe-805b-9ff7-ed93ba82b35d"),
+      anti: txtFromFigure("30505779-2efe-8080-8aa5-c1c02aab9811"),
+      lieu: txtFromFigure("30505779-2efe-80ae-b5b5-ceeee8839beb"),
+      objet: txtFromFigure("30505779-2efe-8081-8e49-d78e010fcf65"),
+      citation: txtFromFigure(QUOTE_INPUT_FIGURE_ID),
+      genderExplicit: ""
+    };
+
+    profile.genderExplicit = getSelectedGender();
+    profile.prenom = clip(firstNonEmpty([profile.prenom], "Alex"), 26);
+    profile.age = clip(firstNonEmpty([profile.age], "30-40"), 24);
+    profile.profession = clip(firstNonEmpty([profile.profession], "brand strategist"), 42);
+    profile.style = clip(firstNonEmpty([profile.style], "minimal and refined"), 40);
+    profile.couleurs = clip(firstNonEmpty([profile.couleurs], "palette douce"), 40);
+    profile.accessoires = clip(firstNonEmpty([profile.accessoires], "details subtils"), 50);
+    profile.objet = clip(firstNonEmpty([profile.objet], "carnet et stylo"), 48);
+    profile.citation = clip(firstNonEmpty([profile.citation], "Chaque mot doit avoir du sens."), 90);
+    profile.traits = (profile.traits || []).slice(0, 3).map(function (t) { return clip(t, 20); });
+    while (profile.traits.length < 3) profile.traits.push(["structure","bienveillance","creativite"][profile.traits.length]);
+    profile.gender = detectGender(profile);
+    profile.colorHex = inferColor(profile.couleurs);
+    return profile;
+  }
+
+  function getSelectedGender() {
+    var f = document.querySelector("[data-persona-gender='femme']");
+    var h = document.querySelector("[data-persona-gender='homme']");
+    if (f && f.checked) return "femme";
+    if (h && h.checked) return "homme";
+    return "";
+  }
+
+  function ensureGenderChooser() {
+    if (document.querySelector("[data-persona-gender-box='1']")) return;
+    var prenomFigure = document.getElementById(PRENOM_FIGURE_ID);
+    if (!prenomFigure || !prenomFigure.parentNode) return;
+
+    var box = document.createElement("div");
+    box.className = "persona-gender-box";
+    box.setAttribute("data-persona-gender-box", "1");
+    box.innerHTML =
+      "<p class='persona-gender-title'>Genre du persona :</p>" +
+      "<div class='persona-gender-row'>" +
+      "<label class='persona-gender-opt'><input type='checkbox' data-persona-gender='femme'/> Femme</label>" +
+      "<label class='persona-gender-opt'><input type='checkbox' data-persona-gender='homme'/> Homme</label>" +
+      "</div>";
+
+    prenomFigure.parentNode.insertBefore(box, prenomFigure);
+
+    var female = box.querySelector("[data-persona-gender='femme']");
+    var male = box.querySelector("[data-persona-gender='homme']");
+    function sync(checked) {
+      if (checked === "femme") male.checked = false;
+      if (checked === "homme") female.checked = false;
+    }
+    female.addEventListener("change", function () { if (female.checked) sync("femme"); });
+    male.addEventListener("change", function () { if (male.checked) sync("homme"); });
+  }
+
+  function buildAvatarPrompt(profile) {
+    var genderWord = profile.gender === "femme" ? "woman" : (profile.gender === "homme" ? "man" : "person");
+    var p = [
+      "PROFESSIONAL PHOTOREALISTIC PORTRAIT, SINGLE REAL HUMAN",
+      "head and shoulders, natural skin texture, sharp eyes, realistic hair strands",
+      "soft daylight, 85mm portrait lens look, clean bokeh background",
+      "not cartoon, not illustration, not 3d, no text, no logo, no watermark",
+      "STRICTLY MATCH THESE ATTRIBUTES",
+      "gender: " + genderWord,
+      "age: " + profile.age,
+      "profession: " + profile.profession,
+      "dominant traits: " + profile.traits.join(", "),
+      "clothing style: " + profile.style,
+      "worn colors: " + profile.couleurs,
+      "accessories: " + profile.accessoires,
+      "hair style and facial expression must reflect personality and tone",
+      "NEGATIVE: extra people, duplicate face, deformed hands, blur, low resolution, over-smooth skin, plastic look"
+    ].join(", ");
+    return clip(p, 460);
+  }
+
+  function avatarSeed(profile) {
+    return clip([
+      profile.prenom,
+      profile.gender,
+      profile.age,
+      profile.profession,
+      profile.style,
+      profile.couleurs,
+      profile.accessoires,
+      (profile.traits || []).join("-")
+    ].join("|"), 180).replace(/\s+/g, "-");
+  }
+
+  function buildAvatarImageUrls(profile) {
+    var seed = Date.now().toString(36);
+    var prompt = buildAvatarPrompt(profile);
+    var baseGender = profile.gender === "femme" ? "woman" : (profile.gender === "homme" ? "man" : "person");
+    var main = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt) +
+      "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "a";
+    var retry = "https://image.pollinations.ai/prompt/" + encodeURIComponent(
+      "professional editorial portrait photo, single " + baseGender + ", " +
+      "age " + profile.age + ", profession " + profile.profession + ", " +
+      "style " + profile.style + ", worn colors " + profile.couleurs + ", accessories " + profile.accessoires + ", " +
+      "natural expression, realistic skin pores, detailed hair, studio daylight, 85mm lens, bokeh, photorealistic"
+    ) + "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "b";
+    var retryAltDomain = "https://pollinations.ai/p/" + encodeURIComponent(
+      "professional portrait photography, single " + baseGender + ", " +
+      profile.age + ", " + profile.profession + ", " + profile.style + ", " + profile.couleurs + ", " + profile.accessoires +
+      ", realistic skin, natural expression, bokeh, no cartoon"
+    ) + "?width=960&height=1280&seed=" + seed + "bd";
+    var retry2 = "https://image.pollinations.ai/prompt/" + encodeURIComponent(
+      "premium linkedin-style portrait, single " + baseGender + ", confident and warm expression, " +
+      "head and shoulders framing, clean background blur, realistic face anatomy, high detail photograph, " +
+      "no illustration no cartoon no cgi"
+    ) + "?model=flux&width=960&height=1280&nologo=true&enhance=true&seed=" + seed + "c";
+    return [main, retry, retryAltDomain, retry2];
+  }
+
+  function buildLocalPortraitSvg(profile) {
+    var bg = profile.colorHex || "#8e6cc8";
+    var isFemale = profile.gender === "femme";
+    var isMale = profile.gender === "homme";
+    var styleTxt = lower(profile.style);
+    var accTxt = lower(profile.accessoires);
+    var traitsTxt = lower((profile.traits || []).join(" "));
+    var glasses = accTxt.indexOf("lunette") >= 0;
+    var elegant = styleTxt.indexOf("eleg") >= 0 || styleTxt.indexOf("chic") >= 0 || styleTxt.indexOf("raffin") >= 0;
+    var confident = traitsTxt.indexOf("lead") >= 0 || traitsTxt.indexOf("assur") >= 0 || traitsTxt.indexOf("direct") >= 0;
+    var warm = traitsTxt.indexOf("bienve") >= 0 || traitsTxt.indexOf("chaleur") >= 0 || traitsTxt.indexOf("empat") >= 0;
+
+    var hair = isFemale ? "#8f6a4a" : "#3d3434";
+    if (styleTxt.indexOf("blond") >= 0) hair = "#d1ad6a";
+    if (styleTxt.indexOf("brun") >= 0 || styleTxt.indexOf("marron") >= 0) hair = "#5b4638";
+    if (styleTxt.indexOf("noir") >= 0) hair = "#2f2f35";
+    if (styleTxt.indexOf("roux") >= 0) hair = "#a85e3f";
+
+    var cloth = bg;
+    var mood = confident ? "#2f486a" : (warm ? "#7f4a52" : "#5a4f64");
+    var jaw = isMale ? "86" : "80";
+    var faceTop = isFemale ? "232" : "226";
+    var faceToneA = isFemale ? "#f0c9af" : "#efc4a6";
+    var faceToneB = isFemale ? "#e5b297" : "#dfaa8d";
+    var coat = elegant
+      ? "<path d='M165 862c18-164 120-266 235-266s217 102 235 266z' fill='" + cloth + "'/><path d='M288 638l32 64 32-64v224h-64z' fill='#f7f7fa' opacity='.9'/>"
+      : "<path d='M165 862c24-154 114-252 235-252s211 98 235 252z' fill='" + cloth + "'/>";
+    var glassesShape = glasses
+      ? "<g stroke='#2c2c2c' stroke-width='4' fill='none' opacity='.9'><rect x='248' y='340' width='76' height='46' rx='12'/><rect x='336' y='340' width='76' height='46' rx='12'/><line x1='324' y1='362' x2='336' y2='362'/></g>"
+      : "";
+    var mouth = confident
+      ? "<path d='M286 462c22 11 46 11 68 0' stroke='#7f474e' stroke-width='4' fill='none' stroke-linecap='round'/>"
+      : (warm
+      ? "<path d='M282 458c24 18 52 18 76 0' stroke='#91545c' stroke-width='4' fill='none' stroke-linecap='round'/>"
+      : "<path d='M292 462c18 6 38 6 56 0' stroke='#8a6268' stroke-width='3.5' fill='none' stroke-linecap='round'/>");
+
+    var svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 640 860'>" +
+      "<defs>" +
+      "<linearGradient id='bgGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#f6effa'/><stop offset='1' stop-color='#ecf1fb'/></linearGradient>" +
+      "<radialGradient id='backSpot' cx='50%' cy='30%' r='62%'><stop offset='0' stop-color='" + bg + "' stop-opacity='.30'/><stop offset='1' stop-color='" + bg + "' stop-opacity='0'/></radialGradient>" +
+      "<radialGradient id='faceLight' cx='48%' cy='36%' r='58%'><stop offset='0' stop-color='" + faceToneA + "'/><stop offset='1' stop-color='" + faceToneB + "'/></radialGradient>" +
+      "<linearGradient id='hairGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='" + hair + "'/><stop offset='1' stop-color='#2a2628'/></linearGradient>" +
+      "<filter id='softBlur'><feGaussianBlur stdDeviation='1.6'/></filter>" +
+      "<filter id='grain' x='-20%' y='-20%' width='140%' height='140%'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/><feComponentTransfer><feFuncA type='table' tableValues='0 0 .03 .05'/></feComponentTransfer></filter>" +
+      "<radialGradient id='vignette' cx='50%' cy='44%' r='62%'><stop offset='70%' stop-color='#000' stop-opacity='0'/><stop offset='100%' stop-color='#000' stop-opacity='.20'/></radialGradient>" +
+      "</defs>" +
+      "<rect width='640' height='860' fill='url(#bgGrad)'/>" +
+      "<rect width='640' height='860' fill='url(#backSpot)'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='#fff' opacity='.9'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='url(#vignette)'/>" +
+      "<ellipse cx='320' cy='324' rx='196' ry='230' fill='#ffffff' opacity='.44' filter='url(#softBlur)'/>" +
+      "<path d='M210 312c0-118 90-202 210-202s210 84 210 202v46H210z' fill='url(#hairGrad)' opacity='.98'/>" +
+      "<ellipse cx='320' cy='384' rx='" + jaw + "' ry='108' fill='url(#faceLight)'/>" +
+      "<ellipse cx='288' cy='382' rx='12' ry='8.5' fill='#2b2b2b'/><ellipse cx='352' cy='382' rx='12' ry='8.5' fill='#2b2b2b'/>" +
+      "<ellipse cx='288' cy='378' rx='2.1' ry='2.1' fill='#fff'/><ellipse cx='352' cy='378' rx='2.1' ry='2.1' fill='#fff'/>" +
+      "<path d='M318 " + faceTop + "c-11 22-14 40-12 66' stroke='#d79d84' stroke-width='3' fill='none' stroke-linecap='round' opacity='.65'/>" +
+      "<ellipse cx='265' cy='426' rx='18' ry='9' fill='#d58a87' opacity='.26'/><ellipse cx='374' cy='426' rx='18' ry='9' fill='#d58a87' opacity='.26'/>" +
+      mouth +
+      glassesShape +
+      "<path d='M228 336c19-22 52-35 88-35' stroke='#1d1c20' stroke-width='5' fill='none' opacity='.45'/>" +
+      "<path d='M412 336c-19-22-52-35-88-35' stroke='#1d1c20' stroke-width='5' fill='none' opacity='.45'/>" +
+      coat +
+      "<rect x='72' y='66' width='496' height='728' rx='44' fill='none' stroke='#d8cfdf'/>" +
+      "<rect x='72' y='66' width='496' height='728' rx='44' filter='url(#grain)'/>" +
+      "<rect width='640' height='860' fill='" + mood + "' opacity='.06'/>" +
+      "</svg>";
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  function findQuoteFigure() {
+    var headings = document.querySelectorAll("h2, h3");
+    for (var i = 0; i < headings.length; i++) {
+      var text = (headings[i].textContent || "").trim();
+      if (/citation qui la d[eé]finit/i.test(text)) {
+        var probe = headings[i].nextElementSibling;
+        while (probe) {
+          if (probe.tagName && probe.tagName.toLowerCase() === "figure") return probe;
+          probe = probe.nextElementSibling;
+        }
+      }
+    }
+
+    var callouts = document.querySelectorAll("figure.callout");
+    for (var j = callouts.length - 1; j >= 0; j--) {
+      var t = (callouts[j].textContent || "").toLowerCase();
+      if (t.indexOf("citation") >= 0 || t.indexOf("zone de texte") >= 0) return callouts[j];
+    }
+    return null;
+  }
+
+  function renderCard() {
+    if (document.querySelector("[data-persona-ai-card='1']")) return;
+    var quoteFigure = document.getElementById(QUOTE_INPUT_FIGURE_ID) || findQuoteFigure();
+
+    var anchor = document.getElementById(INSERT_BEFORE_ID);
+    var card = document.createElement("section");
+    card.className = "persona-ai-card";
+    card.setAttribute("data-persona-ai-card", "1");
+    card.innerHTML =
+      "<div class='persona-ai-head'><h3 class='persona-ai-title'>Carte d'identite du persona</h3></div>" +
+      "<div class='persona-ai-meta' data-persona-meta='1'></div>" +
+      "<section class='persona-id-card' data-persona-id='1'><div class='persona-id-grid'>" +
+      "<div class='persona-id-item'><b>Nom :</b> <span data-id-name='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Genre :</b> <span data-id-gender='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Age :</b> <span data-id-age='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Profession :</b> <span data-id-job='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Style :</b> <span data-id-style='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Couleurs :</b> <span data-id-colors='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Accessoires :</b> <span data-id-acc='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Traits :</b> <span data-id-traits='1'>-</span></div>" +
+      "<div class='persona-id-item'><b>Objet fetiche :</b> <span data-id-item='1'>-</span></div>" +
+      "<div class='persona-id-item' style='grid-column:1 / -1;'><b>Citation :</b> <span data-id-quote='1'>-</span></div>" +
+      "</div></section>";
+
+    var fallbackHost = document.querySelector(".page-body") || document.body;
+    if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(card, anchor);
+    else if (quoteFigure && quoteFigure.parentNode) quoteFigure.parentNode.insertBefore(card, quoteFigure.nextSibling);
+    else fallbackHost.appendChild(card);
+
+    var meta = card.querySelector("[data-persona-meta='1']");
+    var idCard = card.querySelector("[data-persona-id='1']");
+    var idName = card.querySelector("[data-id-name='1']");
+    var idGender = card.querySelector("[data-id-gender='1']");
+    var idAge = card.querySelector("[data-id-age='1']");
+    var idJob = card.querySelector("[data-id-job='1']");
+    var idStyle = card.querySelector("[data-id-style='1']");
+    var idColors = card.querySelector("[data-id-colors='1']");
+    var idAcc = card.querySelector("[data-id-acc='1']");
+    var idTraits = card.querySelector("[data-id-traits='1']");
+    var idItem = card.querySelector("[data-id-item='1']");
+    var idQuote = card.querySelector("[data-id-quote='1']");
+
+    function fillId(profile) {
+      idName.textContent = profile.prenom || "-";
+      idGender.textContent = profile.gender || "-";
+      idAge.textContent = profile.age || "-";
+      idJob.textContent = profile.profession || "-";
+      idStyle.textContent = profile.style || "-";
+      idColors.textContent = profile.couleurs || "-";
+      idAcc.textContent = profile.accessoires || "-";
+      idTraits.textContent = (profile.traits || []).join(", ") || "-";
+      idItem.textContent = profile.objet || "-";
+      idQuote.textContent = profile.citation || "-";
+    }
+
+    var refreshTimer = null;
+    function refreshIdCard() {
+      var profile = buildProfile();
+      fillId(profile);
+      meta.textContent = "Mise a jour automatique depuis les champs du persona.";
+    }
+
+    function scheduleRefresh() {
+      if (refreshTimer) clearTimeout(refreshTimer);
+      refreshTimer = setTimeout(refreshIdCard, 120);
+    }
+
+    refreshIdCard();
+    document.addEventListener("input", scheduleRefresh, true);
+    document.addEventListener("change", scheduleRefresh, true);
+  }
+
+  window.addEventListener("DOMContentLoaded", function () { renderCard(); });
+  window.addEventListener("DOMContentLoaded", function () { ensureGenderChooser(); });
+})();
+</script>
+<script data-baseline-layout-fix-v2="1">
+(function () {
+  function applyBaselineLayoutFix() {
+    var row = document.getElementById("30505779-2efe-8091-857b-d7c08a34117b");
+    if (!row) return;
+
+    row.style.display = "flex";
+    row.style.justifyContent = "flex-start";
+    row.style.alignItems = "flex-start";
+    row.style.gap = "36px";
+
+    var wrappers = row.children ? Array.prototype.slice.call(row.children) : [];
+    wrappers.forEach(function (w) {
+      w.style.display = "block";
+      w.style.width = "calc(50% - 18px)";
+      w.style.maxWidth = "calc(50% - 18px)";
+      w.style.flex = "0 0 calc(50% - 18px)";
+      w.style.padding = "0";
+      w.style.margin = "0";
+    });
+
+    var left = document.getElementById("30505779-2efe-80b1-9c40-d9f1bd0ac15a");
+    var right = document.getElementById("30505779-2efe-801a-ac1d-cac7d0783789");
+    [left, right].forEach(function (col) {
+      if (!col) return;
+      col.style.width = "100%";
+      col.style.maxWidth = "100%";
+      col.style.padding = "0";
+      col.style.margin = "0";
+    });
+
+    [
+      "30505779-2efe-80e1-965c-db3d06a83d17",
+      "30505779-2efe-80db-af32-e6f7ccd0c7a5",
+      "30505779-2efe-80f0-b4ff-daf6a379c5f5"
+    ].forEach(function (id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      card.style.background = "#ffffff";
+      card.style.border = "1px solid #e4dccf";
+      card.style.borderLeft = "1px solid #e4dccf";
+      card.style.borderRadius = "12px";
+      card.style.padding = "14px 16px";
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    applyBaselineLayoutFix();
+    setTimeout(applyBaselineLayoutFix, 60);
+    setTimeout(applyBaselineLayoutFix, 240);
+  });
+})();
+</script>
+<style data-response-card-style-v1="1">
+.block-color-gray_background.callout {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%) !important;
+  border: 0 !important;
+  box-shadow:
+    0 14px 28px rgba(30, 22, 15, 0.10),
+    0 3px 8px rgba(30, 22, 15, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03) !important;
+  transform: translateZ(0);
+}
+</style><style data-global-dotted-bg-v1="1">
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
+    #ffffff !important;
+}
+</style></head><body><article id="29505779-2efe-81e6-be2b-e44f4963e114" class="page serif"><header><img class="page-cover-image" src="LAB_(14).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(16).png"/></div><h1 class="page-title" dir="auto">Personnalité &amp; ton de marque</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-800e-9d61-d7727941c9f4" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:720px" src="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Script vidéo : Dans cette partie, on va donner une personnalité à ta marque. Une marque n’est pas neutre : elle parle, elle s’exprime, elle crée une relation. Pense à ta marque comme à une personne : comment parle t-elle ? quelle energie dégage t-elle ? Cette section est essentielle pour garantir une communication cohérente, notamment à l’écrit : réseaux sociaux, site web, emails. Prends le temps de remplie le tableau “est / n’est pas”, il t’aidera énormément à éviter les incohérences dans le ton utilisé par ta marque.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e4-a96d-e8627d619eef" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a5-88c2-c9befcdfcbcc" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8017-9212-e6c85f496dd4" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-807b-a435-ec2347f809a5" style="width:56.25%" class="column"><div style="display:contents" dir="ltr"><figure id="30505779-2efe-808d-bb98-c69df4e356ef" class="image"><a href="Elments_nouvelle_comm%201.png"><img style="width:336px" src="Elments_nouvelle_comm%201.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80be-8057-ed16bfe24791" style="width:43.75%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8025-966f-c128fd2bcf22" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80a3-8022-d6ece58d42e2" class="">Ta marque a une personnalité propre.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8003-8fb6-e91d285c4445" class="">Une marque n’est pas seulement ce qu’elle fait.<br/>Elle est aussi la manière dont elle s’exprime.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8073-a894-f3e9bc4f39a3" class="">Elle influence ton langage, ton style visuel et la relation que tu crées avec ton audience.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a6-b820-c194f61071ee" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8093-8918-eb549d783f04" class="">La personnalité donne une dimension humaine à votre marque.<br/>Le ton en est la traduction concrète dans votre communication.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803c-a2a5-d1088d4c5b08" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806e-853b-da0ff7c5719c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805c-999b-fcc2e46d51ca" class="">Sans personnalité claire, une marque devient neutre.<br/>Sans ton défini, la communication devient incohérente.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8092-b7b3-e70bed410816" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b4-8ca4-fafee516c9e9" class="">Dans ce module, vous allez structurer l’“attitude” de votre marque.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8069-ac8e-f6b96b39973f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f5-8564-f55b56e00615" class="">
+</p></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">🎭 La personnalité incarnée de ta marque: comment je me résume en une phrase</summary><div class="indented"><div style="display:contents" dir="auto"><p id="30505779-2efe-802b-a35f-e8ebf6416fe4" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8005-ac7d-d0ab52e865f2" class="">🧠 Personnalité ≠ valeurs</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8036-a7e4-f4f2231c5f2d" class="">Les valeurs définissent ce que vous défendez.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-b2b1-c4076cb43ea4" class="">La personnalité définit comment vous vous exprimez.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8009-9084-e65f7f81fbdc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a4-9c13-ee6187596536" class=""><em>Exemple :</em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800f-9375-ea3435d60999" class="">Valeur : Clarté</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8023-948a-cdc844444560" class="">Personnalité : Pédagogique, structurée, rassurante</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8052-9c4a-fefa705aadbc" class="">La personnalité rend la marque identifiable.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80de-bf4c-c11cbf921e5e" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-800d-b59a-f3bfe128a8ef" class="">Si ta marque était une personne, comment la décrirais tu ?</h3></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-802b-947c-f74930bc3c0e"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809f-9dc1-d98929fdd6b5" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-8072-9b15-e4216a66dfae" class="column-list"><div style="display:contents" dir="auto"><div id="2f405779-2efe-8049-8279-e15f89293566" style="width:12.5%" class="column"><div style="display:contents" dir="ltr"><figure id="2f405779-2efe-80a8-9989-fa450c6cacaf" class="image"><a href="IMG_6714.jpg"><img style="width:144px" src="IMG_6714.jpg"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-803c-a4ee-ff0562db95be" style="width:87.5%" class="column"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8006-8fdc-ddd2d96e2b2b" class="">🎙️Note vocale</p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-8005-a550-e54f811fccfe"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure></div><div style="display:contents" dir="auto"><p id="2f405779-2efe-80ea-8ac6-daac20054d3b" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a7-adbf-e12646c9ddc0" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-80e6-99a4-f245c2679974" class="">Identité de base</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-800f-b981-f0b91106c108" class="bulleted-list"><li style="list-style-type:disc"><strong>Prénom :</strong> [Choisis un prénom qui reflète ta personnalité de marque]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-806c-bd13-f0f43046e057"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802d-abf4-ece269ab1825" class="bulleted-list"><li style="list-style-type:disc"><strong>Âge approximatif :</strong> [Ex: 30-35 ans, maturité et expérience]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8008-8900-cb7db36aa770"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80cb-85af-d895f05cc7a2" class="bulleted-list"><li style="list-style-type:disc"><strong>Profession :</strong> [Ex: Mentor créatif, Stratège bienveillant, Guide inspirant]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ae-905c-ca436e909e72"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-80b9-9049-ca8a21fec8a0" class="">Personnalité &amp; caractère</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8086-8882-c3fd5821de2b" class="bulleted-list"><li style="list-style-type:disc"><strong>3 traits dominants :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8032-a0df-ca0744044b72"><div style="width:100%"><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80e9-bdac-c2186a877c74" class="numbered-list" start="1"><li>[Zone de texte]</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80f3-b759-c87355bee2c0" class="numbered-list" start="2"><li>[Zone de texte]</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-8026-966a-c59623602425" class="numbered-list" start="3"><li>[Zone de texte]</li></ol></div></div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80bd-a59d-c0d765996a3e" class="bulleted-list"><li style="list-style-type:disc"><strong>Style de communication :</strong> [Ex: Chaleureux et pédagogue, Direct et inspirant]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-802b-960e-fd03d88b9e6b"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e7-b2f9-c020d4b7f3dd" class="bulleted-list"><li style="list-style-type:disc"><strong>Ton de voix :</strong> [Ex: Bienveillant mais structuré, Accessible sans être familier]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80a1-b0e2-e1f6f64bfd83"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-80de-83da-d274d498ec93" class="">Style &amp; apparence</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809e-a31e-ca5ffb3c9efe" class="bulleted-list"><li style="list-style-type:disc"><strong>Style vestimentaire :</strong> [Ex: Élégant décontracté, Minimaliste raffiné]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8055-bf73-c236799d74c7"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8025-8cd7-cb1aed21b98d" class="bulleted-list"><li style="list-style-type:disc"><strong>Couleurs portées :</strong> [Reprendre les couleurs de ta palette]</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ae-9bd6-e08de8335552"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8053-be6c-d911fca9a6dc" class="bulleted-list"><li style="list-style-type:disc"><strong>Accessoires / détails distinctifs :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8036-a76d-da1e3fe413f5"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-8028-92fc-e9bb0b7edee7" class="">Valeurs &amp; convictions</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8045-8771-c5b0f6392fba" class="bulleted-list"><li style="list-style-type:disc"><strong>Ce qui compte le plus pour elle :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-805b-9ff7-ed93ba82b35d"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-807f-97ff-d58d2415738f" class="bulleted-list"><li style="list-style-type:disc"><strong>Ce qu&#x27;elle ne tolère pas :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8080-8aa5-c1c02aab9811"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-8066-b21a-ce6798c26e2f" class="">Relations &amp; interactions</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8054-b901-f04c77aa2086" class="bulleted-list"><li style="list-style-type:disc"><strong>Comment accueille-t-elle quelqu&#x27;un ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80f1-a427-f6beb60a5e7d"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809e-9e85-c6c99b1567c6" class="bulleted-list"><li style="list-style-type:disc"><strong>Comment réagit-elle face à un problème ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8056-b7d7-d94416bb5e7b"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8015-9b89-cd8fbe8f683d" class="bulleted-list"><li style="list-style-type:disc"><strong>Quel type d&#x27;ami/conseiller serait-elle ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80a7-8d49-dedb7a3b7ff1"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-80f1-8cf5-e7ad6944c663" class="">Environnement &amp; univers</h2></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80c3-affd-ff68f169a496" class="bulleted-list"><li style="list-style-type:disc"><strong>Son lieu de vie / travail idéal :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ae-b5b5-ceeee8839beb"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80d4-a101-fc40366a700e" class="bulleted-list"><li style="list-style-type:disc"><strong>Objets fétiches sur son bureau :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8081-8e49-d78e010fcf65"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e4-a549-fd6eab7a4110" class="bulleted-list"><li style="list-style-type:disc"><strong>Musique qu&#x27;elle écoute :</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8006-bec4-c42d9a0df35c"><div style="width:100%">[Zone de texte]</div></figure></div><div style="display:contents" dir="auto"><h2 id="30505779-2efe-8077-ad02-ef4026f9c06f" class="">Citation qui la définit</h2></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-802c-b30c-f4b00788e987" class=""><em>&quot;[Une phrase qu&#x27;elle dirait souvent, qui résume sa philosophie]&quot;</em></blockquote></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-802e-9cb9-e83d68368803"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-8093-a055-e40b7ec803bb" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-800b-9bd6-d8bcccf47d71"/></div><div style="display:contents" dir="ltr"><figure class="block-color-blue_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80cf-a519-e23373f95d95"><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8038-8f43-c83d163654a2" class="">💡 <strong>Conseil :</strong> Garde cette persona à portée de main lors de chaque création de contenu. Demande-toi : &quot;Comment [prénom] communiquerait-elle ce message ?&quot; Cela t&#x27;aidera à maintenir une cohérence naturelle dans ton expression de marque.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805e-92f9-cb24cbab021d" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8015-aa1e-e249830eb7dd" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80b4-963e-d36e4cd2199f" style="width:68.75%" class="column"><div style="display:contents" dir="ltr"><figure id="30505779-2efe-804b-b82d-d5cde68a5bed"><div class="source"><a href="https://www.canva.com/design/DAHBHT9GsTo/d_HB6uA38U9wW8jV-gfIlg/edit">https://www.canva.com/design/DAHBHT9GsTo/d_HB6uA38U9wW8jV-gfIlg/edit</a></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8090-966c-d0b095d802da" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8056-8b98-cb2265c58bb4" style="width:31.249999999999993%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8074-a92c-f43570a35555" class="">Tu peux maintenant t’amuser à créer tes fiches PERSONA !</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802f-95c0-e33e2a77a079" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-802d-b5c5-fdb61ba39754"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8042-a52e-cd55836a486d" class="">N’oublie pas de dupliquer le fichier CANVA avant de le modifier.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8034-8eda-f8d3cfea2338" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2f405779-2efe-808f-906c-f7b18be056bd" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">📝 Baseline : comment je me résume en une phrase</summary><div class="indented"><div style="display:contents" dir="auto"><p id="30505779-2efe-8080-95ec-e02129846d32" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80bb-99ae-fac3675495a8"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-802c-95bd-f959471cd006" class="">🎙️Note vocale :  “La baseline est souvent sous-estimée, alors qu’elle joue un rôle clé dans la perception de ta marque. C’est la phrase qui permet de comprendre instantanément ce que tu fais et pourquoi tu es différent. Dans cette section, je vais te guider pas à pas pour formuler une baseline claire, alignée et durable, que tu vas pouvoir utiliser sur l’ensemble de tes supports de communication. Prends bien le temps de faire les exercices : une bonne baseline peut transformer la manière dont ta marque est perçue.” La baseline est une phrase courte qui résume l’essence de ta marque. Elle permet de comprendre <strong>en un instant</strong> ce que tu fais, pour qui, et ce qui te différencie. Une bonne baseline n’est ni un slogan publicitaire creux, ni une phrase trop vague. Elle doit être claire, mémorisable et alignée avec ton ADN et ton positionnement. Cette section a pour objectif de t’aider à formuler une baseline juste, durable et utilisable sur tous tes supports de communication. Elle doit être reconnaissable, cohérente et facilement déclinable sur tous tes supports.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8007-8d08-fdc9002f9bae" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-803d-986d-d0bc2fe266a0" class="">Structure de la section “Baseline” </h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8040-b062-c4c4bcc53f64" class="">
+</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8062-b9ad-e23844843d3d" class="">Notre baseline actuelle ou souhaitée : [Zone de texte]</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8059-b6cb-ff953d42050f" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8098-8870-c8d5d2386ae1"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c2-afd3-f1aac2889fa4" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-801b-b73e-e0fbe1f9dbd5" class="">Objectif de la baseline</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8074-ba16-fe9dce0f5edb" class="">En une phrase, que doit comprendre une personne qui découvre ta marque pour la première fois ?</blockquote></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8069-a0eb-c493c23df981"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ee-b920-d92a1fcaed8d" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8075-9115-e10c5ea93ee8" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-802c-8799-d2b0993d39cc"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ba-ab79-c24fd753f2d0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d5-ba66-d5eda92557a2" class="">Une Baseline efficace combine généralement :<div class="indented"><div style="display:contents" dir="auto"><ul id="30505779-2efe-80d4-b668-cd7f6b47e79b" class="bulleted-list"><li style="list-style-type:disc"><strong>Ton activité</strong> (ce que tu fais)</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80ea-92ec-d348039b2e10" class="bulleted-list"><li style="list-style-type:disc"><strong>Ta valeur ajoutée</strong> (ce qui te rend unique)</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8056-a5a4-c7899fb1cf45" class="bulleted-list"><li style="list-style-type:disc"><strong>Ta cible ou bénéfice principal</strong></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-abab-d01db1707bd9" class="">
+</p></div></div></p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80f7-a2d5-f12117107f53"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-800f-a537-e4ea3f84d501" class="">🧠 Exercices pratiques (cœur de la valeur)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808c-845c-e3293d8aa6af" class=""><strong>✍️ Exercice 1 – La phrase brute</strong></p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8081-be8a-fccbbe075060" class="">Complète la phrase suivante, sans chercher à être “marketing” :<div style="display:contents" dir="auto"><p id="30505779-2efe-80fb-971a-f836c671cd68" class=""><em>J’aide [cible] à [objectif] grâce à [méthode / valeur].</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807c-b229-ea6aa6b526a4" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ab-bb0f-e49271717705"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80b0-8e4c-c234fce43286" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80cb-b84e-c461aaa28951" class="">👉 L’objectif ici est la clarté, pas l’esthétisme.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8087-a4fb-e364164af9ae" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8063-969e-fae10c14f4a6"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c6-b9be-c2bb9bf9e63b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8063-be26-d16d4189f7f8" class=""><strong>✍️ Exercice 2 – Simplification</strong></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-a0f0-fce4bc52f2d9" class="">À partir de la phrase précédente, supprime :<div class="indented"><div style="display:contents" dir="auto"><ul id="30505779-2efe-80f9-ba36-df5b1d5376e2" class="bulleted-list"><li style="list-style-type:disc">les mots inutiles</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8094-ac8e-fdc0000f14a4" class="bulleted-list"><li style="list-style-type:disc">les termes trop génériques</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8069-9943-db72275f81b0" class="bulleted-list"><li style="list-style-type:disc">les répétitions</li></ul></div></div></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8083-b95f-fa8022a2cea2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807d-84c3-fdf8f825d862" class="">Tu peux la réécrire en <strong>moins de 10 mots</strong>.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-800e-899a-e1cdae37d506"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8011-87ad-fb4e8a1cca25" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806d-bc3b-da6e5f5a7352" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80bc-9e83-e6426e2a288f"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8006-ade9-c4660aa64f90" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d6-87df-d9825cb81a31" class=""><strong>✍️ Exercice 3 – Angle émotionnel</strong></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806b-82ff-ebef25674a42" class="">Tu peux maintenant réécrire ta Baseline en mettant l’accent sur :<div class="indented"><div style="display:contents" dir="auto"><ul id="30505779-2efe-80c9-b57a-ce068cd36010" class="bulleted-list"><li style="list-style-type:disc">une émotion</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e2-9af1-fc4243615799" class="bulleted-list"><li style="list-style-type:disc">une transformation</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8005-ace4-e6a87dffaa7a" class="bulleted-list"><li style="list-style-type:disc">un bénéfice clair</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8029-9b23-e0dd716ec43b" class="">
+</p></div></div></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80d6-995a-e859b8b96830"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80a0-8648-e5aed7b44d10" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8034-9905-dcb8cd234314" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8030-933f-dbd60fc591f6"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e3-8e78-c1f37bed3466" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8091-857b-d7c08a34117b" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80b1-9c40-d9f1bd0ac15a" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-80f3-badb-d1333f45bcce" class=""><strong>✍️ Exercice 4 – Test de compréhension</strong></p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80e1-965c-db3d06a83d17" class="">Fais lire ta Baseline à une personne extérieure à ton activité.<div style="display:contents" dir="auto"><p id="30505779-2efe-8030-b95a-d1d9940b7f25" class="">Notes ce qu’elle a compris en une phrase :</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b3-ae4c-ea6e7ffeaa8a" class=""><em>“Selon elle, cette marque fait…”</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e2-a3c3-eb31b85e5a0a" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805c-9654-fb92ebf2274d" class="">👉 Si la réponse n’est pas claire → ajustement nécessaire.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808a-8ec1-f0f03872833d" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-801a-ac1d-cac7d0783789" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-801f-a956-cb34c9b47834" class="">👀 5. Exemples concrets</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ca-828c-e89a80be1c33" class=""><strong>Exemple 1 – Freelance / créatif</strong></p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80db-af32-e6f7ccd0c7a5" class="">“Des identités visuelles claires pour des marques alignées.”</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80da-9a38-e8b851d30e3b" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e5-975d-ed5ab797bb70" class=""><strong>Exemple 2 – Coach / accompagnement</strong></p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80f0-b4ff-daf6a379c5f5" class="">“Accompagner les entrepreneurs à structurer une marque qui leur ressemble.”</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8068-afae-dfff1600c4de" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-805a-8d79-c1bfa7c3e562"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-807c-b240-f66f27e82a0e" class="">Ta Baseline : [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80de-8f63-e7d442453856" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80cb-96e1-e6dde621348d"/></div><div style="display:contents" dir="auto"><h1 id="30505779-2efe-8026-991b-d2db21cb3b35" class="">🧪 Test de solidité</h1></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8045-8d1e-ed89a0449de1" class="">Ta baseline doit répondre à ces critères :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806b-bfb1-e6ffcbc00ae8" class="bulleted-list"><li style="list-style-type:disc">Compréhensible en 5 secondes</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802c-abc5-f0fce065039a" class="bulleted-list"><li style="list-style-type:disc">Alignée avec ton positionnement</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8019-b721-cb2566c029b3" class="bulleted-list"><li style="list-style-type:disc">Cohérente avec ta tonalité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801d-83b5-f700551f4cfc" class="bulleted-list"><li style="list-style-type:disc">Durable dans le temps</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8004-987c-d51137963231" class="bulleted-list"><li style="list-style-type:disc">Différenciante</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a6-a4d4-f7628a967675" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a1-a336-e9957a6dd618" class="">Test ultime :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-800d-9fd0-c1fc8a270aa4" class="">Si on retire ton nom, pourrait-elle appartenir à quelqu’un d’autre ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8055-b8c6-e7101047b99b" class="">Si oui → elle est trop générique.</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8018-b28e-ecf5d2e2a93a"/></div><div style="display:contents" dir="auto"><h1 id="30505779-2efe-80fc-9373-d2722e30b706" class="">🎭 Cohérence visuelle</h1></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-ac56-ffc21c769d42" class="">Ta Baseline doit fonctionner :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80db-b53f-d5df5eeb802e" class="bulleted-list"><li style="list-style-type:disc">Sous ton logo</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b8-b7cf-ce68b06120b4" class="bulleted-list"><li style="list-style-type:disc">Sur tes réseaux</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-808c-bd9b-c17d7a1a3f5e" class="bulleted-list"><li style="list-style-type:disc">Sur ton site</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8047-8f6a-e54c823b67bf" class="bulleted-list"><li style="list-style-type:disc">Sur tes supports commerciaux</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-804b-842b-efec892707a2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-804c-83c6-cb62622e741a" class="">Elle doit rester lisible et équilibrée.</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">🎨 Palettes de couleurs</summary><div class="indented"><div style="display:contents" dir="auto"><p id="30405779-2efe-8002-9e36-f8015c5bdc71" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-804f-b4b2-ff2cb434306c" class="">Les couleurs jouent un rôle essentiel dans la perception de ta marque.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8051-8d8b-fdeac6a24528" class="">Elles véhiculent des émotions et renforcent ton positionnement.</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-809f-a091-dac6c486cdf9" class="bulleted-list"><li style="list-style-type:disc">Y a-t-il des couleurs que tu aimes particulièrement ?</li></ul></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8038-a1e0-cd4714beae47" class="column-list"><div style="display:contents" dir="auto"><div id="30405779-2efe-80bf-b4de-c4834b05f1f1" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-809a-93a2-c16cb1785b32" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-80c1-9463-f7c78fa1ac98" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-808a-9903-c7112235415e" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-802c-9501-ed552e33fbaf" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-80cb-8da9-f1e77b2fe728" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30405779-2efe-804b-a3ed-e9a9f8881838" class="">
+</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-801e-9088-e278cc52aa9f" class="bulleted-list"><li style="list-style-type:disc">Y a-t-il des couleurs à éviter absolument ?</li></ul></div><div style="display:contents" dir="auto"><div id="30405779-2efe-80b3-a89c-e18f5c8d26ae" class="column-list"><div style="display:contents" dir="auto"><div id="30405779-2efe-8021-82fc-f0070bca1c74" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-80c6-bf5c-d531e0ad6d0a" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8066-9a00-d0dfd85abf20" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8081-9d75-ed5bb1cfc02d" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-8022-b997-f37d70e33b24" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div><div style="display:contents" dir="auto"><p id="30405779-2efe-809e-958f-eb4cd82793e1" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8040-b9f1-de19eb12661b" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-80d9-a5ce-fb7391b0dbf9" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div><div style="display:contents" dir="auto"><p id="30405779-2efe-802f-b56d-ec78c7d9888b" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-809b-92e1-c1dc71534ce1" class="bulleted-list"><li style="list-style-type:disc">Souhaites-tu une identité plutôt :<div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8082-98f4-fb2ae8726bd8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">sobre / colorée</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80b1-b291-ca89ba605c8d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">douce / contrastée</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80ab-829a-f930a6934385" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">minimaliste / expressive</span><div class="indented"></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8061-bea0-ce14f1fe281f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8079-9f76-f968dbd598a1" class="">Définissons tes couleurs </p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80ef-a96a-d30e153f2c37" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:480px" src="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Petit rappel de l’utilisation des codes couleurs</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8069-b633-e00b1507a17f" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2ee05779-2efe-809e-8df7-edebd2ed6fa9" class="">Couleurs principales</h3></div><div style="display:contents" dir="ltr"><table id="2ee05779-2efe-802b-b986-f0d43e420606" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2ee05779-2efe-8053-be67-df3120c94d75"><th id="\KcJ" class="simple-table-header-color simple-table-header">Couleur</th><th id="XdD]" class="simple-table-header-color simple-table-header">HEX</th><th id="eRwK" class="simple-table-header-color simple-table-header">RGB</th><th id="yCUw" class="simple-table-header-color simple-table-header">CMJN</th><th id="^OiZ" class="simple-table-header-color simple-table-header">Usage</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-80e4-a689-d0915076feb6"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-8038-bb52-de463205246d"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-80c8-b8b9-f41e3a4f41fb"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8079-a9a4-d73a503fa88c" class="column-list"><div style="display:contents" dir="auto"><div id="30405779-2efe-80a6-93ba-f37428d28c6c" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-8037-a730-d8dab2fe23c7" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-80c3-a57e-ecc4b82609a6" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-8069-8833-e7417de279ee" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8014-8965-f4af767394d3" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-8000-8024-d43f3456ec21" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30405779-2efe-80f3-995d-d8ecf0f2ead0" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2ee05779-2efe-80b4-aecb-f33540b6fd66" class="">Couleurs secondaires</h3></div><div style="display:contents" dir="ltr"><table id="30405779-2efe-800c-b1f8-c52acdcb5e70" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="30405779-2efe-8066-862d-dae26561d902"><th id="\KcJ" class="simple-table-header-color simple-table-header">Couleur</th><th id="XdD]" class="simple-table-header-color simple-table-header">HEX</th><th id="eRwK" class="simple-table-header-color simple-table-header">RGB</th><th id="yCUw" class="simple-table-header-color simple-table-header">CMJN</th><th id="^OiZ" class="simple-table-header-color simple-table-header">Usage</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-80a8-90cc-e108f118cfdc"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-80ea-b352-e54b5b484cd8"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30b05779-2efe-8036-8434-c48e2b78ca19"><th id="\KcJ" class="simple-table-header-color simple-table-header">[Zone de texte]</th><td id="XdD]" class="">[Zone de texte]</td><td id="eRwK" class="">[Zone de texte]</td><td id="yCUw" class="">[Zone de texte]</td><td id="^OiZ" class="">[Zone de texte]</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8021-b640-e3d4957e241c" class="column-list"><div style="display:contents" dir="auto"><div id="30405779-2efe-805f-b3dd-cc59c3103368" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-80bd-a0d4-d21569ce9ee2" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div><div style="display:contents" dir="auto"><p id="30405779-2efe-806d-befd-df4274d02171" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8021-800b-d4b129344e77" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-806f-9f86-eb8e059d1aa9" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-8040-8020-d44411ec8a5a" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30405779-2efe-8007-a2da-dc201574469c" style="width:100%" class="column"><div style="display:contents" dir="ltr"><figure id="30405779-2efe-80ea-99e5-ce0d392d443d" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div></div></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">🖼️ Images &amp; éléments graphiques</summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8024-9f61-e9e06ef1bf19" class="">Les éléments graphiques enrichissent ton univers visuel et renforcent ton identité.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8079-9b57-f27a8364eb41" class="">Ils doivent toujours respecter l’ADN et le ton de la marque.</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80d3-aff1-c99d05ee12ad" class="bulleted-list"><li style="list-style-type:disc">Préfères-tu :<div style="display:contents" dir="auto"><ul id="2ee05779-2efe-802e-8890-f3107e8dd136" class="bulleted-list"><li style="list-style-type:circle">☐ Photos</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80bf-beed-f3d757639354" class="bulleted-list"><li style="list-style-type:circle">☐ Illustrations</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80b0-bd8f-fc65d19a2d55" class="bulleted-list"><li style="list-style-type:circle">☐ Un mix des deux</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c9-93b0-c402110a8cd1" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8079-9e5c-ee0ba40774b3" class="">Ambiances visuelles à privilégier :</p></div><div style="display:contents" dir="auto"><p id="2f405779-2efe-8021-b0ad-ca92ddea48d1" class=""><strong>🖼️ MOODBOARD </strong></p></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-80e0-b606-f8b27da967ea" class="column-list"><div style="display:contents" dir="auto"><div id="2f405779-2efe-80ae-a42c-c4b14f3b444d" style="width:68.75%" class="column"><div style="display:contents" dir="ltr"><figure id="30505779-2efe-8032-8210-f0a30f60b6dd"><div class="source"><a href="https://www.canva.com/design/DAHBHemSzHk/LIyT2UE9YhIH-NReyz2vHQ/edit?utm_content=DAHBHemSzHk&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton">https://www.canva.com/design/DAHBHemSzHk/LIyT2UE9YhIH-NReyz2vHQ/edit?utm_content=DAHBHemSzHk&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton</a></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-8037-aa68-c3a9bdf442e4" style="width:31.24999999999998%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-800b-a9eb-e92a68993520" class="">A toi de jouer, réalise ton MOODBOARD en complétant ce template !</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-b700-d1047656cf52" class="">
+</p></div><div style="display:contents" dir="ltr"><figure class="block-color-red_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e9-b65c-eca06610715a"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8005-ad8d-f9e37f469e4e" class="">N’oublie pas de dupliquer le fichier CANVA avant de le modifier.</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8019-8b66-dcb26c334ae0" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-806a-ace7-e5aae020ab8a" class="bulleted-list"><li style="list-style-type:disc">Ambiances à éviter :</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2f405779-2efe-8027-88c4-d6f7aadbca92"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2f405779-2efe-80ee-92db-d6ae961cf056" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8025-815e-e8eb6ed46a6d" class="bulleted-list"><li style="list-style-type:disc">Souhaites-tu utiliser des icônes, motifs ou éléments graphiques ?</li></ul></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-80f4-bdb6-ce6fabdafe99" class="column-list"><div style="display:contents" dir="auto"><div id="2f405779-2efe-8065-96d7-d78b0cbce5f1" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2f405779-2efe-8010-8dc6-e339be5d5609" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-804f-8253-d26a41325ee8" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2f405779-2efe-80d1-8456-dba227f81303" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-8095-9f40-d3cecf438e01" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2f405779-2efe-8093-9627-e6212d65710c" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2f405779-2efe-8057-9fca-f86b1477b3b6" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2f405779-2efe-80e3-81a5-fc84f62fcfd4" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8099-9bcb-d600501c41a6" class="">
+</p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Application de la marque</summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d6-9b9c-d1bf0bd8efd5" class="">Cette section montre comment utiliser ton identité sur les supports du quotidien.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-807c-951e-d4f1d71f5dac" class="">Elle sert de référence pour garder une cohérence sur tous tes canaux.</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80b0-8579-d60c994fe046" class="bulleted-list"><li style="list-style-type:disc">Sur quels supports ta marque sera-t-elle utilisée ?<div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80e1-ae55-fdec19d6e425" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"> Réseaux sociaux</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8026-8ceb-c7dc0dd37940" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Site web</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80ec-b26b-f7bc153632ff" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Présentations</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80fc-af07-eb9aa6933db9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Documents commerciaux</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8075-814b-df6577b1c31d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Publicité PRINT</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="2f405779-2efe-806a-bc1b-fb9ce766d237" class="">
+</p></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80ba-afa7-fe4409cfdde3" class="bulleted-list"><li style="list-style-type:disc">Quels supports sont prioritaires aujourd’hui ?</li></ul></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-80e9-ad8f-d6c567b76f1f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-80bb-a14b-fcbf95347091" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-808f-92dd-caef10d71059" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-800f-80e6-f925bf7a4393" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="2f405779-2efe-8078-a430-f4de38a8ce02" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2f405779-2efe-804f-bdfc-d06281875436" class="">Checklist – Avant publication d’un visuel</h2></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-8061-a2b8-ca7590282189" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Les couleurs respectent la palette définie</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8042-a68f-eb08c39f763a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Le logo est utilisé correctement</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b4-9b09-e91ae54c3971" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Les typographies sont cohérentes</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8098-8766-cd1193d38736" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Le contraste est suffisant</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8076-ad24-e7862e49a5c3" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Le ton correspond à la personnalité de la marque</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8037-9cd9-d19be14e3407" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2f405779-2efe-801f-89af-cfe02078f4fc"/></div><div style="display:contents" dir="auto"><h2 id="2f405779-2efe-8085-919f-f4f015733c3f" class="">Checklist – Création d’un nouveau support</h2></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-80b8-b005-f58604aaadfa" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Objectif du support défini</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-808a-83b7-f73dba22385f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Support prioritaire identifié</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8051-92ae-d6df435b1145" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Règles du guide respectées</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e6-a99a-d40aeae7f930" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Message clair et lisible</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b9-aef9-e6bc2a4685cd" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2f405779-2efe-80a4-a2d4-f8c169d83467"/></div><div style="display:contents" dir="auto"><h2 id="2f405779-2efe-8097-b117-e599f578f48c" class="">Checklist – Évolution de la marque</h2></div><div style="display:contents" dir="auto"><ul id="2f405779-2efe-8010-ad79-d49af78d43ac" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">L’ADN reste inchangé</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80bb-a67d-ca16e9157c69" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Les évolutions sont progressives</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8005-bedf-f5ef43e16afc" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Les changements sont documentés</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80c9-8824-e8f0944e5c03" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Le guide est mis à jour</span><div class="indented"></div></li></ul></div></div></details></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8067-ad53-dfd29d594e15" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ff-97b8-fe4ab3028e05" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a4-9366-d88abbd609c3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8033-a897-d4faa2a0b773" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8073-9d77-d09b32ea95af" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80ef-ae2a-fef39c7b4b9f" style="width:100%" class="column"></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80e9-ba4e-cf6de618bc07" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8022-8c4a-e88fd068174d" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-800f-af01-c9ffe0dbd73e" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-805a-bc5d-c3df1bf12451" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8092-a3d3-ed8b9babc637" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8009-9f43-f3c61230b783" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8015-b51d-f105cd0da133" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+

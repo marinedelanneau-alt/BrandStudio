@@ -1,0 +1,753 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Positionnement</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="29505779-2efe-810e-98f4-ffd60c74fad4" class="page serif"><header><img class="page-cover-image" src="LAB_(11).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(13).png"/></div><h1 class="page-title" dir="auto">Positionnement</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-803a-a53f-d2ce515c85c3" class="">
+</p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80fe-b5fa-f8908d353d2c" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:624px" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Script vidéo : Le positionnement va te permettre de clarifier à qui tu t’adresses et pourquoi on te choisit toi. Beaucoup de marques veulent parler à tout le monde, et finissent par ne parler à personne. Ici, l’objectif est d’être précis : mieux vaut une cible claire qu’une cible trop large. En définissant ton positionnement, tu facilites ta communication, ton discours commercial et tes choix visuels. Appuie-toi sur les exercices et n’hésite pas à comparer avec tes concurrents pour mieux comprendre ta différence.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f3-bebd-f93ea8375882" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e6-9db2-e5d02a2f0ccb" class="">Le positionnement répond à une question essentielle :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80e1-815d-c35f800643d0" class="">Pourquoi choisir ta marque plutôt qu’une autre ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-86a0-ef54a7e95d30" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809f-ad41-e25052b40465" class="">Il ne s’agit pas seulement de définir tacible.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-a441-ccd72826a897" class="">Il s’agit de clarifier la place que tu occupes dans l’esprit de tes clients.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80df-b7c1-f4a6bc0c68d4" class="">Un positionnement fort permet :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8002-817d-c7548afe733b" class="bulleted-list"><li style="list-style-type:disc">d’attirer les bonnes personnes</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8076-8980-dead684bd822" class="bulleted-list"><li style="list-style-type:disc">de simplifier ta communication</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809a-9593-fd5262b93c55" class="bulleted-list"><li style="list-style-type:disc">de renforcer ta crédibilité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806c-af4b-e85a2bb87cb1" class="bulleted-list"><li style="list-style-type:disc">de justifier ton prix</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bc-89aa-c6e53ffad85f" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="29505779-2efe-8183-a85f-e8accafef8d2" class="block-color-yellow_background"> 🎯 Cible</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d3-b481-f55fca1854dc" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-9fff-df26d490ced1" class="">Une cible est définie par :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8045-adc1-e0440366fe9d" class="bulleted-list"><li style="list-style-type:disc">un niveau de maturité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b4-b652-d23d9d70611e" class="bulleted-list"><li style="list-style-type:disc">un problème précis</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8051-bee3-d1b2fbee57bd" class="bulleted-list"><li style="list-style-type:disc">une situation spécifique</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80aa-bb37-c37662a9dd9d" class="bulleted-list"><li style="list-style-type:disc">une ambition</li></ul></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8022-a3c8-e977ed77154c"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8020-8e23-d2ca468258fe" class="">Exercice — Cible stratégique</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e0-953d-eb8a94b265aa" class="">Répondez :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80de-b177-f9189354909f" class="bulleted-list"><li style="list-style-type:disc">À quel moment précis intervient ma marque ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80c4-ad19-d49eefea780a" class="bulleted-list"><li style="list-style-type:disc">Quelle est la situation exacte de mon client lorsqu’il me contacte ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-803c-9e18-ebfe49546781" class="bulleted-list"><li style="list-style-type:disc">Qu’est-ce qu’il a déjà essayé ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8018-8bf0-dc7f737cbcc8" class="bulleted-list"><li style="list-style-type:disc">Qu’est-ce qu’il refuse ?</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bb-a224-f175f47d77d3" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f2-a932-f5cd8a846d59" class="">Plus la situation est précise, plus le positionnement est fort.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-b8a4-f7ad304314c1" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8051-9903-e7681acd3062" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80e9-9ce6-ff06418a3343" style="width:100%" class="column"><div style="display:contents" dir="auto"><ol type="1" id="29505779-2efe-81a8-80fb-fa908ce14d58" class="numbered-list" start="1"><li>À qui t’adresses tu principalement ?<div style="display:contents" dir="auto"><ul id="29505779-2efe-81ec-8358-f30950ebb575" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="29505779-2efe-8124-8444-e0be6c5a216e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="29505779-2efe-81a3-abd1-c9d649d35779" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div></li></ol></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8057-ab7f-f530ca86e032" style="width:100%" class="column"><div style="display:contents" dir="auto"><ol type="1" id="29505779-2efe-814e-a84d-c51ef47a5cbe" class="numbered-list" start="2"><li>Quels sont les problèmes ou frustrations de cette cible ?</li></ol></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-801f-8a27-f0805d05545a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8086-9e69-ee05414dd6ec" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8004-8470-d26477d42483" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e4-b5c8-cf34823da867" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8025-a662-e124aac60168" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2ee05779-2efe-8054-af53-cc7e8a83c699" class="block-color-yellow_background">2 - Différenciation</h3></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80ed-ab1d-ccca0ebe190c" class="">🧩 Définir ton angle différenciant</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802f-bb7b-f7462ce4466f" class="">Ton angle peut se situer sur :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b5-a659-dbf324217b06" class="bulleted-list"><li style="list-style-type:disc">la méthode</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-804e-8d70-c2eef76c4bf8" class="bulleted-list"><li style="list-style-type:disc">la posture</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8093-b35d-e488ea9edb6f" class="bulleted-list"><li style="list-style-type:disc">l’expérience client</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80ee-9740-f253c724b62e" class="bulleted-list"><li style="list-style-type:disc">la spécialisation</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e6-a382-ebdf76dda268" class="bulleted-list"><li style="list-style-type:disc">le niveau d’autonomie transmis</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8018-b3f8-e90e9fc3845f" class="bulleted-list"><li style="list-style-type:disc">le niveau d’exigence</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fa-8b12-c2a97c61bb59" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e8-ba51-d3c835b8c8d1" class="">Demande toi  :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80c8-98dc-e7fefad29b0d" class="">Qu’est-ce que je fais différemment ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8038-acda-edfa738bda00" class="">Puis :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-805b-9262-cb552a0fe203" class="">Pourquoi est-ce important ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d2-9691-ee78c24a51a8" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8062-b1f8-e9340f1f931d"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802d-ae6b-ee53cdfbabf2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d4-808d-cb265239c920" class="">Qu’est-ce qui te distingue de tes concurrents ?</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-808d-9aee-f7090c1a9822"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809e-9a1f-c3c42c4f0ec7" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-808b-a1dd-cd1db266ba63" class="">Pourquoi devrait-on te choisir toi ?</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8058-aa10-ea57de42e51a"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-803e-99f7-f0abe4b38c46" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81d7-8cdf-cd44c1feed9c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81d3-866c-c62ae4f8ea01" class=""><em>Tu as maintenant ton </em><em><strong>histoire. </strong></em><em>Exploitons la. </em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809d-b287-f0504ebab65d" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="2ee05779-2efe-8060-8bf4-fef39a6a6145" class="block-color-yellow_background">3 - Concurrence </h3></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8097-83d3-e7bac66073e5" class="">⚖️ Positionnement vs concurrence</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d2-ba37-fe23118507e0" class="">Un bon positionnement assume une différence.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8048-a708-dafe9de5cfb0" class="">Tu peux lister :</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800c-8f8a-d4ec8532c106" class="">
+</p></div><div style="display:contents" dir="ltr"><table id="30505779-2efe-806e-bbf8-d5005bb86812" class="simple-table"><tbody><div style="display:contents" dir="ltr"><tr id="30505779-2efe-805e-9dba-f23a9ebc65f5"><td id="H_~p" class="" style="width:235.66666666666666px"><mark class="highlight-default_background">3 acteurs proches de toi</mark></td><td id=";RAO" class="" style="width:235.66666666666666px">Ce qu’ils mettent en avant</td><td id="JPx:" class="" style="width:235.66666666666666px">Ce que tu as choisi d’incarner différemment</td></tr></div><div style="display:contents" dir="ltr"><tr id="30505779-2efe-80be-aacc-cc7a5362e124"><td id="H_~p" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id=";RAO" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id="JPx:" class="" style="width:235.66666666666666px">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30505779-2efe-80a4-a218-d6d16c9a6c21"><td id="H_~p" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id=";RAO" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id="JPx:" class="" style="width:235.66666666666666px">[Zone de texte]</td></tr></div><div style="display:contents" dir="ltr"><tr id="30505779-2efe-8070-9b61-c0cc5250cb3f"><td id="H_~p" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id=";RAO" class="" style="width:235.66666666666666px">[Zone de texte]</td><td id="JPx:" class="" style="width:235.66666666666666px">[Zone de texte]</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808a-975a-dc388b3d9318" class="">Tu ne doit pas être “meilleur”.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d6-86f5-cb6a7d0cf503" class="">Tu dois être clair.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8081-a9cd-e66e9d44505f" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8001-bd7a-c801af03ee4a"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8073-9fa0-c0621792461c" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c2-a226-d705fc9ec184" class="">Qui sont tes principaux concurrents ?</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80a5-a716-f8234f608e8f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80a4-a301-f9d00e18c29f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30b05779-2efe-80ed-905b-f094e46caede" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">[Zone de texte]</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8009-89f0-f9faeef6cca3" class="">
+</p></div><div style="display:contents" dir="auto"><ol type="1" id="2ee05779-2efe-806f-ab88-d39bf5979862" class="numbered-list" start="1"><li>Qu’aimes-tu / n’aimes-tu pas dans leur communication ?</li></ol></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-8048-8beb-ddcd6df8fd32" class="column-list"><div style="display:contents" dir="auto"><div id="2ee05779-2efe-804f-85e1-e88f52bb6964" style="width:50%" class="column"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-801f-9e05-e066c873d19c" class="block-color-teal_background">Ce que j’aime</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8072-a9fa-f44141c686bb" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-808a-9ca6-d0ac21376d12" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80d5-902d-cf2ec248a1fa" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80e1-8ae9-f49cc6ccc5ce" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803a-af2e-f533e506a7d8" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-803d-88b7-c5087cc25d5e" class="">Parce qu’une image vaut milles mots :</p></div></div></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-80ed-b652-d387202a6090" style="width:50%" class="column"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80ab-bd7b-dfec91b676e9" class="block-color-teal_background">Ce que je n’aime pas</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-802e-916c-fe312441faa6" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-803e-9e47-c223bea20f17" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80e6-b141-f504415d1f7d" class="bulleted-list"><li style="list-style-type:disc">[Zone de texte]</li></ul></div></div></div></div></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-8051-9af3-f4c0e4cefa2c" class="column-list"><div style="display:contents" dir="auto"><div id="2ee05779-2efe-80a2-ab2c-d5c4e2097347" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80db-ad87-f92715e18fdc" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-80ed-b623-d33640c35162" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-8032-83e2-d8a849488342" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-80a8-a8c0-cce09cfd8250" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-8078-bed6-c238eaa2fbe3" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="2ee05779-2efe-8070-b4fa-eb8e817bf465" style="width:25%" class="column"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80cd-8b88-c128b6d17feb" class="image"><a href="https://www.notion.so"><img src="https://www.notion.so"/></a></figure></div></div></div></div></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8096-bd59-f84668da9c11" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-809d-8f1e-f11ac3b5bb76"/></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8010-b855-e0a4246eb733" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8005-8fad-c958fd1d067f" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-80c2-a871-e3eec17b9360" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8093-8024-d430614b0532" class="">✍️ Formulation finale</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8029-af35-d069b2ce50e0" class="">A toi de jouer :</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8054-894f-f1b43d68a903" class="">Version explicative (site / présentation)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8029-8eab-e0c6a04e52ab" class="">3–4 lignes structurées.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8092-b958-c9c570eec828"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8045-8145-dd8fe009e7c9" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80c2-98fc-c51b3daa4e73" class="">Version synthétique (pitch)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8067-9e70-cc6acdbf330a" class="">1 phrase claire.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8007-a761-f734b65eb09a"><div style="font-size:1.5em"><span class="icon">📝</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-802d-bf8c-f23410e0fa46" class="">[Zone de texte]</p></div></div></figure></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-809f-9196-e62cc3971691" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80df-86a6-d099601dc25c" class="">💬 Exemple - Brand Studio (fictif)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8045-93a6-c82fec553dec" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80a3-9749-fe9de0955ec4" class="">Version explicative :</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802f-b2b9-ed5dd87ba0e5" class="">Brand Studio accompagne les entrepreneurs en phase de structuration à poser les bases stratégiques et visuelles de leur marque afin de devenir autonomes dans leur communication.</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80b7-a82a-d10a1051bda6" class="">Version synthétique :</h3></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-809e-b707-ca3a839e5c17" class="">Un studio digital pour structurer votre marque et piloter votre stratégie en autonomie.</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8008-a8cf-f83b6c26d57b" class="">
+</p></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803e-9d1f-eaae00dbb701" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8006-82f4-e0fcca2a7479"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-808f-84c1-d100f3bb6d1e" class="">🧪 Test de solidité</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809a-a8fc-d8dc18087176" class="">Peux-tu répondre à ces questions :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80cb-a537-c8de7f3d14c5" class="bulleted-list"><li style="list-style-type:disc">Est-ce que mon positionnement est compréhensible en 10 secondes ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b2-898c-ce519ac45127" class="bulleted-list"><li style="list-style-type:disc">Est-il distinct de mes concurrents ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80f6-b16f-ef2d3ce7b6a4" class="bulleted-list"><li style="list-style-type:disc">Est-il cohérent avec mes valeurs ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8064-ba96-cc19bbb9b669" class="bulleted-list"><li style="list-style-type:disc">Est-il assumé ?</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8098-80f8-e399d71e09f2" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a3-8959-df74047e91a9" class="">Si la réponse est hésitante, il mérite d’être affiné.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e7-9a9e-cee907edc417" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-805c-8d6f-dc0803742160"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8092-8d21-d37ecd20fec0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bd-98a2-ca43cba556f9" class=""><em><mark class="highlight-orange">Un positionnement clair rend une marque inoubliable.</mark></em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8008-a878-d6a24b6f6c5e"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8021-80e8-cd62eec8e35c" class="">Mon Positionnement : [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80a3-b67e-c00186f79b70" class="">
+</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8040-a21c-e766da8db61a" class="">
+</p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80cb-8921-f63e38a15967" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-8059-9f05-cc4ea808d9f6" style="width:100%" class="column"></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-800e-a2eb-e73225181b02" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ef-b37d-fbf7c5d7b723" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-805a-be22-c8645e2a675f" style="width:100%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-80bf-8d53-e64d22e1d5f0" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8038-9cf3-c18a56f6206b" style="width:100%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81f4-b7cc-d0592e4cfbd9" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81d9-b146-c73f160e4521" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e8-aaf3-d002cd415bbb" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-818d-ae15-cae33ddb5e7d" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-8173-bf1e-ea6623f87d31" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81f9-9a67-d0b2b0bebfa0" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e5-9771-c1006abd6e63" class="">
+</p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81f5-979e-d7c608ed97bc" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
