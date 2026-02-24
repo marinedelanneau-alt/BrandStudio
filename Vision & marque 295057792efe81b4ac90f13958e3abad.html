@@ -1382,38 +1382,54 @@ summary {
 }
 </style>
 <style data-vision-modern-v2="1">
-/* Vision & marque - modern premium pastel */
-article[id="29505779-2efe-81b4-ac90-f13958e3abad"],
-article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page,
-article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-body {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
-    #ffffff;
+/* Vision & marque - harmonise avec la home */
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 0 20px 20px !important;
 }
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-cover-image {
+  position: relative;
   display: block;
-  width: 100% !important;
-  max-width: none !important;
-  margin-left: 0 !important;
-  object-fit: cover;
-  border-radius: 26px !important;
-  border: 1px solid rgba(234, 223, 242, 0.9) !important;
-  box-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.82) inset,
-    0 18px 34px rgba(23, 18, 36, 0.14) !important;
+  width: 100%;
+  height: clamp(150px, 18vw, 280px);
+  object-fit: contain;
+  object-position: center;
+  opacity: 1;
+  filter: none;
+  border-radius: 14px !important;
+  z-index: 1;
+  background: #ffffff;
+  border: 1px solid #d7dce5;
+  box-shadow: 0 10px 20px rgba(27, 33, 46, 0.08) !important;
 }
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] > header {
-  max-width: 1320px;
-  margin: 12px auto 16px;
-  padding: 14px;
-  border-radius: 32px;
-  border: 1px solid #e8e0ef;
-  background: #ffffff;
-  box-shadow:
-    0 2px 0 rgba(255,255,255,.85) inset,
-    0 16px 34px rgba(27, 21, 41, 0.10);
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px !important;
+  min-height: 0 !important;
+  margin: 18px auto 12px !important;
+  padding: 16px 16px 18px !important;
+  border: 1px solid #d5dae2 !important;
+  background: #f3f4f7 !important;
+  box-shadow: 0 14px 28px rgba(28, 34, 48, 0.10) !important;
+}
+
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] > header::before {
+  content: none !important;
+}
+
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-header-icon-with-cover {
+  display: none !important;
+}
+
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title,
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-description {
+  position: relative;
+  z-index: 2;
+  text-align: center;
 }
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-body {
@@ -1423,28 +1439,41 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-body {
 }
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title {
-  position: relative;
-  display: inline-block !important;
-  margin: 16px 0 10px !important;
+  margin: 30px auto 0 !important;
+  max-width: 900px;
   padding: 0 !important;
-  border-radius: 0 !important;
   border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif !important;
-  font-size: clamp(2rem, 3.3vw, 2.7rem) !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.005em !important;
-  color: #2f2621 !important;
-  text-transform: none !important;
-  line-height: 1.08 !important;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: #202a3d !important;
+  text-shadow: none;
 }
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title::before {
   content: none !important;
 }
 
-article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title::after {`r`n  content: none !important;`r`n}
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title::after {
+  content: none !important;
+}
+
+article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-description::before {
+  content: "Brand Studio Lab";
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid #decaab;
+  background: rgba(255, 255, 255, 0.74);
+  color: #7c4a1d;
+  font: 700 12px/1 "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] h2,
 article[id="29505779-2efe-81b4-ac90-f13958e3abad"] h3 {
@@ -1554,22 +1583,30 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .block-color-brown_background
 }
 
 @media (max-width: 980px) {
+  article[id="29505779-2efe-81b4-ac90-f13958e3abad"] {
+    padding: 0 12px 14px;
+  }
+
+  article[id="29505779-2efe-81b4-ac90-f13958e3abad"] > header {
+    min-height: 270px;
+    padding: 20px 18px 18px;
+    border-radius: 22px;
+  }
+
   article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-body {
     padding: 14px 12px 24px;
   }
 
   article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-cover-image {
-  display: block;
-  width: 100% !important;
-  max-width: none !important;
-  margin-left: 0 !important;
-  object-fit: cover;
-  border-radius: 26px !important;
-  border: 1px solid rgba(234, 223, 242, 0.9) !important;
-  box-shadow:
-    0 2px 0 rgba(255, 255, 255, 0.82) inset,
-    0 18px 34px rgba(23, 18, 36, 0.14) !important;
-}
+    display: block;
+    width: 100% !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    object-fit: contain;
+    border-radius: 14px !important;
+    border: 1px solid #d7dce5 !important;
+    box-shadow: 0 10px 20px rgba(27, 33, 46, 0.08) !important;
+  }
 }
 </style>
 <style data-response-card-style-v1="1">
