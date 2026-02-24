@@ -854,53 +854,150 @@ blockquote.quote-large {
   }
 
   function buildGuideHtml(data, logoSrc) {
-    var byChapter = groupByChapter(data);
-    var chapters = Object.keys(byChapter);
     var today = new Date().toLocaleDateString("fr-FR");
 
-    var totalAnswers = 0, totalChecks = 0, totalImages = 0;
-    data.forEach(function (m) {
-      totalAnswers += (m.answers || []).length;
-      totalChecks += Number(m.checksCount || 0);
-      totalImages += (m.images || []).length;
-    });
+    function norm(s) {
+      var t = String(s || "").toLowerCase();
+      try { t = t.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+      return t.replace(/\s+/g, " ").trim();
+    }
 
-    var toc = chapters.map(function (ch, idx) {
-      return "<li><span class='toc-num'>" + (idx + 1) + ".</span><span class='toc-label'>" + esc(ch) + "</span></li>";
-    }).join("");
+    function moduleBy(part) {
+      var n = norm(part);
+      for (var i = 0; i < data.length; i++) {
+        if (norm(data[i].module).indexOf(n) !== -1) return data[i];
+      }
+      return { module: part, answers: [] };
+    }
 
-    var body = chapters.map(function (ch, chapterIndex) {
-      var modulesHtml = byChapter[ch].map(function (m) {
-        var answersHtml = (m.answers || []).map(function (a) {
-          return "<article class='answer-card'><h4>" + esc(a.label) + "</h4><p>" + esc(a.value).replace(/\n/g, "<br>") + "</p></article>";
-        }).join("");
+    function matchesAll(txt, tokens) {
+      var n = norm(txt);
+      for (var i = 0; i < tokens.length; i++) {
+        if (n.indexOf(norm(tokens[i])) === -1) return false;
+      }
+      return true;
+    }
 
-        var checksHtml = Number(m.checksCount || 0) > 0
-          ? "<article class='metric-pill'><strong>" + m.checksCount + "</strong><span>cases cochées</span></article>"
-          : "";
-
-        var imagesHtml = (m.images || []).length
-          ? "<div class='image-grid'>" + m.images.map(function (src) { return "<figure class='img-card'><img src='" + src + "' alt='visuel client'></figure>"; }).join("") + "</div>"
-          : "";
-
-        if (!answersHtml && !checksHtml && !imagesHtml) {
-          return "<section class='module'><header class='module-head'><h3>" + esc(m.module) + "</h3></header><div class='empty'>Aucune réponse enregistrée.</div></section>";
+    function findFirst(mod, patterns) {
+      var list = (mod && mod.answers) || [];
+      for (var i = 0; i < patterns.length; i++) {
+        for (var j = 0; j < list.length; j++) {
+          if (matchesAll(list[j].label, patterns[i])) return list[j];
         }
+      }
+      return null;
+    }
 
-        return "<section class='module'><header class='module-head'><h3>" + esc(m.module) + "</h3>" + checksHtml + "</header><div class='module-grid'>" + answersHtml + "</div>" + imagesHtml + "</section>";
+    function findMany(mod, patterns, limit) {
+      var list = (mod && mod.answers) || [];
+      var out = [];
+      for (var i = 0; i < patterns.length && out.length < limit; i++) {
+        for (var j = 0; j < list.length && out.length < limit; j++) {
+          if (!matchesAll(list[j].label, patterns[i])) continue;
+          if (out.some(function (x) { return x.label === list[j].label && x.value === list[j].value; })) continue;
+          out.push(list[j]);
+        }
+      }
+      return out;
+    }
+
+    function findAfterHeading(mod, headingPatterns, limit) {
+      var list = (mod && mod.answers) || [];
+      var idx = -1;
+      for (var i = 0; i < list.length; i++) {
+        for (var p = 0; p < headingPatterns.length; p++) {
+          if (matchesAll(list[i].label, headingPatterns[p])) { idx = i; break; }
+        }
+        if (idx !== -1) break;
+      }
+      if (idx === -1) return [];
+      return list.slice(idx + 1, idx + 1 + limit);
+    }
+
+    var adn = moduleBy("Vision");
+    var pos = moduleBy("Positionnement");
+    var perso = moduleBy("Personnalit");
+
+    var mission = findFirst(adn, [["mission"]]);
+    var missionFin = findFirst(adn, [["phrase", "fin"], ["phrase", "finale"], ["conclusion"]]);
+    var missionExp = findFirst(adn, [["mission", "version", "explicative"], ["version", "explicative"]]);
+
+    var visionCourte = findFirst(adn, [["vision", "courte"], ["version", "courte"]]);
+    var visionLongue = findFirst(adn, [["vision", "longue"], ["version", "longue"]]);
+
+    var valeurs = findMany(adn, [["valeur", "1"], ["valeur", "2"], ["valeur", "3"], ["valeurs"]], 3);
+    var promesse = findFirst(adn, [["promesse"]]);
+
+    var monPositionnement = findFirst(pos, [["mon", "positionnement"], ["positionnement"]]);
+    var baseline = findFirst(perso, [["baseline"], ["signature"]]) || findFirst(pos, [["baseline"]]);
+
+    var couleursP = findMany(perso, [["couleurs", "principales"], ["couleur", "principale"], ["principales"]], 3);
+    if (!couleursP.length) couleursP = findAfterHeading(perso, [["couleurs", "principales"]], 3);
+    var couleursS = findMany(perso, [["couleurs", "secondaires"], ["couleur", "secondaire"], ["secondaires"]], 3);
+    if (!couleursS.length) couleursS = findAfterHeading(perso, [["couleurs", "secondaires"]], 3);
+
+    function card(title, item) {
+      var value = item && item.value ? item.value : "Non renseigne";
+      return "<article class='answer-card'><h4>" + esc(title) + "</h4><p>" + esc(value).replace(/\n/g, "<br>") + "</p></article>";
+    }
+
+    function listCard(title, items) {
+      if (!items || !items.length) return card(title, null);
+      var html = items.map(function (it, i) {
+        return "<p><strong>" + (i + 1) + ".</strong> " + esc(it.value || "").replace(/\n/g, "<br>") + "</p>";
       }).join("");
+      return "<article class='answer-card'><h4>" + esc(title) + "</h4>" + html + "</article>";
+    }
 
-      return "<section class='chapter'>" +
-        "<header class='chapter-banner'>" +
-          "<div class='chapter-dot chapter-dot-a'></div>" +
-          "<div class='chapter-dot chapter-dot-b'></div>" +
-          "<div class='chapter-cut'></div>" +
-          "<div class='chapter-num'>" + (chapterIndex + 1) + ".</div>" +
-          "<h2>" + esc(ch) + "</h2>" +
-        "</header>" +
-        "<div class='chapter-content'>" + modulesHtml + "</div>" +
-      "</section>";
+    var selectedCount = [
+      mission, missionFin, missionExp, visionCourte, visionLongue, promesse, monPositionnement, baseline
+    ].filter(function (x) { return !!(x && x.value); }).length + (valeurs.length || 0) + (couleursP.length || 0) + (couleursS.length || 0);
+
+    var toc = [
+      "Mission",
+      "Vision",
+      "Valeurs et promesse",
+      "Positionnement et baseline",
+      "Couleurs principales",
+      "Couleurs secondaires"
+    ].map(function (label, idx) {
+      return "<li><span class='toc-num'>" + (idx + 1) + ".</span><span class='toc-label'>" + esc(label) + "</span></li>";
     }).join("");
+
+    var body = "<section class='chapter'>" +
+      "<header class='chapter-banner'>" +
+        "<div class='chapter-dot chapter-dot-a'></div>" +
+        "<div class='chapter-dot chapter-dot-b'></div>" +
+        "<div class='chapter-cut'></div>" +
+        "<div class='chapter-num'>1.</div>" +
+        "<h2>Synthese de marque</h2>" +
+      "</header>" +
+      "<div class='chapter-content'>" +
+        "<section class='module'><header class='module-head'><h3>Mission</h3></header><div class='module-grid'>" +
+          card("Mission", mission) +
+          card("Phrase de fin", missionFin) +
+          card("Version explicative", missionExp) +
+        "</div></section>" +
+        "<section class='module'><header class='module-head'><h3>Vision</h3></header><div class='module-grid'>" +
+          card("Version courte", visionCourte) +
+          card("Version longue", visionLongue) +
+        "</div></section>" +
+        "<section class='module'><header class='module-head'><h3>Valeurs et promesse</h3></header><div class='module-grid'>" +
+          listCard("3 valeurs", valeurs) +
+          card("Promesse de marque", promesse) +
+        "</div></section>" +
+        "<section class='module'><header class='module-head'><h3>Positionnement et baseline</h3></header><div class='module-grid'>" +
+          card("Mon positionnement", monPositionnement) +
+          card("Baseline", baseline) +
+        "</div></section>" +
+        "<section class='module'><header class='module-head'><h3>Couleurs principales</h3></header><div class='module-grid'>" +
+          listCard("3 couleurs principales", couleursP) +
+        "</div></section>" +
+        "<section class='module'><header class='module-head'><h3>Couleurs secondaires</h3></header><div class='module-grid'>" +
+          listCard("3 couleurs secondaires", couleursS) +
+        "</div></section>" +
+      "</div>" +
+    "</section>";
 
     var logo = logoSrc ? "<img class='logo' src='" + logoSrc + "' alt='Logo'>" : "<div class='logo-fallback'>Brand Studio</div>";
 
@@ -948,27 +1045,19 @@ blockquote.quote-large {
       ".module{background:#fff;border:1px solid #e9dccb;border-radius:16px;padding:10px 11px;page-break-inside:avoid;display:flex;flex-direction:column;gap:8px;}" +
       ".module-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;border-bottom:1px solid #f0e6d7;padding-bottom:6px;}" +
       ".module-head h3{margin:0;font-size:18px;line-height:1.2;color:#32333b;font-weight:800;}" +
-      ".metric-pill{margin:0;background:#f9f2e6;border:1px solid #efd9b9;color:#5b4d38;border-radius:999px;padding:5px 10px;display:inline-flex;align-items:center;gap:6px;}" +
-      ".metric-pill strong{font-size:16px;line-height:1;color:var(--orange-dark);}" +
-      ".metric-pill span{font-size:11px;font-weight:700;white-space:nowrap;}" +
       ".module-grid{display:grid;grid-template-columns:1fr;gap:7px;}" +
       ".answer-card{border:1px solid #ebdfcf;border-radius:12px;background:#fffcf8;padding:9px;}" +
       ".answer-card h4{margin:0 0 5px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--plum);font-weight:800;}" +
-      ".answer-card p{margin:0;font-size:12px;line-height:1.45;color:#2e2f36;white-space:pre-wrap;}" +
-      ".image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;}" +
-      ".img-card{margin:0;border-radius:16px;overflow:hidden;background:#fff;border:1px solid #eddcc8;}" +
-      ".img-card img{display:block;width:100%;height:108px;object-fit:cover;}" +
-      ".empty{padding:10px;border:1px dashed #dcc9af;border-radius:10px;color:#7a6d5d;background:#fff9ef;font-size:12px;}" +
+      ".answer-card p{margin:0 0 6px;font-size:12px;line-height:1.45;color:#2e2f36;white-space:pre-wrap;}" +
       "</style></head><body><main class='doc'>" +
-      "<section class='cover'><div class='cover-shape s1'></div><div class='cover-shape s2'></div><div class='cover-card'><div class='cover-main'><div><div class='kicker'>Brand Studio</div><h1>Guide de marque</h1><p class='sub'>Synthèse stratégique de la formation, construite à partir des réponses du client pour guider sa communication et ses choix de marque.</p></div><div class='meta'>Document généré le " + esc(today) + "</div></div><aside class='cover-side'>" + logo +
-      "<div class='stat'><b>" + totalAnswers + "</b><span>Réponses intégrées</span></div>" +
-      "<div class='stat'><b>" + totalChecks + "</b><span>Checklist validée</span></div>" +
-      "<div class='stat'><b>" + totalImages + "</b><span>Visuels sélectionnés</span></div></aside></div></section>" +
+      "<section class='cover'><div class='cover-shape s1'></div><div class='cover-shape s2'></div><div class='cover-card'><div class='cover-main'><div><div class='kicker'>Brand Studio</div><h1>Guide de marque</h1><p class='sub'>Synthese strategique de la formation, construite a partir des reponses client prioritaires.</p></div><div class='meta'>Document genere le " + esc(today) + "</div></div><aside class='cover-side'>" + logo +
+      "<div class='stat'><b>" + selectedCount + "</b><span>Elements integres</span></div>" +
+      "<div class='stat'><b>6</b><span>Blocs de synthese</span></div>" +
+      "<div class='stat'><b>1</b><span>Guide cible</span></div></aside></div></section>" +
       "<section class='toc-page page-break'><div class='toc-box toc'><h2 class='toc-title'>Sommaire</h2><ul>" + toc + "</ul></div></section>" +
       body +
       "</main></body></html>";
   }
-
   function openPrint(html) {
     var w = window.open("", "_blank");
     if (!w) {
