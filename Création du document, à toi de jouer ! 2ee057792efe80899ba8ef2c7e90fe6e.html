@@ -959,74 +959,7 @@ blockquote.quote-large {
       ".img-card{margin:0;border-radius:16px;overflow:hidden;background:#fff;border:1px solid #eddcc8;}" +
       ".img-card img{display:block;width:100%;height:108px;object-fit:cover;}" +
       ".empty{padding:10px;border:1px dashed #dcc9af;border-radius:10px;color:#7a6d5d;background:#fff9ef;font-size:12px;}" +
-      "</style><style data-global-dotted-bg-v1="1">
-body {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
-    #ffffff !important;
-}
-</style><style data-page-title-writing-v1="1">
-article[id="2ee05779-2efe-8089-9ba8-ef2c7e90fe6e"] .page-title.is-writing,
-article[id="2ee05779-2efe-8089-9ba8-ef2c7e90fe6e"] .page-title.is-written {
-  font-family: "Segoe Script", "Lucida Handwriting", "Brush Script MT", cursive !important;
-  letter-spacing: 0.005em !important;
-  line-height: 1.08 !important;
-}
-
-article[id="2ee05779-2efe-8089-9ba8-ef2c7e90fe6e"] .page-title.is-writing::after {
-  content: "" !important;
-  display: inline-block !important;
-  width: 2px !important;
-  height: 0.9em !important;
-  margin-left: 0.16em !important;
-  vertical-align: -0.06em !important;
-  background: currentColor !important;
-  animation: title-caret-blink .7s steps(1) infinite !important;
-  opacity: 0.8 !important;
-}
-
-@keyframes title-caret-blink {
-  0%, 45% { opacity: 0.85; }
-  46%, 100% { opacity: 0; }
-}
-</style>
-<script data-page-title-writing-v1="1">
-(function () {
-  window.addEventListener("DOMContentLoaded", function () {
-    var title = document.querySelector('article[id="2ee05779-2efe-8089-9ba8-ef2c7e90fe6e"] .page-title');
-    if (!title) return;
-
-    var full = (title.textContent || "").trim();
-    if (!full) return;
-
-    var prefersReduced = false;
-    try {
-      prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    } catch (e) { prefersReduced = false; }
-
-    if (prefersReduced) {
-      title.classList.add("is-written");
-      return;
-    }
-
-    var chars = Array.from(full);
-    title.textContent = "";
-    title.classList.add("is-writing");
-
-    var i = 0;
-    var speed = 42;
-    var timer = setInterval(function () {
-      title.textContent += chars[i] || "";
-      i += 1;
-      if (i >= chars.length) {
-        clearInterval(timer);
-        title.classList.remove("is-writing");
-        title.classList.add("is-written");
-      }
-    }, speed);
-  });
-})();
-</script></head><body><main class='doc'>" +
+      "</style></head><body><main class='doc'>" +
       "<section class='cover'><div class='cover-shape s1'></div><div class='cover-shape s2'></div><div class='cover-card'><div class='cover-main'><div><div class='kicker'>Brand Studio</div><h1>Guide de marque</h1><p class='sub'>Synthèse stratégique de la formation, construite à partir des réponses du client pour guider sa communication et ses choix de marque.</p></div><div class='meta'>Document généré le " + esc(today) + "</div></div><aside class='cover-side'>" + logo +
       "<div class='stat'><b>" + totalAnswers + "</b><span>Réponses intégrées</span></div>" +
       "<div class='stat'><b>" + totalChecks + "</b><span>Checklist validée</span></div>" +
