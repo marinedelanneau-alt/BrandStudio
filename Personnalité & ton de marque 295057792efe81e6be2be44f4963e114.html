@@ -799,12 +799,12 @@ blockquote.quote-large {
 
   function injectStyles() {
     var css = [
-      ".brand-zone{font:inherit;color:#2f2621;background:transparent;border:0;outline:none;box-sizing:border-box;}",
+      ".brand-zone{font:inherit;color:#1f2b44;background:transparent;border:0;outline:none;box-sizing:border-box;}",
       ".brand-zone:focus{outline:none;}",
-      ".brand-zone-block{display:block;width:100%;min-height:92px;padding:0;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;}",
-      ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:0 4px;margin:0 3px;vertical-align:middle;border-bottom:1px dashed #a99889;cursor:text;}",
-      ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#9a8d82;}",
-      ".brand-zone-inline:focus{background:rgba(181,92,66,.08);}",
+      ".brand-zone-block{display:block;width:100%;min-height:92px;padding:10px 12px;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;background:#ffffff;border:1px solid #c2c7d1;border-radius:8px;}",
+      ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:4px 8px;margin:0 3px;vertical-align:middle;border:1px solid #c2c7d1;border-radius:8px;background:#ffffff;cursor:text;}",
+      ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#8b94a6;}",
+      ".brand-zone-inline:focus{border-color:#4a90e2;box-shadow:0 0 0 2px rgba(74,144,226,.2);}",
       ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}"
 ].join("");
     var st = document.createElement("style");
@@ -1315,9 +1315,7 @@ blockquote.quote-large {
 </style>
 <style data-studio-global-v1="1">
 body {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
-    linear-gradient(180deg, #f5f2ea 0%, #f2eee6 100%);
+  background: #ececef;
 }
 
 .page {
@@ -1325,15 +1323,17 @@ body {
 }
 
 .page-body {
-  max-width: 1180px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 24px 20px 42px;
+  padding: 20px 24px 56px;
 }
 
 .page-title {
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  font-size: clamp(40px, 7vw, 58px);
+  line-height: 1.05;
   letter-spacing: 0.01em;
-  color: #2c241d;
+  color: #1f2b44;
 }
 
 h2, h3 {
@@ -1348,16 +1348,17 @@ h2, h3 {
 .block-color-purple_background,
 .block-color-brown_background,
 .block-color-red_background {
-  border: 1px solid #eadbc5;
-  border-radius: 14px;
-  box-shadow: 0 8px 20px rgba(68, 44, 23, 0.08);
+  background: #ffffff !important;
+  border: 1px solid #cfd3dc;
+  border-radius: 8px;
+  box-shadow: none;
 }
 
 .callout {
-  border: 1px solid #eadbc5;
-  border-radius: 16px !important;
-  background: #fffaf2 !important;
-  box-shadow: 0 10px 24px rgba(68, 44, 23, 0.08);
+  border: 1px solid #cfd3dc;
+  border-radius: 8px !important;
+  background: #ffffff !important;
+  box-shadow: none;
 }
 
 /* Cards de réponses */
@@ -1373,10 +1374,10 @@ h2, h3 {
 }
 
 blockquote {
-  border-left: 5px solid #d58b2d !important;
-  border-radius: 12px;
-  background: #fff9ef;
-  border: 1px solid #ecddc8;
+  border-left: 4px solid #4a90e2 !important;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #cfd3dc;
   padding: 14px 16px;
 }
 
@@ -1403,10 +1404,10 @@ figure.image img {
 }
 
 details {
-  border: 1px solid #eadbc5;
-  border-radius: 14px;
-  background: #fffdf8;
-  box-shadow: 0 8px 20px rgba(68, 44, 23, 0.06);
+  border: 1px solid #cfd3dc;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: none;
   padding: 8px 12px;
 }
 
@@ -1874,20 +1875,14 @@ summary {
 </script>
 <style data-response-card-style-v1="1">
 .block-color-gray_background.callout {
-  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%) !important;
-  border: 0 !important;
-  box-shadow:
-    0 14px 28px rgba(30, 22, 15, 0.10),
-    0 3px 8px rgba(30, 22, 15, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.03) !important;
-  transform: translateZ(0);
+  background: #ffffff !important;
+  border: 1px solid #cfd3dc !important;
+  box-shadow: none !important;
+  transform: none;
 }
 </style><style data-global-dotted-bg-v1="1">
 body {
-  background:
-    radial-gradient(circle at 12% 8%, rgba(226, 186, 83, 0.18) 0, rgba(226, 186, 83, 0.18) 2px, transparent 3px) 0 0 / 22px 22px,
-    #ffffff !important;
+  background: #ececef !important;
 }
 </style><style data-page-title-writing-v1="1">
 article[id="29505779-2efe-81e6-be2b-e44f4963e114"] .page-title.is-writing,
