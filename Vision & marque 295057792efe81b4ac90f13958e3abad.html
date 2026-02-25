@@ -842,14 +842,25 @@ blockquote.quote-large {
     return /(?:Ã.|Â.|â.|ðŸ|�)/.test(s || "");
   }
 
+  function cp1252ByteFromCodePoint(cp) {
+    if (cp >= 0 && cp <= 255) return cp;
+    var map = {
+      8364: 128, 8218: 130, 402: 131, 8222: 132, 8230: 133, 8224: 134, 8225: 135, 710: 136, 8240: 137,
+      352: 138, 8249: 139, 338: 140, 381: 142, 8216: 145, 8217: 146, 8220: 147, 8221: 148, 8226: 149,
+      8211: 150, 8212: 151, 732: 152, 8482: 153, 353: 154, 8250: 155, 339: 156, 382: 158, 376: 159
+    };
+    return Object.prototype.hasOwnProperty.call(map, cp) ? map[cp] : null;
+  }
+
   function decodeUtf8Mojibake(s) {
     if (!s || !looksMojibake(s) || typeof TextDecoder === "undefined") return s;
     try {
       var bytes = new Uint8Array(s.length);
       for (var i = 0; i < s.length; i++) {
         var code = s.charCodeAt(i);
-        if (code > 255) return s;
-        bytes[i] = code;
+        var b = cp1252ByteFromCodePoint(code);
+        if (b === null) return s;
+        bytes[i] = b;
       }
       var decoded = new TextDecoder("utf-8").decode(bytes);
       if (!decoded) return s;
@@ -878,7 +889,11 @@ blockquote.quote-large {
     }
   }
 
-  window.addEventListener("DOMContentLoaded", fixVisibleTextMojibake);
+  window.addEventListener("DOMContentLoaded", function () {
+    fixVisibleTextMojibake();
+    setTimeout(fixVisibleTextMojibake, 60);
+    setTimeout(fixVisibleTextMojibake, 240);
+  });
 })();
 </script>
 <script>
