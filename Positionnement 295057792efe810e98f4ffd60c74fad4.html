@@ -1402,6 +1402,13 @@ summary {
 </style>
 <style data-positionnement-studio-banner-v1="1">
 /* Bandeau Positionnement - même layout que l'accueil */
+@media only screen {
+  body {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+}
+
 #29505779-2efe-810e-98f4-ffd60c74fad4 {
   max-width: 1320px !important;
   margin: 0 auto !important;
@@ -1411,7 +1418,7 @@ summary {
 #29505779-2efe-810e-98f4-ffd60c74fad4 > header {
   position: relative;
   overflow: hidden;
-  border-radius: 24px !important;
+  border-radius: 0 !important;
   min-height: 0 !important;
   margin: 0 auto 12px !important;
   padding: 0 16px 18px !important;
@@ -1430,16 +1437,30 @@ summary {
   width: 100%;
   height: auto !important;
   max-height: none !important;
-  margin-bottom: 24px !important;
+  margin-bottom: 12px !important;
   object-fit: contain;
   object-position: top center;
   opacity: 1;
   filter: none;
-  border-radius: 14px !important;
+  border-radius: 0 !important;
   z-index: 1;
-  background: #ffffff;
-  border: 1px solid #d7dce5;
-  box-shadow: 0 10px 20px rgba(27, 33, 46, 0.08) !important;
+  background: transparent;
+  border: 0;
+  box-shadow: none !important;
+}
+
+/* Masque discret du petit logo imprimé en bas à gauche de la bannière */
+#29505779-2efe-810e-98f4-ffd60c74fad4 > header::after {
+  content: "";
+  position: absolute;
+  left: 19.5%;
+  bottom: 20px;
+  width: 74px;
+  height: 24px;
+  background: #f3f4f7;
+  border-radius: 6px;
+  z-index: 3;
+  pointer-events: none;
 }
 
 #29505779-2efe-810e-98f4-ffd60c74fad4 .page-header-icon,
@@ -1473,7 +1494,13 @@ summary {
   #29505779-2efe-810e-98f4-ffd60c74fad4 > header {
     min-height: 0;
     padding: 0 12px 12px;
-    border-radius: 22px;
+    border-radius: 0;
+  }
+  #29505779-2efe-810e-98f4-ffd60c74fad4 > header::after {
+    left: 20%;
+    bottom: 12px;
+    width: 60px;
+    height: 20px;
   }
 }
 </style>
