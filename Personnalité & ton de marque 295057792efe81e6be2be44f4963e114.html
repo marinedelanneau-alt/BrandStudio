@@ -808,7 +808,7 @@ blockquote.quote-large {
     var ta = document.createElement("textarea");
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
-    ta.placeholder = "Ecris ta reponse ici...";
+    ta.placeholder = "Ecris tes reponses ici...";
     ta.value = store[id] || "";
 
     function autoGrow() {
@@ -834,7 +834,7 @@ blockquote.quote-large {
     var span = document.createElement("span");
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
-    span.setAttribute("data-placeholder", "Ta reponse");
+    span.setAttribute("data-placeholder", "Ecris tes reponses ici...");
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
