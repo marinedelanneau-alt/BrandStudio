@@ -1381,7 +1381,7 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
     }, speed);
   });
 })();
-</script><script data-logo-upload-block-v1="1">
+</script><script data-logo-upload-block-v2="1">
 (function () {
   var LOGO_KEY = "brandstudio_client_logo_v1";
   var ANCHOR_ID = "2ee05779-2efe-8039-8594-fb584c35549b";
@@ -1392,28 +1392,44 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
     if (!anchor) return;
 
     var style = document.createElement("style");
-    style.textContent = "#bs-logo-upload-card{margin:16px 0 10px;padding:14px;border:1px solid #dfd7cb;border-radius:14px;background:#fff;box-shadow:0 6px 16px rgba(34,28,21,.08)}#bs-logo-upload-card .bs-copy{margin:0 0 10px;line-height:1.45;color:#2c231c;font-size:15px}#bs-logo-upload-card .bs-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}#bs-logo-upload-card .bs-btn{display:inline-flex;align-items:center;gap:8px;background:#2f2621;color:#fff;padding:8px 12px;border-radius:999px;font:600 13px/1.2 Arial,sans-serif;cursor:pointer;border:0;text-decoration:none}#bs-logo-upload-card .bs-reset{background:#efe7dc;color:#3a2b1f;border:1px solid #d8c9b4}#bs-logo-upload-card .bs-input{position:absolute;left:-9999px}#bs-logo-upload-card .bs-preview{margin-top:10px;max-width:220px;max-height:120px;display:none;border:1px solid #e2d6c6;border-radius:10px;background:#fff;padding:8px;object-fit:contain}";
+    style.textContent =
+      "#bs-logo-upload-card{margin:14px 0 8px}" +
+      "#bs-logo-upload-card .bs-copy{margin:0 0 10px;line-height:1.45;color:#2c231c;font-size:15px}" +
+      "#bs-logo-upload-card .bs-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}" +
+      "#bs-logo-upload-card .bs-btn{display:inline-flex;align-items:center;gap:8px;background:#2f2621;color:#fff;padding:8px 12px;border-radius:999px;font:600 13px/1.2 Arial,sans-serif;cursor:pointer;border:0;text-decoration:none}" +
+      "#bs-logo-upload-card .bs-input{position:absolute;left:-9999px}" +
+      "#bs-logo-upload-card .bs-preview-wrap{margin-top:10px;position:relative;display:none;max-width:220px}" +
+      "#bs-logo-upload-card .bs-preview{width:100%;max-width:220px;max-height:120px;display:block;border:1px solid #e2d6c6;border-radius:10px;background:#fff;padding:8px;object-fit:contain}" +
+      "#bs-logo-upload-card .bs-edit-overlay{position:absolute;right:8px;bottom:8px;background:rgba(22,18,15,.62);color:#fff;padding:4px 8px;border-radius:999px;font:500 11px/1 Arial,sans-serif;opacity:0;pointer-events:none;transition:opacity .16s ease}" +
+      "#bs-logo-upload-card .bs-preview-wrap:hover .bs-edit-overlay{opacity:1;pointer-events:auto}";
 
     var card = document.createElement("div");
     card.id = "bs-logo-upload-card";
-    card.innerHTML = "<p class=\"bs-copy\">C&rsquo;est d&eacute;sormais ton espace, personnalise-le ! Tu as d&eacute;j&agrave; un logo ? Tu peux le t&eacute;l&eacute;charger ici (tu n&rsquo;en as pas ? Tu peux y mettre ce que tu souhaites, ta photo par exemple ?)</p><div class=\"bs-actions\"><label class=\"bs-btn\" for=\"bs-logo-input\">T&eacute;l&eacute;charger un visuel</label><input id=\"bs-logo-input\" class=\"bs-input\" type=\"file\" accept=\"image/*\"><button type=\"button\" class=\"bs-btn bs-reset\" id=\"bs-logo-reset\">Supprimer</button></div><img id=\"bs-logo-preview\" class=\"bs-preview\" alt=\"Aper&ccedil;u du logo\">";
+    card.innerHTML =
+      "<p class=\"bs-copy\">C&rsquo;est d&eacute;sormais ton espace, personnalise-le ! Tu as d&eacute;j&agrave; un logo ? Tu peux le t&eacute;l&eacute;charger ici (tu n&rsquo;en as pas ? Tu peux y mettre ce que tu souhaites, ta photo par exemple ?)</p>" +
+      "<div class=\"bs-actions\" id=\"bs-logo-actions\"><label class=\"bs-btn\" for=\"bs-logo-input\">T&eacute;l&eacute;charger un visuel</label></div>" +
+      "<input id=\"bs-logo-input\" class=\"bs-input\" type=\"file\" accept=\"image/*\">" +
+      "<div id=\"bs-logo-preview-wrap\" class=\"bs-preview-wrap\"><img id=\"bs-logo-preview\" class=\"bs-preview\" alt=\"Aper&ccedil;u du logo\"><label class=\"bs-edit-overlay\" for=\"bs-logo-input\">Modifier l&rsquo;image</label></div>";
 
     var parent = anchor.parentNode || anchor;
     parent.insertBefore(style, anchor.nextSibling);
     parent.insertBefore(card, style.nextSibling);
 
     var input = document.getElementById("bs-logo-input");
-    var reset = document.getElementById("bs-logo-reset");
+    var actions = document.getElementById("bs-logo-actions");
     var preview = document.getElementById("bs-logo-preview");
+    var previewWrap = document.getElementById("bs-logo-preview-wrap");
 
     function setPreview(src) {
       if (!src) {
-        preview.style.display = "none";
+        previewWrap.style.display = "none";
+        actions.style.display = "flex";
         preview.removeAttribute("src");
         return;
       }
       preview.src = src;
-      preview.style.display = "block";
+      previewWrap.style.display = "inline-block";
+      actions.style.display = "none";
     }
 
     try { setPreview(localStorage.getItem(LOGO_KEY) || ""); } catch (e) {}
@@ -1428,12 +1444,6 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
         setPreview(src);
       };
       reader.readAsDataURL(file);
-    });
-
-    reset.addEventListener("click", function () {
-      input.value = "";
-      try { localStorage.removeItem(LOGO_KEY); } catch (e) {}
-      setPreview("");
     });
   }
 
