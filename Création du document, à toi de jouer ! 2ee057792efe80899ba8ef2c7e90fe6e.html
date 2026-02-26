@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Création du document, à toi de jouer !</title><style>
+﻿<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Création du document, à toi de jouer !</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -718,7 +718,9 @@ blockquote.quote-large {
   window[ONCE] = true;
 
   var AUTH_KEY = "brandstudio_access_granted";
-  var LOGO_KEY = "brandstudio_client_logo_v1";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var LOGO_KEY = "brandstudio_client_logo_v1::" + USER_NS;
   var MENU_URL = "En route vers ta nouvelle stratégie de marque 295057792efe80aabdfeebdd4704fcac.html";
 
   var MODULES = [
@@ -821,9 +823,9 @@ blockquote.quote-large {
   function collectData(promptMaps) {
     return MODULES.map(function (m) {
       var path = modulePath(m.file);
-      var zoneData = readJson("brandstudio_zone_inputs_v1::" + path);
-      var todoData = readJson("brandstudio_todo_v1::" + path);
-      var imageData = readJson("brandstudio_image_slots_v1::" + path);
+      var zoneData = readJson("brandstudio_zone_inputs_v1::" + USER_NS + "::" + path);
+      var todoData = readJson("brandstudio_todo_v1::" + USER_NS + "::" + path);
+      var imageData = readJson("brandstudio_image_slots_v1::" + USER_NS + "::" + path);
       var promptList = (promptMaps && promptMaps[m.file]) || [];
 
       var answers = Object.keys(zoneData)
@@ -1096,7 +1098,7 @@ blockquote.quote-large {
   }
 
   window.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem(AUTH_KEY) !== "1") { window.location.replace("index.html"); return; }
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
 
     var lastY = window.scrollY || 0;
 
@@ -1120,6 +1122,7 @@ blockquote.quote-large {
       logout.style.transition = "opacity .18s ease, transform .18s ease";
       logout.addEventListener("click", function () {
         localStorage.removeItem(AUTH_KEY);
+        localStorage.removeItem(USER_CODE_KEY);
         window.location.href = "index.html";
       });
       window.addEventListener("scroll", function () {
@@ -1268,6 +1271,9 @@ body {
 </style></head><body><article id="2ee05779-2efe-8089-9ba8-ef2c7e90fe6e" class="page serif"><header><img class="page-cover-image" src="LAB_(22).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(20).png"/></div><h1 class="page-title" dir="auto">Création du document, à toi de jouer !</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8049-93d4-d245b421daaf" class="">🎙️Note vocale :</p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-8070-b299-f8be6877ed8d"><div class="source"><a href="https://www.notion.soundefined"></a></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-808d-a8ae-c0d127f94423" class=""><em>Ouvre ce fichier dans CANVA et duplique le dans tes documents avant de le modifier, sinon tu vas modifier l’original !</em></p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80a2-8442-d310940d5990"><div class="source"><a href="https://www.canva.com/design/DAG-9xy8cQk/QW--HwQiiIRdmZO8Sa-G-Q/edit?utm_content=DAG-9xy8cQk&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton">https://www.canva.com/design/DAG-9xy8cQk/QW--HwQiiIRdmZO8Sa-G-Q/edit?utm_content=DAG-9xy8cQk&amp;utm_campaign=designshare&amp;utm_medium=link2&amp;utm_source=sharebutton</a></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809d-a9b8-d4255ae4b49f" class="">
 </p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809a-a402-cc17dd2d15a4" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
+
 
 
 

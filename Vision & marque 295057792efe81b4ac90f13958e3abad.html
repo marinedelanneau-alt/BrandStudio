@@ -716,7 +716,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var TOKEN = "[Zone de texte]";
-  var KEY = "brandstudio_zone_inputs_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_zone_inputs_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
 
@@ -923,7 +925,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_todo_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_todo_v1::" + USER_NS + "::" + location.pathname;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
 
@@ -985,7 +989,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_image_slots_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_image_slots_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
 
@@ -1110,7 +1116,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var AUTH_KEY = "brandstudio_access_granted";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
   window.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
     if (document.querySelector("button[data-logout='1']")) return;
 
     var btn = document.createElement("button");
@@ -1133,6 +1141,7 @@ blockquote.quote-large {
 
     btn.addEventListener("click", function () {
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
       window.location.href = "index.html";
     });
 
@@ -1826,6 +1835,8 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8090-8b3f-c506c8d76820" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-8054-db1f031abc2c" class="">
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80a0-892a-eab96463a0ad" style="width:33.33333333333333%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-bed1-e97d3927a9d2" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 

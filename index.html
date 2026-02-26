@@ -225,9 +225,10 @@ body {
   <script>
     const VALID_CODES_FALLBACK = ["MARINE2026", "BRANDVIP"];
     const AUTH_KEY = "brandstudio_access_granted";
+    const USER_CODE_KEY = "brandstudio_user_code_v1";
     const TARGET_PAGE = "En route vers ta nouvelle stratégie de marque 295057792efe80aabdfeebdd4704fcac.html";
 
-    if (localStorage.getItem(AUTH_KEY) === "1") {
+    if (localStorage.getItem(AUTH_KEY) === "1" && localStorage.getItem(USER_CODE_KEY)) {
       window.location.href = TARGET_PAGE;
     }
 
@@ -258,6 +259,7 @@ body {
       const ok = await validateCode(code);
       if (ok) {
         localStorage.setItem(AUTH_KEY, "1");
+        localStorage.setItem(USER_CODE_KEY, code);
         window.location.href = TARGET_PAGE;
       } else {
         error.textContent = "Code invalide.";
@@ -287,4 +289,6 @@ body {
   </script>
 </body>
 </html>
+
+
 

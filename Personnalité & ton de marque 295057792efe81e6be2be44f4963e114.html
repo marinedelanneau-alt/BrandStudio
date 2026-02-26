@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Personnalité &amp; ton de marque</title><style>
+﻿<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Personnalité &amp; ton de marque</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -741,7 +741,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var TOKEN = "[Zone de texte]";
-  var KEY = "brandstudio_zone_inputs_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_zone_inputs_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
 
@@ -948,7 +950,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_todo_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_todo_v1::" + USER_NS + "::" + location.pathname;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
 
@@ -1099,7 +1103,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_image_slots_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_image_slots_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
 
@@ -1224,7 +1230,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var AUTH_KEY = "brandstudio_access_granted";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
   window.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
     if (document.querySelector("button[data-logout='1']")) return;
 
     var btn = document.createElement("button");
@@ -1247,6 +1255,7 @@ blockquote.quote-large {
 
     btn.addEventListener("click", function () {
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
       window.location.href = "index.html";
     });
 
@@ -2016,6 +2025,8 @@ article[id="29505779-2efe-81e6-be2b-e44f4963e114"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8009-9f43-f3c61230b783" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8015-b51d-f105cd0da133" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 

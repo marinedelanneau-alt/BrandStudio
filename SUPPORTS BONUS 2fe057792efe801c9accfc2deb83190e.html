@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SUPPORTS BONUS</title><style>
+﻿<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SUPPORTS BONUS</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -798,7 +798,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_todo_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_todo_v1::" + USER_NS + "::" + location.pathname;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
 
@@ -860,7 +862,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_image_slots_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_image_slots_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
 
@@ -985,7 +989,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var AUTH_KEY = "brandstudio_access_granted";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
   window.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
     if (document.querySelector("button[data-logout='1']")) return;
 
     var btn = document.createElement("button");
@@ -1008,6 +1014,7 @@ blockquote.quote-large {
 
     btn.addEventListener("click", function () {
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
       window.location.href = "index.html";
     });
 
@@ -1241,6 +1248,8 @@ article[id="2fe05779-2efe-801c-9acc-fc2deb83190e"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8084-ba71-cfade11ba91c" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8028-9a66-dc48f356dd0c" class="">
 </p></div><div style="display:contents" dir="auto"><h2 id="2fe05779-2efe-807a-b588-ff8d9444f58c" class="">Checklist – Avant publication d’un visuel</h2></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-803f-a596-c11c2ebf5de0" class="bulleted-list"><li style="list-style-type:disc">☐ Les couleurs respectent la palette définie</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-80f7-9948-f18a05c3659c" class="bulleted-list"><li style="list-style-type:disc">☐ Le logo est utilisé correctement</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-80f8-a447-d4958d7c5102" class="bulleted-list"><li style="list-style-type:disc">☐ Les typographies sont cohérentes</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-802a-b28b-ca71b9090e01" class="bulleted-list"><li style="list-style-type:disc">☐ Le contraste est suffisant</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8012-80b0-d31f63eee199" class="bulleted-list"><li style="list-style-type:disc">☐ Le ton correspond à la personnalité de la marque</li></ul></div><div style="display:contents" dir="auto"><hr id="30405779-2efe-809e-9c41-e844a06e272f"/></div><div style="display:contents" dir="auto"><h2 id="30405779-2efe-8078-accb-d3edc096c993" class="">Checklist – Création d’un nouveau support</h2></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8056-916c-c4143f2fa1e1" class="bulleted-list"><li style="list-style-type:disc">☐ Objectif du support défini</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-805f-9253-de0cbf0b6f4a" class="bulleted-list"><li style="list-style-type:disc">☐ Support prioritaire identifié</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-80d3-9ff9-cdbc4d70bc12" class="bulleted-list"><li style="list-style-type:disc">☐ Règles du guide respectées</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-80d5-aac7-cded8467318c" class="bulleted-list"><li style="list-style-type:disc">☐ Message clair et lisible</li></ul></div><div style="display:contents" dir="auto"><hr id="30405779-2efe-80c8-8788-f51b7eebf97d"/></div><div style="display:contents" dir="auto"><h2 id="30405779-2efe-803a-88f5-fa01eaa9ed16" class="">Checklist – Évolution de la marque</h2></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8059-a0dc-efdf7206ebf9" class="bulleted-list"><li style="list-style-type:disc">☐ L’ADN reste inchangé</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8061-b996-dbfc0e15a7d4" class="bulleted-list"><li style="list-style-type:disc">☐ Les évolutions sont progressives</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8029-a4b4-ff2cc320c14c" class="bulleted-list"><li style="list-style-type:disc">☐ Les changements sont documentés</li></ul></div><div style="display:contents" dir="auto"><ul id="30405779-2efe-8070-aca9-fd0133259c71" class="bulleted-list"><li style="list-style-type:disc">☐ Le guide est mis à jour</li></ul></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 

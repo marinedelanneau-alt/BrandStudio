@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Qui te propose cette offre ?</title><style>
+﻿<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Qui te propose cette offre ?</title><style>
 /* cspell:disable-file */
 /* webkit printing magic: print all background colors */
 html {
@@ -798,7 +798,9 @@ blockquote.quote-large {
 </script>
 <script>
 (function () {
-  var KEY = "brandstudio_todo_v1::" + location.pathname;
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var KEY = "brandstudio_todo_v1::" + USER_NS + "::" + location.pathname;
   var state = {};
   try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
 
@@ -861,7 +863,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var AUTH_KEY = "brandstudio_access_granted";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
   window.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
     if (document.querySelector("button[data-logout='1']")) return;
 
     var btn = document.createElement("button");
@@ -884,6 +888,7 @@ blockquote.quote-large {
 
     btn.addEventListener("click", function () {
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
       window.location.href = "index.html";
     });
 
@@ -1207,6 +1212,8 @@ article[id="29505779-2efe-81ff-a620-f0a50d9b1a35"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-812e-a48a-c274d058f17a" class=""><a href="En%20route%20vers%20ta%20nouvelle%20strat%C3%A9gie%20de%20marque%20295057792efe80aabdfeebdd4704fcac.html">👈  Page d&#x27;accueil</a> </p></div></div></div><div style="display:contents" dir="auto"><div id="29505779-2efe-81cd-8f6f-eaaa437a97a0" style="width:18.749999999999996%" class="column"><div style="display:contents" dir="auto"><p id="29505779-2efe-81b1-9c03-d32d27a7f093" class="">
 </p></div><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div></div></div></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e7-a57f-cd3a3489659a" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 

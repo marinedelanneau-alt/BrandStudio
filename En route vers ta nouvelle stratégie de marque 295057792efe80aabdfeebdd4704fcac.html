@@ -779,7 +779,9 @@ blockquote.quote-large {
 <script>
 (function () {
   var AUTH_KEY = "brandstudio_access_granted";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
   window.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem(AUTH_KEY) !== "1" || !localStorage.getItem(USER_CODE_KEY)) { window.location.replace("index.html"); return; }
     if (document.querySelector("button[data-logout='1']")) return;
 
     var btn = document.createElement("button");
@@ -802,6 +804,7 @@ blockquote.quote-large {
 
     btn.addEventListener("click", function () {
       localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
       window.location.href = "index.html";
     });
 
@@ -1383,7 +1386,9 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
 })();
 </script><script data-logo-upload-block-v2="1">
 (function () {
-  var LOGO_KEY = "brandstudio_client_logo_v1";
+  var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var LOGO_KEY = "brandstudio_client_logo_v1::" + USER_NS;
   var ANCHOR_ID = "2ee05779-2efe-8039-8594-fb584c35549b";
 
   function mountLogoBlock() {
@@ -1462,6 +1467,8 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8092-a6e3-e030f7acf8d9" class=""><em>Ce document est personnel et réservé à votre usage exclusif. Toute reproduction ou diffusion sans autorisation est interdite.</em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800d-8ff7-dbba1dc91fb9" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807a-9ef8-c6f336057ae3" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 
