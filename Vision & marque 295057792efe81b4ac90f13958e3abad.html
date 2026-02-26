@@ -718,13 +718,65 @@ blockquote.quote-large {
   var TOKEN = "[Zone de texte]";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
   var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
+  var ACCESS_CODE = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
   var KEY = "brandstudio_zone_inputs_v1::" + USER_NS + "::" + location.pathname;
   var store = {};
   try { store = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { store = {}; }
+  var remoteTimer = null;
+
+  function persistLocal() {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  }
+
+  function scheduleRemoteSave() {
+    if (!ACCESS_CODE) return;
+    clearTimeout(remoteTimer);
+    remoteTimer = setTimeout(function () {
+      pushRemoteStore();
+    }, 700);
+  }
+
+  async function pushRemoteStore() {
+    if (!ACCESS_CODE) return;
+    try {
+      await fetch("/api/zone-inputs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "save",
+          code: ACCESS_CODE,
+          path: location.pathname,
+          data: store
+        }),
+        keepalive: true
+      });
+    } catch (e) {}
+  }
+
+  async function loadRemoteStore() {
+    if (!ACCESS_CODE) return;
+    try {
+      var res = await fetch("/api/zone-inputs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "load",
+          code: ACCESS_CODE,
+          path: location.pathname
+        })
+      });
+      if (!res.ok) return;
+      var json = await res.json();
+      var remoteData = json && json.data && typeof json.data === "object" ? json.data : {};
+      store = Object.assign({}, remoteData, store);
+      persistLocal();
+    } catch (e) {}
+  }
 
   function save(id, val) {
     store[id] = val;
-    localStorage.setItem(KEY, JSON.stringify(store));
+    persistLocal();
+    scheduleRemoteSave();
   }
   function createBlockField(id) {
 
@@ -811,7 +863,10 @@ blockquote.quote-large {
     node.parentNode.replaceChild(frag, node);
   }
 
-  window.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("beforeunload", function () { pushRemoteStore(); });
+
+  window.addEventListener("DOMContentLoaded", async function () {
+    await loadRemoteStore();
     injectStyles();
 
     var blockIndex = 0;
@@ -1849,6 +1904,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8090-8b3f-c506c8d76820" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-8054-db1f031abc2c" class="">
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80a0-892a-eab96463a0ad" style="width:33.33333333333333%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-bed1-e97d3927a9d2" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 
