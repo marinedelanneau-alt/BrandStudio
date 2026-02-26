@@ -1196,7 +1196,7 @@ blockquote.quote-large {
   });
 })();
 </script>
-<script data-promesse-align-v1="1">
+<script data-promesse-align-v1="2">
 (function () {
   function alignPromesseBlocks() {
     var leftA = document.getElementById("30b05779-2efe-80d4-ac0d-e322489c37f4");
@@ -1205,14 +1205,20 @@ blockquote.quote-large {
     var rightB = document.getElementById("30505779-2efe-80b4-a6f0-c45efc7b96b8");
     if (!leftA || !leftB || !rightA || !rightB) return;
 
-    rightA.style.marginTop = "";
-    rightB.style.marginTop = "";
+    // Keep layout compact: avoid large dynamic offsets that create empty space.
+    rightA.style.marginTop = "0";
+    rightB.style.marginTop = "0";
+
+    if (window.matchMedia("(max-width: 900px)").matches) return;
 
     var deltaA = leftA.getBoundingClientRect().top - rightA.getBoundingClientRect().top;
-    rightA.style.marginTop = Math.round(deltaA) + "px";
-
     var deltaB = leftB.getBoundingClientRect().top - rightB.getBoundingClientRect().top;
-    rightB.style.marginTop = Math.round(deltaB) + "px";
+
+    var safeA = Math.max(0, Math.min(24, Math.round(deltaA)));
+    var safeB = Math.max(0, Math.min(24, Math.round(deltaB)));
+
+    rightA.style.marginTop = safeA + "px";
+    rightB.style.marginTop = safeB + "px";
   }
 
   window.addEventListener("DOMContentLoaded", function () {
@@ -1835,6 +1841,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8090-8b3f-c506c8d76820" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-8054-db1f031abc2c" class="">
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80a0-892a-eab96463a0ad" style="width:33.33333333333333%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-bed1-e97d3927a9d2" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 
