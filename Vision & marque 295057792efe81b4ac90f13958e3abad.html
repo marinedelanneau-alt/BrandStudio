@@ -1140,9 +1140,21 @@ blockquote.quote-large {
     btn.style.transition = "opacity .18s ease, transform .18s ease";
 
     btn.addEventListener("click", function () {
-      localStorage.removeItem(AUTH_KEY);
-      localStorage.removeItem(USER_CODE_KEY);
-      window.location.href = "index.html";
+              try {
+          var code = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+          var clientId = (localStorage.getItem("brandstudio_client_id_v1") || "").trim();
+          if (code && clientId) {
+            fetch("/api/release-code-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ code: code, client_id: clientId }),
+              keepalive: true
+            }).catch(function () {});
+          }
+        } catch (e) {}
+        localStorage.removeItem(AUTH_KEY);
+        localStorage.removeItem(USER_CODE_KEY);
+        window.location.href = "index.html";
     });
 
     document.body.appendChild(btn);
@@ -1841,6 +1853,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8090-8b3f-c506c8d76820" style="width:33.33333333333333%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8050-8054-db1f031abc2c" class="">
 </p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80a0-892a-eab96463a0ad" style="width:33.33333333333333%" class="column"></div></div></div></div><div style="display:contents" dir="auto"><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-bed1-e97d3927a9d2" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 

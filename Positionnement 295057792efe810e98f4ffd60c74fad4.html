@@ -1140,9 +1140,21 @@ blockquote.quote-large {
     btn.style.transition = "opacity .18s ease, transform .18s ease";
 
     btn.addEventListener("click", function () {
-      localStorage.removeItem(AUTH_KEY);
-      localStorage.removeItem(USER_CODE_KEY);
-      window.location.href = "index.html";
+              try {
+          var code = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+          var clientId = (localStorage.getItem("brandstudio_client_id_v1") || "").trim();
+          if (code && clientId) {
+            fetch("/api/release-code-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ code: code, client_id: clientId }),
+              keepalive: true
+            }).catch(function () {});
+          }
+        } catch (e) {}
+        localStorage.removeItem(AUTH_KEY);
+        localStorage.removeItem(USER_CODE_KEY);
+        window.location.href = "index.html";
     });
 
     document.body.appendChild(btn);
@@ -1453,6 +1465,7 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e5-9771-c1006abd6e63" class="">
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81f5-979e-d7c608ed97bc" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 

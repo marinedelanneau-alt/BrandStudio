@@ -803,9 +803,21 @@ blockquote.quote-large {
     btn.style.transition = "opacity .18s ease, transform .18s ease";
 
     btn.addEventListener("click", function () {
-      localStorage.removeItem(AUTH_KEY);
-      localStorage.removeItem(USER_CODE_KEY);
-      window.location.href = "index.html";
+              try {
+          var code = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+          var clientId = (localStorage.getItem("brandstudio_client_id_v1") || "").trim();
+          if (code && clientId) {
+            fetch("/api/release-code-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ code: code, client_id: clientId }),
+              keepalive: true
+            }).catch(function () {});
+          }
+        } catch (e) {}
+        localStorage.removeItem(AUTH_KEY);
+        localStorage.removeItem(USER_CODE_KEY);
+        window.location.href = "index.html";
     });
 
     document.body.appendChild(btn);
@@ -1467,6 +1479,7 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8092-a6e3-e030f7acf8d9" class=""><em>Ce document est personnel et réservé à votre usage exclusif. Toute reproduction ou diffusion sans autorisation est interdite.</em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800d-8ff7-dbba1dc91fb9" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807a-9ef8-c6f336057ae3" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 

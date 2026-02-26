@@ -226,28 +226,47 @@ body {
     const VALID_CODES_FALLBACK = ["MARINE2026", "BRANDVIP"];
     const AUTH_KEY = "brandstudio_access_granted";
     const USER_CODE_KEY = "brandstudio_user_code_v1";
+    const CLIENT_ID_KEY = "brandstudio_client_id_v1";
     const TARGET_PAGE = "En route vers ta nouvelle stratégie de marque 295057792efe80aabdfeebdd4704fcac.html";
 
-    if (localStorage.getItem(AUTH_KEY) === "1" && localStorage.getItem(USER_CODE_KEY)) {
-      window.location.href = TARGET_PAGE;
+    function getClientId() {
+      let clientId = (localStorage.getItem(CLIENT_ID_KEY) || "").trim();
+      if (!clientId) {
+        clientId = "cli_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 10);
+        localStorage.setItem(CLIENT_ID_KEY, clientId);
+      }
+      return clientId;
     }
 
     async function validateCode(code) {
-      if (VALID_CODES_FALLBACK.includes(code)) return true;
+      if (VALID_CODES_FALLBACK.includes(code)) return { valid: true, reason: "fallback" };
       try {
+        const clientId = getClientId();
         const res = await fetch("/api/validate-code", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code })
+          body: JSON.stringify({ code, client_id: clientId })
         });
 
-        if (!res.ok) return VALID_CODES_FALLBACK.includes(code);
+        if (!res.ok) return { valid: VALID_CODES_FALLBACK.includes(code), reason: "fallback" };
         const json = await res.json();
-        return !!json.valid;
+        return { valid: !!json.valid, reason: json.reason || "", retryAfter: json.retry_after_seconds || 0 };
       } catch (e) {
-        return VALID_CODES_FALLBACK.includes(code);
+        return { valid: VALID_CODES_FALLBACK.includes(code), reason: "fallback" };
       }
     }
+
+    (async function bootstrapExistingSession() {
+      const cachedCode = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+      if (localStorage.getItem(AUTH_KEY) !== "1" || !cachedCode) return;
+      const result = await validateCode(cachedCode);
+      if (result.valid) {
+        window.location.href = TARGET_PAGE;
+        return;
+      }
+      localStorage.removeItem(AUTH_KEY);
+      localStorage.removeItem(USER_CODE_KEY);
+    })();
 
     document.getElementById("loginForm").addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -256,13 +275,18 @@ body {
       const code = input.value.trim().toUpperCase();
       error.textContent = "";
 
-      const ok = await validateCode(code);
-      if (ok) {
+      const result = await validateCode(code);
+      if (result.valid) {
         localStorage.setItem(AUTH_KEY, "1");
         localStorage.setItem(USER_CODE_KEY, code);
         window.location.href = TARGET_PAGE;
       } else {
-        error.textContent = "Code invalide.";
+        if (result.reason === "session_active_elsewhere") {
+          const mins = Math.max(1, Math.ceil((Number(result.retryAfter) || 0) / 60));
+          error.textContent = "Ce code est deja utilise sur une autre session active. Reessaie dans environ " + mins + " min.";
+        } else {
+          error.textContent = "Code invalide.";
+        }
         input.select();
       }
     });

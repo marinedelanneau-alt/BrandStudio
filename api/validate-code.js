@@ -12,14 +12,55 @@ function getRedisConfig() {
   return { url, token };
 }
 
-async function redisGet(redis, key) {
-  const resp = await fetch(`${redis.url}/get/${encodeURIComponent(key)}`, {
-    method: "GET",
-    headers: { Authorization: `Bearer ${redis.token}` }
+function toPositiveInt(value, fallback) {
+  var n = Number.parseInt(String(value == null ? "" : value), 10);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
+function safeParseJson(raw) {
+  if (raw == null) return null;
+  if (typeof raw !== "string") return raw;
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    return raw;
+  }
+}
+
+async function redisCommand(redis, args, method) {
+  var path = args.map(function (part) {
+    return encodeURIComponent(String(part));
+  }).join("/");
+  var resp = await fetch(redis.url + "/" + path, {
+    method: method || "GET",
+    headers: { Authorization: "Bearer " + redis.token }
   });
-  if (!resp.ok) throw new Error(`Redis get failed: ${resp.status}`);
-  const data = await resp.json();
+  if (!resp.ok) {
+    var raw = await resp.text();
+    throw new Error("Redis command failed (" + resp.status + "): " + (raw || "unknown"));
+  }
+  var data = await resp.json();
   return data ? data.result : null;
+}
+
+async function redisGet(redis, key) {
+  return redisCommand(redis, ["get", key], "GET");
+}
+
+async function redisSetNxEx(redis, key, value, ttlSeconds) {
+  var raw = typeof value === "string" ? value : JSON.stringify(value);
+  return redisCommand(redis, ["set", key, raw, "EX", String(ttlSeconds), "NX"], "POST");
+}
+
+async function redisSetEx(redis, key, value, ttlSeconds) {
+  var raw = typeof value === "string" ? value : JSON.stringify(value);
+  return redisCommand(redis, ["set", key, raw, "EX", String(ttlSeconds)], "POST");
+}
+
+async function redisTtl(redis, key) {
+  var ttl = await redisCommand(redis, ["ttl", key], "GET");
+  var n = Number(ttl);
+  return Number.isFinite(n) ? n : -1;
 }
 
 module.exports = async function handler(req, res) {
@@ -48,6 +89,8 @@ module.exports = async function handler(req, res) {
   }
 
   const code = String(body.code || "").trim().toUpperCase();
+  const clientId = String(body.client_id || "").trim();
+  const ttlSeconds = toPositiveInt(process.env.ACCESS_SESSION_TTL_SECONDS, 7200);
   if (!code) {
     res.statusCode = 400;
     res.setHeader("Content-Type", "application/json");
@@ -56,10 +99,68 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const data = await redisGet(redis, `code:${code}`);
+    const data = await redisGet(redis, "code:" + code);
+    if (!data) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ valid: false, reason: "invalid_code" }));
+      return;
+    }
+
+    if (!clientId) {
+      res.statusCode = 400;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ valid: false, error: "client_id manquant" }));
+      return;
+    }
+
+    var lockKey = "active_session:" + code;
+    var now = new Date().toISOString();
+    var existingRaw = await redisGet(redis, lockKey);
+    var existing = safeParseJson(existingRaw);
+
+    if (!existing || !existing.client_id) {
+      var newLock = {
+        code: code,
+        client_id: clientId,
+        acquired_at: now,
+        last_seen_at: now
+      };
+      var setResult = await redisSetNxEx(redis, lockKey, newLock, ttlSeconds);
+      if (setResult === "OK") {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.end(JSON.stringify({ valid: true, reason: "session_acquired", expires_in: ttlSeconds }));
+        return;
+      }
+      existingRaw = await redisGet(redis, lockKey);
+      existing = safeParseJson(existingRaw);
+    }
+
+    if (existing && existing.client_id === clientId) {
+      var refreshed = {
+        code: code,
+        client_id: clientId,
+        acquired_at: existing.acquired_at || now,
+        last_seen_at: now
+      };
+      await redisSetEx(redis, lockKey, refreshed, ttlSeconds);
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.end(JSON.stringify({ valid: true, reason: "session_refreshed", expires_in: ttlSeconds }));
+      return;
+    }
+
+    var remaining = await redisTtl(redis, lockKey);
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ valid: !!data }));
+    res.end(
+      JSON.stringify({
+        valid: false,
+        reason: "session_active_elsewhere",
+        retry_after_seconds: remaining > 0 ? remaining : ttlSeconds
+      })
+    );
   } catch (err) {
     res.statusCode = 500;
     res.setHeader("Content-Type", "application/json");

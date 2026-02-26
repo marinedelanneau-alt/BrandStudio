@@ -887,9 +887,21 @@ blockquote.quote-large {
     btn.style.transition = "opacity .18s ease, transform .18s ease";
 
     btn.addEventListener("click", function () {
-      localStorage.removeItem(AUTH_KEY);
-      localStorage.removeItem(USER_CODE_KEY);
-      window.location.href = "index.html";
+              try {
+          var code = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+          var clientId = (localStorage.getItem("brandstudio_client_id_v1") || "").trim();
+          if (code && clientId) {
+            fetch("/api/release-code-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ code: code, client_id: clientId }),
+              keepalive: true
+            }).catch(function () {});
+          }
+        } catch (e) {}
+        localStorage.removeItem(AUTH_KEY);
+        localStorage.removeItem(USER_CODE_KEY);
+        window.location.href = "index.html";
     });
 
     document.body.appendChild(btn);
@@ -1212,6 +1224,7 @@ article[id="29505779-2efe-81ff-a620-f0a50d9b1a35"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-812e-a48a-c274d058f17a" class=""><a href="En%20route%20vers%20ta%20nouvelle%20strat%C3%A9gie%20de%20marque%20295057792efe80aabdfeebdd4704fcac.html">👈  Page d&#x27;accueil</a> </p></div></div></div><div style="display:contents" dir="auto"><div id="29505779-2efe-81cd-8f6f-eaaa437a97a0" style="width:18.749999999999996%" class="column"><div style="display:contents" dir="auto"><p id="29505779-2efe-81b1-9c03-d32d27a7f093" class="">
 </p></div><div style="display:contents" dir="auto"><div><div style="display:contents" dir="auto"></div></div></div></div></div></div></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e7-a57f-cd3a3489659a" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 
