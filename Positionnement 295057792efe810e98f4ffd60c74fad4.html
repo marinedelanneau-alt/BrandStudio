@@ -1413,8 +1413,8 @@ summary {
   overflow: hidden;
   border-radius: 24px !important;
   min-height: 0 !important;
-  margin: 18px auto 12px !important;
-  padding: 16px 16px 18px !important;
+  margin: 0 auto 12px !important;
+  padding: 0 16px 18px !important;
   border: 1px solid #d5dae2 !important;
   background: #f3f4f7 !important;
   box-shadow: 0 14px 28px rgba(28, 34, 48, 0.10) !important;
@@ -1428,10 +1428,11 @@ summary {
   position: relative;
   display: block;
   width: 100%;
-  height: clamp(150px, 18vw, 280px);
+  height: auto !important;
+  max-height: none !important;
   margin-bottom: 24px !important;
   object-fit: contain;
-  object-position: center;
+  object-position: top center;
   opacity: 1;
   filter: none;
   border-radius: 14px !important;
@@ -1441,6 +1442,7 @@ summary {
   box-shadow: 0 10px 20px rgba(27, 33, 46, 0.08) !important;
 }
 
+#29505779-2efe-810e-98f4-ffd60c74fad4 .page-header-icon,
 #29505779-2efe-810e-98f4-ffd60c74fad4 .page-header-icon-with-cover {
   display: none !important;
 }
@@ -1453,7 +1455,8 @@ summary {
 }
 
 #29505779-2efe-810e-98f4-ffd60c74fad4 .page-title {
-  margin: 46px auto 0 !important;
+  display: none !important;
+  margin: 0 !important;
   max-width: 900px;
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
   font-size: clamp(28px, 3.6vw, 44px);
@@ -1468,8 +1471,8 @@ summary {
     padding: 0 12px 14px;
   }
   #29505779-2efe-810e-98f4-ffd60c74fad4 > header {
-    min-height: 270px;
-    padding: 20px 18px 18px;
+    min-height: 0;
+    padding: 0 12px 12px;
     border-radius: 22px;
   }
 }
