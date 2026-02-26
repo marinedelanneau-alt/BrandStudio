@@ -798,6 +798,13 @@ blockquote.quote-large {
     ta.addEventListener("change", autoGrow);
     ta.addEventListener("keyup", autoGrow);
     ta.addEventListener("paste", function () { setTimeout(autoGrow, 0); });
+    ta.addEventListener("focus", function () {
+      if ((ta.value || "").trim() === "Ecris tes reponses ici...") {
+        ta.value = "";
+        save(id, "");
+        autoGrow();
+      }
+    });
 
     requestAnimationFrame(autoGrow);
     setTimeout(autoGrow, 50);
@@ -807,16 +814,30 @@ blockquote.quote-large {
 
   function createInlineField(id) {
     var span = document.createElement("span");
+    var inlinePrompt = "Ecris tes reponses ici...";
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
-    span.setAttribute("data-placeholder", "Ecris tes reponses ici...");
+    span.setAttribute("data-placeholder", inlinePrompt);
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
     span.textContent = store[id] || "";
+    if ((span.textContent || "").trim()) {
+      span.setAttribute("data-placeholder", "");
+    }
 
     span.addEventListener("input", function () {
       save(id, span.textContent || "");
+    });
+    span.addEventListener("focus", function () {
+      if (!(span.textContent || "").trim()) {
+        span.setAttribute("data-placeholder", "");
+      }
+    });
+    span.addEventListener("blur", function () {
+      if (!(span.textContent || "").trim()) {
+        span.setAttribute("data-placeholder", inlinePrompt);
+      }
     });
 
     span.addEventListener("keydown", function (e) {
@@ -831,6 +852,7 @@ blockquote.quote-large {
       ".brand-zone{font:inherit;color:#2f2621;background:transparent;border:0;outline:none;box-sizing:border-box;}",
       ".brand-zone:focus{outline:none;}",
       ".brand-zone-block{display:block;width:100%;min-height:92px;padding:0;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;}",
+      ".brand-zone-block::placeholder{color:#9a8d82;opacity:1;font:inherit;}",
       ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:0 4px;margin:0 3px;vertical-align:middle;border-bottom:1px dashed #a99889;cursor:text;}",
       ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#9a8d82;}",
       ".brand-zone-inline:focus{background:rgba(181,92,66,.08);}",
