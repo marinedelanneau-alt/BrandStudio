@@ -752,7 +752,80 @@ blockquote.quote-large {
     localStorage.setItem(KEY, JSON.stringify(store));
   }
 
-    function createBlockField(id) {
+      function compactText(s) {
+    return String(s || "").replace(/\s+/g, " ").trim();
+  }
+
+  function findPromptForElement(el) {
+    var node = el;
+    for (var depth = 0; depth < 7 && node; depth++) {
+      var prev = node.previousElementSibling;
+      while (prev) {
+        var t = compactText(prev.innerText || prev.textContent || "");
+        if (t && t !== TOKEN && t.length <= 260) return t;
+        prev = prev.previousElementSibling;
+      }
+      node = node.parentElement;
+    }
+    return "Aide-moi a formuler une reponse claire et utile.";
+  }
+
+  function uniqueSuggestions(arr) {
+    var out = [];
+    var seen = {};
+    arr.forEach(function (v) {
+      var t = compactText(v);
+      if (!t) return;
+      var k = t.toLowerCase();
+      if (seen[k]) return;
+      seen[k] = true;
+      out.push(t);
+    });
+    return out.slice(0, 3);
+  }
+
+  function buildAideSuggestions(prompt, current) {
+    var p = compactText(prompt).toLowerCase();
+    var c = compactText(current);
+
+    var mission = p.indexOf("mission") >= 0;
+    var vision = p.indexOf("vision") >= 0;
+    var valeur = p.indexOf("valeur") >= 0;
+    var promesse = p.indexOf("promesse") >= 0;
+
+    var suggestions = [];
+
+    if (mission) {
+      suggestions.push("Ma marque existe pour aider [cible] a [resultat concret] grace a [approche], afin de [impact durable].");
+      suggestions.push("J'accompagne [cible] qui veulent [objectif] avec [methode], pour [benefice mesurable].");
+    }
+    if (vision) {
+      suggestions.push("D'ici 3 a 5 ans, ma marque sera reconnue pour [position], avec un impact clair sur [public / secteur].");
+      suggestions.push("Je veux construire une marque [adjectif 1, adjectif 2] qui permet a [cible] de [transformation].");
+    }
+    if (valeur) {
+      suggestions.push("[Valeur] : je l'applique en [action concrete] dans chaque interaction client.");
+      suggestions.push("Cette valeur guide mes choix: [decision 1], [decision 2], [decision 3].");
+    }
+    if (promesse) {
+      suggestions.push("Je promets a mes clients [resultat principal], avec [niveau d'exigence] et [delai / cadre].");
+      suggestions.push("En travaillant avec moi, vous obtenez [benefice concret] sans [frein principal].");
+    }
+
+    suggestions.push("Pour [cible], je propose [offre] afin de [benefice], grace a [methode].");
+    suggestions.push("Mon approche se distingue par [difference cle], ce qui permet de [resultat].");
+
+    if (c) {
+      suggestions.unshift("Version reformulee: " + c + " Cela se traduit concretement par [exemple court].");
+    }
+
+    return uniqueSuggestions(suggestions);
+  }
+
+  function createBlockField(id, promptText) {
+    var wrap = document.createElement("div");
+    wrap.className = "brand-zone-wrap";
+
     var ta = document.createElement("textarea");
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
@@ -775,7 +848,61 @@ blockquote.quote-large {
     requestAnimationFrame(autoGrow);
     setTimeout(autoGrow, 50);
 
-    return ta;
+    var tools = document.createElement("div");
+    tools.className = "brand-ai-tools";
+
+    var aiBtn = document.createElement("button");
+    aiBtn.type = "button";
+    aiBtn.className = "brand-ai-btn";
+    aiBtn.textContent = "Aide IA";
+
+    var panel = document.createElement("div");
+    panel.className = "brand-ai-panel";
+
+    function applySuggestion(text) {
+      ta.value = text;
+      save(id, ta.value);
+      autoGrow();
+      ta.focus();
+    }
+
+    function renderSuggestions() {
+      panel.innerHTML = "";
+      var title = document.createElement("p");
+      title.className = "brand-ai-title";
+      title.textContent = "Propositions pour t'aider a formuler:";
+      panel.appendChild(title);
+
+      var list = document.createElement("div");
+      list.className = "brand-ai-list";
+      var suggestions = buildAideSuggestions(promptText, ta.value);
+      suggestions.forEach(function (s) {
+        var chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "brand-ai-chip";
+        chip.textContent = s;
+        chip.addEventListener("click", function () { applySuggestion(s); });
+        list.appendChild(chip);
+      });
+      panel.appendChild(list);
+    }
+
+    aiBtn.addEventListener("click", function () {
+      var visible = panel.style.display === "block";
+      if (visible) {
+        panel.style.display = "none";
+        return;
+      }
+      renderSuggestions();
+      panel.style.display = "block";
+    });
+
+    tools.appendChild(aiBtn);
+    wrap.appendChild(ta);
+    wrap.appendChild(tools);
+    wrap.appendChild(panel);
+
+    return wrap;
   }
 
   function createInlineField(id) {
@@ -807,7 +934,16 @@ blockquote.quote-large {
       ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:4px 8px;margin:0 3px;vertical-align:middle;border:1px solid #c2c7d1;border-radius:8px;background:#ffffff;cursor:text;}",
       ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#8b94a6;}",
       ".brand-zone-inline:focus{border-color:#4a90e2;box-shadow:0 0 0 2px rgba(74,144,226,.2);}",
-      ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}"
+            ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}",
+      ".brand-zone-wrap{display:block;width:100%;}",
+      ".brand-ai-tools{display:flex;align-items:center;gap:8px;margin:2px 0 8px;}",
+      ".brand-ai-btn{border:1px solid #d7c7b6;background:#fff;border-radius:999px;padding:4px 10px;font:600 12px/1.2 Arial,sans-serif;color:#5a4130;cursor:pointer;}",
+      ".brand-ai-btn:hover{background:#f9f2ea;}",
+      ".brand-ai-panel{display:none;border:1px solid #eadbc5;background:#fffdf8;border-radius:10px;padding:8px 10px;margin:0 0 8px;}",
+      ".brand-ai-title{margin:0 0 6px;font:600 12px/1.3 Arial,sans-serif;color:#6a5140;}",
+      ".brand-ai-list{display:flex;flex-direction:column;gap:6px;}",
+      ".brand-ai-chip{border:1px solid #e6d8c9;background:#fff;border-radius:10px;padding:6px 8px;text-align:left;font:500 12px/1.35 Arial,sans-serif;color:#2f2621;cursor:pointer;}",
+      ".brand-ai-chip:hover{background:#f7efe6;}"
 ].join("");
     var st = document.createElement("style");
     st.textContent = css;
@@ -816,7 +952,7 @@ blockquote.quote-large {
 
   function replaceBlockToken(el, id) {
     el.textContent = "";
-    el.appendChild(createBlockField(id));
+    el.appendChild(createBlockField(id, findPromptForElement(el)));
   }
 
   function replaceInlineTokensInTextNode(node, startIndexRef) {
@@ -2037,6 +2173,8 @@ article[id="29505779-2efe-81e6-be2b-e44f4963e114"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8009-9f43-f3c61230b783" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30405779-2efe-8015-b51d-f105cd0da133" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
+
 
 
 
