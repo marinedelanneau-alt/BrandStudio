@@ -1243,12 +1243,15 @@ body {
 #29505779-2efe-80aa-bdfe-ebdd4704fcac .page-cover-image {
   position: relative;
   display: block;
-  width: 100%;
+  width: auto !important;
+  max-width: 100% !important;
   height: auto !important;
   max-height: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
   margin-bottom: 56px !important;
-  object-fit: contain;
-  object-position: center;
+  object-fit: unset !important;
+  object-position: center top;
   opacity: 1;
   filter: none;
   border-radius: 14px !important;
