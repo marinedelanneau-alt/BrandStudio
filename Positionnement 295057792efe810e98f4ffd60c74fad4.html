@@ -745,7 +745,7 @@ blockquote.quote-large {
     return "Aide-moi a formuler une reponse claire et utile.";
   }
 
-  function uniqueSuggestions(arr) {
+    function uniqueSuggestions(arr) {
     var out = [];
     var seen = {};
     arr.forEach(function (v) {
@@ -797,6 +797,36 @@ blockquote.quote-large {
     return uniqueSuggestions(suggestions);
   }
 
+  async function fetchRemoteSuggestions(promptText, currentText) {
+    try {
+      var code = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
+      var context = Object.keys(store)
+        .sort()
+        .map(function (k) { return compactText(store[k]); })
+        .filter(function (v) { return !!v; })
+        .slice(0, 8);
+
+      var res = await fetch("/api/ai-writing-help", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: promptText,
+          current: currentText,
+          context: context,
+          page: (document.title || "").trim(),
+          code: code
+        })
+      });
+
+      if (!res.ok) return null;
+      var data = await res.json();
+      if (!data || !Array.isArray(data.suggestions)) return null;
+      return uniqueSuggestions(data.suggestions);
+    } catch (e) {
+      return null;
+    }
+  }
+
   function createBlockField(id, promptText) {
     var wrap = document.createElement("div");
     wrap.className = "brand-zone-wrap";
@@ -841,16 +871,15 @@ blockquote.quote-large {
       ta.focus();
     }
 
-    function renderSuggestions() {
+    function renderSuggestions(suggestions, originLabel) {
       panel.innerHTML = "";
       var title = document.createElement("p");
       title.className = "brand-ai-title";
-      title.textContent = "Propositions pour t'aider a formuler:";
+      title.textContent = originLabel || "Propositions pour t'aider a formuler:";
       panel.appendChild(title);
 
       var list = document.createElement("div");
       list.className = "brand-ai-list";
-      var suggestions = buildAideSuggestions(promptText, ta.value);
       suggestions.forEach(function (s) {
         var chip = document.createElement("button");
         chip.type = "button";
@@ -862,14 +891,28 @@ blockquote.quote-large {
       panel.appendChild(list);
     }
 
-    aiBtn.addEventListener("click", function () {
+    aiBtn.addEventListener("click", async function () {
       var visible = panel.style.display === "block";
       if (visible) {
         panel.style.display = "none";
         return;
       }
-      renderSuggestions();
+
+      panel.innerHTML = "";
+      var loading = document.createElement("p");
+      loading.className = "brand-ai-title";
+      loading.textContent = "Generation en cours...";
+      panel.appendChild(loading);
       panel.style.display = "block";
+
+      var remote = await fetchRemoteSuggestions(promptText, ta.value);
+      if (remote && remote.length) {
+        renderSuggestions(remote, "Suggestions personnalisees (GPT):");
+        return;
+      }
+
+      var local = buildAideSuggestions(promptText, ta.value);
+      renderSuggestions(local, "Propositions locales (mode secours):");
     });
 
     tools.appendChild(aiBtn);
@@ -878,9 +921,7 @@ blockquote.quote-large {
     wrap.appendChild(panel);
 
     return wrap;
-  }
-
-  function createInlineField(id) {
+  }\n\n  function createInlineField(id) {
     var span = document.createElement("span");
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
@@ -1601,6 +1642,7 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81e5-9771-c1006abd6e63" class="">
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81f5-979e-d7c608ed97bc" class="">
 </p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+
 
 
 
