@@ -1202,11 +1202,83 @@ blockquote.quote-large {
       ".brand-upload-box.has-image .brand-upload-controls{position:absolute;top:10px;right:10px;margin:0;opacity:0;pointer-events:none;transition:opacity .15s ease;}",
       ".brand-upload-box.has-image .brand-upload-btn{background:transparent;color:#7b6b5d;box-shadow:none;padding:1px 2px;border-radius:4px;font-size:12px;font-weight:500;text-decoration:none;letter-spacing:.01em;width:auto !important;text-align:right;}",
       ".brand-upload-box.has-image:hover .brand-upload-controls,.brand-upload-box.has-image:focus-within .brand-upload-controls{opacity:1;pointer-events:auto;}.brand-upload-box.has-image .brand-upload-btn:hover{background:transparent;color:#5c4d3f;transform:none;text-decoration:underline;text-underline-offset:2px;}",
-      "",
-      "",
+      ".brand-color-swatch{display:flex;align-items:flex-end;justify-content:flex-start;width:100%;min-height:180px;border-radius:16px;border:1px solid #d8dce5;box-shadow:0 10px 20px rgba(45,31,20,.08);padding:10px 12px;box-sizing:border-box;}",
+      ".brand-color-swatch-label{display:inline-block;padding:4px 8px;border-radius:999px;font:600 12px/1 Arial,sans-serif;background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.08);}",
       "@media (max-width:700px){figure.brand-upload-slot{margin:.7em 0 1em;}.brand-upload-controls{flex-wrap:wrap;}.brand-upload-btn{width:100%;text-align:center;}}"
 ].join("");
     document.head.appendChild(st);
+  }
+
+  function normalizeHex(raw) {
+    var v = String(raw || "").trim();
+    if (!v) return "";
+    if (v.charAt(0) !== "#") v = "#" + v;
+    var m = v.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
+    return m ? v.toUpperCase() : "";
+  }
+
+  function textColorFor(bgHex) {
+    var h = (bgHex || "").replace("#", "");
+    if (h.length === 3) {
+      h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    }
+    if (h.length !== 6) return "#1f2b44";
+    var r = parseInt(h.slice(0, 2), 16);
+    var g = parseInt(h.slice(2, 4), 16);
+    var b = parseInt(h.slice(4, 6), 16);
+    var luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+    return luminance > 160 ? "#1f2b44" : "#ffffff";
+  }
+
+  function readHexFromCell(cell) {
+    if (!cell) return "";
+    var ta = cell.querySelector("textarea.brand-zone-block");
+    if (ta) return normalizeHex(ta.value);
+    var inline = cell.querySelector(".brand-zone-inline");
+    if (inline) return normalizeHex(inline.textContent || "");
+    return normalizeHex(cell.textContent || "");
+  }
+
+  function applyPrimaryColorSwatches() {
+    var table = document.getElementById("2ee05779-2efe-802b-b986-f0d43e420606");
+    if (!table) return;
+
+    var rows = Array.from(table.querySelectorAll("tbody tr"));
+    if (!rows.length) return;
+
+    var hexValues = rows.slice(0, 3).map(function (row) {
+      var cells = row.querySelectorAll("th, td");
+      return readHexFromCell(cells[1]);
+    });
+
+    var figureIds = [
+      "30405779-2efe-8037-a730-d8dab2fe23c7",
+      "30405779-2efe-8069-8833-e7417de279ee",
+      "30405779-2efe-8000-8024-d43f3456ec21"
+    ];
+
+    figureIds.forEach(function (id, idx) {
+      var fig = document.getElementById(id);
+      if (!fig) return;
+      var hex = hexValues[idx] || "";
+      fig.classList.add("brand-upload-slot");
+      fig.innerHTML = "";
+
+      var swatch = document.createElement("div");
+      swatch.className = "brand-color-swatch";
+      swatch.style.background = hex || "#f1f3f7";
+
+      var label = document.createElement("span");
+      label.className = "brand-color-swatch-label";
+      label.textContent = hex || "HEX manquant";
+      label.style.color = hex ? textColorFor(hex) : "#5f6a7d";
+      if (hex) {
+        label.style.background = "rgba(255,255,255,.72)";
+      }
+
+      swatch.appendChild(label);
+      fig.appendChild(swatch);
+    });
   }
 
   window.addEventListener("DOMContentLoaded", function () {
@@ -1219,10 +1291,25 @@ blockquote.quote-large {
       return !!(a && img);
     });
 
+    var primarySwatchFigureIds = {
+      "30405779-2efe-8037-a730-d8dab2fe23c7": true,
+      "30405779-2efe-8069-8833-e7417de279ee": true,
+      "30405779-2efe-8000-8024-d43f3456ec21": true
+    };
+
     targets.forEach(function (fig, idx) {
+      if (primarySwatchFigureIds[fig.id]) return;
       var id = makeSlotId(fig, idx);
       buildUploadUI(fig, id);
     });
+
+    applyPrimaryColorSwatches();
+
+    var primaryTable = document.getElementById("2ee05779-2efe-802b-b986-f0d43e420606");
+    if (primaryTable) {
+      primaryTable.addEventListener("input", applyPrimaryColorSwatches);
+      primaryTable.addEventListener("change", applyPrimaryColorSwatches);
+    }
   });
 })();
 </script>
