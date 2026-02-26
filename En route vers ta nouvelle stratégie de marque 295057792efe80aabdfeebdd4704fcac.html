@@ -1216,76 +1216,64 @@ body {
   background: transparent !important;
 }
 </style>
-<style data-home-studio-banner-v1="1">
-/* Bandeau d'accueil intégré - univers Studio */
-#29505779-2efe-80aa-bdfe-ebdd4704fcac {
-  max-width: 1320px !important;
-  margin: 0 auto !important;
-  padding: 0 20px 20px !important;
+<style data-home-studio-banner-v2="1">
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-cover-image {
+  display: block;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  min-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  max-height: none !important;
+  height: auto !important;
+  object-fit: cover;
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac > header {
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] > header {
   position: relative;
   overflow: hidden;
-  border-radius: 24px !important;
-  min-height: 0 !important;
-  margin: 18px auto 12px !important;
-  padding: 16px 16px 18px !important;
-  border: 1px solid #d5dae2 !important;
-  background: #f3f4f7 !important;
-  box-shadow: 0 14px 28px rgba(28, 34, 48, 0.10) !important;
+  min-height: 0;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0 0 16px calc(50% - 50vw) !important;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac > header::before {
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] > header::before {
   content: none !important;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-cover-image {
-  position: relative;
-  display: block;
-  width: auto !important;
-  max-width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  margin-bottom: 56px !important;
-  object-fit: unset !important;
-  object-position: center top;
-  opacity: 1;
-  filter: none;
-  border-radius: 14px !important;
-  z-index: 1;
-  background: #ffffff;
-  border: 1px solid #d7dce5;
-  box-shadow: 0 10px 20px rgba(27, 33, 46, 0.08) !important;
-}
-
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-header-icon-with-cover {
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-header-icon-with-cover {
   display: none !important;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-header-icon-with-cover .icon {
-  width: 96px;
-  height: 96px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 8px;
-  border: 1px solid #e5d5bc;
-  box-shadow: 0 14px 28px rgba(38, 24, 10, 0.14);
-}
-
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-title,
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-description {
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title,
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-description {
   position: relative;
   z-index: 2;
   text-align: center;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-title {
-  margin: 34px auto 0 !important;
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-body {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 20px 20px 42px;
+}
+
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title {
+  margin: 30px auto 0 !important;
   max-width: 900px;
-  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif !important;
   font-size: clamp(28px, 3.6vw, 44px);
   line-height: 1.04;
   letter-spacing: -0.01em;
@@ -1293,7 +1281,12 @@ body {
   text-shadow: none;
 }
 
-#29505779-2efe-80aa-bdfe-ebdd4704fcac .page-description::before {
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title::before,
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title::after {
+  content: none !important;
+}
+
+article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-description::before {
   content: "Brand Studio Lab";
   display: inline-block;
   margin-top: 14px;
@@ -1307,18 +1300,35 @@ body {
   text-transform: uppercase;
 }
 
-@media (max-width: 840px) {
-  #29505779-2efe-80aa-bdfe-ebdd4704fcac {
+@media (max-width: 980px) {
+  article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] {
     padding: 0 12px 14px;
   }
-  #29505779-2efe-80aa-bdfe-ebdd4704fcac > header {
-    min-height: 270px;
-    padding: 20px 18px 18px;
-    border-radius: 22px;
+
+  article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] > header {
+    min-height: 0;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 0 16px calc(50% - 50vw) !important;
+    padding: 0;
+    border-radius: 0;
   }
-  #29505779-2efe-80aa-bdfe-ebdd4704fcac .page-header-icon-with-cover .icon {
-    width: 78px;
-    height: 78px;
+
+  article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-body {
+    padding: 14px 12px 24px;
+  }
+
+  article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-cover-image {
+    display: block;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    max-height: none !important;
+    object-fit: cover;
+    border-radius: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
   }
 }
 </style>
