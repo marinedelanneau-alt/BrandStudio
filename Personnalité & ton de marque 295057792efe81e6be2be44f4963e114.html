@@ -2107,6 +2107,109 @@ article[id="29505779-2efe-81e6-be2b-e44f4963e114"] .page-title.is-writing::after
     }, speed);
   });
 })();
+</script><script data-hex-swatch-hotfix-v1="1">
+(function () {
+  var TABLE_ID = "2ee05779-2efe-802b-b986-f0d43e420606";
+  var FIGURE_IDS = [
+    "30405779-2efe-8037-a730-d8dab2fe23c7",
+    "30405779-2efe-8069-8833-e7417de279ee",
+    "30405779-2efe-8000-8024-d43f3456ec21"
+  ];
+
+  function ensureStyle() {
+    if (document.getElementById("hex-swatch-hotfix-style")) return;
+    var st = document.createElement("style");
+    st.id = "hex-swatch-hotfix-style";
+    st.textContent = [
+      ".brand-color-swatch{display:flex;align-items:flex-end;justify-content:flex-start;width:100%;min-height:180px;border-radius:16px;border:1px solid #d8dce5;box-shadow:0 10px 20px rgba(45,31,20,.08);padding:10px 12px;box-sizing:border-box;}",
+      ".brand-color-swatch-label{display:inline-block;padding:4px 8px;border-radius:999px;font:600 12px/1 Arial,sans-serif;background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.08);}"
+    ].join("");
+    document.head.appendChild(st);
+  }
+
+  function normalizeHex(raw) {
+    var v = String(raw || "").trim();
+    if (!v) return "";
+    if (v.charAt(0) !== "#") v = "#" + v;
+    var m = v.match(/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/);
+    return m ? v.toUpperCase() : "";
+  }
+
+  function textColorFor(bgHex) {
+    var h = (bgHex || "").replace("#", "");
+    if (h.length === 3) {
+      h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2);
+    }
+    if (h.length !== 6) return "#1f2b44";
+    var r = parseInt(h.slice(0, 2), 16);
+    var g = parseInt(h.slice(2, 4), 16);
+    var b = parseInt(h.slice(4, 6), 16);
+    var luminance = (0.299 * r + 0.587 * g + 0.114 * b);
+    return luminance > 160 ? "#1f2b44" : "#ffffff";
+  }
+
+  function readHexFromCell(cell) {
+    if (!cell) return "";
+    var ta = cell.querySelector("textarea.brand-zone-block");
+    if (ta) return normalizeHex(ta.value);
+    var inline = cell.querySelector(".brand-zone-inline");
+    if (inline) return normalizeHex(inline.textContent || "");
+    return normalizeHex(cell.textContent || "");
+  }
+
+  function getPrimaryRows(table) {
+    var tbodyRows = Array.from(table.querySelectorAll("tbody tr"));
+    if (tbodyRows.length) return tbodyRows.slice(0, 3);
+    return Array.from(table.querySelectorAll("tr")).filter(function (row) {
+      return !row.closest("thead");
+    }).slice(0, 3);
+  }
+
+  function renderSwatches() {
+    var table = document.getElementById(TABLE_ID);
+    if (!table) return;
+
+    ensureStyle();
+    var rows = getPrimaryRows(table);
+    var hexValues = rows.map(function (row) {
+      var cells = row.querySelectorAll("th, td");
+      return readHexFromCell(cells[1]);
+    });
+
+    FIGURE_IDS.forEach(function (id, idx) {
+      var fig = document.getElementById(id);
+      if (!fig) return;
+      var hex = hexValues[idx] || "";
+      fig.classList.add("brand-upload-slot");
+      fig.innerHTML = "";
+
+      var swatch = document.createElement("div");
+      swatch.className = "brand-color-swatch";
+      swatch.style.background = hex || "#f1f3f7";
+
+      var label = document.createElement("span");
+      label.className = "brand-color-swatch-label";
+      label.textContent = hex || "HEX manquant";
+      label.style.color = hex ? textColorFor(hex) : "#5f6a7d";
+      swatch.appendChild(label);
+
+      fig.appendChild(swatch);
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    renderSwatches();
+    setTimeout(renderSwatches, 250);
+
+    var table = document.getElementById(TABLE_ID);
+    if (!table) return;
+
+    table.addEventListener("input", renderSwatches);
+    table.addEventListener("change", renderSwatches);
+    var mo = new MutationObserver(function () { renderSwatches(); });
+    mo.observe(table, { subtree: true, childList: true, characterData: true });
+  });
+})();
 </script></head><body><article id="29505779-2efe-81e6-be2b-e44f4963e114" class="page serif"><header><img class="page-cover-image" src="LAB_(14).png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="LAB_(16).png"/></div><h1 class="page-title" dir="auto">Personnalité &amp; ton de marque</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-800e-9d61-d7727941c9f4" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:720px" src="https://images.unsplash.com/photo-1497015455546-1da71faf8d06?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Script vidéo : Dans cette partie, on va donner une personnalité à ta marque. Une marque n’est pas neutre : elle parle, elle s’exprime, elle crée une relation. Pense à ta marque comme à une personne : comment parle t-elle ? quelle energie dégage t-elle ? Cette section est essentielle pour garantir une communication cohérente, notamment à l’écrit : réseaux sociaux, site web, emails. Prends le temps de remplie le tableau “est / n’est pas”, il t’aidera énormément à éviter les incohérences dans le ton utilisé par ta marque.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e4-a96d-e8627d619eef" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80a5-88c2-c9befcdfcbcc" class="">
 </p></div><div style="display:contents" dir="auto"><div id="30505779-2efe-8017-9212-e6c85f496dd4" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-807b-a435-ec2347f809a5" style="width:56.25%" class="column"><div style="display:contents" dir="ltr"><figure id="30505779-2efe-808d-bb98-c69df4e356ef" class="image"><a href="Elments_nouvelle_comm%201.png"><img style="width:336px" src="Elments_nouvelle_comm%201.png"/></a></figure></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80be-8057-ed16bfe24791" style="width:43.75%" class="column"><div style="display:contents" dir="auto"><p id="30505779-2efe-8025-966f-c128fd2bcf22" class="">
