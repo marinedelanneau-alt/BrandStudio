@@ -1427,7 +1427,9 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
     style.textContent =
       "#bs-logo-upload-card{margin:14px 0 8px}" +
       "#bs-logo-upload-card .bs-copy{margin:0 0 10px;line-height:1.45;color:#2c231c;font-size:15px}" +
-      "#bs-logo-upload-card .bs-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}" +
+      "#bs-logo-upload-card .bs-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex-wrap:wrap}" +
+      "#bs-logo-upload-card .bs-company-name{display:block;width:min(360px,100%);padding:10px 12px;border:1px solid #eadbc5;border-radius:12px;background:#fffdf8;color:#7b6b5d;font:400 15px/1.35 Georgia,'Times New Roman',serif;box-sizing:border-box}" +
+      "#bs-logo-upload-card .bs-company-name:focus{outline:none;border-color:#dba45d;box-shadow:0 0 0 3px rgba(219,164,93,.18);color:#2c231c;background:#fff}" +
       "#bs-logo-upload-card .bs-btn{display:inline-flex;align-items:center;gap:8px;background:#2f2621;color:#fff;padding:8px 12px;border-radius:999px;font:600 13px/1.2 Arial,sans-serif;cursor:pointer;border:0;text-decoration:none}" +
       "#bs-logo-upload-card .bs-input{position:absolute;left:-9999px}" +
       "#bs-logo-upload-card .bs-preview-wrap{margin-top:10px;position:relative;display:none;max-width:220px}" +
@@ -1439,7 +1441,7 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
     card.id = "bs-logo-upload-card";
     card.innerHTML =
       "<p class=\"bs-copy\">C&rsquo;est d&eacute;sormais ton espace, personnalise-le ! Tu as d&eacute;j&agrave; un logo ? Tu peux le t&eacute;l&eacute;charger ici (tu n&rsquo;en as pas ? Tu peux y mettre ce que tu souhaites, ta photo par exemple ?)</p>" +
-      "<div class=\"bs-actions\" id=\"bs-logo-actions\"><label class=\"bs-btn\" for=\"bs-logo-input\">T&eacute;l&eacute;charger un visuel</label></div>" +
+      "<div class=\"bs-actions\" id=\"bs-logo-actions\"><input id=\"bs-company-name\" class=\"bs-company-name\" type=\"text\" value=\"Le nom de ton entreprise\" data-default=\"Le nom de ton entreprise\"><label class=\"bs-btn\" for=\"bs-logo-input\">T&eacute;l&eacute;charger un visuel</label></div>" +
       "<input id=\"bs-logo-input\" class=\"bs-input\" type=\"file\" accept=\"image/*\">" +
       "<div id=\"bs-logo-preview-wrap\" class=\"bs-preview-wrap\"><img id=\"bs-logo-preview\" class=\"bs-preview\" alt=\"Aper&ccedil;u du logo\"><label class=\"bs-edit-overlay\" for=\"bs-logo-input\">Modifier l&rsquo;image</label></div>";
 
@@ -1451,6 +1453,20 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
     var actions = document.getElementById("bs-logo-actions");
     var preview = document.getElementById("bs-logo-preview");
     var previewWrap = document.getElementById("bs-logo-preview-wrap");
+    var companyNameInput = document.getElementById("bs-company-name");
+
+    if (companyNameInput) {
+      companyNameInput.addEventListener("focus", function () {
+        if (companyNameInput.value === companyNameInput.getAttribute("data-default")) {
+          companyNameInput.value = "";
+        }
+      });
+      companyNameInput.addEventListener("blur", function () {
+        if (!companyNameInput.value.trim()) {
+          companyNameInput.value = companyNameInput.getAttribute("data-default");
+        }
+      });
+    }
 
     function setPreview(src) {
       if (!src) {
