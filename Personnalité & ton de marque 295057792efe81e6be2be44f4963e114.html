@@ -798,18 +798,28 @@ blockquote.quote-large {
     } catch (e) {}
   }
 
+  var DEFAULT_PROMPT = "Ecris tes reponses ici...";
+
   function save(id, val) {
     store[id] = val;
     persistLocal();
     scheduleRemoteSave();
   }
-  function createBlockField(id) {
 
+  function getSeedPrompt(id) {
+    var txt = String(store[id] || "").trim();
+    if (!txt || txt === DEFAULT_PROMPT) return "";
+    return txt;
+  }
+
+  function createBlockField(id) {
     var ta = document.createElement("textarea");
+    var seedPrompt = getSeedPrompt(id);
+
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
-    ta.placeholder = "Ecris tes reponses ici...";
-    ta.value = store[id] || "";
+    ta.placeholder = seedPrompt || DEFAULT_PROMPT;
+    ta.value = seedPrompt ? "" : (store[id] || "");
 
     function autoGrow() {
       ta.style.height = "auto";
@@ -823,13 +833,6 @@ blockquote.quote-large {
     ta.addEventListener("change", autoGrow);
     ta.addEventListener("keyup", autoGrow);
     ta.addEventListener("paste", function () { setTimeout(autoGrow, 0); });
-    ta.addEventListener("focus", function () {
-      if ((ta.value || "").trim() === "Ecris tes reponses ici...") {
-        ta.value = "";
-        save(id, "");
-        autoGrow();
-      }
-    });
 
     requestAnimationFrame(autoGrow);
     setTimeout(autoGrow, 50);
@@ -839,14 +842,16 @@ blockquote.quote-large {
 
   function createInlineField(id) {
     var span = document.createElement("span");
-    var inlinePrompt = "Ecris tes reponses ici...";
+    var seedPrompt = getSeedPrompt(id);
+    var inlinePrompt = seedPrompt || DEFAULT_PROMPT;
+
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
     span.setAttribute("data-placeholder", inlinePrompt);
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
-    span.textContent = store[id] || "";
+    span.textContent = seedPrompt ? "" : (store[id] || "");
     if ((span.textContent || "").trim()) {
       span.setAttribute("data-placeholder", "");
     }
