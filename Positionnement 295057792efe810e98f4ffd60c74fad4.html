@@ -1798,6 +1798,50 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .block-color-brown_background
   });
 })();
 </script>
+<script data-four-upload-row-fix-v1="1">
+(function () {
+  var WRAP_ID = "2ee05779-2efe-8051-9af3-f4c0e4cefa2c";
+  var COL_IDS = [
+    "2ee05779-2efe-80a2-ab2c-d5c4e2097347",
+    "2ee05779-2efe-80ed-b623-d33640c35162",
+    "2ee05779-2efe-80a8-a8c0-cce09cfd8250",
+    "2ee05779-2efe-8070-b4fa-eb8e817bf465"
+  ];
+
+  function forceFourCols() {
+    var wrap = document.getElementById(WRAP_ID);
+    if (!wrap) return;
+
+    var cols = COL_IDS.map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    if (cols.length < 4) {
+      var nested = Array.from(wrap.querySelectorAll('[style*="display:contents"] > .column'));
+      if (nested.length >= 4) cols = nested.slice(0, 4);
+    }
+    if (cols.length < 4) return;
+
+    cols.forEach(function (c) { wrap.appendChild(c); });
+
+    wrap.style.display = "flex";
+    wrap.style.flexWrap = "nowrap";
+    wrap.style.alignItems = "flex-start";
+    wrap.style.gap = "16px";
+
+    cols.forEach(function (c) {
+      c.style.display = "block";
+      c.style.width = "calc(25% - 12px)";
+      c.style.maxWidth = "calc(25% - 12px)";
+      c.style.minWidth = "0";
+      c.style.flex = "0 0 calc(25% - 12px)";
+    });
+  }
+
+  window.addEventListener("DOMContentLoaded", function () {
+    forceFourCols();
+    setTimeout(forceFourCols, 60);
+    setTimeout(forceFourCols, 220);
+  });
+})();
+</script>
 <style data-response-card-style-v1="1">
 .block-color-gray_background.callout {
   background: transparent !important;
