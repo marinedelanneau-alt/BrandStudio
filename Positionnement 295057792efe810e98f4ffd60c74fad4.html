@@ -1547,19 +1547,24 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8048-8beb-ddcd
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8051-9af3-f4c0e4cefa2c {
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
   gap: 14px !important;
   align-items: stretch;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  -webkit-overflow-scrolling: touch;
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8051-9af3-f4c0e4cefa2c > div[style*="display:contents"] {
   display: block !important;
+  flex: 0 0 250px !important;
+  min-width: 250px !important;
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8051-9af3-f4c0e4cefa2c .column {
   width: 100% !important;
-  min-width: 0 !important;
+  min-width: 250px !important;
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8051-9af3-f4c0e4cefa2c figure.brand-upload-slot {
