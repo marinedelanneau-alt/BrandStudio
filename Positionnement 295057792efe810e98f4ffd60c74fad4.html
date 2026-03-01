@@ -1545,8 +1545,16 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .column-list {
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8048-8beb-ddcd6df8fd32 {
-  grid-template-columns: 1fr 1fr !important;
-  align-items: start;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8048-8beb-ddcd6df8fd32 > [style*="display:contents"] > .column {
+  width: calc(50% - 8px) !important;
+  max-width: calc(50% - 8px) !important;
+  min-width: 0 !important;
 }
 
 article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .column {
@@ -1665,7 +1673,12 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .block-color-brown_background
   }
 
   article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8048-8beb-ddcd6df8fd32 {
-    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+
+  article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] #2ee05779-2efe-8048-8beb-ddcd6df8fd32 > [style*="display:contents"] > .column {
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 </style>
