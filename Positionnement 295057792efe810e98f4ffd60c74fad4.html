@@ -1124,14 +1124,14 @@ blockquote.quote-large {
     figure.appendChild(box);
 
     function renderAddIcon() {
-      labelText.innerHTML = "<svg viewBox='0 0 24 24' width='20' height='20' aria-hidden='true' focusable='false'><path d='M12 3a1 1 0 0 1 1 1v8.59l2.3-2.3a1 1 0 1 1 1.4 1.42l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.42l2.3 2.3V4a1 1 0 0 1 1-1Zm-7 14a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z' fill='currentColor'/></svg>";
-      labelText.classList.add("is-icon");
+      labelText.innerHTML = "<span class='brand-upload-btn-icon' aria-hidden='true'><svg viewBox='0 0 24 24' width='15' height='15' focusable='false'><path d='M12 3a1 1 0 0 1 1 1v7.59l2.3-2.29a1 1 0 1 1 1.4 1.41l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.41L11 11.59V4a1 1 0 0 1 1-1Zm-7 14a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1Z' fill='currentColor'/></svg></span><span class='brand-upload-btn-label'>Ajouter image</span><span class='brand-upload-btn-meta' aria-hidden='true'><i></i><i></i></span>";
+      labelText.classList.add("is-pill");
       label.setAttribute("aria-label", "Ajouter une image");
     }
 
     function renderEditText() {
       labelText.textContent = "Modifier l'image";
-      labelText.classList.remove("is-icon");
+      labelText.classList.remove("is-pill");
       label.setAttribute("aria-label", "Modifier l'image");
     }
 
@@ -1179,10 +1179,15 @@ blockquote.quote-large {
       ".brand-upload-preview{display:none;width:100%;max-height:340px;object-fit:cover;border-radius:14px;background:#fff;border:1px solid #efdfce;box-shadow:0 6px 16px rgba(45,31,20,.08);}",
       ".brand-upload-hint{font-size:13px;color:#6f5d50;margin-top:10px;font-weight:600;}",
       ".brand-upload-controls{display:flex;gap:10px;margin-top:13px;align-items:center;justify-content:flex-start;}",
-      ".brand-upload-btn{font:600 14px/1.1 'Avenir Next','Trebuchet MS','Segoe UI',sans-serif;border:1px solid #e1e6ee;border-radius:10px;padding:10px 14px;cursor:pointer;letter-spacing:.01em;transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease;color:#5f636b;background:#f2f4f7;box-shadow:0 1px 2px rgba(32,45,64,.08),0 3px 10px rgba(32,45,64,.06);}",
-      ".brand-upload-btn-text{display:inline-flex;align-items:center;justify-content:center;min-width:1.2em;}",
-      ".brand-upload-btn-text.is-icon{width:20px;height:20px;line-height:1;}",
-      ".brand-upload-btn:hover{transform:translateY(-1px);background:#eef1f5;box-shadow:0 1px 2px rgba(32,45,64,.1),0 7px 16px rgba(32,45,64,.1);}",
+      ".brand-upload-btn{font:600 12px/1.15 'Avenir Next','Trebuchet MS','Segoe UI',sans-serif;border:1px solid #e9e4d8;border-radius:12px;padding:8px 11px;cursor:pointer;letter-spacing:.01em;transition:transform .16s ease,box-shadow .16s ease,background-color .16s ease,color .16s ease;color:#55534d;background:#f7f3e9;box-shadow:0 1px 2px rgba(39,45,58,.07),0 6px 14px rgba(39,45,58,.06);}",
+      ".brand-upload-btn-text{display:inline-flex;align-items:center;justify-content:center;gap:8px;}",
+      ".brand-upload-btn-text.is-pill{display:inline-flex;align-items:center;}",
+      ".brand-upload-btn-icon{display:inline-flex;align-items:center;justify-content:center;color:#c9a55f;}",
+      ".brand-upload-btn-label{color:#4f4d47;font-weight:600;}",
+      ".brand-upload-btn-meta{display:inline-flex;align-items:center;gap:6px;margin-left:2px;}",
+      ".brand-upload-btn-meta i{display:inline-block;width:14px;height:14px;border-radius:999px;background:#f9f5ec;border:1px solid #eadfca;position:relative;}",
+      ".brand-upload-btn-meta i:before{content:'';position:absolute;inset:4px;border-radius:999px;background:#e6c98f;opacity:.95;}",
+      ".brand-upload-btn:hover{transform:translateY(-1px);background:#fbf7ee;color:#44423d;box-shadow:0 1px 2px rgba(39,45,58,.1),0 8px 16px rgba(39,45,58,.1);}",
       ".brand-upload-btn:focus-visible{outline:none;box-shadow:0 0 0 3px rgba(126,145,169,.24),0 7px 16px rgba(32,45,64,.12);}",
       ".brand-upload-box.has-image:before{opacity:0;}",
       ".brand-upload-box.has-image .brand-upload-controls{position:absolute;top:10px;right:10px;margin:0;opacity:0;pointer-events:none;transition:opacity .15s ease;}",
