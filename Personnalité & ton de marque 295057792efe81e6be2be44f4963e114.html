@@ -741,6 +741,7 @@ blockquote.quote-large {
 <script>
 (function () {
   var TOKEN = "[Zone de texte]";
+  var RESPONSE_ICON_SRC = "Elments_nouvelle_comm 1.png";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
   var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
   var ACCESS_CODE = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase();
@@ -800,6 +801,13 @@ blockquote.quote-large {
 
   var DEFAULT_PROMPT = "Ecris tes reponses ici...";
 
+  function normalizeStoredText(val) {
+    if (typeof val !== "string") return "";
+    var t = val.trim();
+    if (!t || t === DEFAULT_PROMPT) return "";
+    return val;
+  }
+
   function save(id, val) {
     store[id] = val;
     persistLocal();
@@ -807,7 +815,7 @@ blockquote.quote-large {
   }
 
   function getSeedPrompt(id) {
-    var txt = String(store[id] || "").trim();
+    var txt = String(normalizeStoredText(store[id]) || "").trim();
     if (!txt || txt === DEFAULT_PROMPT) return "";
     return txt;
   }
@@ -815,11 +823,12 @@ blockquote.quote-large {
   function createBlockField(id) {
     var ta = document.createElement("textarea");
     var seedPrompt = getSeedPrompt(id);
+    var rawValue = normalizeStoredText(store[id] || "");
 
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
     ta.placeholder = seedPrompt || DEFAULT_PROMPT;
-    ta.value = seedPrompt ? "" : (store[id] || "");
+    ta.value = seedPrompt ? "" : rawValue;
 
     function autoGrow() {
       ta.style.height = "auto";
@@ -895,6 +904,26 @@ blockquote.quote-large {
   function replaceBlockToken(el, id) {
     el.textContent = "";
     el.appendChild(createBlockField(id));
+    ensureCalloutIcon(el);
+  }
+
+  function ensureCalloutIcon(el) {
+    var callout = el && el.closest ? el.closest("figure.callout") : null;
+    if (!callout) return;
+    var existing = callout.querySelector(".icon img.icon-response");
+    if (existing) return;
+
+    var iconWrap = document.createElement("div");
+    iconWrap.style.fontSize = "1.5em";
+    var span = document.createElement("span");
+    span.className = "icon";
+    var img = document.createElement("img");
+    img.className = "icon-response";
+    img.src = RESPONSE_ICON_SRC;
+    img.alt = "";
+    span.appendChild(img);
+    iconWrap.appendChild(span);
+    callout.insertBefore(iconWrap, callout.firstChild);
   }
 
   function replaceInlineTokensInTextNode(node, startIndexRef) {
@@ -916,6 +945,19 @@ blockquote.quote-large {
   }
 
   window.addEventListener("DOMContentLoaded", function () {
+    var changed = false;
+    Object.keys(store).forEach(function (k) {
+      var cleaned = normalizeStoredText(store[k]);
+      if (!cleaned) {
+        if (store[k]) changed = true;
+        delete store[k];
+      } else if (cleaned !== store[k]) {
+        store[k] = cleaned;
+        changed = true;
+      }
+    });
+    if (changed) persistLocal();
+
     injectStyles();
 
     var blockIndex = 0;
