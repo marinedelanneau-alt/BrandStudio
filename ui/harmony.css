@@ -102,6 +102,22 @@ article.page .brand-zone-block {
   min-height: 124px !important;
 }
 
+/* In callouts: keep a single outer frame, no inner gray outline */
+article.page figure.callout textarea.brand-zone-block,
+article.page figure.callout .brand-zone-block {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-radius: 10px !important;
+  padding-left: 14px !important;
+}
+
+/* Move response icon further outside so text is never hidden */
+article.page figure.callout .icon {
+  left: -56px !important;
+  top: -14px !important;
+}
+
 article.page .to-do-list li {
   margin: 6px 0 !important;
 }
