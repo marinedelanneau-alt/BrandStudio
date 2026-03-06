@@ -1,0 +1,113 @@
+/* Global visual harmony layer for Notion-exported pages */
+:root {
+  --hs-text: #2f2a26;
+  --hs-muted: #6d655e;
+  --hs-line: #e7dfd5;
+  --hs-surface: #ffffff;
+}
+
+article.page .page-body {
+  max-width: 1040px !important;
+  margin: 0 auto !important;
+  padding: 30px 42px 92px !important;
+}
+
+article.page .page-title {
+  margin-bottom: 14px !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0.01em !important;
+}
+
+article.page p,
+article.page li,
+article.page td,
+article.page th {
+  color: var(--hs-text) !important;
+  line-height: 1.62 !important;
+}
+
+article.page p {
+  margin: 8px 0 !important;
+}
+
+article.page h2,
+article.page h3,
+article.page h4 {
+  margin: 18px 0 10px !important;
+  line-height: 1.2 !important;
+}
+
+article.page ul,
+article.page ol {
+  margin: 8px 0 10px !important;
+  padding-left: 1.35em !important;
+}
+
+article.page hr {
+  border: 0 !important;
+  border-top: 1px solid var(--hs-line) !important;
+  margin: 24px 0 !important;
+}
+
+article.page details {
+  margin: 14px 0 20px !important;
+}
+
+article.page details > summary {
+  padding: 0 !important;
+  margin: 0 0 12px !important;
+}
+
+article.page figure.callout {
+  border-radius: 14px !important;
+}
+
+article.page figure.block-color-gray_background.callout {
+  background: var(--hs-surface) !important;
+  border: 1px solid var(--hs-line) !important;
+  padding: 12px 14px !important;
+}
+
+article.page figure.block-color-orange_background.callout,
+article.page figure.block-color-red_background.callout,
+article.page figure.block-color-yellow_background.callout,
+article.page figure.block-color-blue_background.callout {
+  border-left: 2px solid #c97a5a !important;
+  border-radius: 0 !important;
+  padding: 4px 0 4px 12px !important;
+}
+
+article.page blockquote {
+  border-left: 2px solid var(--hs-line) !important;
+  margin: 12px 0 !important;
+  padding: 6px 0 6px 14px !important;
+  color: #3e3833 !important;
+}
+
+article.page .column-list {
+  gap: 18px !important;
+}
+
+article.page .column-list .column {
+  padding: 0 !important;
+}
+
+article.page textarea.brand-zone-block,
+article.page .brand-zone-block {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--hs-line) !important;
+  background: #fff !important;
+  min-height: 124px !important;
+}
+
+article.page .to-do-list li {
+  margin: 6px 0 !important;
+}
+
+@media (max-width: 900px) {
+  article.page .page-body {
+    padding: 20px 16px 84px !important;
+  }
+}
