@@ -233,7 +233,7 @@ ul.to-do-list > li {
 }
 
 .to-do-children-checked {
-	text-decoration: line-through;
+	text-decoration: none;
 	opacity: 0.375;
 }
 
@@ -775,6 +775,13 @@ blockquote.quote-large {
 
   var DEFAULT_PROMPT = "Ecris tes reponses ici...";
 
+  function normalizeStoredText(val) {
+    if (typeof val !== "string") return "";
+    var t = val.trim();
+    if (!t || t === DEFAULT_PROMPT) return "";
+    return val;
+  }
+
   function save(id, val) {
     store[id] = val;
     persistLocal();
@@ -782,7 +789,7 @@ blockquote.quote-large {
   }
 
   function getSeedPrompt(id) {
-    var txt = String(store[id] || "").trim();
+    var txt = String(normalizeStoredText(store[id]) || "").trim();
     if (!txt || txt === DEFAULT_PROMPT) return "";
     return txt;
   }
@@ -790,20 +797,56 @@ blockquote.quote-large {
   function createBlockField(id) {
     var ta = document.createElement("textarea");
     var seedPrompt = getSeedPrompt(id);
+    var promptText = seedPrompt || DEFAULT_PROMPT;
+    var rawValue = normalizeStoredText(store[id] || "");
 
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
-    ta.placeholder = seedPrompt || DEFAULT_PROMPT;
-    ta.value = seedPrompt ? "" : (store[id] || "");
+    ta.placeholder = "";
+    ta.setAttribute("data-prompt", promptText);
 
     function autoGrow() {
       ta.style.height = "auto";
       ta.style.height = (ta.scrollHeight + 2) + "px";
     }
 
+    function showPrompt() {
+      ta.value = promptText;
+      ta.setAttribute("data-prompt-visible", "1");
+      ta.classList.add("is-prompt");
+      autoGrow();
+    }
+
+    function hidePrompt() {
+      if (ta.getAttribute("data-prompt-visible") !== "1") return;
+      ta.value = "";
+      ta.setAttribute("data-prompt-visible", "0");
+      ta.classList.remove("is-prompt");
+      autoGrow();
+    }
+
+    if (rawValue) {
+      ta.value = rawValue;
+      ta.setAttribute("data-prompt-visible", "0");
+    } else {
+      showPrompt();
+    }
+
     ta.addEventListener("input", function () {
       save(id, ta.value);
       autoGrow();
+    });
+    ta.addEventListener("focus", function () {
+      hidePrompt();
+    });
+    ta.addEventListener("blur", function () {
+      if (!(ta.value || "").trim()) {
+        save(id, "");
+        showPrompt();
+        return;
+      }
+      ta.setAttribute("data-prompt-visible", "0");
+      ta.classList.remove("is-prompt");
     });
     ta.addEventListener("change", autoGrow);
     ta.addEventListener("keyup", autoGrow);
@@ -819,30 +862,49 @@ blockquote.quote-large {
     var span = document.createElement("span");
     var seedPrompt = getSeedPrompt(id);
     var inlinePrompt = seedPrompt || DEFAULT_PROMPT;
+    var rawValue = normalizeStoredText(store[id] || "");
 
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
-    span.setAttribute("data-placeholder", inlinePrompt);
+    span.setAttribute("data-prompt", inlinePrompt);
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
-    span.textContent = seedPrompt ? "" : (store[id] || "");
-    if ((span.textContent || "").trim()) {
-      span.setAttribute("data-placeholder", "");
+
+    function showPrompt() {
+      span.textContent = inlinePrompt;
+      span.setAttribute("data-prompt-visible", "1");
+      span.classList.add("is-prompt");
+    }
+
+    function hidePrompt() {
+      if (span.getAttribute("data-prompt-visible") !== "1") return;
+      span.textContent = "";
+      span.setAttribute("data-prompt-visible", "0");
+      span.classList.remove("is-prompt");
+    }
+
+    if (rawValue) {
+      span.textContent = rawValue;
+      span.setAttribute("data-prompt-visible", "0");
+    } else {
+      showPrompt();
     }
 
     span.addEventListener("input", function () {
       save(id, span.textContent || "");
     });
     span.addEventListener("focus", function () {
-      if (!(span.textContent || "").trim()) {
-        span.setAttribute("data-placeholder", "");
-      }
+      hidePrompt();
     });
     span.addEventListener("blur", function () {
       if (!(span.textContent || "").trim()) {
-        span.setAttribute("data-placeholder", inlinePrompt);
+        save(id, "");
+        showPrompt();
+        return;
       }
+      span.setAttribute("data-prompt-visible", "0");
+      span.classList.remove("is-prompt");
     });
 
     span.addEventListener("keydown", function (e) {
@@ -855,11 +917,11 @@ blockquote.quote-large {
   function injectStyles() {
     var css = [
       ".brand-zone{font:inherit;color:#2f2621;background:transparent;border:0;outline:none;box-sizing:border-box;}",
+      ".brand-zone.is-prompt{color:#9a8d82;}",
       ".brand-zone:focus{outline:none;}",
       ".brand-zone-block{display:block;width:100%;min-height:92px;padding:0;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;}",
       ".brand-zone-block::placeholder{color:#9a8d82;opacity:1;font:inherit;}",
       ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:0 4px;margin:0 3px;vertical-align:middle;border-bottom:1px dashed #a99889;cursor:text;}",
-      ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#9a8d82;}",
       ".brand-zone-inline:focus{background:rgba(181,92,66,.08);}",
       ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}"].join("");
     var st = document.createElement("style");
@@ -1204,9 +1266,16 @@ blockquote.quote-large {
     injectStyles();
 
     var figures = Array.from(document.querySelectorAll("figure.image"));
+    var uploadFigureIds = [
+      "2ee05779-2efe-80db-ad87-f92715e18fdc",
+      "2ee05779-2efe-8032-83e2-d8a849488342",
+      "2ee05779-2efe-8078-bed6-c238eaa2fbe3",
+      "2ee05779-2efe-80cd-8b88-c128b6d17feb"
+    ];
     var targets = figures.filter(function (fig) {
-      var a = fig.querySelector("a[href='https://www.notion.so']");
-      var img = fig.querySelector("img[src='https://www.notion.so']");
+      if (uploadFigureIds.indexOf(fig.id) >= 0) return true;
+      var a = fig.querySelector("a[href*='notion.so']");
+      var img = fig.querySelector("img[src*='notion.so']");
       return !!(a && img);
     });
 
@@ -1789,7 +1858,7 @@ article[id="29505779-2efe-810e-98f4-ffd60c74fad4"] .page-title.is-writing::after
 })();
 </script><style data-response-icon-v1="1">.callout{position:relative;overflow:visible !important;}.callout .icon{position:absolute;top:-18px;left:-42px;z-index:4;pointer-events:none;display:block;line-height:0;max-width:none !important;max-height:none !important;width:auto !important;height:auto !important;margin-right:0 !important;overflow:visible !important;}.callout .icon img.icon-response{width:76px !important;height:76px !important;object-fit:contain;display:block;filter:drop-shadow(0 6px 12px rgba(0,0,0,.18));}.callout textarea.brand-zone-block{width:100% !important;max-width:100% !important;padding-left:0 !important;}</style><style data-brand-typography-v1="1">:root{--bs-font-main:"Inter","Avenir Next","Segoe UI",Arial,sans-serif;--bs-font-title:"Segoe Script","Lucida Handwriting","Brush Script MT","Segoe Print",cursive;}body,.page,.sans,.serif,.to-do-children-checked,.to-do-children-unchecked,p,li,blockquote,td,th,input,textarea,button,select,label{font-family:var(--bs-font-main)!important;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}h1,h2,h3,h4,h5,h6,.page-title{font-family:var(--bs-font-title)!important;font-weight:800;letter-spacing:.01em;line-height:1.18;}p,li,blockquote,td,th{line-height:1.58;}textarea.brand-zone-block,textarea.brand-zone,span.brand-zone-inline{font-family:var(--bs-font-main)!important;line-height:1.58;}</style><script data-text-spacing-v1="1">(function(){function skip(node){if(!node||!node.parentElement)return true;var p=node.parentElement;var tag=p.tagName;return tag==="SCRIPT"||tag==="STYLE"||tag==="TEXTAREA"||tag==="INPUT"||tag==="CODE"||tag==="PRE";}function normalize(txt){if(!txt)return txt;return txt.replace(/\u00A0/g," ").replace(/[ \t]{2,}/g," ").replace(/ +([:;!?])/g," $1");}window.addEventListener("DOMContentLoaded",function(){var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null);var n;while((n=w.nextNode())){if(skip(n))continue;var t=n.nodeValue;var x=normalize(t);if(x!==t)n.nodeValue=x;}});})();</script><link rel="stylesheet" href="ui/harmony.css"/></head><body><article id="29505779-2efe-810e-98f4-ffd60c74fad4" class="page serif"><header><img class="page-cover-image" src="/banner-positionnement.png" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="elements_nouvelle_comm_exact_v2.png"/></div><h1 class="page-title" dir="auto">Positionnement</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-803a-a53f-d2ce515c85c3" class="">
 </p></div><div style="display:contents" dir="ltr"><figure id="2ee05779-2efe-80fe-b5fa-f8908d353d2c" class="image" style="text-align:left"><a href="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"><img style="width:624px" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb"/></a><figcaption>Script vidéo : Le positionnement va te permettre de clarifier à qui tu t’adresses et pourquoi on te choisit toi. Beaucoup de marques veulent parler à tout le monde, et finissent par ne parler à personne. Ici, l’objectif est d’être précis : mieux vaut une cible claire qu’une cible trop large. En définissant ton positionnement, tu facilites ta communication, ton discours commercial et tes choix visuels. Appuie-toi sur les exercices et n’hésite pas à comparer avec tes concurrents pour mieux comprendre ta différence.</figcaption></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f3-bebd-f93ea8375882" class="">
-</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e6-9db2-e5d02a2f0ccb" class="">Le positionnement répond à une question essentielle :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80e1-815d-c35f800643d0" class="">Pourquoi choisir ta marque plutôt qu’une autre ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-86a0-ef54a7e95d30" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e6-9db2-e5d02a2f0ccb" class="">Le positionnement répond à une question essentielle :</p></div><div style="display:contents" dir="ltr"><figure id="30505779-2efe-80e1-815d-c35f800643d0" class="image" style="text-align:left"><img style="width:100%;max-width:960px" src="Pourquoi choisir ta marque plutôt qu'une autre.png" alt="Pourquoi choisir ta marque plutôt qu'une autre ?"/></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8015-86a0-ef54a7e95d30" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809f-ad41-e25052b40465" class="">Il ne s’agit pas seulement de définir tacible.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-a441-ccd72826a897" class="">Il s’agit de clarifier la place que tu occupes dans l’esprit de tes clients.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80df-b7c1-f4a6bc0c68d4" class="">Un positionnement fort permet :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8002-817d-c7548afe733b" class="bulleted-list"><li style="list-style-type:disc">d’attirer les bonnes personnes</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8076-8980-dead684bd822" class="bulleted-list"><li style="list-style-type:disc">de simplifier ta communication</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809a-9593-fd5262b93c55" class="bulleted-list"><li style="list-style-type:disc">de renforcer ta crédibilité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806c-af4b-e85a2bb87cb1" class="bulleted-list"><li style="list-style-type:disc">de justifier ton prix</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bc-89aa-c6e53ffad85f" class="">
 </p></div><div style="display:contents" dir="auto"><h3 id="29505779-2efe-8183-a85f-e8accafef8d2" class="block-color-yellow_background"> 🎯 Cible</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d3-b481-f55fca1854dc" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-9fff-df26d490ced1" class="">Une cible est définie par :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8045-adc1-e0440366fe9d" class="bulleted-list"><li style="list-style-type:disc">un niveau de maturité</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b4-b652-d23d9d70611e" class="bulleted-list"><li style="list-style-type:disc">un problème précis</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8051-bee3-d1b2fbee57bd" class="bulleted-list"><li style="list-style-type:disc">une situation spécifique</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80aa-bb37-c37662a9dd9d" class="bulleted-list"><li style="list-style-type:disc">une ambition</li></ul></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-8022-a3c8-e977ed77154c"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8020-8e23-d2ca468258fe" class="">Exercice — Cible stratégique</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e0-953d-eb8a94b265aa" class="">Répondez :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80de-b177-f9189354909f" class="bulleted-list"><li style="list-style-type:disc">À quel moment précis intervient ma marque ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80c4-ad19-d49eefea780a" class="bulleted-list"><li style="list-style-type:disc">Quelle est la situation exacte de mon client lorsqu’il me contacte ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-803c-9e18-ebfe49546781" class="bulleted-list"><li style="list-style-type:disc">Qu’est-ce qu’il a déjà essayé ?</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8018-8bf0-dc7f737cbcc8" class="bulleted-list"><li style="list-style-type:disc">Qu’est-ce qu’il refuse ?</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bb-a224-f175f47d77d3" class="">

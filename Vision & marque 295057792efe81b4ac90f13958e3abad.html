@@ -775,6 +775,13 @@ blockquote.quote-large {
 
   var DEFAULT_PROMPT = "Ecris tes réponses ici...";
 
+  function normalizeStoredText(val) {
+    if (typeof val !== "string") return "";
+    var t = val.trim();
+    if (!t || t === DEFAULT_PROMPT) return "";
+    return val;
+  }
+
   function save(id, val) {
     store[id] = val;
     persistLocal();
@@ -782,7 +789,7 @@ blockquote.quote-large {
   }
 
   function getSeedPrompt(id) {
-    var txt = String(store[id] || "").trim();
+    var txt = String(normalizeStoredText(store[id]) || "").trim();
     if (!txt || txt === DEFAULT_PROMPT) return "";
     return txt;
   }
@@ -790,20 +797,56 @@ blockquote.quote-large {
   function createBlockField(id) {
     var ta = document.createElement("textarea");
     var seedPrompt = getSeedPrompt(id);
+    var promptText = seedPrompt || DEFAULT_PROMPT;
+    var rawValue = normalizeStoredText(store[id] || "");
 
     ta.className = "brand-zone brand-zone-block";
     ta.rows = 4;
-    ta.placeholder = seedPrompt || DEFAULT_PROMPT;
-    ta.value = seedPrompt ? "" : (store[id] || "");
+    ta.placeholder = "";
+    ta.setAttribute("data-prompt", promptText);
 
     function autoGrow() {
       ta.style.height = "auto";
       ta.style.height = (ta.scrollHeight + 2) + "px";
     }
 
+    function showPrompt() {
+      ta.value = promptText;
+      ta.setAttribute("data-prompt-visible", "1");
+      ta.classList.add("is-prompt");
+      autoGrow();
+    }
+
+    function hidePrompt() {
+      if (ta.getAttribute("data-prompt-visible") !== "1") return;
+      ta.value = "";
+      ta.setAttribute("data-prompt-visible", "0");
+      ta.classList.remove("is-prompt");
+      autoGrow();
+    }
+
+    if (rawValue) {
+      ta.value = rawValue;
+      ta.setAttribute("data-prompt-visible", "0");
+    } else {
+      showPrompt();
+    }
+
     ta.addEventListener("input", function () {
       save(id, ta.value);
       autoGrow();
+    });
+    ta.addEventListener("focus", function () {
+      hidePrompt();
+    });
+    ta.addEventListener("blur", function () {
+      if (!(ta.value || "").trim()) {
+        save(id, "");
+        showPrompt();
+        return;
+      }
+      ta.setAttribute("data-prompt-visible", "0");
+      ta.classList.remove("is-prompt");
     });
     ta.addEventListener("change", autoGrow);
     ta.addEventListener("keyup", autoGrow);
@@ -819,30 +862,49 @@ blockquote.quote-large {
     var span = document.createElement("span");
     var seedPrompt = getSeedPrompt(id);
     var inlinePrompt = seedPrompt || DEFAULT_PROMPT;
+    var rawValue = normalizeStoredText(store[id] || "");
 
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
-    span.setAttribute("data-placeholder", inlinePrompt);
+    span.setAttribute("data-prompt", inlinePrompt);
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
-    span.textContent = seedPrompt ? "" : (store[id] || "");
-    if ((span.textContent || "").trim()) {
-      span.setAttribute("data-placeholder", "");
+
+    function showPrompt() {
+      span.textContent = inlinePrompt;
+      span.setAttribute("data-prompt-visible", "1");
+      span.classList.add("is-prompt");
+    }
+
+    function hidePrompt() {
+      if (span.getAttribute("data-prompt-visible") !== "1") return;
+      span.textContent = "";
+      span.setAttribute("data-prompt-visible", "0");
+      span.classList.remove("is-prompt");
+    }
+
+    if (rawValue) {
+      span.textContent = rawValue;
+      span.setAttribute("data-prompt-visible", "0");
+    } else {
+      showPrompt();
     }
 
     span.addEventListener("input", function () {
       save(id, span.textContent || "");
     });
     span.addEventListener("focus", function () {
-      if (!(span.textContent || "").trim()) {
-        span.setAttribute("data-placeholder", "");
-      }
+      hidePrompt();
     });
     span.addEventListener("blur", function () {
       if (!(span.textContent || "").trim()) {
-        span.setAttribute("data-placeholder", inlinePrompt);
+        save(id, "");
+        showPrompt();
+        return;
       }
+      span.setAttribute("data-prompt-visible", "0");
+      span.classList.remove("is-prompt");
     });
 
     span.addEventListener("keydown", function (e) {
@@ -855,11 +917,11 @@ blockquote.quote-large {
   function injectStyles() {
     var css = [
       ".brand-zone{font:inherit;color:#2f2621;background:transparent;border:0;outline:none;box-sizing:border-box;}",
+      ".brand-zone.is-prompt{color:#9a8d82;}",
       ".brand-zone:focus{outline:none;}",
       ".brand-zone-block{display:block;width:100%;min-height:92px;padding:0;margin:6px 0;resize:none;overflow:hidden;line-height:1.5;}",
       ".brand-zone-block::placeholder{color:#9a8d82;opacity:1;font:inherit;}",
       ".brand-zone-inline{display:inline-block;min-width:140px;max-width:100%;padding:0 4px;margin:0 3px;vertical-align:middle;border-bottom:1px dashed #a99889;cursor:text;}",
-      ".brand-zone-inline:empty:before{content:attr(data-placeholder);color:#9a8d82;}",
       ".brand-zone-inline:focus{background:rgba(181,92,66,.08);}",
             ".simple-table .brand-zone-inline{display:block;width:100%;min-width:0;margin:0;}"].join("");
     var st = document.createElement("style");
@@ -1560,7 +1622,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title {
   background: transparent !important;
   box-shadow: none !important;
   font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif !important;
-  font-size: clamp(28px, 3.6vw, 44px);
+  font-size: clamp(24px, 3vw, 36px);
   line-height: 1.04;
   letter-spacing: -0.01em;
   color: #202a3d !important;
@@ -1736,6 +1798,13 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .block-color-brown_background
     inset 0 -1px 0 rgba(0, 0, 0, 0.03) !important;
   transform: translateZ(0);
 }
+
+figure#30b05779-2efe-80d4-ac0d-e322489c37f4,
+figure#30b05779-2efe-8005-914e-d5c653087e6c {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
 </style><style data-global-dotted-bg-v1="1">
 body {
   background:
@@ -1873,7 +1942,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b6-814d-e3b3a060b62f" class="block-color-yellow_background">A toi de jouer</p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-8005-b657-f4cc0883366e" class="block-color-default_background bulleted-list"><li style="list-style-type:disc"><strong>Pourquoi la marque existe-t-elle ?</strong></li></ul></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8003-9526-c3e442a8b036" class="">Complète la phrase suivante :</p></div><div style="display:contents" dir="auto"><blockquote id="2ee05779-2efe-8023-878b-f13dd0db8b53" class="">« Ma marque existe pour aider [Zone de texte] à [Zone de texte] grâce à [Zone de texte]. »</blockquote></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8016-baeb-c2a100c2eae7" class="">
 </p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-80e7-b79f-f0fb090c00f0" class="bulleted-list"><li style="list-style-type:disc"><strong>Pourquoi as-tu créé cette activité ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8065-9237-e826d1d369be"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809b-a039-face68a451d9" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-86db-f3d58d362d32" class="">
 </p></div><div style="display:contents" dir="auto"><ul id="2ee05779-2efe-809d-9fb2-e9c4c1e3e593" class="bulleted-list"><li style="list-style-type:disc"><strong>Quel problème cherches-tu à résoudre pour tes clients ?</strong></li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2ee05779-2efe-8002-bb09-d0ef6a8d299d"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80b2-b974-d4c921c2021d" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2fe05779-2efe-80e4-9d36-fb21f2c01db4" class="">
-</p></div><div style="display:contents" dir="auto"><blockquote id="2fe05779-2efe-805b-b6b8-d3ec5f58db39" class=""><em><strong>Exemple fictif avec : </strong></em><strong>Lumière Studio</strong><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8065-bc00-c7a225e2fac9" class="">Studio de design graphique spécialisé dans l’accompagnement des marques personnelles et créatives.</p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80df-bb0d-d74860b256fa" class="block-color-gray_background"><strong>Sa mission</strong> : <em>Ma marque existe pour aider les entrepreneurs créatifs à structurer leur communication grâce à une identité claire et cohérente.</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8053-b951-c72486a22c4f" class="">
+</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8053-b951-c72486a22c4f" class="">
 </p></div><div style="display:contents" dir="ltr"><figure class="block-color-orange_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e1-8e4d-c707deb63f25"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ea-94ea-c62f6da1cf96" class=""><strong>Votre mission doit pouvoir guider :</strong></p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8047-8a74-d0285b01b1fa" class="bulleted-list"><li style="list-style-type:disc">la création de vos offres</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80cb-910e-e3ea2fe598e4" class="bulleted-list"><li style="list-style-type:disc">votre communication</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e3-8d76-e76747351680" class="bulleted-list"><li style="list-style-type:disc">votre discours commercial</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80e1-a6b8-ee2a7271b995" class="bulleted-list"><li style="list-style-type:disc">vos décisions de développement</li></ul></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803d-9b3e-fb7fec990f02" class="">Test :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8086-9c94-c6623372d302" class="">Si je lance cette nouvelle offre, est-elle alignée avec ma mission ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809c-a160-c9785eb13c79" class="">Si la réponse est floue, la mission doit être clarifiée.</p></div><div style="display:contents" dir="auto"><p id="2fe05779-2efe-802e-b9f7-fe5517aab726" class="">
 </p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80e6-997e-d735fbce754e" class="block-color-yellow_background"><strong>Exercice – La phrase essentielle</strong></p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8098-bdd0-ef4b6ae5d032" class="">Version explicative (3–4 lignes)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8002-94b8-c400ce1879c9" class="">Pour votre site ou présentation.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ec-8e35-c636ce9fff69"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8043-9bf5-e49939cb8b4e" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-807b-aad3-fc976ef01d1d" class="">Version synthétique (1 phrase)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b2-9fe1-c512c3cd397a" class="">Pour vos supports.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80ff-aca1-d064edc6cc7c"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80bb-92f6-e8e9bfcc44f1" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8073-9c28-f59e706ad60f" class="">Version interne (ultra claire)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e6-a2c4-cf2d9830d749" class="">Pour guider vos décisions.</p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e5-a55b-d27f3b4cfad2"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-809a-99e7-ccf9e9313786" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-96c3-d3af0b6de91d" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-801a-9630-ecd4575d0694" class="block-color-orange"><em>Une mission claire transforme votre activité en engagement.</em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c1-b11a-d7a39479a734"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="2fe05779-2efe-8020-bd03-fcdfb3e3daad" class="">Ta Mission ➡️ [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8019-8dfb-ec5174ffefd2" class="">
@@ -1886,9 +1955,9 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fb-acda-cc62f98aa4f9" class="">
 </p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-8038-9dc2-d5fcc96cc84c" class="">Que souhaites-tu obtenir grâce à ce branding ?</p></div><div style="display:contents" dir="auto"><blockquote id="2ee05779-2efe-8018-8fb0-e136859702f5" class="block-color-gray_background"><strong>Exemple </strong>: <em>Devenir une référence reconnue dans l’accompagnement des marques personnelles.</em></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fd-bb6a-ebd39f4ced00" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c7-8950-c87085c52d33" class="">À partir des exercices précédents, formulez votre vision en 3 versions :</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807f-9c7a-ef0322e628ee" class="">
-</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-804d-a8bb-fc8d34c27fe3" class="block-color-yellow">Version longue </h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808d-8c6c-e5de2cc6fcd2" class="">En 3-4 lignes</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80df-8b3f-ef58727974ba" class="">Exemple – Vision Brand Studio (fictif)<div style="display:contents" dir="auto"><p id="30505779-2efe-8032-8709-c5e18c2a2857" class=""><em>Construire un studio de marque reconnu pour son approche pédagogique et stratégique, qui accompagne les entrepreneurs à structurer leur identité avec autonomie et cohérence.</em></p></div></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803a-a3e6-f7d0959cd0ae" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-804d-a8bb-fc8d34c27fe3" class="block-color-yellow">Version longue </h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-808d-8c6c-e5de2cc6fcd2" class="">En 3-4 lignes</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803a-a3e6-f7d0959cd0ae" class="">
 </p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c6-8a89-f9d1a6b1a61d"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80ad-bdd6-f387dfa71c4c" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e2-b1d0-fc4239fb20e4" class="">
-</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8033-86cf-e7829f3d719d" class="block-color-yellow">Version synthétique</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c6-bd41-c36a8793b3b7" class="">1 phrase claire.</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8053-a965-ffc4e8411096" class=""><em>Exemple – Rendre les entrepreneurs autonomes dans leur stratégie de marque.</em></blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b6-8167-e924ead321ff" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8033-86cf-e7829f3d719d" class="block-color-yellow">Version synthétique</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c6-bd41-c36a8793b3b7" class="">1 phrase claire.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80b6-8167-e924ead321ff" class="">
 </p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80c9-9ddf-d5e96f6bbe42"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-80cc-8a83-ca5d098144f9" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80ee-b1ab-d306e2550b6c" class="block-color-yellow">Version interne</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e7-9cf2-fff0be475d02" class="">Une phrase pour vous uniquement.</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-8008-8695-ee6c31580bf3" class=""><em>Exemple - Créer un studio aligné, structuré et durable.</em></blockquote></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80d4-b08f-dbe98654f923"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-8012-b017-e17f6c94a817" class="">[Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8012-b409-fe3cf07493d3" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80ec-b2f4-e87317bfe3c7" class="">
 </p></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80d6-bb3c-e56106a065cb" class="block-color-orange"><em>Une vision claire transforme chaque décision en choix stratégique.</em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-80e2-ac9f-e23fb45f3371"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8010-ac2d-ea03945d04a8" class="">Ta Vision ➡️ [Zone de texte]</h3></div></div></figure></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80eb-b819-dc6c685a61fb" class="">
@@ -1905,8 +1974,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805d-b7da-d20883d4f076" class=""><em><mark class="highlight-yellow_background">Cochez ensuite à 3 à 5 valeurs maximum.</mark></em></p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805b-98a6-d8aab8721be8" class="">
 </p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80b3-97b3-e05364943e2f"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-807a-a0f2-d399c65f8dbd" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-8066-a532-e74a56c944b7" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8004-86fc-ea6905bd30eb" class="">🔍  Traduire les valeurs en actions</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8024-9c14-c7667c54c993" class="">Pour chaque valeur retenue, complétez :</p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fb-8639-c3bd5274cb84" class="">Valeur : [Zone de texte]</h3></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8069-9f78-c6fb4010fe3a" class="bulleted-list"><li style="list-style-type:disc">Cela signifie que je [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8092-8487-cfc8803f01bb" class="bulleted-list"><li style="list-style-type:disc">Concrètement, cela se traduit par [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8086-aa79-e0af847767ae" class="bulleted-list"><li style="list-style-type:disc">Dans ma communication, cela donne [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-807c-b7bb-d56e246cc4dc" class="">
 </p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80f3-bbf9-ff29935c7a65"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80ab-b40a-ca89b83b8d05" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-808c-bcad-cc2dcd52dc47" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80a6-bfc6-e59a881737cc" class="">✍️  Formulation finale</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-802c-aca4-e4e08d01d659" class="">Présentez vos valeurs sous cette forme :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-806b-83ec-d7053eee260d" class="bulleted-list"><li style="list-style-type:disc">Valeur 1 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-800f-ab11-d02e813cf404" class="bulleted-list"><li style="list-style-type:circle">Courte explication claire et concrète.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-807e-8539-efff09c068da"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-809f-a528-ddbd9291aa15" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8096-a4d2-ea7bb8451996" class="bulleted-list"><li style="list-style-type:disc">Valeur 2 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-80a6-ba44-eaf3232cfb6c" class="bulleted-list"><li style="list-style-type:circle">Explication orientée action.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-80dd-b64e-cfa29171b983"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-802f-b2ef-c137fad10076" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801b-89e3-d9e32a0f01db" class="bulleted-list"><li style="list-style-type:disc">Valeur 3 — [Zone de texte]<div style="display:contents" dir="auto"><ul id="30505779-2efe-805e-8d35-d3a55b8684e8" class="bulleted-list"><li style="list-style-type:circle">Lien avec votre posture ou votre communication.</li></ul></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30b05779-2efe-8039-9af7-c0da5f3b8075"><div style="font-size:1.5em"><span class="icon"><img class="icon-response" src="Elments_nouvelle_comm 1.png" alt=""/></span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30b05779-2efe-80e4-bded-fe8bd764324c" class="">[Zone de texte]</p></div></div></figure></div></li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8047-89b9-dabeda4d864e" class="">
-</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-805d-9c29-cb56eaddfb6d" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fb-b391-d91123b76562" class="">💬 Exemple complet (Brand Studio fictif)</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-805a-a3dd-eb9276cd6179" class="">
-</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8020-82d0-c9c9b83d4172" class="bulleted-list"><li style="list-style-type:disc"><strong>Clarté</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-80fd-8beb-eb286f70ee85" class="bulleted-list"><li style="list-style-type:circle">Nous simplifions pour mieux décider.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809c-993e-e5b6888bc7ef" class="bulleted-list"><li style="list-style-type:disc"><strong>Autonomie</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-8029-b7d6-c295bed905ef" class="bulleted-list"><li style="list-style-type:circle">Nous transmettons des méthodes, pas seulement des livrables.</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8016-957b-fd61464e2e37" class="bulleted-list"><li style="list-style-type:disc"><strong>Cohérence</strong><div style="display:contents" dir="auto"><ul id="30505779-2efe-80d8-a219-e29be0133fcd" class="bulleted-list"><li style="list-style-type:circle">Chaque choix visuel est aligné avec la stratégie.</li></ul></div></li></ul></div></div></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800d-8030-c21ff104c93a" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800d-8030-c21ff104c93a" class="">
 </p></div></div></details></div><div style="display:contents" dir="auto"><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0"><mark class="highlight-purple">🔥 Promesse de la marque</mark></summary><div class="indented"><div style="display:contents" dir="auto"><p id="2ee05779-2efe-809d-8854-d5f7c96ff6af" class=""><strong>Ta promesse est l’engagement que tu prends envers tes clients.</strong></p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-805f-a2ef-d892157efc39" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas une intention.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8058-a36f-de06751db505" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas une ambition.</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-804a-ac6b-ddeaf130506b" class="bulleted-list"><li style="list-style-type:disc">Ce n’est pas un slogan.</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8023-8d9b-e97bbc7307a3" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809a-b297-d6c644dd4fbd" class="">C’est ce que votre client peut attendre de vous, de manière fiable et constante.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8082-9ff7-cdb53271d26a" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80bc-92fd-d333681f4e74" class="">Une promesse forte crée de la confiance.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80e1-be4d-d95cfc2bb9be" class="">Une promesse floue crée de la déception.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-800e-bcd6-fe95cad9a6c6" class="">
@@ -1919,7 +1987,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80c5-8b81-c0c608c7aa79" class="">Une promesse forte :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-809b-83d1-cbf782941286" class="bulleted-list"><li style="list-style-type:disc">est spécifique</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-808e-afd5-c9d4a0512d07" class="bulleted-list"><li style="list-style-type:disc">est mesurable (même indirectement)</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-800e-9f5e-fcdf0025f311" class="bulleted-list"><li style="list-style-type:disc">est ressentie concrètement</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8032-b03a-fab22f130c9b" class="">
 </p></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-80fd-b044-e2ae2e98ae0f" class="">Exemple faible :</h3></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80ad-9ab1-efc303e9bc91" class="">Je vous aide à améliorer votre communication.</blockquote></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8043-b549-da8da85a9e2d" class="">Exemple plus fort :</h3></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80c6-a471-eb87e16b7fa7" class="">Je vous aide à structurer une identité de marque claire et exploitable en autonomie.</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8008-bd08-d6b82084b78d" class="">
 </p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-800c-b4bb-e513128dca03"/></div><div style="display:contents" dir="auto"><div id="30505779-2efe-80bc-9762-f0346e37b420" class="column-list"><div style="display:contents" dir="auto"><div id="30505779-2efe-807f-b0a6-f7886daa3061" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8080-bd46-dca412be704e" class="">🎯  Les 3 dimensions d’une promesse solide</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8061-9aae-ff11028ddae9" class="">Une promesse peut agir sur :</p></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80ac-b24f-c13a1a851dd2" class="numbered-list" start="1"><li><strong>Le résultat</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-809e-b714-f3bd0673276c" class="">→ Ce que le client obtient</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-80f0-97ff-f0599a178940" class="numbered-list" start="2"><li><strong>L’expérience</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-8059-8d5b-ebd41b7e2e14" class="">→ Comment il vit la collaboration</p></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="30505779-2efe-800d-b13c-f1cb312ed58d" class="numbered-list" start="3"><li><strong>La posture</strong><div style="display:contents" dir="auto"><p id="30505779-2efe-8044-ba14-f3d0a2f30cec" class="">→ Ce qui te distingue dans ton approche</p></div></li></ol></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8055-a227-f56560786645" class="">
-</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-809b-b414-cb7c87a4dd23" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8067-aad9-c51789539ada" class="">Exercice</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8058-908b-cda7519b1eed" class="">Réponds pour chacune :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8091-9c34-f84158f12036" class="bulleted-list"><li style="list-style-type:disc">Résultat promis :</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802c-8c41-e9d4bf58402c" class="bulleted-list"><li style="list-style-type:disc">Expérience promise :</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801e-a22c-f4209895866f" class="bulleted-list"><li style="list-style-type:disc">Posture promise :</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d5-b7f5-c1694ba13071" class="">
+</p></div></div></div><div style="display:contents" dir="auto"><div id="30505779-2efe-809b-b414-cb7c87a4dd23" style="width:100%" class="column"><div style="display:contents" dir="auto"><h3 id="30505779-2efe-8067-aad9-c51789539ada" class="">Exercice</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8058-908b-cda7519b1eed" class="">Réponds pour chacune :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-8091-9c34-f84158f12036" class="bulleted-list"><li style="list-style-type:disc">Résultat promis : [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-802c-8c41-e9d4bf58402c" class="bulleted-list"><li style="list-style-type:disc">Expérience promise : [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-801e-a22c-f4209895866f" class="bulleted-list"><li style="list-style-type:disc">Posture promise : [Zone de texte]</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80d5-b7f5-c1694ba13071" class="">
 </p></div></div></div></div></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80d2-8f7e-fdfb3d9754e8"/></div><div style="display:contents" dir="auto"><h3 id="30505779-2efe-803d-a4a0-d2fa852c40a5" class="">⚖️  Promesse réaliste vs promesse excessive</h3></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80f7-9a25-e0d0fbb1c361" class="">Une promesse trop ambitieuse crée une pression inutile.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8063-a2d6-e8617326d076" class="">Ta promesse doit être :</p></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-803f-95de-d18e4a22cd62" class="bulleted-list"><li style="list-style-type:disc">alignée avec tes capacités actuelles</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80b2-9f00-d8a8e33aa0f4" class="bulleted-list"><li style="list-style-type:disc">tenable dans le temps</li></ul></div><div style="display:contents" dir="auto"><ul id="30505779-2efe-80f5-8b87-ec61b1bc4077" class="bulleted-list"><li style="list-style-type:disc">cohérente avec tes valeurs</li></ul></div><div style="display:contents" dir="auto"><p id="30505779-2efe-806c-851b-f2dbc234cc3d" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80da-bcaf-f1b596673cc3" class="">Peux-tu répondre positivement à cette question :</p></div><div style="display:contents" dir="auto"><blockquote id="30505779-2efe-80c6-9f37-cd6335427ef2" class="">Est-ce que je peux garantir cela pour 100 % de mes clients ?</blockquote></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8066-92ab-e7e8a556a09a" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-80fa-9756-d285d38e982a" class="">Si non, il faut reformuler.</p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-8007-9a38-ceeee4b5b4df" class="">
@@ -1931,7 +1999,7 @@ article[id="29505779-2efe-81b4-ac90-f13958e3abad"] .page-title.is-writing::after
 </p></div><div style="display:contents" dir="auto"><hr id="30505779-2efe-80e3-b1d3-eb1d5a3882c6"/></div><div style="display:contents" dir="auto"><p id="30505779-2efe-809f-b85a-f35a63c40128" class="">
 </p></div><div style="display:contents" dir="auto"><p id="30505779-2efe-803d-9f01-cf64071c9bfc" class=""><em><mark class="highlight-orange">Une promesse claire transforme la confiance en engagement.</mark></em></p></div><div style="display:contents" dir="ltr"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="30505779-2efe-8094-8104-ccd7b42f7ba4"><div style="font-size:1.5em"><span class="icon">📌</span></div><div style="width:100%"><div style="display:contents" dir="auto"><p id="30505779-2efe-806f-a40d-cf0710648f56" class="">Ta Promesse ➡️ [Zone de texte]</p></div></div></figure></div><div style="display:contents" dir="auto"><p id="2ee05779-2efe-80ab-8eb3-fa6ba8c5349f" class="">
 </p></div><div style="display:contents" dir="auto"><p id="29505779-2efe-81c4-8eef-e4a6437ae6f4" class="">
-</p></div></div></details></div></div></article><style data-promise-line-align-v2="1">#30505779-2efe-803d-9f01-cf64071c9bfc{display:flex;align-items:center;gap:10px}#30505779-2efe-803d-9f01-cf64071c9bfc .bs-inline-pin{font-size:28px;line-height:1;display:inline-flex;transform:translateY(-1px)}</style><script data-ui-cleanup-icons-v3="1">(function(){function run(){try{var marks=document.querySelectorAll("mark.highlight-purple");for(var i=0;i<marks.length;i++){var t=(marks[i].textContent||"");if(t.indexOf("Mission")!==-1){marks[i].textContent="Mission";}if(t.indexOf("Valeurs")!==-1){marks[i].textContent="Valeurs";}}var ids=["30505779-2efe-8036-9a86-c63b6278e638","30505779-2efe-80e1-8e4d-c707deb63f25"];for(var j=0;j<ids.length;j++){var fig=document.getElementById(ids[j]);if(!fig)continue;var iconWrap=fig.querySelector("div[style*=font-size]");if(iconWrap&&iconWrap.querySelector("span.icon")){iconWrap.remove();}}var line=document.getElementById("30505779-2efe-803d-9f01-cf64071c9bfc");if(line && !line.querySelector(".bs-inline-pin")){var pin=document.createElement("span");pin.className="bs-inline-pin";pin.textContent=String.fromCodePoint(0x1F4CC);line.insertBefore(pin,line.firstChild);}}catch(e){}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",run);}else{run();}})();</script></body></html>
+</p></div></div></details></div></div></article><script data-ui-cleanup-icons-v3="1">(function(){function run(){try{var marks=document.querySelectorAll("mark.highlight-purple");for(var i=0;i<marks.length;i++){var t=(marks[i].textContent||"");if(t.indexOf("Mission")!==-1){marks[i].textContent="Mission";}if(t.indexOf("Valeurs")!==-1){marks[i].textContent="Valeurs";}}var ids=["30505779-2efe-8036-9a86-c63b6278e638","30505779-2efe-80e1-8e4d-c707deb63f25"];for(var j=0;j<ids.length;j++){var fig=document.getElementById(ids[j]);if(!fig)continue;var iconWrap=fig.querySelector("div[style*=font-size]");if(iconWrap&&iconWrap.querySelector("span.icon")){iconWrap.remove();}}}catch(e){}}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",run);}else{run();}})();</script></body></html>
 
 
 

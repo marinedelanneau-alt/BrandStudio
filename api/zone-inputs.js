@@ -119,7 +119,10 @@ module.exports = async function handler(req, res) {
     if (action === "load") {
       var raw = await redisGet(redis, key);
       var parsed = safeParseJson(raw);
-      var data = cleanZoneData(parsed);
+      var source = parsed && typeof parsed === "object" && parsed.data && typeof parsed.data === "object"
+        ? parsed.data
+        : parsed;
+      var data = cleanZoneData(source);
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.end(JSON.stringify({ ok: true, data: data }));
