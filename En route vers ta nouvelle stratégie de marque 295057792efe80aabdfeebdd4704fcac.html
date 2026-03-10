@@ -1236,6 +1236,9 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] > header {
   position: relative;
   overflow: hidden;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100vw !important;
   max-width: 100vw !important;
   margin: 0 0 16px calc(50% - 50vw) !important;
@@ -1433,9 +1436,9 @@ article[id="29505779-2efe-80aa-bdfe-ebdd4704fcac"] .page-title.is-writing::after
 
     var style = document.createElement("style");
     style.textContent =
-      "#bs-logo-upload-card{display:grid;gap:14px;margin:18px 0 14px}" +
+      "#bs-logo-upload-card{display:grid;justify-items:center;gap:14px;margin:18px auto 14px}" +
       "#bs-logo-upload-card .bs-copy{margin:0;line-height:1.45;color:#2c231c;font-size:15px}" +
-      "#bs-logo-upload-card .bs-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex-wrap:wrap}" +
+      "#bs-logo-upload-card .bs-actions{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;width:100%}" +
       "#bs-logo-upload-card .bs-company-name{display:block;width:min(560px,100%);min-height:56px;margin:0;padding:10px 2px 12px;border:0;border-bottom:2px solid #e4d8c8;border-radius:0;background:transparent;color:#8a7d71;font-family:'Avenir Next','Trebuchet MS','Segoe UI',sans-serif;font-size:clamp(20px,2.6vw,30px);font-weight:800;line-height:1.2;letter-spacing:.01em;box-sizing:border-box;resize:none;overflow:hidden}" +
       "#bs-logo-upload-card .bs-company-name:focus{outline:none;border-bottom-color:#dba45d;box-shadow:none;color:#2c231c;background:transparent}" +
       "#bs-logo-upload-card .bs-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;gap:8px;background:#2f2621;color:#fff;padding:10px 16px;border-radius:999px;font:600 14px/1.2 Arial,sans-serif;cursor:pointer;border:0;text-decoration:none;box-sizing:border-box;white-space:nowrap}" +
