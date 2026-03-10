@@ -741,6 +741,7 @@ blockquote.quote-large {
 <script>
 (function () {
   var TOKEN = "[Zone de texte]";
+  var TOKEN_PATTERN = /\[Zone de texte(?:\s*:\s*([^\]]+))?\]/g;
   var RESPONSE_ICON_SRC = "Elments_nouvelle_comm 1.png";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
   var USER_NS = (localStorage.getItem(USER_CODE_KEY) || "").trim().toUpperCase() || "ANON";
@@ -814,16 +815,16 @@ blockquote.quote-large {
     scheduleRemoteSave();
   }
 
-  function getSeedPrompt(id) {
-    var txt = String(normalizeStoredText(store[id]) || "").trim();
-    if (!txt || txt === DEFAULT_PROMPT) return "";
-    return txt;
+  function parsePromptToken(txt) {
+    if (typeof txt !== "string") return null;
+    var match = txt.trim().match(/^\[Zone de texte(?:\s*:\s*([^\]]+))?\]$/);
+    if (!match) return null;
+    var prompt = (match[1] || "").trim();
+    return prompt || DEFAULT_PROMPT;
   }
 
-  function createBlockField(id) {
+  function createBlockField(id, promptText) {
     var ta = document.createElement("textarea");
-    var seedPrompt = getSeedPrompt(id);
-    var promptText = seedPrompt || DEFAULT_PROMPT;
     var rawValue = normalizeStoredText(store[id] || "");
 
     ta.className = "brand-zone brand-zone-block";
@@ -884,21 +885,19 @@ blockquote.quote-large {
     return ta;
   }
 
-  function createInlineField(id) {
+  function createInlineField(id, promptText) {
     var span = document.createElement("span");
-    var seedPrompt = getSeedPrompt(id);
-    var inlinePrompt = seedPrompt || DEFAULT_PROMPT;
     var rawValue = normalizeStoredText(store[id] || "");
 
     span.className = "brand-zone brand-zone-inline";
     span.contentEditable = "true";
-    span.setAttribute("data-prompt", inlinePrompt);
+    span.setAttribute("data-prompt", promptText);
     span.setAttribute("role", "textbox");
     span.setAttribute("aria-label", "Zone de reponse");
     span.spellcheck = true;
 
     function showPrompt() {
-      span.textContent = inlinePrompt;
+      span.textContent = promptText;
       span.setAttribute("data-prompt-visible", "1");
       span.classList.add("is-prompt");
     }
@@ -955,9 +954,9 @@ blockquote.quote-large {
     document.head.appendChild(st);
   }
 
-  function replaceBlockToken(el, id) {
+  function replaceBlockToken(el, id, promptText) {
     el.textContent = "";
-    el.appendChild(createBlockField(id));
+    el.appendChild(createBlockField(id, promptText || DEFAULT_PROMPT));
     ensureCalloutIcon(el);
   }
 
@@ -985,15 +984,19 @@ blockquote.quote-large {
     if (!txt || txt.indexOf(TOKEN) === -1) return;
 
     var frag = document.createDocumentFragment();
-    var parts = txt.split(TOKEN);
+    var lastIndex = 0;
+    var match;
+    TOKEN_PATTERN.lastIndex = 0;
 
-    for (var i = 0; i < parts.length; i++) {
-      if (parts[i]) frag.appendChild(document.createTextNode(parts[i]));
-      if (i < parts.length - 1) {
-        var id = "inline::" + (startIndexRef.value++);
-        frag.appendChild(createInlineField(id));
-      }
+    while ((match = TOKEN_PATTERN.exec(txt))) {
+      var before = txt.slice(lastIndex, match.index);
+      if (before) frag.appendChild(document.createTextNode(before));
+      frag.appendChild(createInlineField("inline::" + (startIndexRef.value++), (match[1] || "").trim() || DEFAULT_PROMPT));
+      lastIndex = TOKEN_PATTERN.lastIndex;
     }
+
+    var tail = txt.slice(lastIndex);
+    if (tail) frag.appendChild(document.createTextNode(tail));
 
     node.parentNode.replaceChild(frag, node);
   }
@@ -1018,8 +1021,9 @@ blockquote.quote-large {
     Array.from(document.querySelectorAll("p, div, li, blockquote, h1, h2, h3, h4, td, th")).forEach(function (el) {
       if (el.children.length !== 0) return;
       var t = (el.textContent || "").trim();
-      if (t === TOKEN) {
-        replaceBlockToken(el, "block::" + (blockIndex++));
+      var promptText = parsePromptToken(t);
+      if (promptText !== null) {
+        replaceBlockToken(el, "block::" + (blockIndex++), promptText);
       }
     });
 
