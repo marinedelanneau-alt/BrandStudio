@@ -1,21 +1,10 @@
 import type { TextareaHTMLAttributes } from "react";
-import { tokens } from "../../lib/design-tokens";
 
 export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <textarea
       {...props}
-      style={{
-        width: "100%",
-        minHeight: 152,
-        padding: 18,
-        borderRadius: tokens.radius.md,
-        border: `1px solid ${tokens.colors.border}`,
-        background: tokens.colors.surface,
-        color: tokens.colors.textPrimary,
-        resize: "vertical",
-        ...props.style,
-      }}
+      className="min-h-[150px] w-full rounded-[22px] border-2 border-[#E7DDD2] bg-white px-5 py-4 text-base leading-7 text-[#3F3F49] outline-none placeholder:text-[#B5ADA3] focus:border-[#C96F2B] focus:ring-4 focus:ring-[#F6E2D4]"
     />
   );
 }
