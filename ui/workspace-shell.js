@@ -239,11 +239,13 @@
       var link = create("a", "bs-module-link");
       link.href = module.href;
       if (moduleIndex === idx) link.classList.add("is-current");
+      if (moduleIndex < idx) link.classList.add("is-complete");
+      if (moduleIndex > idx) link.classList.add("is-upcoming");
       var indexEl = create("span", "bs-module-index", String(moduleIndex + 1));
       var textWrap = create("span");
       textWrap.appendChild(create("span", "bs-module-kicker", moduleIndex === idx ? "Section active" : "Module"));
       textWrap.appendChild(create("span", "bs-module-title", module.title));
-      var tail = create("span", "bs-module-kicker", moduleIndex < idx ? "Vu" : "Ouvrir");
+      var tail = create("span", "bs-module-kicker", moduleIndex < idx ? "Vu" : (moduleIndex === idx ? "En cours" : "Ouvrir"));
       link.appendChild(indexEl);
       link.appendChild(textWrap);
       link.appendChild(tail);
@@ -268,6 +270,7 @@
     var meta = create("div", "bs-topbar-meta");
     meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " reperes" : "Section libre"));
     meta.appendChild(create("span", "bs-topbar-chip", stats.percent + "% complete"));
+    meta.appendChild(create("span", "bs-topbar-chip bs-topbar-chip-current", headings.length ? headings[0].text : "Demarrage"));
     copy.appendChild(meta);
 
     var actions = create("div", "bs-topbar-actions");
@@ -448,6 +451,7 @@
   function bindHeadingSpy(root) {
     var links = Array.prototype.slice.call(root.querySelectorAll(".bs-heading-item[href^='#']"));
     if (!links.length) return;
+    var currentChip = document.querySelector(".bs-topbar-chip-current");
 
     var map = links.map(function (link) {
       var id = (link.getAttribute("href") || "").slice(1);
@@ -468,6 +472,7 @@
       map.forEach(function (item) {
         item.link.classList.toggle("is-active", item === active);
       });
+      if (currentChip) currentChip.textContent = textOf(active.target) || "Section active";
     }
 
     updateActive();

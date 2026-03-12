@@ -279,6 +279,15 @@ body.bs-shell-ready > * {
   border-color: rgba(201, 111, 43, 0.32);
 }
 
+.bs-module-link.is-complete {
+  background: linear-gradient(180deg, rgba(154, 165, 123, 0.16), rgba(255, 255, 255, 0.82));
+  border-color: rgba(154, 165, 123, 0.24);
+}
+
+.bs-module-link.is-upcoming .bs-module-kicker:last-child {
+  opacity: 0.72;
+}
+
 .bs-module-index {
   width: 30px;
   height: 30px;
@@ -294,6 +303,11 @@ body.bs-shell-ready > * {
 .bs-module-link.is-current .bs-module-index {
   background: var(--bs-text);
   color: #fff;
+}
+
+.bs-module-link.is-complete .bs-module-index {
+  background: rgba(154, 165, 123, 0.22);
+  color: #4d5a38;
 }
 
 .bs-module-title {
@@ -365,6 +379,15 @@ body.bs-shell-ready > * {
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+}
+
+.bs-topbar-chip-current {
+  max-width: min(28ch, 100%);
+  background: rgba(201, 111, 43, 0.1);
+  color: var(--bs-terracotta-deep);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bs-topbar-actions {
@@ -1506,6 +1529,10 @@ article.page .to-do-list .checkbox {
 .bs-heading-item.is-active strong {
   background: var(--bs-text);
   color: #fff;
+}
+
+.bs-heading-item.is-active span {
+  color: var(--bs-text);
 }
 
 .bs-heading-item strong {
