@@ -543,7 +543,7 @@ article.page .column-list .column {
   box-shadow: var(--bs-shadow-soft);
 }
 
-.bs-step-card::before {
+.bs-step-card::after {
   content: attr(data-step-label);
   position: absolute;
   top: 18px;
@@ -561,6 +561,7 @@ article.page .column-list .column {
   font-weight: 800;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  z-index: 2;
 }
 
 .bs-intro-card::before {
@@ -620,11 +621,15 @@ article.page .column-list .column {
 }
 
 .bs-step-card[data-section-title] {
-  padding-top: 32px;
+  padding-top: 44px;
+}
+
+.bs-step-card:not([data-section-title]) {
+  padding-top: 48px;
 }
 
 .bs-step-card.bs-section-has-longform {
-  padding-top: 30px;
+  padding-top: 52px;
 }
 
 .bs-step-card.bs-section-has-fold-cluster {
@@ -654,6 +659,22 @@ article.page p {
   margin: 0 0 14px !important;
   max-width: 68ch;
   font-size: 1rem;
+}
+
+article.page h1 + p,
+article.page h2 + p,
+article.page h3 + p,
+article.page h4 + p,
+article.page p + figure,
+article.page p + details,
+article.page p + table,
+article.page p + blockquote,
+article.page ul + figure,
+article.page ol + figure,
+article.page figure + p,
+article.page details + p,
+article.page table + p {
+  margin-top: 8px !important;
 }
 
 article.page .bs-step-card > :last-child,
@@ -722,6 +743,7 @@ article.page h4 {
   display: inline-block;
   padding-right: 10px;
   font-size: clamp(1.45rem, 2.2vw, 2rem) !important;
+  max-width: min(100%, 22ch);
 }
 
 article.page h2::before,
@@ -898,6 +920,7 @@ article.page .bs-table-wrap {
 article.page figure.image {
   padding: 10px !important;
   overflow: hidden;
+  margin-bottom: 20px !important;
 }
 
 article.page figure.bs-figure-plain {
@@ -998,6 +1021,7 @@ article.page figure.bs-figure-story {
 article.page figure.bs-figure-plain img {
   border-radius: 28px !important;
   box-shadow: 0 20px 38px rgba(79, 49, 27, 0.14);
+  object-fit: cover;
 }
 
 article.page figcaption {
@@ -1040,6 +1064,7 @@ article.page figure.callout {
   position: relative;
   padding: 18px 20px 16px !important;
   overflow: visible !important;
+  margin-top: 10px !important;
 }
 
 article.page figure.callout > :last-child,
@@ -1124,6 +1149,7 @@ article.page figure.bs-placeholder-media::after {
 article.page blockquote {
   padding: 16px 18px !important;
   border-left: 0 !important;
+  margin-top: 10px !important;
 }
 
 article.page blockquote.bs-editorial-quote {
@@ -1231,6 +1257,7 @@ article.page table.bs-work-table td {
 article.page table.bs-data-table td,
 article.page table.bs-data-table th {
   padding: 12px 14px !important;
+  vertical-align: top;
 }
 
 article.page hr.bs-divider {
