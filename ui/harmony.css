@@ -545,12 +545,14 @@ article.page .column-list .column {
 
 .bs-step-card::before {
   content: attr(data-step-label);
+  position: absolute;
+  top: 18px;
+  right: 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 48px;
   height: 32px;
-  margin-bottom: 14px;
   padding: 0 12px;
   border-radius: 999px;
   background: rgba(201, 111, 43, 0.12);
@@ -617,6 +619,10 @@ article.page .column-list .column {
   text-transform: uppercase;
 }
 
+.bs-step-card[data-section-title] {
+  padding-top: 32px;
+}
+
 .bs-step-card.bs-section-has-longform {
   padding-top: 30px;
 }
@@ -648,6 +654,11 @@ article.page p {
   margin: 0 0 14px !important;
   max-width: 68ch;
   font-size: 1rem;
+}
+
+article.page .bs-step-card > :last-child,
+article.page .bs-intro-card > :last-child {
+  margin-bottom: 0 !important;
 }
 
 article.page p:empty {
@@ -868,6 +879,10 @@ article.page details.bs-fold-section > .indented {
   padding: 10px 0 0 !important;
 }
 
+article.page details.bs-fold-section > .indented > :last-child {
+  margin-bottom: 0 !important;
+}
+
 article.page details.bs-fold-section + details.bs-fold-section {
   margin-top: 14px !important;
 }
@@ -986,8 +1001,9 @@ article.page figure.bs-figure-plain img {
 }
 
 article.page figcaption {
-  margin-top: 12px !important;
-  padding: 8px 10px 4px;
+  margin-top: 14px !important;
+  padding: 14px 14px 2px;
+  border-top: 1px solid rgba(231, 221, 210, 0.88);
   color: var(--bs-muted) !important;
   opacity: 1 !important;
   font-size: 0.95rem !important;
@@ -1026,6 +1042,11 @@ article.page figure.callout {
   overflow: visible !important;
 }
 
+article.page figure.callout > :last-child,
+article.page blockquote > :last-child {
+  margin-bottom: 0 !important;
+}
+
 article.page figure.callout::before {
   content: "Studio Prompt";
   position: absolute;
@@ -1055,6 +1076,7 @@ article.page figure.callout .icon img.icon-response {
 article.page figure.bs-placeholder-media {
   position: relative;
   min-height: 180px;
+  padding: 64px 14px 64px !important;
   border: 1px dashed rgba(154, 165, 123, 0.55) !important;
   background:
     linear-gradient(180deg, rgba(255, 253, 249, 0.9), rgba(247, 243, 236, 0.92)),
@@ -1070,7 +1092,7 @@ article.page figure.bs-placeholder-media > a {
 
 article.page figure.bs-placeholder-media img[src="https://www.notion.so"] {
   width: 100%;
-  min-height: 180px;
+  min-height: 48px;
   opacity: 0;
 }
 
