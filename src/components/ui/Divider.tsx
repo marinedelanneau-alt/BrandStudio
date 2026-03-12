@@ -7,7 +7,7 @@ export function Divider() {
         position: "relative",
         height: 28,
         margin: "28px 0",
-        background: `linear-gradient(90deg, transparent, ${tokens.colors.borderStrong}, transparent)`,
+        background: `linear-gradient(90deg, transparent, ${tokens.colors.border}, transparent)`,
       }}
     />
   );

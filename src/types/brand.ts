@@ -6,69 +6,41 @@ export type FieldType =
   | "colorrow"
   | "colorgenerator";
 
-export type BaseField = {
+export type Field = {
   key: string;
   label: string;
-  description?: string;
+  type: FieldType;
   placeholder?: string;
 };
-
-export type TextField = BaseField & {
-  type: "text" | "textarea";
-};
-
-export type CheckboxField = BaseField & {
-  type: "checkbox";
-  options: string[];
-};
-
-export type ImageUploadField = BaseField & {
-  type: "imageupload";
-  accept?: string[];
-};
-
-export type ColorRow = {
-  key: string;
-  name: string;
-  hex?: string;
-  usage?: string;
-};
-
-export type ColorRowField = BaseField & {
-  type: "colorrow";
-  rows: ColorRow[];
-};
-
-export type ColorGeneratorField = BaseField & {
-  type: "colorgenerator";
-  seedColor?: string;
-};
-
-export type Field =
-  | TextField
-  | CheckboxField
-  | ImageUploadField
-  | ColorRowField
-  | ColorGeneratorField;
-
-export type StepTone = "hero" | "insight" | "example" | "tip" | "exercise" | "checklist" | "summary";
 
 export type Step = {
   id: string;
   title: string;
-  description?: string;
-  tone: StepTone;
-  fields?: Field[];
+  description: string;
+  note?: string;
+  insightTitle?: string;
+  insight?: string;
+  exampleText?: string;
+  checklist?: string[];
+  audioTitle?: string;
+  audioDescription?: string;
+  summaryFields?: string[];
+  fields: Field[];
 };
 
 export type Module = {
   id: string;
-  slug: string;
+  kind: "dashboard" | "module" | "export";
+  eyebrow: string;
   title: string;
-  href: string;
-  index: number;
-  coverSrc?: string;
-  steps: Step[];
+  subtitle: string;
+  accent: "yellow" | "terracotta" | "sage" | "lilac";
+  quote?: string;
+  introNote?: string;
+  example?: string;
+  banner?: string;
+  sections?: Array<{ title: string; body: string }>;
+  steps?: Step[];
 };
 
 export type BrandBookSection = {
@@ -91,3 +63,5 @@ export type ProgressSnapshot = {
   totalChecks: number;
   percent: number;
 };
+
+export type BrandData = Record<string, unknown>;

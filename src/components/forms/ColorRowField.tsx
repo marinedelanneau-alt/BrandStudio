@@ -1,7 +1,13 @@
-import type { ColorRow } from "../../types/brand";
 import { FieldBlock } from "./FieldBlock";
 
-export function ColorRowField({ label, rows }: { label: string; rows: ColorRow[] }) {
+type ColorRowItem = {
+  key: string;
+  name: string;
+  hex?: string;
+  usage?: string;
+};
+
+export function ColorRowField({ label, rows }: { label: string; rows: ColorRowItem[] }) {
   return (
     <FieldBlock label={label}>
       <div style={{ display: "grid", gap: 12 }}>

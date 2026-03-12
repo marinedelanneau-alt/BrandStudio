@@ -10,9 +10,7 @@ type ProgressInput = {
 export function useModuleProgress({ fields, values }: ProgressInput): ProgressSnapshot {
   return useMemo(() => {
     const totalFields = fields.filter((field) => field.type !== "checkbox").length;
-    const totalChecks = fields
-      .filter((field) => field.type === "checkbox")
-      .reduce((count, field) => count + ("options" in field ? field.options.length : 0), 0);
+    const totalChecks = fields.filter((field) => field.type === "checkbox").length;
 
     const completedFields = fields.filter((field) => {
       if (field.type === "checkbox") return false;
@@ -24,7 +22,7 @@ export function useModuleProgress({ fields, values }: ProgressInput): ProgressSn
       .filter((field) => field.type === "checkbox")
       .reduce((count, field) => {
         const current = values[field.key];
-        return count + (Array.isArray(current) ? current.length : 0);
+        return count + (current ? 1 : 0);
       }, 0);
 
     const total = totalFields + totalChecks;

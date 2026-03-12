@@ -1,20 +1,14 @@
-:root {
-  color-scheme: light;
-}
-
-html,
-body {
+html, body, #root {
   margin: 0;
   min-height: 100%;
-  background: #f7f3ec;
-  color: #3f3f49;
-  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
 }
 
-* {
-  box-sizing: border-box;
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #F7F3EC;
+  color: #3F3F49;
 }
 
-a {
-  color: inherit;
+.font-display {
+  font-family: Georgia, "Times New Roman", serif;
 }

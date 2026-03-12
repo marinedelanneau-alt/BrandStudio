@@ -1,4 +1,4 @@
-import { modules } from "../../data/modules";
+import { moduleRoutes, modules } from "../../data/modules";
 import { brandAssets } from "../../lib/brand-assets";
 import { tokens } from "../../lib/design-tokens";
 import { Badge } from "../ui/Badge";
@@ -10,7 +10,7 @@ type SidebarProps = {
 
 export function Sidebar({ currentModuleId }: SidebarProps) {
   return (
-    <aside style={{ display: "grid", gap: tokens.spacing[4] }}>
+    <aside style={{ display: "grid", gap: tokens.spacing.xl }}>
       <Card style={{ padding: 24 }}>
         <Badge>{brandAssets.workspaceTagline}</Badge>
         <img src={brandAssets.logoSrc} alt={brandAssets.name} style={{ width: 112, margin: "18px 0" }} />
@@ -18,10 +18,10 @@ export function Sidebar({ currentModuleId }: SidebarProps) {
         <p style={{ color: tokens.colors.textSecondary }}>{brandAssets.productTagline}</p>
       </Card>
       <Card style={{ padding: 18 }}>
-        {modules.map((module) => (
+        {modules.map((module, index) => (
           <a
             key={module.id}
-            href={module.href}
+            href={moduleRoutes[module.id] || "#"}
             style={{
               display: "grid",
               gridTemplateColumns: "32px 1fr",
@@ -32,7 +32,7 @@ export function Sidebar({ currentModuleId }: SidebarProps) {
               fontWeight: module.id === currentModuleId ? 700 : 500,
             }}
           >
-            <span>{module.index + 1}</span>
+            <span>{index + 1}</span>
             <span>{module.title}</span>
           </a>
         ))}

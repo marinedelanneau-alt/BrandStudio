@@ -18,13 +18,13 @@ export function AppShell({ title, progress, currentModuleId, aside, children }: 
       style={{
         display: "grid",
         gridTemplateColumns: "288px minmax(0, 1fr) 312px",
-        gap: tokens.spacing[8],
+        gap: tokens.spacing["2xl"],
         width: "min(1460px, calc(100vw - 48px))",
         margin: "28px auto 124px",
       }}
     >
       <Sidebar currentModuleId={currentModuleId} />
-      <main style={{ display: "grid", gap: tokens.spacing[4] }}>
+      <main style={{ display: "grid", gap: tokens.spacing.xl }}>
         <Topbar title={title} progress={progress} />
         {children}
       </main>

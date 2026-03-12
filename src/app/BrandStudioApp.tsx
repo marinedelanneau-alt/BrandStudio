@@ -19,7 +19,7 @@ export function BrandStudioApp() {
       aside={
         <QuickPreview
           title={currentModule.title}
-          coverSrc={currentModule.coverSrc}
+          coverSrc={currentModule.banner}
           items={[
             { id: "1", label: "Module", value: currentModule.title },
             { id: "2", label: "Progression", value: "0%" },

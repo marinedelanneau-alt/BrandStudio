@@ -13,7 +13,7 @@ export function ImageUploadField({ label, hint }: ImageUploadFieldProps) {
         style={{
           minHeight: 220,
           padding: 22,
-          borderRadius: tokens.radius.lg,
+          borderRadius: tokens.radius.xl,
           border: `1px dashed ${tokens.colors.terracotta}`,
           background: tokens.colors.surface,
           display: "grid",
