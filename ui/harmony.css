@@ -27,6 +27,7 @@
 html,
 body {
   min-height: 100%;
+  scroll-padding-top: 120px;
 }
 
 body {
@@ -1494,6 +1495,17 @@ article.page .to-do-list .checkbox {
   transform: translateY(-1px);
   border-color: rgba(201, 111, 43, 0.22);
   background: rgba(255, 255, 255, 0.92);
+}
+
+.bs-heading-item.is-active {
+  border-color: rgba(201, 111, 43, 0.3);
+  background: linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(248, 243, 236, 0.94));
+  box-shadow: 0 12px 24px rgba(72, 47, 27, 0.08);
+}
+
+.bs-heading-item.is-active strong {
+  background: var(--bs-text);
+  color: #fff;
 }
 
 .bs-heading-item strong {

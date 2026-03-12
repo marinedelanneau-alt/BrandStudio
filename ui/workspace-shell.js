@@ -445,6 +445,36 @@
     });
   }
 
+  function bindHeadingSpy(root) {
+    var links = Array.prototype.slice.call(root.querySelectorAll(".bs-heading-item[href^='#']"));
+    if (!links.length) return;
+
+    var map = links.map(function (link) {
+      var id = (link.getAttribute("href") || "").slice(1);
+      var target = id ? document.getElementById(id) : null;
+      return target ? { link: link, target: target } : null;
+    }).filter(function (item) {
+      return !!item;
+    });
+
+    if (!map.length) return;
+
+    function updateActive() {
+      var active = map[0];
+      map.forEach(function (item) {
+        var rect = item.target.getBoundingClientRect();
+        if (rect.top <= 180) active = item;
+      });
+      map.forEach(function (item) {
+        item.link.classList.toggle("is-active", item === active);
+      });
+    }
+
+    updateActive();
+    window.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive);
+  }
+
   function mountShell() {
     if (document.body.dataset.bsShellMounted === "1") return;
     var article = document.querySelector("article.page");
@@ -482,6 +512,7 @@
 
     moveUtilityButtons(topbar, bottomBar);
     bindSaveIndicator(document.body);
+    bindHeadingSpy(aside);
   }
 
   window.addEventListener("load", mountShell);
