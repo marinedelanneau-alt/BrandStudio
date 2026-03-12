@@ -59,6 +59,9 @@
     Array.prototype.slice.call(body.querySelectorAll("figure.image")).forEach(function (figure) {
       if (figure.querySelector("figcaption")) figure.classList.add("bs-figure-story");
       if (!figure.querySelector("figcaption")) figure.classList.add("bs-figure-plain");
+      if (figure.querySelector("img[src='https://www.notion.so']")) {
+        figure.classList.add("bs-placeholder-media");
+      }
     });
 
     Array.prototype.slice.call(body.querySelectorAll("figure .source")).forEach(function (source) {
@@ -84,6 +87,12 @@
 
     Array.prototype.slice.call(body.querySelectorAll("table")).forEach(function (table) {
       table.classList.add("bs-data-table");
+      if (/\[Zone de texte\]/i.test(textOf(table))) table.classList.add("bs-work-table");
+      if (!table.parentElement || !table.parentElement.classList.contains("bs-table-wrap")) {
+        var wrap = create("div", "bs-table-wrap");
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+      }
     });
 
     Array.prototype.slice.call(body.querySelectorAll("hr")).forEach(function (rule) {
@@ -93,9 +102,18 @@
     Array.prototype.slice.call(body.children).forEach(function (node, index) {
       if (node.matches && node.matches("p")) {
         var text = textOf(node);
+        var previous = node.previousElementSibling;
         if (!text) node.classList.add("bs-empty-block");
         if (index < 4 && text.length > 110) node.classList.add("bs-lead");
         if (text.length > 180) node.classList.add("bs-body-long");
+        if (
+          text.length > 0 &&
+          text.length < 65 &&
+          !node.querySelector("strong") &&
+          !(previous && previous.matches && previous.matches("h1, h2, h3, h4"))
+        ) {
+          node.classList.add("bs-punchline");
+        }
       }
 
       if (node.matches && node.matches("blockquote")) {
@@ -115,6 +133,21 @@
 
     var firstStory = body.querySelector("figure.bs-figure-story");
     if (firstStory) firstStory.classList.add("bs-hero-story");
+
+    Array.prototype.slice.call(body.querySelectorAll(".column-list")).forEach(function (list) {
+      var figures = Array.prototype.slice.call(list.children).map(function (child) {
+        return child.querySelector ? child.querySelector(".column figure.image, figure.image") : null;
+      }).filter(function (figure) {
+        return !!figure;
+      });
+      if (figures.length && figures.every(function (figure) { return figure.classList.contains("bs-placeholder-media"); })) {
+        list.classList.add("bs-placeholder-grid");
+      }
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("li")).forEach(function (item) {
+      if (item.querySelector("ul, ol, .to-do-list")) item.classList.add("bs-list-question");
+    });
 
     body.dataset.bsDecorated = "1";
   }
@@ -160,6 +193,8 @@
       if (section.querySelector("details")) section.classList.add("bs-section-has-folds");
       if (section.querySelector(".link-to-page")) section.classList.add("bs-section-has-navcards");
       if (section.querySelector("table")) section.classList.add("bs-section-has-table");
+      if (section.querySelector(".bs-placeholder-grid")) section.classList.add("bs-section-has-placeholders");
+      if (section.querySelector(".bs-work-table")) section.classList.add("bs-section-has-worktable");
     });
 
     body.dataset.bsGrouped = "1";

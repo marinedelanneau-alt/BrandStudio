@@ -641,6 +641,22 @@ article.page p.bs-lead {
   box-shadow: 0 14px 28px rgba(70, 47, 28, 0.05);
 }
 
+article.page p.bs-punchline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 4px !important;
+  padding: 10px 16px !important;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 111, 43, 0.16);
+  background: rgba(240, 214, 74, 0.18);
+  color: var(--bs-terracotta-deep) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  line-height: 1.45 !important;
+  max-width: fit-content;
+}
+
 article.page p.bs-body-long {
   max-width: 72ch;
 }
@@ -735,6 +751,16 @@ article.page ol.numbered-list > li::before {
   background: var(--bs-text);
 }
 
+article.page li.bs-list-question {
+  padding-bottom: 16px !important;
+}
+
+article.page li.bs-list-question > ul.bulleted-list,
+article.page li.bs-list-question > ol.numbered-list,
+article.page li.bs-list-question > .to-do-list {
+  margin-top: 14px !important;
+}
+
 article.page li {
   margin: 0 0 10px !important;
 }
@@ -798,6 +824,14 @@ article.page details.bs-fold-section[open] > summary::after {
 
 article.page details.bs-fold-section > .indented {
   padding: 10px 0 0 !important;
+}
+
+article.page .bs-table-wrap {
+  width: 100%;
+  margin: 0 0 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
 }
 
 article.page figure.image {
@@ -926,6 +960,20 @@ article.page .column-list.bs-opening-grid .column {
   gap: 16px;
 }
 
+article.page .column-list.bs-placeholder-grid {
+  align-items: stretch;
+  gap: 16px !important;
+}
+
+article.page .column-list.bs-placeholder-grid .column {
+  display: flex;
+}
+
+article.page .column-list.bs-placeholder-grid .column > div,
+article.page .column-list.bs-placeholder-grid .column figure {
+  width: 100%;
+}
+
 article.page figure.callout {
   position: relative;
   padding: 18px 20px 16px !important;
@@ -956,6 +1004,53 @@ article.page figure.callout .icon img.icon-response {
   width: 68px !important;
   height: 68px !important;
   filter: drop-shadow(0 10px 18px rgba(63, 63, 73, 0.14));
+}
+
+article.page figure.bs-placeholder-media {
+  position: relative;
+  min-height: 180px;
+  border: 1px dashed rgba(154, 165, 123, 0.55) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.9), rgba(247, 243, 236, 0.92)),
+    radial-gradient(circle at top right, rgba(185, 178, 217, 0.16), transparent 48%) !important;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+}
+
+article.page figure.bs-placeholder-media > a {
+  min-height: inherit;
+  display: flex;
+  align-items: stretch;
+}
+
+article.page figure.bs-placeholder-media img[src="https://www.notion.so"] {
+  width: 100%;
+  min-height: 180px;
+  opacity: 0;
+}
+
+article.page figure.bs-placeholder-media::before {
+  content: "Ajout visuel";
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(231, 221, 210, 0.92);
+  color: #6b645c;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+article.page figure.bs-placeholder-media::after {
+  content: "Depose ici une inspiration, une image ou une reference";
+  position: absolute;
+  inset: auto 18px 18px 18px;
+  color: var(--bs-muted);
+  font-size: 0.96rem;
+  line-height: 1.55;
 }
 
 article.page blockquote {
@@ -1120,6 +1215,18 @@ body.bs-page-personnalite .bs-fold-section > summary {
 
 body.bs-page-personnalite .bs-data-table {
   margin-top: 12px !important;
+}
+
+body.bs-page-positionnement .bs-step-card.bs-section-has-placeholders,
+body.bs-page-personnalite .bs-step-card.bs-section-has-placeholders {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(252, 248, 242, 0.98)),
+    radial-gradient(circle at top right, rgba(185, 178, 217, 0.12), transparent 32%);
+}
+
+body.bs-page-positionnement .bs-step-card.bs-section-has-worktable,
+body.bs-page-personnalite .bs-step-card.bs-section-has-worktable {
+  padding-bottom: 34px;
 }
 
 body.bs-page-personnalite .bs-resource-card .source {
@@ -1390,6 +1497,15 @@ button[data-logout="1"] {
   .bs-columns,
   article.page .column-list {
     grid-template-columns: 1fr;
+  }
+
+  article.page p.bs-punchline {
+    display: flex;
+    max-width: 100%;
+  }
+
+  article.page .bs-table-wrap {
+    margin-right: -2px;
   }
 
   .bs-bottom-bar {
