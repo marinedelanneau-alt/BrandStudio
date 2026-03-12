@@ -405,10 +405,10 @@ article.page {
 article.page header {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(220px, 0.85fr);
-  gap: 28px;
-  align-items: end;
-  padding: 34px;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 34px;
+  align-items: center;
+  padding: 38px;
   margin-bottom: 24px;
   border: 1px solid var(--bs-line);
   border-radius: 34px;
@@ -454,7 +454,7 @@ article.page .page-cover-image {
   width: 100% !important;
   max-width: 100% !important;
   height: 100%;
-  min-height: 240px;
+  min-height: 300px;
   max-height: 100% !important;
   margin: 0 !important;
   object-fit: cover;
@@ -466,7 +466,7 @@ article.page .page-header-icon {
   position: relative;
   z-index: 2;
   width: fit-content;
-  margin: 36px 0 10px !important;
+  margin: 44px 0 14px !important;
   padding: 10px 14px;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.9);
@@ -487,16 +487,16 @@ article.page .page-title {
   z-index: 2;
   margin: 0 !important;
   font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
-  line-height: 0.96 !important;
+  line-height: 0.94 !important;
   letter-spacing: -0.03em !important;
-  max-width: 9ch;
+  max-width: 10ch;
 }
 
 article.page .page-description {
   position: relative;
   z-index: 2;
   max-width: 52ch;
-  margin: 10px 0 0 !important;
+  margin: 14px 0 0 !important;
   color: var(--bs-muted);
 }
 
@@ -512,7 +512,7 @@ article.page .page-body {
 
 .bs-content-stack {
   display: grid;
-  gap: 22px;
+  gap: 26px;
 }
 
 .bs-columns,
@@ -536,9 +536,9 @@ article.page .column-list .column {
 .bs-intro-card,
 .bs-step-card {
   position: relative;
-  padding: 24px 26px;
+  padding: 28px 30px;
   border: 1px solid var(--bs-line);
-  border-radius: 28px;
+  border-radius: 30px;
   background: rgba(255, 253, 249, 0.96);
   box-shadow: var(--bs-shadow-soft);
 }
@@ -639,9 +639,11 @@ article.page p {
   font-size: 1rem;
 }
 
-article.page .bs-intro-card > * + *,
-article.page .bs-step-card > * + * {
-  margin-top: 0 !important;
+article.page .bs-intro-card > h1,
+article.page .bs-step-card > h2,
+article.page .bs-step-card > h3,
+article.page .bs-step-card > h4 {
+  margin-top: 6px !important;
 }
 
 article.page h1 + p,
@@ -652,12 +654,14 @@ article.page p + figure,
 article.page p + details,
 article.page p + table,
 article.page p + blockquote,
+article.page p + .column-list,
 article.page ul + figure,
 article.page ol + figure,
 article.page figure + p,
 article.page details + p,
-article.page table + p {
-  margin-top: 8px !important;
+article.page table + p,
+article.page .column-list + p {
+  margin-top: 12px !important;
 }
 
 article.page .bs-step-card > :last-child,
@@ -895,7 +899,7 @@ article.page details.bs-fold-section + details.bs-fold-section {
 
 article.page .bs-table-wrap {
   width: 100%;
-  margin: 0 0 18px;
+  margin: 4px 0 20px;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 4px;
@@ -909,6 +913,7 @@ article.page figure.image {
 
 article.page figure.bs-figure-story {
   padding-bottom: 14px !important;
+  max-width: min(100%, 860px);
 }
 
 article.page figure.bs-figure-plain {
@@ -916,6 +921,7 @@ article.page figure.bs-figure-plain {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
+  max-width: min(100%, 760px);
 }
 
 article.page figure.bs-resource-card {
@@ -1014,7 +1020,7 @@ article.page figure.bs-figure-plain img {
 
 article.page figcaption {
   margin-top: 14px !important;
-  padding: 14px 14px 2px;
+  padding: 14px 16px 4px;
   border-top: 1px solid rgba(231, 221, 210, 0.88);
   color: var(--bs-muted) !important;
   opacity: 1 !important;
@@ -1050,7 +1056,7 @@ article.page .column-list.bs-placeholder-grid .column figure {
 
 article.page figure.callout {
   position: relative;
-  padding: 18px 20px 16px !important;
+  padding: 20px 22px 18px !important;
   overflow: visible !important;
   margin-top: 10px !important;
 }
@@ -1135,7 +1141,7 @@ article.page figure.bs-placeholder-media::after {
 }
 
 article.page blockquote {
-  padding: 16px 18px !important;
+  padding: 18px 20px !important;
   border-left: 0 !important;
   margin-top: 10px !important;
 }
@@ -1586,7 +1592,7 @@ button[data-logout="1"] {
   article.page .page-cover-image {
     grid-column: 1;
     grid-row: auto;
-    min-height: 220px;
+    min-height: 240px;
   }
 
   article.page .page-title {
@@ -1596,7 +1602,7 @@ button[data-logout="1"] {
 
   .bs-intro-card,
   .bs-step-card {
-    padding: 20px 18px;
+    padding: 22px 18px;
   }
 
   .bs-columns,
