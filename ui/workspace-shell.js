@@ -178,13 +178,20 @@
 
     groups.forEach(function (group, index) {
       var section = create("section", index === 0 ? "bs-intro-card" : "bs-step-card");
+      var heading = null;
       if (index > 0) {
         section.setAttribute("data-step-label", "Etape " + index);
       }
       stack.appendChild(section);
       group.forEach(function (node) {
         section.appendChild(node);
+        if (!heading && node.querySelector) {
+          heading = node.querySelector("h2, h3, h4");
+        }
       });
+      if (heading) {
+        section.setAttribute("data-section-title", textOf(heading));
+      }
       if (section.querySelector(".column-list")) section.classList.add("bs-section-has-columns");
       if (section.querySelector("figure.callout")) section.classList.add("bs-section-has-callout");
       if (section.querySelector(".to-do-list")) section.classList.add("bs-section-has-checklist");
@@ -195,6 +202,9 @@
       if (section.querySelector("table")) section.classList.add("bs-section-has-table");
       if (section.querySelector(".bs-placeholder-grid")) section.classList.add("bs-section-has-placeholders");
       if (section.querySelector(".bs-work-table")) section.classList.add("bs-section-has-worktable");
+      if (section.querySelectorAll("p.bs-body-long").length >= 2) section.classList.add("bs-section-has-longform");
+      if (section.querySelectorAll("details").length >= 2) section.classList.add("bs-section-has-fold-cluster");
+      if (section.querySelectorAll("figure.callout, blockquote").length >= 2) section.classList.add("bs-section-has-editorial-notes");
     });
 
     body.dataset.bsGrouped = "1";
