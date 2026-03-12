@@ -1,61 +1,43 @@
 export const colors = {
   background: "#F7F3EC",
   surface: "#FFFDF9",
-  surfaceMuted: "#F4EFE7",
+  surfaceMuted: "#F6F1E8",
   border: "#E7DDD2",
-  borderStrong: "#D7CABD",
   textPrimary: "#3F3F49",
   textSecondary: "#756F67",
   terracotta: "#C96F2B",
-  terracottaDeep: "#AB5921",
   yellow: "#F0D64A",
   sage: "#9AA57B",
   lilac: "#B9B2D9",
-  success: "#6A8A55",
-  warning: "#B96A2B",
+  white: "#FFFFFF",
 } as const;
 
 export const spacing = {
-  2: 8,
-  3: 12,
-  4: 16,
-  5: 20,
-  6: 24,
-  8: 32,
-  12: 48,
-  16: 64,
-  20: 80,
+  xs: "0.5rem",
+  sm: "0.75rem",
+  md: "1rem",
+  lg: "1.5rem",
+  xl: "2rem",
+  "2xl": "3rem",
+  "3xl": "5rem",
 } as const;
 
 export const radius = {
-  sm: 16,
-  md: 24,
-  lg: 32,
-  pill: 999,
+  md: "1rem",
+  lg: "1.25rem",
+  xl: "1.5rem",
+  "2xl": "2rem",
+  pill: "999px",
 } as const;
 
 export const shadows = {
-  soft: "0 14px 34px rgba(79, 55, 35, 0.06)",
-  card: "0 20px 54px rgba(65, 41, 22, 0.08)",
-  float: "0 28px 70px rgba(44, 31, 22, 0.1)",
+  soft: "0 10px 24px rgba(25,25,25,0.04)",
+  medium: "0 18px 36px rgba(25,25,25,0.08)",
 } as const;
 
 export const typography = {
-  fontBody: `"Aptos", "Trebuchet MS", "Segoe UI", sans-serif`,
-  fontDisplay: `"Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif`,
-  h1: { fontSize: "clamp(2.4rem, 3.7vw, 3.9rem)", lineHeight: 0.94, letterSpacing: "-0.04em" },
-  h2: { fontSize: "clamp(1.9rem, 2.5vw, 2.6rem)", lineHeight: 1, letterSpacing: "-0.03em" },
-  h3: { fontSize: "clamp(1.3rem, 1.7vw, 1.72rem)", lineHeight: 1.08, letterSpacing: "-0.02em" },
-  bodyLarge: { fontSize: "1.08rem", lineHeight: 1.82 },
-  body: { fontSize: "1rem", lineHeight: 1.72 },
-  label: { fontSize: "0.95rem", lineHeight: 1.55 },
-  caption: { fontSize: "0.78rem", lineHeight: 1.45 },
-} as const;
-
-export const breakpoints = {
-  mobile: 768,
-  tablet: 980,
-  desktop: 1260,
+  display: "Georgia, 'Times New Roman', serif",
+  body: "Inter, ui-sans-serif, system-ui, sans-serif",
 } as const;
 
 export const tokens = {
@@ -64,7 +46,6 @@ export const tokens = {
   radius,
   shadows,
   typography,
-  breakpoints,
 } as const;
 
 export type DesignTokens = typeof tokens;
