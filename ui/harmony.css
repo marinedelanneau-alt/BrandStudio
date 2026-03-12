@@ -602,29 +602,7 @@ article.page .column-list .column {
     linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(248, 243, 236, 0.94));
 }
 
-.bs-step-card[data-section-title]::before {
-  content: attr(data-section-title);
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  max-width: min(100%, 44ch);
-  margin-bottom: 16px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(231, 221, 210, 0.92);
-  background: rgba(255, 255, 255, 0.82);
-  color: #6a625b;
-  font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.bs-step-card[data-section-title] {
-  padding-top: 44px;
-}
-
-.bs-step-card:not([data-section-title]) {
+.bs-step-card {
   padding-top: 48px;
 }
 
@@ -659,6 +637,11 @@ article.page p {
   margin: 0 0 14px !important;
   max-width: 68ch;
   font-size: 1rem;
+}
+
+article.page .bs-intro-card > * + *,
+article.page .bs-step-card > * + * {
+  margin-top: 0 !important;
 }
 
 article.page h1 + p,
@@ -744,6 +727,7 @@ article.page h4 {
   padding-right: 10px;
   font-size: clamp(1.45rem, 2.2vw, 2rem) !important;
   max-width: min(100%, 22ch);
+  margin-top: 6px !important;
 }
 
 article.page h2::before,
@@ -898,7 +882,7 @@ article.page details.bs-fold-section[open] > summary::after {
 }
 
 article.page details.bs-fold-section > .indented {
-  padding: 10px 0 0 !important;
+  padding: 14px 0 0 !important;
 }
 
 article.page details.bs-fold-section > .indented > :last-child {
@@ -921,6 +905,10 @@ article.page figure.image {
   padding: 10px !important;
   overflow: hidden;
   margin-bottom: 20px !important;
+}
+
+article.page figure.bs-figure-story {
+  padding-bottom: 14px !important;
 }
 
 article.page figure.bs-figure-plain {
@@ -1260,6 +1248,12 @@ article.page table.bs-data-table th {
   vertical-align: top;
 }
 
+article.page .bs-table-wrap + p,
+article.page .bs-table-wrap + figure,
+article.page .bs-table-wrap + details {
+  margin-top: 10px !important;
+}
+
 article.page hr.bs-divider {
   margin: 24px 0 !important;
 }
@@ -1334,9 +1328,9 @@ body.bs-page-personnalite .bs-step-card.bs-section-has-worktable {
   padding-bottom: 34px;
 }
 
-body.bs-page-vision .bs-step-card[data-section-title],
-body.bs-page-positionnement .bs-step-card[data-section-title],
-body.bs-page-personnalite .bs-step-card[data-section-title] {
+body.bs-page-vision .bs-step-card,
+body.bs-page-positionnement .bs-step-card,
+body.bs-page-personnalite .bs-step-card {
   box-shadow: 0 20px 42px rgba(68, 46, 28, 0.08);
 }
 

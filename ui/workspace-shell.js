@@ -178,20 +178,13 @@
 
     groups.forEach(function (group, index) {
       var section = create("section", index === 0 ? "bs-intro-card" : "bs-step-card");
-      var heading = null;
       if (index > 0) {
         section.setAttribute("data-step-label", "Etape " + index);
       }
       stack.appendChild(section);
       group.forEach(function (node) {
         section.appendChild(node);
-        if (!heading && node.querySelector) {
-          heading = node.querySelector("h2, h3, h4");
-        }
       });
-      if (heading) {
-        section.setAttribute("data-section-title", textOf(heading));
-      }
       if (section.querySelector(".column-list")) section.classList.add("bs-section-has-columns");
       if (section.querySelector("figure.callout")) section.classList.add("bs-section-has-callout");
       if (section.querySelector(".to-do-list")) section.classList.add("bs-section-has-checklist");
