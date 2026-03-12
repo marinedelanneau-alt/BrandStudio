@@ -1335,8 +1335,120 @@ body.bs-page-home .bs-nav-card + .bs-nav-card {
 }
 
 body.bs-page-home .bs-intro-card h1.block-color-red {
-  font-size: clamp(2rem, 4vw, 3rem) !important;
+  font-family: var(--bs-font-display) !important;
+  font-size: clamp(2rem, 3.4vw, 3.1rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.03em !important;
   max-width: 12ch;
+  margin: 8px 0 18px !important;
+}
+
+body.bs-page-home::before {
+  top: 160px;
+  right: 8px;
+  width: 180px;
+  height: 180px;
+  opacity: 0.16;
+}
+
+body.bs-page-home::after {
+  left: -10px;
+  bottom: 40px;
+  width: 180px;
+  height: 180px;
+  opacity: 0.1;
+}
+
+body.bs-page-home article.page header {
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr) !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 0 24px !important;
+  padding: 38px !important;
+  border: 1px solid var(--bs-line) !important;
+  border-radius: 34px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(255, 249, 242, 0.92)),
+    radial-gradient(circle at 12% 0%, rgba(240, 214, 74, 0.18), transparent 24%) !important;
+  box-shadow: var(--bs-shadow-card) !important;
+  overflow: hidden !important;
+}
+
+body.bs-page-home article.page header::before {
+  content: "Studio Note" !important;
+}
+
+body.bs-page-home article.page .page-cover-image {
+  grid-column: 2 !important;
+  grid-row: 1 / span 3 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 300px !important;
+  margin: 0 !important;
+  border-radius: 28px !important;
+  box-shadow: 0 22px 42px rgba(79, 49, 27, 0.14) !important;
+}
+
+body.bs-page-home article.page .page-title,
+body.bs-page-home article.page .page-title.is-writing,
+body.bs-page-home article.page .page-title.is-written {
+  width: auto !important;
+  max-width: 10ch !important;
+  margin: 42px 0 0 !important;
+  text-align: left !important;
+  font-family: var(--bs-font-display) !important;
+  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
+  line-height: 0.94 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--bs-text) !important;
+}
+
+body.bs-page-home article.page .page-title.is-writing::after,
+body.bs-page-home article.page .page-title.is-written::after {
+  content: none !important;
+}
+
+body.bs-page-home article.page .page-description {
+  width: auto !important;
+  max-width: 52ch !important;
+  margin: 14px 0 0 !important;
+  text-align: left !important;
+}
+
+body.bs-page-home article.page .page-description::before {
+  content: none !important;
+}
+
+body.bs-page-home article.page .page-body {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 0 120px !important;
+}
+
+body.bs-page-home #2ee05779-2efe-8098-ad5e-eb1b9d4e9716 {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.92fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+body.bs-page-home #29505779-2efe-8198-9bdc-f19ce12ad42c {
+  font-family: var(--bs-font-display) !important;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem) !important;
+  line-height: 1.02 !important;
+  margin: 4px 0 16px !important;
+}
+
+body.bs-page-home .bs-aside .bs-preview-cover {
+  height: 148px;
+  object-position: center;
+}
+
+body.bs-page-home .bs-aside-card {
+  overflow: hidden;
 }
 
 body.bs-page-vision .bs-intro-card,
@@ -1674,6 +1786,24 @@ button[data-logout="1"] {
   article.page .page-title {
     max-width: none;
     font-size: clamp(2rem, 8vw, 3.2rem) !important;
+  }
+
+  body.bs-page-home article.page header {
+    grid-template-columns: 1fr !important;
+    padding: 24px !important;
+  }
+
+  body.bs-page-home article.page .page-title,
+  body.bs-page-home article.page .page-title.is-writing,
+  body.bs-page-home article.page .page-title.is-written {
+    max-width: none !important;
+    margin-top: 28px !important;
+    text-align: left !important;
+  }
+
+  body.bs-page-home #2ee05779-2efe-8098-ad5e-eb1b9d4e9716 {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
   }
 
   .bs-intro-card,
