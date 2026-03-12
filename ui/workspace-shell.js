@@ -36,6 +36,26 @@
     return ((el && el.textContent) || "").replace(/\s+/g, " ").trim();
   }
 
+  function previousMeaningfulSibling(node) {
+    var current = node ? node.previousElementSibling : null;
+    while (current) {
+      if (textOf(current)) return current;
+      current = current.previousElementSibling;
+    }
+    return null;
+  }
+
+  function detectCalloutTone(text) {
+    var value = (text || "").toLowerCase();
+    if (!value) return "";
+    if (/⚠|important|attention|a eviter|a éviter|vigilance/.test(value)) return "warning";
+    if (/👉|conseil|astuce|tip|bon reflexe|bon réflexe|coach/.test(value)) return "tip";
+    if (/exemple|par exemple|inspiration/.test(value)) return "example";
+    if (/exercice|a toi|à toi|pratique|atelier/.test(value)) return "exercise";
+    if (/test|verifie|vérifie|rappel|checkpoint/.test(value)) return "test";
+    return "";
+  }
+
   function create(tag, className, text) {
     var el = document.createElement(tag);
     if (className) el.className = className;
@@ -66,7 +86,16 @@
 
     Array.prototype.slice.call(body.querySelectorAll("figure .source")).forEach(function (source) {
       var figure = source.closest("figure");
-      if (figure) figure.classList.add("bs-resource-card");
+      if (!figure) return;
+      figure.classList.add("bs-resource-card");
+      var anchor = source.querySelector("a");
+      var href = (anchor && anchor.getAttribute("href")) || "";
+      var previous = previousMeaningfulSibling(figure);
+      var previousText = textOf(previous);
+      if (/soundefined/i.test(href) || /note vocale|audio|podcast|ecoute|écoute|🎙️/i.test(previousText)) {
+        figure.classList.add("bs-audio-note");
+        if (previous && previous.matches && previous.matches("p")) previous.classList.add("bs-audio-label");
+      }
     });
 
     Array.prototype.slice.call(body.querySelectorAll("figure.link-to-page")).forEach(function (figure) {
@@ -75,6 +104,22 @@
 
     Array.prototype.slice.call(body.querySelectorAll("ul.bulleted-list")).forEach(function (list) {
       list.classList.add("bs-bulleted-list");
+      var items = Array.prototype.slice.call(list.children);
+      if (
+        items.length &&
+        items.every(function (item) {
+          return /^[☐☑✓]/.test(textOf(item));
+        })
+      ) {
+        list.classList.add("bs-checklist-list");
+        items.forEach(function (item) {
+          var firstNode = item.firstChild;
+          var cleaned = textOf(item).replace(/^[☐☑✓]\s*/, "");
+          if (!cleaned) return;
+          item.textContent = "";
+          item.appendChild(create("span", "bs-checklist-copy", cleaned));
+        });
+      }
     });
 
     Array.prototype.slice.call(body.querySelectorAll("ol.numbered-list")).forEach(function (list) {
@@ -106,6 +151,7 @@
         if (!text) node.classList.add("bs-empty-block");
         if (index < 4 && text.length > 110) node.classList.add("bs-lead");
         if (text.length > 180) node.classList.add("bs-body-long");
+        if (/^(🎙️|👉|⚠️|test\b|exercice\b|rappel\b)/i.test(text)) node.classList.add("bs-inline-label");
         if (
           text.length > 0 &&
           text.length < 65 &&
@@ -118,6 +164,11 @@
 
       if (node.matches && node.matches("blockquote")) {
         node.classList.add("bs-editorial-quote");
+      }
+
+      if (node.matches && node.matches("figure.callout")) {
+        var tone = detectCalloutTone(textOf(node));
+        if (tone) node.classList.add("bs-callout-" + tone);
       }
 
       if (node.matches && node.matches("h2, h3, h4")) {
@@ -188,6 +239,7 @@
       if (section.querySelector(".column-list")) section.classList.add("bs-section-has-columns");
       if (section.querySelector("figure.callout")) section.classList.add("bs-section-has-callout");
       if (section.querySelector(".to-do-list")) section.classList.add("bs-section-has-checklist");
+      if (section.querySelector(".bs-checklist-list")) section.classList.add("bs-section-has-checklist");
       if (section.querySelector("figure.image")) section.classList.add("bs-section-has-media");
       if (section.querySelector("ol.numbered-list")) section.classList.add("bs-section-has-steps");
       if (section.querySelector("details")) section.classList.add("bs-section-has-folds");
@@ -195,6 +247,7 @@
       if (section.querySelector("table")) section.classList.add("bs-section-has-table");
       if (section.querySelector(".bs-placeholder-grid")) section.classList.add("bs-section-has-placeholders");
       if (section.querySelector(".bs-work-table")) section.classList.add("bs-section-has-worktable");
+      if (section.querySelector(".bs-audio-note")) section.classList.add("bs-section-has-audio");
       if (section.querySelectorAll("p.bs-body-long").length >= 2) section.classList.add("bs-section-has-longform");
       if (section.querySelectorAll("details").length >= 2) section.classList.add("bs-section-has-fold-cluster");
       if (section.querySelectorAll("figure.callout, blockquote").length >= 2) section.classList.add("bs-section-has-editorial-notes");
