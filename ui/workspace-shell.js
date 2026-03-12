@@ -87,6 +87,25 @@
     );
   }
 
+  function sectionKindFromSection(section) {
+    if (!section || !section.querySelector) return "";
+    var heading = section.querySelector(".bs-heading-exercise, .bs-heading-example, .bs-heading-insight, .bs-heading-checklist, .bs-heading-summary, .bs-heading-tip");
+    if (heading) {
+      if (heading.classList.contains("bs-heading-exercise")) return "exercise";
+      if (heading.classList.contains("bs-heading-example")) return "example";
+      if (heading.classList.contains("bs-heading-insight")) return "insight";
+      if (heading.classList.contains("bs-heading-checklist")) return "checklist";
+      if (heading.classList.contains("bs-heading-summary")) return "summary";
+      if (heading.classList.contains("bs-heading-tip")) return "tip";
+    }
+    if (section.querySelector(".bs-audio-note")) return "tip";
+    if (section.querySelector(".bs-checklist-list, .to-do-list")) return "checklist";
+    if (section.querySelector(".bs-work-table, textarea, .brand-zone-block")) return "exercise";
+    if (section.querySelector(".bs-resource-card, .bs-nav-card")) return "example";
+    if (section.querySelector("blockquote, figure.callout")) return "insight";
+    return "";
+  }
+
   function create(tag, className, text) {
     var el = document.createElement(tag);
     if (className) el.className = className;
@@ -297,6 +316,8 @@
       if (section.querySelectorAll("p.bs-body-long").length >= 2) section.classList.add("bs-section-has-longform");
       if (section.querySelectorAll("details").length >= 2) section.classList.add("bs-section-has-fold-cluster");
       if (section.querySelectorAll("figure.callout, blockquote").length >= 2) section.classList.add("bs-section-has-editorial-notes");
+      var kind = sectionKindFromSection(section);
+      if (kind) section.classList.add("bs-kind-" + kind);
     });
 
     body.dataset.bsGrouped = "1";

@@ -764,6 +764,104 @@ article.page .column-list .column {
     radial-gradient(circle at top right, rgba(240, 214, 74, 0.08), transparent 32%);
 }
 
+.bs-step-card.bs-kind-insight,
+.bs-step-card.bs-kind-example,
+.bs-step-card.bs-kind-exercise,
+.bs-step-card.bs-kind-checklist,
+.bs-step-card.bs-kind-summary,
+.bs-step-card.bs-kind-tip {
+  overflow: visible;
+}
+
+.bs-step-card.bs-kind-insight {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(249, 244, 238, 0.96)),
+    radial-gradient(circle at top right, rgba(185, 178, 217, 0.1), transparent 34%);
+}
+
+.bs-step-card.bs-kind-example {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.99), rgba(252, 249, 242, 0.97)),
+    radial-gradient(circle at top right, rgba(240, 214, 74, 0.12), transparent 30%);
+}
+
+.bs-step-card.bs-kind-exercise {
+  background:
+    linear-gradient(180deg, rgba(255, 254, 251, 0.99), rgba(250, 245, 238, 0.98)),
+    radial-gradient(circle at top right, rgba(201, 111, 43, 0.09), transparent 34%);
+}
+
+.bs-step-card.bs-kind-checklist {
+  background:
+    linear-gradient(180deg, rgba(251, 252, 247, 0.99), rgba(247, 249, 241, 0.97)),
+    radial-gradient(circle at top right, rgba(154, 165, 123, 0.1), transparent 34%);
+}
+
+.bs-step-card.bs-kind-summary {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(247, 243, 236, 0.97)),
+    radial-gradient(circle at top right, rgba(63, 63, 73, 0.05), transparent 34%);
+}
+
+.bs-step-card.bs-kind-tip {
+  background:
+    linear-gradient(180deg, rgba(250, 252, 247, 0.98), rgba(246, 249, 239, 0.96)),
+    radial-gradient(circle at top right, rgba(154, 165, 123, 0.1), transparent 30%);
+}
+
+.bs-step-card.bs-kind-insight::before,
+.bs-step-card.bs-kind-example::before,
+.bs-step-card.bs-kind-exercise::before,
+.bs-step-card.bs-kind-checklist::before,
+.bs-step-card.bs-kind-summary::before,
+.bs-step-card.bs-kind-tip::before {
+  position: absolute;
+  top: -12px;
+  left: 22px;
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(231, 221, 210, 0.86);
+  background: rgba(255, 253, 249, 0.96);
+  font-size: 0.71rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 20px rgba(68, 46, 28, 0.05);
+}
+
+.bs-step-card.bs-kind-insight::before {
+  content: "Insight Block";
+  color: #5b5376;
+}
+
+.bs-step-card.bs-kind-example::before {
+  content: "Example Block";
+  color: #6d5d15;
+}
+
+.bs-step-card.bs-kind-exercise::before {
+  content: "Exercise Block";
+  color: var(--bs-terracotta-deep);
+}
+
+.bs-step-card.bs-kind-checklist::before {
+  content: "Checklist";
+  color: #5a6746;
+}
+
+.bs-step-card.bs-kind-summary::before {
+  content: "Summary Block";
+  color: var(--bs-text);
+}
+
+.bs-step-card.bs-kind-tip::before {
+  content: "Coach Tip";
+  color: #5a6746;
+}
+
 article.page p,
 article.page li,
 article.page td,
@@ -988,6 +1086,17 @@ article.page p.bs-coach-note {
   background: linear-gradient(180deg, rgba(250, 252, 247, 0.98), rgba(246, 249, 239, 0.96));
   color: #4f5a40 !important;
   max-width: 42rem;
+}
+
+article.page p.bs-field-label + .to-do-list,
+article.page p.bs-field-label + ul.bulleted-list,
+article.page p.bs-field-label + ol.numbered-list,
+article.page p.bs-field-label + .column-list,
+article.page p.bs-field-label + figure.callout,
+article.page p.bs-field-label + .bs-table-wrap,
+article.page p.bs-field-label + table,
+article.page p.bs-field-label + details {
+  margin-top: 8px !important;
 }
 
 article.page mark,
@@ -2043,6 +2152,7 @@ article.page textarea::placeholder {
   border-radius: 22px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 245, 237, 0.95));
   border: 1px solid rgba(231, 221, 210, 0.9);
+  box-shadow: 0 14px 30px rgba(68, 46, 28, 0.06);
 }
 
 .bs-focus-card .bs-preview-card {
@@ -2186,9 +2296,9 @@ article.page textarea::placeholder {
   display: flex;
   align-items: center;
   gap: 12px;
-  min-width: min(720px, calc(100vw - 28px));
+  min-width: min(680px, calc(100vw - 28px));
   width: fit-content;
-  padding: 12px;
+  padding: 10px;
   border-radius: 999px;
   backdrop-filter: blur(16px);
   background: rgba(255, 253, 249, 0.86);
