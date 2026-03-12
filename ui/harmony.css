@@ -467,6 +467,24 @@ article.page header {
   overflow: hidden;
 }
 
+body.bs-shell-ready article.page > header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr) !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 0 24px !important;
+  padding: 38px !important;
+  border: 1px solid var(--bs-line) !important;
+  border-radius: 34px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(255, 249, 242, 0.92)),
+    radial-gradient(circle at 12% 0%, rgba(240, 214, 74, 0.18), transparent 24%) !important;
+  box-shadow: var(--bs-shadow-card) !important;
+  overflow: hidden !important;
+}
+
 article.page header::before {
   content: "Studio Note";
   position: absolute;
@@ -494,6 +512,10 @@ article.page header::after {
   transform: rotate(-8deg);
 }
 
+body.bs-shell-ready article.page > header::before {
+  content: "Studio Note" !important;
+}
+
 article.page .page-cover-image {
   grid-column: 2;
   grid-row: 1 / span 3;
@@ -510,6 +532,19 @@ article.page .page-cover-image {
   box-shadow: 0 22px 42px rgba(79, 49, 27, 0.14);
 }
 
+body.bs-shell-ready article.page .page-cover-image {
+  grid-column: 2 !important;
+  grid-row: 1 / span 3 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  object-fit: cover !important;
+  border-radius: 28px !important;
+  border: 0 !important;
+  box-shadow: 0 22px 42px rgba(79, 49, 27, 0.14) !important;
+}
+
 article.page .page-header-icon {
   position: relative;
   z-index: 2;
@@ -520,6 +555,10 @@ article.page .page-header-icon {
   background: rgba(255, 255, 255, 0.9);
   border: 1px solid rgba(231, 221, 210, 0.95);
   box-shadow: 0 16px 28px rgba(66, 43, 24, 0.08);
+}
+
+body.bs-shell-ready article.page .page-header-icon-with-cover {
+  display: block !important;
 }
 
 article.page .page-header-icon img {
@@ -540,6 +579,35 @@ article.page .page-title {
   max-width: 10ch;
 }
 
+body.bs-shell-ready article.page .page-title,
+body.bs-shell-ready article.page .page-title.is-writing,
+body.bs-shell-ready article.page .page-title.is-written {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: auto !important;
+  max-width: 10ch !important;
+  margin: 42px 0 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  font-family: var(--bs-font-display) !important;
+  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
+  line-height: 0.94 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--bs-text) !important;
+  text-shadow: none !important;
+}
+
+body.bs-shell-ready article.page .page-title::before,
+body.bs-shell-ready article.page .page-title::after,
+body.bs-shell-ready article.page .page-title.is-writing::after,
+body.bs-shell-ready article.page .page-title.is-written::after {
+  content: none !important;
+}
+
 article.page .page-description {
   position: relative;
   z-index: 2;
@@ -548,7 +616,27 @@ article.page .page-description {
   color: var(--bs-muted);
 }
 
+body.bs-shell-ready article.page .page-description {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: auto !important;
+  max-width: 52ch !important;
+  margin: 14px 0 0 !important;
+  text-align: left !important;
+}
+
+body.bs-shell-ready article.page .page-description::before {
+  content: none !important;
+}
+
 article.page .page-body {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 0 120px !important;
+}
+
+body.bs-shell-ready article.page .page-body {
   max-width: none !important;
   margin: 0 !important;
   padding: 0 0 120px !important;
@@ -1777,14 +1865,33 @@ button[data-logout="1"] {
     padding: 24px;
   }
 
+  body.bs-shell-ready article.page > header {
+    grid-template-columns: 1fr !important;
+    padding: 24px !important;
+  }
+
   article.page .page-cover-image {
     grid-column: 1;
     grid-row: auto;
     min-height: 240px;
   }
 
+  body.bs-shell-ready article.page .page-cover-image {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    min-height: 240px !important;
+  }
+
   article.page .page-title {
     max-width: none;
+    font-size: clamp(2rem, 8vw, 3.2rem) !important;
+  }
+
+  body.bs-shell-ready article.page .page-title,
+  body.bs-shell-ready article.page .page-title.is-writing,
+  body.bs-shell-ready article.page .page-title.is-written {
+    max-width: none !important;
+    margin-top: 28px !important;
     font-size: clamp(2rem, 8vw, 3.2rem) !important;
   }
 
