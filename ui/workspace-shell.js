@@ -45,15 +45,46 @@
     return null;
   }
 
+  function nextMeaningfulSibling(node) {
+    var current = node ? node.nextElementSibling : null;
+    while (current) {
+      if (textOf(current)) return current;
+      current = current.nextElementSibling;
+    }
+    return null;
+  }
+
   function detectCalloutTone(text) {
     var value = (text || "").toLowerCase();
     if (!value) return "";
-    if (/⚠|important|attention|a eviter|a éviter|vigilance/.test(value)) return "warning";
-    if (/👉|conseil|astuce|tip|bon reflexe|bon réflexe|coach/.test(value)) return "tip";
+    if (/\u26a0|important|attention|a eviter|a \u00e9viter|vigilance/.test(value)) return "warning";
+    if (/\ud83d\udc49|conseil|astuce|tip|bon reflexe|bon r\u00e9flexe|coach/.test(value)) return "tip";
     if (/exemple|par exemple|inspiration/.test(value)) return "example";
-    if (/exercice|a toi|à toi|pratique|atelier/.test(value)) return "exercise";
-    if (/test|verifie|vérifie|rappel|checkpoint/.test(value)) return "test";
+    if (/exercice|a toi|\u00e0 toi|pratique|atelier/.test(value)) return "exercise";
+    if (/test|verifie|v\u00e9rifie|rappel|checkpoint/.test(value)) return "test";
     return "";
+  }
+
+  function detectHeadingTone(text) {
+    var value = (text || "").toLowerCase();
+    if (!value) return "";
+    if (/insight|intention|cap|vision|essentiel|adn/.test(value)) return "insight";
+    if (/exemple|fictif|inspiration|reference|r\u00e9f\u00e9rence/.test(value)) return "example";
+    if (/exercice|a toi|\u00e0 toi|formulation|atelier|travail/.test(value)) return "exercise";
+    if (/checklist|avant publication|nouveau support/.test(value)) return "checklist";
+    if (/synthese|synth\u00e8se|resume|r\u00e9sum\u00e9|recap|r\u00e9cap/.test(value)) return "summary";
+    if (/conseil|astuce|coach|note vocale|audio/.test(value)) return "tip";
+    return "";
+  }
+
+  function isFieldNode(node) {
+    return !!(
+      node &&
+      node.matches &&
+      node.matches(
+        ".to-do-list, ul.bulleted-list, ol.numbered-list, figure.callout, details, .column-list, table, .bs-table-wrap, figure.image, figure.brand-upload-slot"
+      )
+    );
   }
 
   function create(tag, className, text) {
@@ -92,7 +123,7 @@
       var href = (anchor && anchor.getAttribute("href")) || "";
       var previous = previousMeaningfulSibling(figure);
       var previousText = textOf(previous);
-      if (/soundefined/i.test(href) || /note vocale|audio|podcast|ecoute|écoute|🎙️/i.test(previousText)) {
+      if (/soundefined/i.test(href) || /note vocale|audio|podcast|ecoute|\u00e9coute|\ud83c\udf99\ufe0f/i.test(previousText)) {
         figure.classList.add("bs-audio-note");
         if (previous && previous.matches && previous.matches("p")) previous.classList.add("bs-audio-label");
       }
@@ -108,13 +139,12 @@
       if (
         items.length &&
         items.every(function (item) {
-          return /^[☐☑✓]/.test(textOf(item));
+          return /^[\u2610\u2611\u2713]/.test(textOf(item));
         })
       ) {
         list.classList.add("bs-checklist-list");
         items.forEach(function (item) {
-          var firstNode = item.firstChild;
-          var cleaned = textOf(item).replace(/^[☐☑✓]\s*/, "");
+          var cleaned = textOf(item).replace(/^[\u2610\u2611\u2713]\s*/, "");
           if (!cleaned) return;
           item.textContent = "";
           item.appendChild(create("span", "bs-checklist-copy", cleaned));
@@ -151,7 +181,7 @@
         if (!text) node.classList.add("bs-empty-block");
         if (index < 4 && text.length > 110) node.classList.add("bs-lead");
         if (text.length > 180) node.classList.add("bs-body-long");
-        if (/^(🎙️|👉|⚠️|test\b|exercice\b|rappel\b)/i.test(text)) node.classList.add("bs-inline-label");
+        if (/^(\ud83c\udf99\ufe0f|\ud83d\udc49|\u26a0\ufe0f|test\b|exercice\b|rappel\b)/i.test(text)) node.classList.add("bs-inline-label");
         if (
           text.length > 0 &&
           text.length < 65 &&
@@ -172,10 +202,26 @@
       }
 
       if (node.matches && node.matches("h2, h3, h4")) {
+        var headingTone = detectHeadingTone(textOf(node));
+        node.classList.add("bs-block-heading");
+        if (headingTone) node.classList.add("bs-heading-" + headingTone);
+        if (/block-color-[a-z]+_background/.test(node.className || "")) node.classList.add("bs-subsection-tag");
         var next = node.nextElementSibling;
         if (next && next.matches("p") && textOf(next).length > 90) {
           next.classList.add("bs-section-intro");
         }
+      }
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("p")).forEach(function (node) {
+      var text = textOf(node);
+      if (!text) return;
+      var next = nextMeaningfulSibling(node);
+      if (next && isFieldNode(next) && (text.length < 120 || /[?:]$/.test(text))) {
+        node.classList.add("bs-field-label");
+      }
+      if (node.querySelector("em") && text.length < 220) {
+        node.classList.add("bs-coach-note");
       }
     });
 
