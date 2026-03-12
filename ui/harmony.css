@@ -16,8 +16,8 @@
   --bs-radius-sm: 14px;
   --bs-radius-md: 24px;
   --bs-radius-lg: 34px;
-  --bs-sidebar-w: 284px;
-  --bs-aside-w: 308px;
+  --bs-sidebar-w: 296px;
+  --bs-aside-w: 320px;
   --bs-content-w: minmax(0, 1fr);
   --bs-gap: 28px;
   --bs-font-body: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
@@ -118,7 +118,7 @@ body.bs-shell-ready > * {
   grid-template-columns: var(--bs-sidebar-w) var(--bs-content-w) var(--bs-aside-w);
   gap: var(--bs-gap);
   align-items: start;
-  width: min(1500px, calc(100vw - 40px));
+  width: min(1480px, calc(100vw - 36px));
   margin: 24px auto 124px;
   padding: 0 0 12px;
 }
@@ -137,7 +137,7 @@ body.bs-shell-ready > * {
   border: 1px solid rgba(231, 221, 210, 0.95);
   background: linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(255, 251, 245, 0.94));
   border-radius: 30px;
-  box-shadow: var(--bs-shadow-soft);
+  box-shadow: 0 20px 40px rgba(79, 55, 35, 0.07);
   overflow: hidden;
 }
 
@@ -258,7 +258,7 @@ body.bs-shell-ready > * {
   grid-template-columns: auto 1fr auto;
   gap: 10px;
   align-items: center;
-  padding: 12px 14px;
+  padding: 13px 14px;
   border-radius: 18px;
   text-decoration: none !important;
   border: 1px solid transparent;
@@ -311,8 +311,8 @@ body.bs-shell-ready > * {
 }
 
 .bs-module-title {
-  font-size: 1.02rem;
-  line-height: 1.1;
+  font-size: 1rem;
+  line-height: 1.15;
 }
 
 .bs-module-kicker {
@@ -350,8 +350,8 @@ body.bs-shell-ready > * {
 
 .bs-topbar-title {
   margin: 0;
-  font-size: 1.25rem;
-  line-height: 1;
+  font-size: 1.18rem;
+  line-height: 1.05;
 }
 
 .bs-topbar-subtitle {
@@ -454,9 +454,9 @@ article.page header {
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
-  gap: 34px;
+  gap: 32px;
   align-items: center;
-  padding: 38px;
+  padding: 34px;
   margin-bottom: 24px;
   border: 1px solid var(--bs-line);
   border-radius: 34px;
@@ -524,7 +524,7 @@ article.page .page-cover-image {
   width: 100% !important;
   max-width: 100% !important;
   height: 100%;
-  min-height: 300px;
+  min-height: 280px;
   max-height: 100% !important;
   margin: 0 !important;
   object-fit: cover;
@@ -573,8 +573,8 @@ article.page .page-title {
   position: relative;
   z-index: 2;
   margin: 0 !important;
-  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
-  line-height: 0.94 !important;
+  font-size: clamp(2.25rem, 3.7vw, 3.7rem) !important;
+  line-height: 0.96 !important;
   letter-spacing: -0.03em !important;
   max-width: 10ch;
 }
@@ -594,8 +594,8 @@ body.bs-shell-ready article.page .page-title.is-written {
   box-shadow: none !important;
   text-align: left !important;
   font-family: var(--bs-font-display) !important;
-  font-size: clamp(2.4rem, 4vw, 4.2rem) !important;
-  line-height: 0.94 !important;
+  font-size: clamp(2.25rem, 3.7vw, 3.7rem) !important;
+  line-height: 0.96 !important;
   letter-spacing: -0.03em !important;
   color: var(--bs-text) !important;
   text-shadow: none !important;
@@ -648,7 +648,7 @@ body.bs-shell-ready article.page .page-body {
 
 .bs-content-stack {
   display: grid;
-  gap: 26px;
+  gap: 24px;
 }
 
 .bs-columns,
@@ -672,7 +672,7 @@ article.page .column-list .column {
 .bs-intro-card,
 .bs-step-card {
   position: relative;
-  padding: 28px 30px;
+  padding: 26px 28px;
   border: 1px solid var(--bs-line);
   border-radius: 30px;
   background: rgba(255, 253, 249, 0.96);
@@ -771,7 +771,7 @@ article.page textarea {
 
 article.page p {
   margin: 0 0 14px !important;
-  max-width: 68ch;
+  max-width: 66ch;
   font-size: 1rem;
 }
 
@@ -816,10 +816,10 @@ article.page p.bs-empty-block {
 
 article.page p.bs-lead,
 article.page p.bs-section-intro {
-  font-size: 1.12rem !important;
-  line-height: 1.8 !important;
+  font-size: 1.08rem !important;
+  line-height: 1.74 !important;
   color: #4d4a45 !important;
-  max-width: 60ch;
+  max-width: 58ch;
 }
 
 article.page p.bs-lead {
@@ -855,7 +855,7 @@ article.page h2,
 article.page h3,
 article.page h4 {
   margin: 0 0 14px !important;
-  line-height: 1.05 !important;
+  line-height: 1.02 !important;
   letter-spacing: -0.02em !important;
 }
 
@@ -865,7 +865,7 @@ article.page h4 {
   position: relative;
   display: inline-block;
   padding-right: 10px;
-  font-size: clamp(1.45rem, 2.2vw, 2rem) !important;
+  font-size: clamp(1.38rem, 2vw, 1.88rem) !important;
   max-width: min(100%, 22ch);
   margin-top: 6px !important;
 }
@@ -1049,7 +1049,7 @@ article.page figure.image {
 
 article.page figure.bs-figure-story {
   padding-bottom: 14px !important;
-  max-width: min(100%, 860px);
+  max-width: min(100%, 820px);
 }
 
 article.page figure.bs-figure-plain {
@@ -1057,7 +1057,7 @@ article.page figure.bs-figure-plain {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  max-width: min(100%, 760px);
+  max-width: min(100%, 720px);
 }
 
 article.page figure.bs-resource-card {
@@ -1160,9 +1160,9 @@ article.page figcaption {
   border-top: 1px solid rgba(231, 221, 210, 0.88);
   color: var(--bs-muted) !important;
   opacity: 1 !important;
-  font-size: 0.95rem !important;
-  line-height: 1.65 !important;
-  max-width: 64ch;
+  font-size: 0.92rem !important;
+  line-height: 1.6 !important;
+  max-width: 60ch;
 }
 
 .bs-opening-grid,
@@ -1709,7 +1709,7 @@ article.page .to-do-list .checkbox {
 
 .bs-preview-cover {
   width: 100%;
-  height: 170px;
+  height: 160px;
   object-fit: cover;
   border-radius: 20px;
   border: 1px solid rgba(231, 221, 210, 0.95);
@@ -1717,8 +1717,8 @@ article.page .to-do-list .checkbox {
 
 .bs-preview-title {
   margin: 0;
-  font-size: 1.55rem;
-  line-height: 1;
+  font-size: 1.42rem;
+  line-height: 1.04;
 }
 
 .bs-preview-meta {
