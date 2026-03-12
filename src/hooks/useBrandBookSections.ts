@@ -1,8 +1,7 @@
 import { useMemo } from "react";
-import type { BrandBookSection } from "../types/brand";
-import type { Module } from "../types/module";
+import type { BrandBookSection, Module } from "../types/brand";
 
-export function useBrandBookExport(modules: Module[]) {
+export function useBrandBookSections(modules: Module[]) {
   return useMemo<BrandBookSection[]>(() => {
     return modules.map((module) => ({
       id: module.id,

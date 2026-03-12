@@ -1,4 +1,4 @@
-export const brandConfig = {
+export const brandAssets = {
   name: "Brand Studio",
   logoSrc: "/LAB_(17).png",
   heroCollageSrc: "/Elments_nouvelle_comm.png",

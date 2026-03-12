@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import type { ProgressSnapshot } from "../types/brand";
-import type { Field } from "../types/fields";
+import type { Field } from "../types/brand";
 
 type ProgressInput = {
   fields: Field[];

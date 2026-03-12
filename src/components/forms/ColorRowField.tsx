@@ -1,4 +1,4 @@
-import type { ColorRow } from "../../types/fields";
+import type { ColorRow } from "../../types/brand";
 import { FieldBlock } from "./FieldBlock";
 
 export function ColorRowField({ label, rows }: { label: string; rows: ColorRow[] }) {

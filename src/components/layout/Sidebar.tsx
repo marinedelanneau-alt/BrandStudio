@@ -1,5 +1,5 @@
 import { modules } from "../../data/modules";
-import { brandConfig } from "../../lib/brand-config";
+import { brandAssets } from "../../lib/brand-assets";
 import { tokens } from "../../lib/design-tokens";
 import { Badge } from "../ui/Badge";
 import { Card } from "../ui/Card";
@@ -12,10 +12,10 @@ export function Sidebar({ currentModuleId }: SidebarProps) {
   return (
     <aside style={{ display: "grid", gap: tokens.spacing[4] }}>
       <Card style={{ padding: 24 }}>
-        <Badge>{brandConfig.workspaceTagline}</Badge>
-        <img src={brandConfig.logoSrc} alt={brandConfig.name} style={{ width: 112, margin: "18px 0" }} />
-        <h2 style={{ margin: 0 }}>{brandConfig.name}</h2>
-        <p style={{ color: tokens.colors.textSecondary }}>{brandConfig.productTagline}</p>
+        <Badge>{brandAssets.workspaceTagline}</Badge>
+        <img src={brandAssets.logoSrc} alt={brandAssets.name} style={{ width: 112, margin: "18px 0" }} />
+        <h2 style={{ margin: 0 }}>{brandAssets.name}</h2>
+        <p style={{ color: tokens.colors.textSecondary }}>{brandAssets.productTagline}</p>
       </Card>
       <Card style={{ padding: 18 }}>
         {modules.map((module) => (

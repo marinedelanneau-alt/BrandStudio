@@ -1,4 +1,4 @@
-import type { Module } from "../../types/module";
+import type { Module } from "../../types/brand";
 import { Card } from "../ui/Card";
 
 export function DashboardView({ modules }: { modules: Module[] }) {

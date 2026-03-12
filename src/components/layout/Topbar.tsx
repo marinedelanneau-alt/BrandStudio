@@ -1,5 +1,5 @@
 import type { ProgressSnapshot } from "../../types/brand";
-import { brandConfig } from "../../lib/brand-config";
+import { brandAssets } from "../../lib/brand-assets";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -15,7 +15,7 @@ export function Topbar({ title, progress }: TopbarProps) {
       <div style={{ display: "grid", gap: 8 }}>
         <strong>{title}</strong>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <Badge>{brandConfig.name}</Badge>
+          <Badge>{brandAssets.name}</Badge>
           <Badge>{progress.percent}% complete</Badge>
         </div>
       </div>

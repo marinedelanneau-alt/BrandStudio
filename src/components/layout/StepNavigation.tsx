@@ -10,9 +10,11 @@ export function StepNavigation({ previousHref, nextHref }: StepNavigationProps) 
     <nav style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
       {previousHref ? (
         <a href={previousHref}>
-          <Button variant="secondary">Précédent</Button>
+          <Button variant="secondary">Precedent</Button>
         </a>
-      ) : <span />}
+      ) : (
+        <span />
+      )}
       {nextHref ? (
         <a href={nextHref}>
           <Button>Suivant</Button>
