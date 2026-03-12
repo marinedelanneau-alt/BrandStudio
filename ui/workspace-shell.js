@@ -3,8 +3,8 @@
     { href: "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html", title: "Qui te propose cette offre ?" },
     { href: "Vision & marque 295057792efe81b4ac90f13958e3abad.html", title: "Vision & marque" },
     { href: "Positionnement 295057792efe810e98f4ffd60c74fad4.html", title: "Positionnement" },
-    { href: "Personnalité & ton de marque 295057792efe81e6be2be44f4963e114.html", title: "Personnalité & ton de marque" },
-    { href: "Création du document, à toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html", title: "Création du document, à toi de jouer !" },
+    { href: "Personnalit\u00e9 & ton de marque 295057792efe81e6be2be44f4963e114.html", title: "Personnalit\u00e9 & ton de marque" },
+    { href: "Cr\u00e9ation du document, \u00e0 toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html", title: "Cr\u00e9ation du document, \u00e0 toi de jouer !" },
     { href: "SUPPORTS BONUS 2fe057792efe801c9accfc2deb83190e.html", title: "Supports bonus" }
   ];
   var MENU_URL = "En%20route%20vers%20ta%20nouvelle%20strat%C3%A9gie%20de%20marque%20295057792efe80aabdfeebdd4704fcac.html";
@@ -36,15 +36,87 @@
     return ((el && el.textContent) || "").replace(/\s+/g, " ").trim();
   }
 
-  function clamp(num, min, max) {
-    return Math.max(min, Math.min(max, num));
-  }
-
   function create(tag, className, text) {
     var el = document.createElement(tag);
     if (className) el.className = className;
     if (typeof text === "string") el.textContent = text;
     return el;
+  }
+
+  function decorateBodyContent(body) {
+    if (!body || body.dataset.bsDecorated === "1") return;
+
+    body.classList.add("bs-reading-flow");
+
+    Array.prototype.slice.call(body.querySelectorAll(".column-list")).forEach(function (row) {
+      row.classList.add("bs-columns");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll(".column-list .column")).forEach(function (column) {
+      column.classList.add("bs-column");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("figure.image")).forEach(function (figure) {
+      if (figure.querySelector("figcaption")) figure.classList.add("bs-figure-story");
+      if (!figure.querySelector("figcaption")) figure.classList.add("bs-figure-plain");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("figure .source")).forEach(function (source) {
+      var figure = source.closest("figure");
+      if (figure) figure.classList.add("bs-resource-card");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("figure.link-to-page")).forEach(function (figure) {
+      figure.classList.add("bs-nav-card");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("ul.bulleted-list")).forEach(function (list) {
+      list.classList.add("bs-bulleted-list");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("ol.numbered-list")).forEach(function (list) {
+      list.classList.add("bs-numbered-list");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("details")).forEach(function (details) {
+      details.classList.add("bs-fold-section");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("table")).forEach(function (table) {
+      table.classList.add("bs-data-table");
+    });
+
+    Array.prototype.slice.call(body.querySelectorAll("hr")).forEach(function (rule) {
+      rule.classList.add("bs-divider");
+    });
+
+    Array.prototype.slice.call(body.children).forEach(function (node, index) {
+      if (node.matches && node.matches("p")) {
+        var text = textOf(node);
+        if (!text) node.classList.add("bs-empty-block");
+        if (index < 4 && text.length > 110) node.classList.add("bs-lead");
+        if (text.length > 180) node.classList.add("bs-body-long");
+      }
+
+      if (node.matches && node.matches("blockquote")) {
+        node.classList.add("bs-editorial-quote");
+      }
+
+      if (node.matches && node.matches("h2, h3, h4")) {
+        var next = node.nextElementSibling;
+        if (next && next.matches("p") && textOf(next).length > 90) {
+          next.classList.add("bs-section-intro");
+        }
+      }
+    });
+
+    var firstColumns = body.querySelector(".column-list");
+    if (firstColumns) firstColumns.classList.add("bs-opening-grid");
+
+    var firstStory = body.querySelector("figure.bs-figure-story");
+    if (firstStory) firstStory.classList.add("bs-hero-story");
+
+    body.dataset.bsDecorated = "1";
   }
 
   function groupBodyContent(body) {
@@ -80,6 +152,14 @@
       group.forEach(function (node) {
         section.appendChild(node);
       });
+      if (section.querySelector(".column-list")) section.classList.add("bs-section-has-columns");
+      if (section.querySelector("figure.callout")) section.classList.add("bs-section-has-callout");
+      if (section.querySelector(".to-do-list")) section.classList.add("bs-section-has-checklist");
+      if (section.querySelector("figure.image")) section.classList.add("bs-section-has-media");
+      if (section.querySelector("ol.numbered-list")) section.classList.add("bs-section-has-steps");
+      if (section.querySelector("details")) section.classList.add("bs-section-has-folds");
+      if (section.querySelector(".link-to-page")) section.classList.add("bs-section-has-navcards");
+      if (section.querySelector("table")) section.classList.add("bs-section-has-table");
     });
 
     body.dataset.bsGrouped = "1";
@@ -94,7 +174,7 @@
     brandImg.src = LOGO_SRC;
     brandImg.alt = "Brand Studio";
     var brandTitle = create("h2", "bs-brand-title", "Brand Studio");
-    var brandCopy = create("p", "bs-brand-copy", "Un espace de travail éditorial pour construire ta marque avec plus de clarté, de cohérence et de désirabilité.");
+    var brandCopy = create("p", "bs-brand-copy", "Un espace de travail editorial pour construire ta marque avec plus de clarte, de coherence et de desirabilite.");
     brand.appendChild(brandTag);
     brand.appendChild(brandImg);
     brand.appendChild(brandTitle);
@@ -144,7 +224,7 @@
     var copy = create("div", "bs-topbar-copy");
     var title = textOf(article.querySelector(".page-title")) || "Brand Studio";
     copy.appendChild(create("h2", "bs-topbar-title", title));
-    copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " • Brand Studio" : "Brand Studio"));
+    copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " - Brand Studio" : "Brand Studio"));
 
     var actions = create("div", "bs-topbar-actions");
     var saveBtn = create("button", "bs-pill-btn bs-save-btn is-saved", "Enregistrement auto");
@@ -196,8 +276,8 @@
 
     var quick = create("section", "bs-panel bs-aside-card");
     quick.appendChild(create("div", "bs-aside-label", "Quick Preview"));
-    quick.appendChild(create("h3", "bs-aside-title", "Aperçu rapide"));
-    quick.appendChild(create("p", "bs-aside-copy", "Une lecture synthétique de la section active pour garder le cap pendant le remplissage."));
+    quick.appendChild(create("h3", "bs-aside-title", "Apercu rapide"));
+    quick.appendChild(create("p", "bs-aside-copy", "Une lecture synthetique de la section active pour garder le cap pendant le remplissage."));
     var quickCard = create("div", "bs-preview-card");
     if (cover) {
       var coverClone = create("img", "bs-preview-cover");
@@ -216,7 +296,7 @@
     var brandbook = create("section", "bs-panel bs-aside-card");
     brandbook.appendChild(create("div", "bs-aside-label", "Brand Book Preview"));
     brandbook.appendChild(create("h3", "bs-aside-title", "Livrable en cours"));
-    brandbook.appendChild(create("p", "bs-aside-copy", "Les repères de cette section, mis en forme comme un document de studio premium."));
+    brandbook.appendChild(create("p", "bs-aside-copy", "Les reperes de cette section, mis en forme comme un document de studio premium."));
     var brandCard = create("div", "bs-preview-card");
     var collage = create("img", "bs-preview-cover");
     collage.src = COLLAGE_MAIN;
@@ -334,6 +414,7 @@
     var aside = buildAside(article, idx);
     var bottomBar = buildBottomBar(idx);
 
+    decorateBodyContent(article.querySelector(".page-body"));
     groupBodyContent(article.querySelector(".page-body"));
 
     main.appendChild(topbar);
@@ -346,6 +427,14 @@
     document.body.appendChild(bottomBar);
     document.body.classList.add("bs-shell-ready");
     document.body.dataset.bsShellMounted = "1";
+    if (idx >= 0) document.body.classList.add("bs-module-" + (idx + 1));
+    if (idx === 0) document.body.classList.add("bs-page-offre");
+    if (idx === 1) document.body.classList.add("bs-page-vision");
+    if (idx === 2) document.body.classList.add("bs-page-positionnement");
+    if (idx === 3) document.body.classList.add("bs-page-personnalite");
+    if (idx === 4) document.body.classList.add("bs-page-creation");
+    if (idx === 5) document.body.classList.add("bs-page-bonus");
+    if (currentPath() === norm(MENU_URL)) document.body.classList.add("bs-page-home");
 
     moveUtilityButtons(topbar, bottomBar);
     bindSaveIndicator(document.body);
