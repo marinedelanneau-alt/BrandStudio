@@ -1,4 +1,7 @@
 import type { BrandData, Field } from "../../types/brand";
+import { ColorGeneratorField } from "./ColorGeneratorField";
+import { ColorRowField } from "./ColorRowField";
+import { ImageUploadField } from "./ImageUploadField";
 import { Checkbox } from "../ui/Checkbox";
 import { Input } from "../ui/Input";
 import { Textarea } from "../ui/Textarea";
@@ -12,12 +15,16 @@ type FieldBlockProps = {
 
 export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps) {
   const inputId = `${moduleId}-${field.key}`;
+  const showStandaloneLabel =
+    field.type === "text" || field.type === "textarea";
 
   return (
     <div className="space-y-3">
-      <label htmlFor={inputId} className="block text-sm font-bold text-[#3F3F49]">
-        {field.label}
-      </label>
+      {showStandaloneLabel ? (
+        <label htmlFor={inputId} className="block text-sm font-bold text-[#3F3F49]">
+          {field.label}
+        </label>
+      ) : null}
 
       {field.type === "textarea" ? (
         <Textarea
@@ -46,10 +53,24 @@ export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps
         />
       ) : null}
 
-      {field.type === "imageupload" || field.type === "colorrow" || field.type === "colorgenerator" ? (
-        <div className="rounded-[22px] border-2 border-dashed border-[#E7DDD2] bg-white px-5 py-4 text-sm text-[#6A635B]">
-          {field.placeholder || field.label}
-        </div>
+      {field.type === "imageupload" ? (
+        <ImageUploadField
+          label={field.label}
+          value={value}
+          placeholder={field.placeholder}
+        />
+      ) : null}
+
+      {field.type === "colorrow" ? (
+        <ColorRowField
+          label={field.label}
+          value={value}
+          placeholder={field.placeholder}
+        />
+      ) : null}
+
+      {field.type === "colorgenerator" ? (
+        <ColorGeneratorField label={field.label} value={value} />
       ) : null}
     </div>
   );

@@ -1,28 +1,25 @@
-import { FieldBlock } from "./FieldBlock";
-import { tokens } from "../../lib/design-tokens";
-
 type ImageUploadFieldProps = {
   label: string;
-  hint: string;
+  value?: unknown;
+  placeholder?: string;
 };
 
-export function ImageUploadField({ label, hint }: ImageUploadFieldProps) {
+export function ImageUploadField({
+  label,
+  value,
+  placeholder,
+}: ImageUploadFieldProps) {
   return (
-    <FieldBlock label={label}>
-      <div
-        style={{
-          minHeight: 220,
-          padding: 22,
-          borderRadius: tokens.radius.xl,
-          border: `1px dashed ${tokens.colors.terracotta}`,
-          background: tokens.colors.surface,
-          display: "grid",
-          alignContent: "center",
-          gap: 12,
-        }}
-      >
-        <p style={{ margin: 0, color: tokens.colors.textSecondary }}>{hint}</p>
-      </div>
-    </FieldBlock>
+    <div
+      aria-label={label}
+      className="grid min-h-[220px] content-center gap-3 rounded-[22px] border-2 border-dashed border-[#C96F2B] bg-white px-5 py-6 text-sm text-[#6A635B]"
+    >
+      <p className="m-0 font-semibold text-[#3F3F49]">{label}</p>
+      <p className="m-0">
+        {typeof value === "string" && value.trim()
+          ? value
+          : placeholder || "Ajoute ici tes references visuelles ou ton lien de travail."}
+      </p>
+    </div>
   );
 }
