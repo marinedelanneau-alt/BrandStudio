@@ -1,15 +1,24 @@
-import type { InputHTMLAttributes } from "react";
-import { tokens } from "../../lib/design-tokens";
-
-type CheckboxProps = InputHTMLAttributes<HTMLInputElement> & {
+type Props = {
+  id: string;
+  checked: boolean;
   label: string;
+  onChange: (checked: boolean) => void;
 };
 
-export function Checkbox({ label, ...props }: CheckboxProps) {
+export function Checkbox({ id, checked, label, onChange }: Props) {
   return (
-    <label style={{ display: "flex", gap: 12, alignItems: "flex-start", color: tokens.colors.textPrimary }}>
-      <input type="checkbox" {...props} style={{ width: 18, height: 18, marginTop: 3 }} />
-      <span>{label}</span>
+    <label
+      htmlFor={id}
+      className="flex items-center gap-3 rounded-[18px] border border-[#E7DDD2] bg-white px-4 py-4"
+    >
+      <input
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="h-5 w-5"
+      />
+      <span className="text-base font-medium text-[#3F3F49]">{label}</span>
     </label>
   );
 }
