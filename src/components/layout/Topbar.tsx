@@ -12,13 +12,13 @@ type TopbarProps = {
 
 export function Topbar({ title, progress }: TopbarProps) {
   return (
-    <Card className="flex flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+    <Card className="flex flex-col gap-4 border-[rgba(231,221,210,0.85)] bg-[rgba(255,253,249,0.78)] px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
       <div className="grid gap-3">
         <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
           {brandAssets.workspaceTagline}
         </div>
         <div>
-          <strong className="font-display text-[1.5rem] leading-tight text-[#3F3F49]">
+          <strong className="font-display text-[1.55rem] leading-tight text-[#3F3F49]">
             {cleanText(title)}
           </strong>
           <div className="mt-2 flex flex-wrap gap-2">

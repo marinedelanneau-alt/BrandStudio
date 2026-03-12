@@ -13,10 +13,10 @@ export function Card({ children, className, style }: CardProps) {
     <section
       className={cn("bs-card", className)}
       style={{
-        background: tokens.colors.surface,
+        background: "rgba(255, 253, 249, 0.86)",
         border: `1px solid ${tokens.colors.border}`,
-        borderRadius: tokens.radius.lg,
-        boxShadow: tokens.shadows.soft,
+        borderRadius: "1.6rem",
+        boxShadow: "0 14px 34px rgba(44, 39, 31, 0.055)",
         position: "relative",
         ...style,
       }}
