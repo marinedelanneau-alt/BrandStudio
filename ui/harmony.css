@@ -1661,6 +1661,52 @@ article.page .to-do-list .checkbox {
   border: 1px solid rgba(231, 221, 210, 0.9);
 }
 
+.bs-focus-card .bs-preview-card {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.98), rgba(248, 243, 236, 0.95)),
+    radial-gradient(circle at top right, rgba(240, 214, 74, 0.12), transparent 34%);
+}
+
+.bs-focus-kicker {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 28px;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(201, 111, 43, 0.1);
+  color: var(--bs-terracotta-deep);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bs-focus-title {
+  font-size: 1.35rem;
+  line-height: 1.08;
+}
+
+.bs-focus-copy {
+  margin: 0;
+  color: var(--bs-muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.bs-focus-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(185, 178, 217, 0.16);
+  overflow: hidden;
+}
+
+.bs-focus-progress-bar {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--bs-terracotta), var(--bs-solar));
+}
+
 .bs-preview-cover {
   width: 100%;
   height: 170px;

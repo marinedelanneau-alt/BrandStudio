@@ -340,6 +340,26 @@
     quickCard.appendChild(meta);
     quick.appendChild(quickCard);
 
+    var focus = create("section", "bs-panel bs-aside-card bs-focus-card");
+    focus.appendChild(create("div", "bs-aside-label", "Focus"));
+    focus.appendChild(create("h3", "bs-aside-title", "Focus du moment"));
+    focus.appendChild(create("p", "bs-aside-copy", "Un repere court pour savoir ou vous en etes et quoi traiter maintenant."));
+    var focusBody = create("div", "bs-preview-card");
+    var focusKicker = create("div", "bs-focus-kicker", "Section active");
+    var focusTitle = create("h4", "bs-preview-title bs-focus-title", headings.length ? headings[0].text : title);
+    focusTitle.setAttribute("data-bs-current-heading", "1");
+    var focusText = create("p", "bs-focus-copy", stats.totalText ? (stats.filledText + " champ(s) rempli(s) sur " + stats.totalText + " dans ce module.") : "Le contenu de cette page est pret a etre explore section par section.");
+    var focusProgress = create("div", "bs-focus-progress");
+    var focusBar = create("div", "bs-focus-progress-bar");
+    focusBar.style.width = stats.percent + "%";
+    focusBar.setAttribute("data-bs-current-progress", "1");
+    focusProgress.appendChild(focusBar);
+    focusBody.appendChild(focusKicker);
+    focusBody.appendChild(focusTitle);
+    focusBody.appendChild(focusText);
+    focusBody.appendChild(focusProgress);
+    focus.appendChild(focusBody);
+
     var brandbook = create("section", "bs-panel bs-aside-card");
     brandbook.appendChild(create("div", "bs-aside-label", "Brand Book Preview"));
     brandbook.appendChild(create("h3", "bs-aside-title", "Livrable en cours"));
@@ -366,6 +386,7 @@
     brandbook.appendChild(brandCard);
 
     aside.appendChild(quick);
+    aside.appendChild(focus);
     aside.appendChild(brandbook);
     return aside;
   }
@@ -452,6 +473,7 @@
     var links = Array.prototype.slice.call(root.querySelectorAll(".bs-heading-item[href^='#']"));
     if (!links.length) return;
     var currentChip = document.querySelector(".bs-topbar-chip-current");
+    var currentHeading = document.querySelector("[data-bs-current-heading='1']");
 
     var map = links.map(function (link) {
       var id = (link.getAttribute("href") || "").slice(1);
@@ -473,6 +495,7 @@
         item.link.classList.toggle("is-active", item === active);
       });
       if (currentChip) currentChip.textContent = textOf(active.target) || "Section active";
+      if (currentHeading) currentHeading.textContent = textOf(active.target) || "Section active";
     }
 
     updateActive();
