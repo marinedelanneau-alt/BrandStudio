@@ -1,34 +1,28 @@
-import type { ButtonHTMLAttributes, CSSProperties, ReactNode } from "react";
-import { tokens } from "../../lib/design-tokens";
+import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import { cn } from "../../lib/helpers";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type Props = PropsWithChildren<
+  ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: "primary" | "secondary" | "ghost";
+  }
+>;
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  children: ReactNode;
-  variant?: ButtonVariant;
-};
-
-const variantStyles: Record<ButtonVariant, CSSProperties> = {
-  primary: { background: tokens.colors.textPrimary, color: "#fff", border: "1px solid transparent" },
-  secondary: { background: tokens.colors.surface, color: tokens.colors.textPrimary, border: `1px solid ${tokens.colors.border}` },
-  ghost: { background: "transparent", color: tokens.colors.textSecondary, border: "1px solid transparent" },
-};
-
-export function Button({ children, className, style, variant = "primary", ...props }: ButtonProps) {
+export function Button({
+  children,
+  className,
+  variant = "secondary",
+  ...props
+}: Props) {
   return (
     <button
-      className={cn("bs-button", className)}
-      style={{
-        minHeight: 44,
-        padding: "0 16px",
-        borderRadius: tokens.radius.pill,
-        fontWeight: 700,
-        fontSize: 14,
-        cursor: "pointer",
-        ...variantStyles[variant],
-        ...style,
-      }}
+      className={cn(
+        "rounded-full border-2 px-5 py-3 text-sm font-black transition",
+        variant === "primary" && "border-[#3F3F49] bg-[#F0D64A] text-[#3F3F49]",
+        variant === "secondary" && "border-[#3F3F49] bg-white text-[#3F3F49]",
+        variant === "ghost" && "border-transparent bg-transparent text-[#3F3F49]",
+        "hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40",
+        className
+      )}
       {...props}
     >
       {children}
