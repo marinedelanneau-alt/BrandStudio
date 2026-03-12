@@ -1,3 +1,4 @@
+import { brandAssets } from "../../lib/brand-assets";
 import type { Module } from "../../types/brand";
 
 type Props = {
@@ -21,12 +22,21 @@ export function Sidebar({
     <aside className="sticky top-0 hidden h-screen overflow-y-auto border-r border-[#E6DDD2] bg-[#FFFDF9] lg:block">
       <div className="p-6">
         <div className="rounded-[28px] border border-[#E7DDD2] bg-[#F6F1E8] p-5">
-          <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
+          <img
+            src={brandAssets.logoSrc}
+            alt={brandAssets.name}
+            className="h-16 w-auto"
+          />
+          <div className="mt-4 text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
             Brand Studio
           </div>
           <h1 className="font-display mt-4 text-3xl leading-tight text-[#3F3F49]">
             Ton studio de marque
           </h1>
+          <p className="mt-3 text-sm leading-6 text-[#756F67]">
+            Un workspace editorial pour construire une marque claire, desirable
+            et activable.
+          </p>
         </div>
 
         <div className="mt-6 rounded-[24px] border border-[#E7DDD2] bg-white p-5">
@@ -43,7 +53,7 @@ export function Sidebar({
             />
           </div>
           <p className="mt-3 text-sm text-[#6F695F]">
-            {completedModules}/{totalModules} sections complétées
+            {completedModules}/{totalModules} sections completees
           </p>
         </div>
 

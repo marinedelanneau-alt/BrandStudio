@@ -11,15 +11,26 @@ type TopbarProps = {
 
 export function Topbar({ title, progress }: TopbarProps) {
   return (
-    <Card style={{ padding: 18, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-      <div style={{ display: "grid", gap: 8 }}>
-        <strong>{title}</strong>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <Badge>{brandAssets.name}</Badge>
-          <Badge>{progress.percent}% complete</Badge>
+    <Card className="flex flex-col gap-4 px-5 py-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="grid gap-3">
+        <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
+          {brandAssets.workspaceTagline}
+        </div>
+        <div>
+          <strong className="font-display text-[1.5rem] leading-tight text-[#3F3F49]">
+            {title}
+          </strong>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <Badge>{brandAssets.name}</Badge>
+            <Badge>{progress.percent}% complete</Badge>
+            <Badge>{progress.completedFields + progress.completedChecks} reperes remplis</Badge>
+          </div>
         </div>
       </div>
-      <Button variant="secondary">Enregistrement auto</Button>
+      <div className="flex items-center gap-3">
+        <Button variant="secondary">Enregistrement auto</Button>
+        <Button variant="ghost">Studio prive</Button>
+      </div>
     </Card>
   );
 }
