@@ -117,8 +117,8 @@ body.bs-shell-ready > * {
   grid-template-columns: var(--bs-sidebar-w) var(--bs-content-w) var(--bs-aside-w);
   gap: var(--bs-gap);
   align-items: start;
-  width: min(1560px, calc(100vw - 40px));
-  margin: 22px auto 120px;
+  width: min(1500px, calc(100vw - 40px));
+  margin: 24px auto 124px;
   padding: 0 0 12px;
 }
 
@@ -309,6 +309,8 @@ body.bs-shell-ready > * {
 
 .bs-main {
   min-width: 0;
+  display: grid;
+  gap: 18px;
 }
 
 .bs-topbar {
@@ -319,13 +321,16 @@ body.bs-shell-ready > * {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 0;
   backdrop-filter: blur(14px);
   background: rgba(255, 253, 249, 0.82);
+  box-shadow: 0 18px 38px rgba(68, 46, 28, 0.08);
 }
 
 .bs-topbar-copy {
   min-width: 0;
+  display: grid;
+  gap: 8px;
 }
 
 .bs-topbar-title {
@@ -335,11 +340,30 @@ body.bs-shell-ready > * {
 }
 
 .bs-topbar-subtitle {
-  margin: 5px 0 0;
+  margin: 0;
   color: var(--bs-muted);
   font-size: 0.86rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.bs-topbar-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bs-topbar-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: rgba(63, 63, 73, 0.05);
+  color: var(--bs-text);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .bs-topbar-actions {
@@ -1407,7 +1431,7 @@ article.page .to-do-list .checkbox {
   display: grid;
   gap: 14px;
   margin-top: 16px;
-  padding: 18px;
+  padding: 20px;
   border-radius: 22px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 245, 237, 0.95));
   border: 1px solid rgba(231, 221, 210, 0.9);
@@ -1463,6 +1487,13 @@ article.page .to-do-list .checkbox {
   border: 1px solid rgba(231, 221, 210, 0.78);
   color: inherit;
   text-decoration: none !important;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+
+.bs-heading-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(201, 111, 43, 0.22);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .bs-heading-item strong {
@@ -1492,6 +1523,8 @@ article.page .to-do-list .checkbox {
   border-radius: 999px;
   backdrop-filter: blur(16px);
   background: rgba(255, 253, 249, 0.86);
+  border: 1px solid rgba(231, 221, 210, 0.92);
+  box-shadow: 0 24px 44px rgba(45, 31, 20, 0.12);
 }
 
 [data-bottom-nav="1"] {
@@ -1577,6 +1610,10 @@ button[data-logout="1"] {
 
   .bs-main {
     order: 2;
+  }
+
+  .bs-topbar {
+    gap: 12px;
   }
 
   .bs-aside {

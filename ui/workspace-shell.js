@@ -261,8 +261,14 @@
     var topbar = create("div", "bs-panel bs-topbar");
     var copy = create("div", "bs-topbar-copy");
     var title = textOf(article.querySelector(".page-title")) || "Brand Studio";
+    var headings = collectHeadings(article);
+    var stats = completionStats(article);
     copy.appendChild(create("h2", "bs-topbar-title", title));
     copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " - Brand Studio" : "Brand Studio"));
+    var meta = create("div", "bs-topbar-meta");
+    meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " reperes" : "Section libre"));
+    meta.appendChild(create("span", "bs-topbar-chip", stats.percent + "% complete"));
+    copy.appendChild(meta);
 
     var actions = create("div", "bs-topbar-actions");
     var saveBtn = create("button", "bs-pill-btn bs-save-btn is-saved", "Enregistrement auto");
