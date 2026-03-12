@@ -14,6 +14,7 @@ import { useBrandBookSections } from "../hooks/useBrandBookSections";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useModuleProgress } from "../hooks/useModuleProgress";
 import { brandAssets } from "../lib/brand-assets";
+import { cleanText } from "../lib/helpers";
 import type { BrandData, Module } from "../types/brand";
 
 export function BrandStudioApp() {
@@ -59,8 +60,8 @@ export function BrandStudioApp() {
     () =>
       brandBookPairs.map(([title, summary], index) => ({
         id: `brand-book-${index + 1}`,
-        title,
-        summary,
+        title: cleanText(title),
+        summary: cleanText(summary),
         moduleId: "brandbook",
       })),
     [brandBookPairs]
@@ -68,7 +69,7 @@ export function BrandStudioApp() {
 
   const quickPreviewItems = useMemo(
     () => [
-      { id: "kind", label: "Type", value: activeModule.kind },
+      { id: "kind", label: "Type", value: cleanText(activeModule.kind) },
       { id: "progress", label: "Progression", value: `${progress.percent}%` },
       {
         id: "structure",
@@ -77,6 +78,11 @@ export function BrandStudioApp() {
       },
     ],
     [activeModule, progress.percent]
+  );
+
+  const mobileModules = useMemo(
+    () => modules.filter((module) => module.kind !== "export"),
+    []
   );
 
   const handleChange = (key: string, value: unknown) => {
@@ -101,18 +107,35 @@ export function BrandStudioApp() {
     >
       <main className="min-w-0 px-4 py-4 lg:px-8 lg:py-6">
         <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-6">
-          <Topbar title={activeModule.title} progress={progress} />
+          <Topbar title={cleanText(activeModule.title)} progress={progress} />
+
+          <div className="flex gap-2 overflow-x-auto rounded-[24px] border border-[#E7DDD2] bg-[#FFFDF9] px-3 py-3 lg:hidden">
+            {mobileModules.map((module) => (
+              <button
+                key={module.id}
+                type="button"
+                onClick={() => setActiveId(module.id)}
+                className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold ${
+                  module.id === activeModule.id
+                    ? "border-[#3F3F49] bg-[#FFF7EE] text-[#3F3F49]"
+                    : "border-[#E7DDD2] bg-white text-[#756F67]"
+                }`}
+              >
+                {cleanText(module.title)}
+              </button>
+            ))}
+          </div>
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px]">
             <div className="grid gap-6">
               <HeroPanel
-                kicker={activeModule.eyebrow}
-                title={activeModule.title}
-                description={activeModule.subtitle}
+                kicker={cleanText(activeModule.eyebrow)}
+                title={cleanText(activeModule.title)}
+                description={cleanText(activeModule.subtitle)}
                 visual={
                   <img
                     src={activeModule.banner || brandAssets.heroCollageSrc}
-                    alt={activeModule.title}
+                    alt={cleanText(activeModule.title)}
                     className="max-h-[280px] w-full object-contain"
                   />
                 }
@@ -123,6 +146,8 @@ export function BrandStudioApp() {
                   modules={contentModules}
                   activeId={activeModule.id}
                   onSelect={setActiveId}
+                  introSections={activeModule.sections}
+                  quote={activeModule.quote}
                 />
               ) : null}
 
@@ -135,8 +160,8 @@ export function BrandStudioApp() {
               ) : null}
 
               <StepNavigation
-                previousLabel={previousModule ? previousModule.title : undefined}
-                nextLabel={nextModule ? nextModule.title : undefined}
+                previousLabel={previousModule ? cleanText(previousModule.title) : undefined}
+                nextLabel={nextModule ? cleanText(nextModule.title) : undefined}
                 onPrevious={
                   previousModule ? () => setActiveId(previousModule.id) : undefined
                 }
@@ -146,7 +171,7 @@ export function BrandStudioApp() {
 
             <aside className="grid gap-6 xl:sticky xl:top-6 xl:self-start">
               <QuickPreview
-                title={activeModule.title}
+                title={cleanText(activeModule.title)}
                 coverSrc={activeModule.banner || brandAssets.sideCollageSrc}
                 items={quickPreviewItems}
               />
