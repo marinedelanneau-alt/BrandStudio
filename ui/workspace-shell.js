@@ -633,6 +633,14 @@
       return !!(node && node.querySelector && node.querySelector("h2, h3, h4"));
     }
 
+    function hasUsefulContent(section) {
+      if (!section) return false;
+      if (section.querySelector("textarea, .brand-zone-inline, .to-do-list, ul.bulleted-list, ol.numbered-list, figure, table, details, audio")) return true;
+      return Array.prototype.slice.call(section.querySelectorAll("p, h1, h2, h3, h4, blockquote, li")).some(function (node) {
+        return textOf(node).length > 0 && !node.classList.contains("bs-empty-block");
+      });
+    }
+
     nodes.forEach(function (node) {
       if (containsHeading(node) && current.length) {
         groups.push(current);
@@ -671,6 +679,9 @@
       if (section.querySelectorAll("figure.callout, blockquote").length >= 2) section.classList.add("bs-section-has-editorial-notes");
       var kind = sectionKindFromSection(section);
       if (kind) section.classList.add("bs-kind-" + kind);
+      if (!hasUsefulContent(section)) {
+        section.remove();
+      }
     });
 
     body.dataset.bsGrouped = "1";

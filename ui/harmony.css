@@ -321,6 +321,8 @@ body.bs-shell-ready > * {
 .bs-module-title {
   font-size: 1rem;
   line-height: 1.15;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .bs-module-kicker {
@@ -709,7 +711,7 @@ article.page .column-list .column {
 }
 
 .bs-intro-card::before {
-  content: "Intent";
+  content: "Introduction";
   display: inline-flex;
   align-items: center;
   height: 32px;
@@ -835,17 +837,17 @@ article.page .column-list .column {
 }
 
 .bs-step-card.bs-kind-insight::before {
-  content: "Insight Block";
+  content: "Insight";
   color: #5b5376;
 }
 
 .bs-step-card.bs-kind-example::before {
-  content: "Example Block";
+  content: "Exemple";
   color: #6d5d15;
 }
 
 .bs-step-card.bs-kind-exercise::before {
-  content: "Exercise Block";
+  content: "Exercice";
   color: var(--bs-terracotta-deep);
 }
 
@@ -855,12 +857,12 @@ article.page .column-list .column {
 }
 
 .bs-step-card.bs-kind-summary::before {
-  content: "Summary Block";
+  content: "Synthèse";
   color: var(--bs-text);
 }
 
 .bs-step-card.bs-kind-tip::before {
-  content: "Coach Tip";
+  content: "Conseil";
   color: #5a6746;
 }
 
@@ -873,6 +875,7 @@ article.page input,
 article.page textarea {
   color: var(--bs-text) !important;
   line-height: 1.72 !important;
+  overflow-wrap: anywhere;
 }
 
 article.page p {
@@ -1033,7 +1036,7 @@ article.page .bs-block-heading.bs-heading-example::before {
 }
 
 article.page .bs-block-heading.bs-heading-exercise::before {
-  content: "Do";
+  content: "Action";
   background: rgba(201, 111, 43, 0.12);
   color: var(--bs-terracotta-deep);
 }
@@ -1051,9 +1054,27 @@ article.page .bs-block-heading.bs-heading-summary::before {
 }
 
 article.page .bs-block-heading.bs-heading-tip::before {
-  content: "Tip";
+  content: "Coach";
   background: rgba(154, 165, 123, 0.18);
   color: #5a6746;
+}
+
+article.page .page-title,
+article.page .page-description,
+article.page h1,
+article.page h2,
+article.page h3,
+article.page h4,
+article.page blockquote,
+article.page figcaption,
+.bs-preview-title,
+.bs-focus-title,
+.bs-heading-item,
+.bs-topbar-title,
+.bs-brand-copy,
+.bs-aside-copy,
+.bs-progress-copy {
+  overflow-wrap: anywhere;
 }
 
 article.page .bs-subsection-tag {
@@ -1380,7 +1401,7 @@ article.page figure.bs-audio-note .source {
 }
 
 article.page figure.bs-audio-note .source::before {
-  content: "Audio note";
+  content: "Note vocale";
   margin-bottom: 12px;
   background: rgba(201, 111, 43, 0.12);
   color: var(--bs-terracotta-deep);
@@ -1491,6 +1512,8 @@ article.page .img-card img,
 article.page .brand-upload-preview {
   border-radius: 20px !important;
   width: 100%;
+  max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -1574,7 +1597,7 @@ article.page figure.callout::before {
 }
 
 article.page figure.callout.bs-callout-tip::before {
-  content: "Coach tip";
+  content: "Conseil";
   background: rgba(154, 165, 123, 0.18);
   color: #5a6746;
 }
