@@ -1,16 +1,13 @@
 import type { ReactNode } from "react";
 import { tokens } from "../../lib/design-tokens";
-import { cn } from "../../lib/helpers";
 
 type BadgeProps = {
   children: ReactNode;
-  className?: string;
 };
 
-export function Badge({ children, className }: BadgeProps) {
+export function Badge({ children }: BadgeProps) {
   return (
     <span
-      className={cn("bs-badge", className)}
       style={{
         display: "inline-flex",
         alignItems: "center",

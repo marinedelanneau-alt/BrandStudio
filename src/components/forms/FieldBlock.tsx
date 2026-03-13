@@ -15,8 +15,8 @@ type FieldBlockProps = {
 
 export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps) {
   const inputId = `${moduleId}-${field.key}`;
-  const showStandaloneLabel = field.type === "text" || field.type === "textarea";
-  const stringValue = typeof value === "string" ? value : "";
+  const showStandaloneLabel =
+    field.type === "text" || field.type === "textarea";
 
   return (
     <div className="space-y-3">
@@ -30,7 +30,7 @@ export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps
         <Textarea
           id={inputId}
           placeholder={field.placeholder}
-          value={stringValue}
+          defaultValue={typeof value === "string" ? value : ""}
           onChange={(event) => onChange(field.key, event.target.value)}
         />
       ) : null}
@@ -39,7 +39,7 @@ export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps
         <Input
           id={inputId}
           placeholder={field.placeholder}
-          value={stringValue}
+          defaultValue={typeof value === "string" ? value : ""}
           onChange={(event) => onChange(field.key, event.target.value)}
         />
       ) : null}
@@ -55,29 +55,22 @@ export function FieldBlock({ moduleId, field, value, onChange }: FieldBlockProps
 
       {field.type === "imageupload" ? (
         <ImageUploadField
-          id={inputId}
           label={field.label}
           value={value}
-          onChange={(nextValue) => onChange(field.key, nextValue)}
+          placeholder={field.placeholder}
         />
       ) : null}
 
       {field.type === "colorrow" ? (
         <ColorRowField
-          id={inputId}
           label={field.label}
           value={value}
-          onChange={(nextValue) => onChange(field.key, nextValue)}
+          placeholder={field.placeholder}
         />
       ) : null}
 
       {field.type === "colorgenerator" ? (
-        <ColorGeneratorField
-          id={inputId}
-          label={field.label}
-          value={value}
-          onChange={(nextValue) => onChange(field.key, nextValue)}
-        />
+        <ColorGeneratorField label={field.label} value={value} />
       ) : null}
     </div>
   );

@@ -17,7 +17,6 @@ export function Card({ children, className, style }: CardProps) {
         border: `1px solid ${tokens.colors.border}`,
         borderRadius: tokens.radius.lg,
         boxShadow: tokens.shadows.soft,
-        position: "relative",
         ...style,
       }}
     >

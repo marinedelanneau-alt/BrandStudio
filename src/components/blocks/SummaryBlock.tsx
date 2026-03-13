@@ -10,9 +10,9 @@ export function SummaryBlock({ values }: Props) {
   if (!entries.length) return null;
 
   return (
-    <Card className="bg-[#FFFDF9] px-6 py-6">
+    <Card className="bg-[#FFFDF9]">
       <div className="mb-3 text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
-        Synthese
+        Synthèse
       </div>
       <div className="space-y-3">
         {entries.map(([label, value]) => (
