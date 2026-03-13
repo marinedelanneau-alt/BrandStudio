@@ -19,8 +19,6 @@ body {
     linear-gradient(180deg, #fbf8f2 0%, #f7f3ec 46%, #f3eee5 100%);
   color: #3F3F49;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
 }
 
 a {
@@ -46,7 +44,7 @@ select {
 
 .font-display {
   font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: -0.028em;
+  letter-spacing: -0.02em;
 }
 
 .bs-card {
@@ -56,10 +54,6 @@ select {
 
 .bs-badge {
   white-space: nowrap;
-}
-
-p {
-  max-width: 72ch;
 }
 
 #root {

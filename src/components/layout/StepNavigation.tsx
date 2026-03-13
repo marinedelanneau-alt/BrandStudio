@@ -14,7 +14,7 @@ export function StepNavigation({
   onNext,
 }: StepNavigationProps) {
   return (
-    <nav className="sticky bottom-4 z-20 mt-8 flex items-center justify-between gap-3 rounded-[26px] border border-[rgba(231,221,210,0.88)] bg-[rgba(255,253,249,0.88)] px-4 py-4 shadow-[0_14px_30px_rgba(25,25,25,0.07)] backdrop-blur">
+    <nav className="sticky bottom-4 z-20 mt-8 flex items-center justify-between gap-3 rounded-[24px] border border-[#E7DDD2] bg-[rgba(255,253,249,0.92)] px-4 py-4 shadow-[0_18px_36px_rgba(25,25,25,0.08)] backdrop-blur">
       {previousLabel && onPrevious ? (
         <Button variant="secondary" onClick={onPrevious}>
           {previousLabel}

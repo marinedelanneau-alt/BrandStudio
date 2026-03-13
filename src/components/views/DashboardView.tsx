@@ -38,24 +38,24 @@ export function DashboardView({
         {modules.map((module) => (
           <Card
             key={module.id}
-            className="group flex h-full flex-col gap-5 border-[rgba(231,221,210,0.88)] bg-[rgba(255,253,249,0.86)] px-6 py-6"
+            className="flex h-full flex-col gap-5 px-6 py-6"
             style={
               module.id === activeId
                 ? {
-                    borderColor: "#d8cbc0",
-                    background: "linear-gradient(180deg, rgba(255,247,238,0.98), rgba(255,253,249,0.94))",
+                    borderColor: "#3F3F49",
+                    background: "#FFF7EE",
                   }
                 : undefined
             }
           >
-            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8A8379]">
+            <div className="text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
               {cleanText(module.eyebrow)}
             </div>
             <div>
-              <h3 className="font-display text-[1.68rem] leading-tight text-[#3F3F49]">
+              <h3 className="font-display text-[1.6rem] leading-tight text-[#3F3F49]">
                 {cleanText(module.title)}
               </h3>
-              <p className="mt-3 text-[0.96rem] leading-8 text-[#756F67]">
+              <p className="mt-3 text-sm leading-7 text-[#756F67]">
                 {cleanText(module.subtitle)}
               </p>
             </div>
