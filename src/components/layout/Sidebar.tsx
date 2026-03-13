@@ -1,5 +1,4 @@
 import { brandAssets } from "../../lib/brand-assets";
-import { cleanText } from "../../lib/helpers";
 import type { Module } from "../../types/brand";
 
 type Props = {
@@ -72,10 +71,10 @@ export function Sidebar({
                 }`}
               >
                 <div className="text-[11px] font-black uppercase tracking-[0.18em] text-[#8A8379]">
-                  {cleanText(module.eyebrow)}
+                  {module.eyebrow}
                 </div>
                 <div className="font-display mt-2 text-[1.15rem] leading-tight text-[#3F3F49]">
-                  {cleanText(module.title)}
+                  {module.title}
                 </div>
               </button>
             );

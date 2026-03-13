@@ -23,23 +23,3 @@ export function groupBy<T, K extends string>(items: T[], getKey: (item: T) => K)
     return acc;
   }, {} as Record<K, T[]>);
 }
-
-export function cleanText(value: string) {
-  return value
-    .replace(/â€™/g, "'")
-    .replace(/â€œ|â€/g, '"')
-    .replace(/â€“|â€”/g, "-")
-    .replace(/â€¦/g, "...")
-    .replace(/Ã©/g, "é")
-    .replace(/Ã¨/g, "è")
-    .replace(/Ã /g, "à")
-    .replace(/Ãª/g, "ê")
-    .replace(/Ã¢/g, "â")
-    .replace(/Ã§/g, "ç")
-    .replace(/Ã¹/g, "ù")
-    .replace(/Ã»/g, "û")
-    .replace(/Ã®/g, "î")
-    .replace(/Ã´/g, "ô")
-    .replace(/Å“/g, "oe")
-    .replace(/Â/g, "");
-}

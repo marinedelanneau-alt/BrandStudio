@@ -1,5 +1,4 @@
 import type { BrandData, Module } from "../../types/brand";
-import { cleanText } from "../../lib/helpers";
 import { AudioNote } from "../blocks/AudioNote";
 import { ChecklistBlock } from "../blocks/ChecklistBlock";
 import { CoachTip } from "../blocks/CoachTip";
@@ -19,19 +18,16 @@ export function ModuleView({ module, data, onChange }: Props) {
   return (
     <div className="space-y-8">
       {module.introNote ? (
-        <CoachTip title="Introduction">{cleanText(module.introNote)}</CoachTip>
+        <CoachTip title="Introduction">{module.introNote}</CoachTip>
       ) : null}
 
-      {module.example ? <ExampleBlock>{cleanText(module.example)}</ExampleBlock> : null}
+      {module.example ? <ExampleBlock>{module.example}</ExampleBlock> : null}
 
       {(module.steps ?? []).map((step, index) => {
         const summary = Object.fromEntries(
           (step.summaryFields || []).map((fieldKey) => {
             const field = step.fields.find((item) => item.key === fieldKey);
-            return [
-              cleanText(field?.label || fieldKey),
-              formatSummaryValue(data[fieldKey]),
-            ];
+            return [field?.label || fieldKey, formatSummaryValue(data[fieldKey])];
           })
         );
 
@@ -43,30 +39,28 @@ export function ModuleView({ module, data, onChange }: Props) {
               </div>
               <div>
                 <h3 className="font-display text-[1.8rem] leading-tight text-[#3F3F49]">
-                  {cleanText(step.title)}
+                  {step.title}
                 </h3>
                 <p className="mt-2 max-w-3xl text-sm leading-7 text-[#6A635B]">
-                  {cleanText(step.description)}
+                  {step.description}
                 </p>
               </div>
             </div>
 
-            {step.note ? <CoachTip>{cleanText(step.note)}</CoachTip> : null}
+            {step.note ? <CoachTip>{step.note}</CoachTip> : null}
 
             {step.audioTitle ? (
               <AudioNote
-                title={cleanText(step.audioTitle)}
-                description={step.audioDescription ? cleanText(step.audioDescription) : undefined}
+                title={step.audioTitle}
+                description={step.audioDescription}
               />
             ) : null}
 
             {step.insight ? (
-              <InsightBlock title={step.insightTitle ? cleanText(step.insightTitle) : undefined}>
-                {cleanText(step.insight)}
-              </InsightBlock>
+              <InsightBlock title={step.insightTitle}>{step.insight}</InsightBlock>
             ) : null}
 
-            {step.exampleText ? <ExampleBlock>{cleanText(step.exampleText)}</ExampleBlock> : null}
+            {step.exampleText ? <ExampleBlock>{step.exampleText}</ExampleBlock> : null}
 
             {step.checklist?.length ? (
               <ChecklistBlock>
@@ -76,7 +70,7 @@ export function ModuleView({ module, data, onChange }: Props) {
                     className="flex items-start gap-3 rounded-[18px] border border-[#E7DDD2] bg-white px-4 py-4"
                   >
                     <input type="checkbox" className="mt-1 h-4 w-4" />
-                    <span>{cleanText(item)}</span>
+                    <span>{item}</span>
                   </label>
                 ))}
               </ChecklistBlock>
@@ -87,11 +81,7 @@ export function ModuleView({ module, data, onChange }: Props) {
                 <FieldBlock
                   key={field.key}
                   moduleId={module.id}
-                  field={{
-                    ...field,
-                    label: cleanText(field.label),
-                    placeholder: field.placeholder ? cleanText(field.placeholder) : undefined,
-                  }}
+                  field={field}
                   value={data[field.key]}
                   onChange={onChange}
                 />
@@ -108,15 +98,15 @@ export function ModuleView({ module, data, onChange }: Props) {
 
 function formatSummaryValue(value: unknown) {
   if (typeof value === "string") {
-    return cleanText(value);
+    return value;
   }
 
   if (Array.isArray(value)) {
-    return value.filter(Boolean).map((item) => cleanText(String(item))).join(", ");
+    return value.filter(Boolean).join(", ");
   }
 
   if (value && typeof value === "object") {
-    return cleanText(JSON.stringify(value));
+    return JSON.stringify(value);
   }
 
   return "";

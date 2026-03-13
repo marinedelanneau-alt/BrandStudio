@@ -1,6 +1,5 @@
 import type { ProgressSnapshot } from "../../types/brand";
 import { brandAssets } from "../../lib/brand-assets";
-import { cleanText } from "../../lib/helpers";
 import { Badge } from "../ui/Badge";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
@@ -19,7 +18,7 @@ export function Topbar({ title, progress }: TopbarProps) {
         </div>
         <div>
           <strong className="font-display text-[1.5rem] leading-tight text-[#3F3F49]">
-            {cleanText(title)}
+            {title}
           </strong>
           <div className="mt-2 flex flex-wrap gap-2">
             <Badge>{brandAssets.name}</Badge>

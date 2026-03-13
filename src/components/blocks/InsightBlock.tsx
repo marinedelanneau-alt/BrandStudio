@@ -1,5 +1,4 @@
 import type { PropsWithChildren } from "react";
-import { cleanText } from "../../lib/helpers";
 import { Card } from "../ui/Card";
 
 export function InsightBlock({
@@ -9,7 +8,7 @@ export function InsightBlock({
   return (
     <Card className="bg-white">
       <div className="mb-3 text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
-        {cleanText(title || "Pourquoi c'est important")}
+        {title || "Pourquoi c’est important"}
       </div>
       <div className="text-sm leading-7 text-[#5E584F]">{children}</div>
     </Card>
