@@ -11,6 +11,59 @@
   var LOGO_SRC = "LAB_(17).png";
   var COLLAGE_MAIN = "Elments_nouvelle_comm.png";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var PAGE_META = {
+    "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html": {
+      description: "Pose le cadre du parcours avec une pr\u00e9sentation claire de l'accompagnement et de sa valeur."
+    },
+    "Vision & marque 295057792efe81b4ac90f13958e3abad.html": {
+      description: "Clarifie l'ADN de ta marque pour ancrer chaque choix visuel dans une intention forte."
+    },
+    "Positionnement 295057792efe810e98f4ffd60c74fad4.html": {
+      description: "Affirme ta diff\u00e9rence, ta cible et ta promesse pour rendre ta marque lisible et d\u00e9sirable."
+    },
+    "Personnalit\u00e9 & ton de marque 295057792efe81e6be2be44f4963e114.html": {
+      description: "Cadre la voix, les codes visuels et les r\u00e9f\u00e9rences de marque pour garder une expression coh\u00e9rente."
+    },
+    "Cr\u00e9ation du document, \u00e0 toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html": {
+      description: "Rassemble les \u00e9l\u00e9ments essentiels et transforme-les en livrable final clair, complet et pr\u00eat \u00e0 l'emploi."
+    },
+    "SUPPORTS BONUS 2fe057792efe801c9accfc2deb83190e.html": {
+      description: "Prolonge le travail avec des ressources compl\u00e9mentaires, des exemples et des rep\u00e8res d'application."
+    },
+    "En route vers ta nouvelle strat\u00e9gie de marque 295057792efe80aabdfeebdd4704fcac.html": {
+      description: "Retrouve le parcours complet dans une interface de travail homog\u00e8ne, guid\u00e9e et exploitable."
+    }
+  };
+  var AUDIO_SOURCE_OVERRIDES = {
+    "Personnalité & ton de marque 295057792efe81e6be2be44f4963e114.html": {
+      "2ee05779-2efe-8005-a550-e54f811fccfe": "Notes vocales/note-vocale-marque-personne.mp4"
+    }
+  };
+  var TEXT_REPLACEMENTS = [
+    [/\bparle t-elle\b/gi, "parle-t-elle"],
+    [/\bd[ée]gage t-elle\b/gi, "d\u00e9gage-t-elle"],
+    [/\bquelle energie\b/gi, "quelle \u00e9nergie"],
+    [/\bremplie le tableau\b/gi, "remplis le tableau"],
+    [/\bTu ne doit pas\b/g, "Tu ne dois pas"],
+    [/\bmilles mots\b/gi, "mille mots"],
+    [/\btu ne pas seulement\b/gi, "tu ne vas pas seulement"],
+    [/\bdes typo\b/gi, "des typographies"],
+    [/\bPublicit\u00e9 PRINT\b/g, "Publicit\u00e9 print"],
+    [/\bUtilise le\b/g, "Utilise-le"],
+    [/\bExploitons la\b/g, "Exploitons-la"],
+    [/\bd\u00e9crirais tu\b/gi, "d\u00e9crirais-tu"],
+    [/\bA toi de jouer\b/g, "\u00c0 toi de jouer"],
+    [/\btacible\b/gi, "ta cible"],
+    [/\bt\u2019adresses tu\b/gi, "t\u2019adresses-tu"],
+    [/\boccupera t-elle\b/gi, "occupera-t-elle"],
+    [/\btu travaillera\b/gi, "tu travailleras"],
+    [/\bD\u00e9finissons tes couleurs\s+/g, "D\u00e9finissons tes couleurs"],
+    [/\bSynthe[seè] de marque\b/g, "Synth\u00e8se de marque"],
+    [/\bSynthese strategique\b/g, "Synth\u00e8se strat\u00e9gique"],
+    [/\bDocument genere le\b/g, "Document g\u00e9n\u00e9r\u00e9 le"],
+    [/\breponses client prioritaires\b/g, "r\u00e9ponses client prioritaires"],
+    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"]
+  ];
 
   function norm(value) {
     try {
@@ -34,6 +87,16 @@
 
   function textOf(el) {
     return ((el && el.textContent) || "").replace(/\s+/g, " ").trim();
+  }
+
+  function getPageMeta() {
+    return PAGE_META[currentPath()] || null;
+  }
+
+  function getAudioOverride(figureId) {
+    var pageMap = AUDIO_SOURCE_OVERRIDES[currentPath()] || null;
+    if (!pageMap) return "";
+    return pageMap[figureId] || "";
   }
 
   function previousMeaningfulSibling(node) {
@@ -113,6 +176,274 @@
     return el;
   }
 
+  function shouldSkipTextNode(node) {
+    if (!node || !node.parentElement) return true;
+    var tag = node.parentElement.tagName;
+    return tag === "SCRIPT" || tag === "STYLE" || tag === "TEXTAREA" || tag === "INPUT" || tag === "CODE" || tag === "PRE";
+  }
+
+  function repairCopy(root) {
+    if (!root || root.dataset.bsCopyFixed === "1") return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (shouldSkipTextNode(node)) continue;
+      var value = node.nodeValue;
+      var nextValue = value;
+      TEXT_REPLACEMENTS.forEach(function (entry) {
+        nextValue = nextValue.replace(entry[0], entry[1]);
+      });
+      nextValue = nextValue.replace(/[ \t]{2,}/g, " ").replace(/ +([:;!?])/g, " $1");
+      if (nextValue !== value) node.nodeValue = nextValue;
+    }
+    root.dataset.bsCopyFixed = "1";
+  }
+
+  function setPageDescription(article) {
+    if (!article) return;
+    var description = article.querySelector(".page-description");
+    var meta = getPageMeta();
+    if (!description || !meta || textOf(description)) return;
+    description.textContent = meta.description;
+  }
+
+  function normalizeTables(root) {
+    if (!root || root.dataset.bsTablesNormalized === "1") return;
+    Array.prototype.slice.call(root.querySelectorAll("table")).forEach(function (table) {
+      ["thead", "tbody", "tfoot"].forEach(function (tagName) {
+        Array.prototype.slice.call(table.querySelectorAll(tagName)).forEach(function (section) {
+          Array.prototype.slice.call(section.children).forEach(function (child) {
+            if (child.tagName !== "DIV") return;
+            while (child.firstChild) {
+              section.insertBefore(child.firstChild, child);
+            }
+            child.remove();
+          });
+        });
+      });
+
+      if (!table.querySelector("thead")) {
+        var firstRow = table.querySelector("tbody tr, tr");
+        if (!firstRow) return;
+        var cells = Array.prototype.slice.call(firstRow.children);
+        var headerLike = cells.length && cells.every(function (cell) {
+          return cell.tagName === "TH" || !/\[Zone de texte\]/i.test(textOf(cell));
+        });
+        if (headerLike) {
+          var thead = document.createElement("thead");
+          thead.appendChild(firstRow);
+          table.insertBefore(thead, table.firstChild);
+        }
+      }
+    });
+    root.dataset.bsTablesNormalized = "1";
+  }
+
+  function zoneStorageKey(node, suffix) {
+    var base = node && node.id ? node.id : "zone";
+    return "brandstudio:fallback:" + currentPath() + ":" + base + ":" + (suffix || "0");
+  }
+
+  function autosizeTextarea(field) {
+    if (!field || field.tagName !== "TEXTAREA") return;
+    field.style.height = "auto";
+    field.style.height = Math.max(field.scrollHeight, 132) + "px";
+  }
+
+  function buildInlineZone(storageKey, placeholder) {
+    var zone = create("span", "brand-zone brand-zone-inline");
+    zone.contentEditable = "true";
+    zone.setAttribute("role", "textbox");
+    zone.setAttribute("data-placeholder", placeholder || "Votre réponse");
+    zone.setAttribute("spellcheck", "true");
+    try {
+      zone.textContent = localStorage.getItem(storageKey) || "";
+    } catch (err) {}
+    zone.addEventListener("input", function () {
+      try {
+        localStorage.setItem(storageKey, zone.textContent.trim());
+      } catch (err) {}
+    });
+    return zone;
+  }
+
+  function buildBlockZone(storageKey, placeholder) {
+    var zone = document.createElement("textarea");
+    zone.className = "brand-zone brand-zone-block";
+    zone.placeholder = placeholder || "Écris ici";
+    zone.rows = 4;
+    try {
+      zone.value = localStorage.getItem(storageKey) || "";
+    } catch (err) {}
+    autosizeTextarea(zone);
+    zone.addEventListener("input", function () {
+      autosizeTextarea(zone);
+      try {
+        localStorage.setItem(storageKey, zone.value);
+      } catch (err) {}
+    });
+    return zone;
+  }
+
+  function replaceInlineTokens(node, tokenText) {
+    if (!node || !tokenText || node.dataset.bsInlineTokensMounted === "1") return false;
+    var raw = node.textContent || "";
+    if (raw.indexOf(tokenText) === -1) return false;
+    node.dataset.bsInlineTokensMounted = "1";
+    var parts = raw.split(tokenText);
+    node.textContent = "";
+    parts.forEach(function (part, index) {
+      if (part) node.appendChild(document.createTextNode(part));
+      if (index < parts.length - 1) {
+        node.appendChild(buildInlineZone(zoneStorageKey(node, "inline-" + index), "Compléter"));
+      }
+    });
+    return true;
+  }
+
+  function mountFallbackFields(root) {
+    if (!root || root.dataset.bsFallbackFieldsMounted === "1") return;
+    var token = "[Zone de texte]";
+
+    Array.prototype.slice.call(root.querySelectorAll("figure.callout, blockquote, td, th, p, li, h2, h3, h4")).forEach(function (node) {
+      if (node.querySelector && node.querySelector("textarea, .brand-zone-inline, [contenteditable='true']")) return;
+      var text = textOf(node);
+      if (!text || text.indexOf(token) === -1) return;
+
+      if (text === token && /^(P|DIV|BLOCKQUOTE|TD|TH)$/i.test(node.tagName)) {
+        node.textContent = "";
+        node.appendChild(buildBlockZone(zoneStorageKey(node, "block"), "Écris ici"));
+        return;
+      }
+
+      if (/^(H2|H3|H4|P|LI|BLOCKQUOTE|TD|TH)$/i.test(node.tagName)) {
+        replaceInlineTokens(node, token);
+      }
+    });
+
+    Array.prototype.slice.call(root.querySelectorAll("p, div")).forEach(function (node) {
+      if (textOf(node) === "* * *") {
+        var divider = document.createElement("hr");
+        divider.className = "bs-divider";
+        node.replaceWith(divider);
+      }
+    });
+
+    root.dataset.bsFallbackFieldsMounted = "1";
+  }
+
+  function normalizeLinks(root) {
+    if (!root || root.dataset.bsLinksNormalized === "1") return;
+    Array.prototype.slice.call(root.querySelectorAll("a[href]")).forEach(function (anchor) {
+      var href = (anchor.getAttribute("href") || "").trim();
+      if (!href) return;
+      var text = textOf(anchor);
+      href = href.replace(/\.frr\/?$/i, ".fr/");
+      href = href.replace(/^([^\]]+)\]\((https?:\/\/[^)]+)\)$/i, "$2");
+      href = href.replace(/^https?:\/\/([^/\]]+)\]\((https?:\/\/[^)]+)\)$/i, "$2");
+      anchor.setAttribute("href", href);
+      if (!anchor.classList.contains("bookmark") && (/^\s*https?:\/\/[^/\]]+\]\(https?:\/\/.+\)\s*$/i.test(text) || /\.frr\/?$/i.test(text))) {
+        anchor.textContent = href;
+      }
+      if (anchor.classList.contains("bookmark")) {
+        var hrefNode = anchor.querySelector(".bookmark-href");
+        if (hrefNode) hrefNode.textContent = href;
+        var titleNode = anchor.querySelector(".bookmark-title");
+        if (titleNode && !textOf(titleNode)) {
+          try {
+            titleNode.textContent = new URL(href).hostname.replace(/^www\./, "");
+          } catch (err) {}
+        }
+      }
+    });
+    root.dataset.bsLinksNormalized = "1";
+  }
+
+  function mountUploadSlots(root) {
+    if (!root) return;
+    Array.prototype.slice.call(root.querySelectorAll("figure.bs-placeholder-media")).forEach(function (figure, index) {
+      if (figure.dataset.bsUploadMounted === "1") return;
+      figure.dataset.bsUploadMounted = "1";
+      figure.classList.add("brand-upload-slot");
+
+      var titleSource = previousMeaningfulSibling(figure);
+      var slotLabel = textOf(titleSource) || "Visuel de r\u00e9f\u00e9rence";
+      var storageKey = "brandstudio:upload:" + (figure.id || "slot-" + index);
+
+      figure.innerHTML = "";
+
+      var box = create("div", "brand-upload-box");
+      var kicker = create("div", "bs-focus-kicker", "R\u00e9f\u00e9rence visuelle");
+      var title = create("strong", "brand-upload-title", slotLabel);
+      var hint = create("p", "brand-upload-hint", "Ajoute une image pour illustrer ce bloc, nourrir ton moodboard ou garder un rep\u00e8re concret dans le parcours.");
+      var controls = create("div", "brand-upload-controls");
+      var input = document.createElement("input");
+      input.type = "file";
+      input.accept = "image/*";
+      input.hidden = true;
+      var addBtn = create("button", "bs-pill-btn bs-secondary-btn", "Ajouter une image");
+      addBtn.type = "button";
+      var removeBtn = create("button", "bs-pill-btn bs-secondary-btn", "Retirer");
+      removeBtn.type = "button";
+      removeBtn.hidden = true;
+      var preview = create("img", "brand-upload-preview");
+      preview.alt = slotLabel;
+      preview.hidden = true;
+
+      function applyPreview(dataUrl) {
+        var hasImage = !!dataUrl;
+        box.classList.toggle("has-image", hasImage);
+        preview.hidden = !hasImage;
+        preview.src = hasImage ? dataUrl : "";
+        removeBtn.hidden = !hasImage;
+        hint.hidden = hasImage;
+      }
+
+      addBtn.addEventListener("click", function () {
+        input.click();
+      });
+
+      removeBtn.addEventListener("click", function () {
+        try {
+          localStorage.removeItem(storageKey);
+        } catch (err) {}
+        input.value = "";
+        applyPreview("");
+      });
+
+      input.addEventListener("change", function () {
+        var file = input.files && input.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function () {
+          var result = typeof reader.result === "string" ? reader.result : "";
+          if (!result) return;
+          try {
+            localStorage.setItem(storageKey, result);
+          } catch (err) {}
+          applyPreview(result);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      controls.appendChild(addBtn);
+      controls.appendChild(removeBtn);
+      box.appendChild(kicker);
+      box.appendChild(title);
+      box.appendChild(hint);
+      box.appendChild(preview);
+      box.appendChild(controls);
+      box.appendChild(input);
+      figure.appendChild(box);
+
+      try {
+        applyPreview(localStorage.getItem(storageKey) || "");
+      } catch (err) {
+        applyPreview("");
+      }
+    });
+  }
+
   function decorateBodyContent(body) {
     if (!body || body.dataset.bsDecorated === "1") return;
 
@@ -142,6 +473,28 @@
       var href = (anchor && anchor.getAttribute("href")) || "";
       var previous = previousMeaningfulSibling(figure);
       var previousText = textOf(previous);
+      var audioOverride = getAudioOverride(figure.id);
+      if (audioOverride) {
+        source.textContent = "";
+        var player = document.createElement("audio");
+        player.controls = true;
+        player.preload = "none";
+        player.src = audioOverride;
+        player.className = "bs-audio-player";
+        var link = create("a", "bs-audio-link", "Ouvrir la note vocale");
+        link.href = audioOverride;
+        link.target = "_blank";
+        link.rel = "noopener";
+        source.appendChild(player);
+        source.appendChild(link);
+        figure.classList.add("bs-audio-note", "has-audio-player");
+        if (previous && previous.matches && previous.matches("p")) previous.classList.add("bs-audio-label");
+        return;
+      }
+      if (/soundefined/i.test(href)) {
+        source.textContent = "Ressource en cours de connexion";
+        if (anchor) anchor.removeAttribute("href");
+      }
       if (/soundefined/i.test(href) || /note vocale|audio|podcast|ecoute|\u00e9coute|\ud83c\udf99\ufe0f/i.test(previousText)) {
         figure.classList.add("bs-audio-note");
         if (previous && previous.matches && previous.matches("p")) previous.classList.add("bs-audio-label");
@@ -295,7 +648,7 @@
     groups.forEach(function (group, index) {
       var section = create("section", index === 0 ? "bs-intro-card" : "bs-step-card");
       if (index > 0) {
-        section.setAttribute("data-step-label", "Etape " + index);
+        section.setAttribute("data-step-label", "\u00c9tape " + index);
       }
       stack.appendChild(section);
       group.forEach(function (node) {
@@ -327,12 +680,12 @@
     var sidebar = create("aside", "bs-sidebar");
 
     var brand = create("section", "bs-panel bs-brand-panel");
-    var brandTag = create("div", "bs-brand-tag", "Creative Workspace");
+    var brandTag = create("div", "bs-brand-tag", "Espace de travail");
     var brandImg = create("img", "bs-brand-mark");
     brandImg.src = LOGO_SRC;
     brandImg.alt = "Brand Studio";
     var brandTitle = create("h2", "bs-brand-title", "Brand Studio");
-    var brandCopy = create("p", "bs-brand-copy", "Un espace de travail editorial pour construire ta marque avec plus de clarte, de coherence et de desirabilite.");
+    var brandCopy = create("p", "bs-brand-copy", "Un espace de travail \u00e9ditorial pour construire ta marque avec plus de clart\u00e9, de coh\u00e9rence et de d\u00e9sirabilit\u00e9.");
     brand.appendChild(brandTag);
     brand.appendChild(brandImg);
     brand.appendChild(brandTitle);
@@ -386,11 +739,11 @@
     var headings = collectHeadings(article);
     var stats = completionStats(article);
     copy.appendChild(create("h2", "bs-topbar-title", title));
-    copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " - Brand Studio" : "Brand Studio"));
+    copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " | Brand Studio" : "Brand Studio"));
     var meta = create("div", "bs-topbar-meta");
-    meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " reperes" : "Section libre"));
-    meta.appendChild(create("span", "bs-topbar-chip", stats.percent + "% complete"));
-    meta.appendChild(create("span", "bs-topbar-chip bs-topbar-chip-current", headings.length ? headings[0].text : "Demarrage"));
+    meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " rep\u00e8res" : "Section libre"));
+    meta.appendChild(create("span", "bs-topbar-chip", stats.percent + "% compl\u00e9t\u00e9"));
+    meta.appendChild(create("span", "bs-topbar-chip bs-topbar-chip-current", headings.length ? headings[0].text : "D\u00e9marrage"));
     copy.appendChild(meta);
 
     var actions = create("div", "bs-topbar-actions");
@@ -442,9 +795,9 @@
     var stats = completionStats(article);
 
     var quick = create("section", "bs-panel bs-aside-card");
-    quick.appendChild(create("div", "bs-aside-label", "Quick Preview"));
-    quick.appendChild(create("h3", "bs-aside-title", "Apercu rapide"));
-    quick.appendChild(create("p", "bs-aside-copy", "Une lecture synthetique de la section active pour garder le cap pendant le remplissage."));
+    quick.appendChild(create("div", "bs-aside-label", "Vue rapide"));
+    quick.appendChild(create("h3", "bs-aside-title", "Aper\u00e7u rapide"));
+    quick.appendChild(create("p", "bs-aside-copy", "Une lecture synth\u00e9tique de la section active pour garder le cap pendant le remplissage."));
     var quickCard = create("div", "bs-preview-card");
     if (cover) {
       var coverClone = create("img", "bs-preview-cover");
@@ -455,7 +808,7 @@
     quickCard.appendChild(create("h4", "bs-preview-title", title));
     var meta = create("div", "bs-preview-meta");
     meta.appendChild(create("span", "bs-chip", idx >= 0 ? "Module " + (idx + 1) : "Module"));
-    meta.appendChild(create("span", "bs-chip", stats.percent + "% complete"));
+    meta.appendChild(create("span", "bs-chip", stats.percent + "% compl\u00e9t\u00e9"));
     if (stats.totalText) meta.appendChild(create("span", "bs-chip", stats.filledText + "/" + stats.totalText + " champs"));
     quickCard.appendChild(meta);
     quick.appendChild(quickCard);
@@ -463,12 +816,12 @@
     var focus = create("section", "bs-panel bs-aside-card bs-focus-card");
     focus.appendChild(create("div", "bs-aside-label", "Focus"));
     focus.appendChild(create("h3", "bs-aside-title", "Focus du moment"));
-    focus.appendChild(create("p", "bs-aside-copy", "Un repere court pour savoir ou vous en etes et quoi traiter maintenant."));
+    focus.appendChild(create("p", "bs-aside-copy", "Un rep\u00e8re court pour savoir o\u00f9 tu en es et quoi traiter maintenant."));
     var focusBody = create("div", "bs-preview-card");
     var focusKicker = create("div", "bs-focus-kicker", "Section active");
     var focusTitle = create("h4", "bs-preview-title bs-focus-title", headings.length ? headings[0].text : title);
     focusTitle.setAttribute("data-bs-current-heading", "1");
-    var focusText = create("p", "bs-focus-copy", stats.totalText ? (stats.filledText + " champ(s) rempli(s) sur " + stats.totalText + " dans ce module.") : "Le contenu de cette page est pret a etre explore section par section.");
+    var focusText = create("p", "bs-focus-copy", stats.totalText ? (stats.filledText + " champ(s) rempli(s) sur " + stats.totalText + " dans ce module.") : "Le contenu de cette page est pr\u00eat \u00e0 \u00eatre explor\u00e9 section par section.");
     var focusProgress = create("div", "bs-focus-progress");
     var focusBar = create("div", "bs-focus-progress-bar");
     focusBar.style.width = stats.percent + "%";
@@ -481,9 +834,9 @@
     focus.appendChild(focusBody);
 
     var brandbook = create("section", "bs-panel bs-aside-card");
-    brandbook.appendChild(create("div", "bs-aside-label", "Brand Book Preview"));
+    brandbook.appendChild(create("div", "bs-aside-label", "Brand Book"));
     brandbook.appendChild(create("h3", "bs-aside-title", "Livrable en cours"));
-    brandbook.appendChild(create("p", "bs-aside-copy", "Les reperes de cette section, mis en forme comme un document de studio premium."));
+    brandbook.appendChild(create("p", "bs-aside-copy", "Les rep\u00e8res de cette section, mis en forme comme un document de studio premium."));
     var brandCard = create("div", "bs-preview-card");
     var collage = create("img", "bs-preview-cover");
     collage.src = COLLAGE_MAIN;
@@ -500,7 +853,7 @@
       list.appendChild(link);
     });
     if (!headings.length) {
-      list.appendChild(create("div", "bs-heading-item", "Le contenu de cette section apparaitra ici au fil du remplissage."));
+      list.appendChild(create("div", "bs-heading-item", "Le contenu de cette section appara\u00eetra ici au fil du remplissage."));
     }
     brandCard.appendChild(list);
     brandbook.appendChild(brandCard);
@@ -568,18 +921,18 @@
       showState("Enregistrement...", "is-dirty");
       if (timer) window.clearTimeout(timer);
       timer = window.setTimeout(function () {
-        showState("Enregistre", "is-saved");
+        showState("Enregistr\u00e9", "is-saved");
       }, 500);
     }
 
-    Array.prototype.slice.call(document.querySelectorAll("textarea, input[contenteditable='true'], .brand-zone-inline")).forEach(function (field) {
+    Array.prototype.slice.call(document.querySelectorAll("textarea, [contenteditable='true'], .brand-zone-inline")).forEach(function (field) {
       field.addEventListener("input", markDirty, { passive: true });
     });
 
     saveBtn.addEventListener("click", function () {
       var note = document.querySelector(".bs-floating-note");
       if (!note) {
-        note = create("div", "bs-floating-note", "Les modifications sont conservees automatiquement.");
+        note = create("div", "bs-floating-note", "Les modifications sont conserv\u00e9es automatiquement.");
         document.body.appendChild(note);
       }
       note.classList.add("is-visible");
@@ -632,12 +985,17 @@
     var shell = create("div", "bs-shell");
     var sidebar = buildSidebar(idx);
     var main = create("main", "bs-main");
+    setPageDescription(article);
+    repairCopy(article);
+    normalizeLinks(article);
+    normalizeTables(article);
+    mountFallbackFields(article);
+    decorateBodyContent(article.querySelector(".page-body"));
+    mountUploadSlots(article.querySelector(".page-body"));
+    groupBodyContent(article.querySelector(".page-body"));
     var topbar = buildTopbar(article, idx);
     var aside = buildAside(article, idx);
     var bottomBar = buildBottomBar(idx);
-
-    decorateBodyContent(article.querySelector(".page-body"));
-    groupBodyContent(article.querySelector(".page-body"));
 
     main.appendChild(topbar);
     main.appendChild(article);

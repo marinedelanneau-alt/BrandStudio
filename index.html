@@ -283,7 +283,7 @@ body {
       } else {
         if (result.reason === "session_active_elsewhere") {
           const mins = Math.max(1, Math.ceil((Number(result.retryAfter) || 0) / 60));
-          error.textContent = "Ce code est deja utilise sur une autre session active. Reessaie dans environ " + mins + " min.";
+          error.textContent = "Ce code est déjà utilisé sur une autre session active. Réessaie dans environ " + mins + " min.";
         } else {
           error.textContent = "Code invalide.";
         }
