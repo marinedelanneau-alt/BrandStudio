@@ -13,10 +13,7 @@ html, body, #root {
 
 body {
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  background:
-    radial-gradient(1200px 700px at -8% -10%, rgba(240, 214, 74, 0.16), transparent 58%),
-    radial-gradient(900px 620px at 112% 0%, rgba(185, 178, 217, 0.18), transparent 48%),
-    linear-gradient(180deg, #fbf8f2 0%, #f7f3ec 46%, #f3eee5 100%);
+  background: #F7F3EC;
   color: #3F3F49;
   line-height: 1.5;
 }
@@ -44,31 +41,12 @@ select {
 
 .font-display {
   font-family: Georgia, "Times New Roman", serif;
-  letter-spacing: -0.02em;
 }
 
 .bs-card {
   padding: 1.5rem;
-  backdrop-filter: blur(18px);
 }
 
 .bs-badge {
   white-space: nowrap;
-}
-
-#root {
-  position: relative;
-}
-
-#root::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(63, 63, 73, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(63, 63, 73, 0.03) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.45), transparent 88%);
-  opacity: 0.22;
 }
