@@ -753,7 +753,9 @@
     copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " | Brand Studio" : "Brand Studio"));
     var meta = create("div", "bs-topbar-meta");
     meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " rep\u00e8res" : "Section libre"));
-    meta.appendChild(create("span", "bs-topbar-chip", stats.percent + "% compl\u00e9t\u00e9"));
+    var progressChip = create("span", "bs-topbar-chip", stats.percent + "% compl\u00e9t\u00e9");
+    progressChip.setAttribute("data-bs-progress-chip", "1");
+    meta.appendChild(progressChip);
     meta.appendChild(create("span", "bs-topbar-chip bs-topbar-chip-current", headings.length ? headings[0].text : "D\u00e9marrage"));
     copy.appendChild(meta);
 
@@ -782,16 +784,23 @@
   }
 
   function completionStats(article) {
-    var textareas = Array.prototype.slice.call(article.querySelectorAll("textarea.brand-zone-block, textarea.brand-zone"));
-    var filledText = textareas.filter(function (el) { return textOf(el).length > 0; }).length;
+    var fields = Array.prototype.slice.call(article.querySelectorAll("textarea.brand-zone-block, textarea.brand-zone, .brand-zone-inline[contenteditable='true']"));
+    var filledText = fields.filter(function (el) {
+      if (!el) return false;
+      if (el.classList && el.classList.contains("brand-zone-inline")) {
+        return textOf(el).length > 0;
+      }
+      if (el.getAttribute && el.getAttribute("data-prompt-visible") === "1") return false;
+      return ((el.value || "").trim()).length > 0;
+    }).length;
     var checks = Array.prototype.slice.call(article.querySelectorAll(".to-do-list > li"));
     var checked = Array.prototype.slice.call(article.querySelectorAll(".checkbox-on")).length;
-    var baseTotal = textareas.length + checks.length;
+    var baseTotal = fields.length + checks.length;
     var baseDone = filledText + checked;
     var percent = baseTotal ? Math.round((baseDone / baseTotal) * 100) : 0;
     return {
       filledText: filledText,
-      totalText: textareas.length,
+      totalText: fields.length,
       checked: checked,
       totalChecks: checks.length,
       percent: percent
@@ -819,8 +828,13 @@
     quickCard.appendChild(create("h4", "bs-preview-title", title));
     var meta = create("div", "bs-preview-meta");
     meta.appendChild(create("span", "bs-chip", idx >= 0 ? "Module " + (idx + 1) : "Module"));
-    meta.appendChild(create("span", "bs-chip", stats.percent + "% compl\u00e9t\u00e9"));
-    if (stats.totalText) meta.appendChild(create("span", "bs-chip", stats.filledText + "/" + stats.totalText + " champs"));
+    var percentChip = create("span", "bs-chip", stats.percent + "% compl\u00e9t\u00e9");
+    percentChip.setAttribute("data-bs-aside-progress-chip", "1");
+    meta.appendChild(percentChip);
+    var fieldsChip = create("span", "bs-chip", stats.filledText + "/" + stats.totalText + " champs");
+    fieldsChip.setAttribute("data-bs-fields-chip", "1");
+    fieldsChip.hidden = !stats.totalText;
+    meta.appendChild(fieldsChip);
     quickCard.appendChild(meta);
     quick.appendChild(quickCard);
 
@@ -833,6 +847,7 @@
     var focusTitle = create("h4", "bs-preview-title bs-focus-title", headings.length ? headings[0].text : title);
     focusTitle.setAttribute("data-bs-current-heading", "1");
     var focusText = create("p", "bs-focus-copy", stats.totalText ? (stats.filledText + " champ(s) rempli(s) sur " + stats.totalText + " dans ce module.") : "Le contenu de cette page est pr\u00eat \u00e0 \u00eatre explor\u00e9 section par section.");
+    focusText.setAttribute("data-bs-progress-copy", "1");
     var focusProgress = create("div", "bs-focus-progress");
     var focusBar = create("div", "bs-focus-progress-bar");
     focusBar.style.width = stats.percent + "%";
@@ -917,7 +932,30 @@
     observer.observe(document.body, { childList: true, subtree: true });
   }
 
-  function bindSaveIndicator(root) {
+  function refreshCompletionUI(article) {
+    if (!article) return;
+    var stats = completionStats(article);
+    var progressChip = document.querySelector("[data-bs-progress-chip='1']");
+    var asideProgressChip = document.querySelector("[data-bs-aside-progress-chip='1']");
+    var fieldsChip = document.querySelector("[data-bs-fields-chip='1']");
+    var progressCopy = document.querySelector("[data-bs-progress-copy='1']");
+    var progressBar = document.querySelector("[data-bs-current-progress='1']");
+
+    if (progressChip) progressChip.textContent = stats.percent + "% compl\u00e9t\u00e9";
+    if (asideProgressChip) asideProgressChip.textContent = stats.percent + "% compl\u00e9t\u00e9";
+    if (fieldsChip) {
+      fieldsChip.hidden = !stats.totalText;
+      fieldsChip.textContent = stats.filledText + "/" + stats.totalText + " champs";
+    }
+    if (progressCopy) {
+      progressCopy.textContent = stats.totalText
+        ? (stats.filledText + " champ(s) rempli(s) sur " + stats.totalText + " dans ce module.")
+        : "Le contenu de cette page est pr\u00eat \u00e0 \u00eatre explor\u00e9 section par section.";
+    }
+    if (progressBar) progressBar.style.width = stats.percent + "%";
+  }
+
+  function bindSaveIndicator(root, article) {
     var saveBtn = root.querySelector("[data-bs-save-indicator='1']");
     if (!saveBtn) return;
     var timer = null;
@@ -929,6 +967,7 @@
     }
 
     function markDirty() {
+      refreshCompletionUI(article);
       showState("Enregistrement...", "is-dirty");
       if (timer) window.clearTimeout(timer);
       timer = window.setTimeout(function () {
@@ -938,6 +977,15 @@
 
     Array.prototype.slice.call(document.querySelectorAll("textarea, [contenteditable='true'], .brand-zone-inline")).forEach(function (field) {
       field.addEventListener("input", markDirty, { passive: true });
+    });
+
+    root.addEventListener("click", function (event) {
+      var target = event.target;
+      if (!target || !target.closest) return;
+      if (!target.closest(".to-do-list .checkbox, .to-do-list .to-do-children-unchecked, .to-do-list .to-do-children-checked")) return;
+      window.setTimeout(function () {
+        refreshCompletionUI(article);
+      }, 0);
     });
 
     saveBtn.addEventListener("click", function () {
@@ -1028,7 +1076,8 @@
     if (currentPath() === norm(MENU_URL)) document.body.classList.add("bs-page-home");
 
     moveUtilityButtons(topbar, bottomBar);
-    bindSaveIndicator(document.body);
+    refreshCompletionUI(article);
+    bindSaveIndicator(document.body, article);
     bindHeadingSpy(aside);
   }
 
