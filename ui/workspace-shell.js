@@ -11,6 +11,7 @@
   var LOGO_SRC = "LAB_(17).png";
   var COLLAGE_MAIN = "Elments_nouvelle_comm.png";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
+  var LAST_MODULE_KEY = "brandstudio_last_module_v1";
   var PAGE_META = {
     "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html": {
       description: "Pose le cadre du parcours avec une pr\u00e9sentation claire de l'accompagnement et de sa valeur."
@@ -85,12 +86,57 @@
     return -1;
   }
 
+  function isHomePage() {
+    return currentPath() === norm(MENU_URL);
+  }
+
   function textOf(el) {
     return ((el && el.textContent) || "").replace(/\s+/g, " ").trim();
   }
 
   function getPageMeta() {
     return PAGE_META[currentPath()] || null;
+  }
+
+  function getModuleMeta(href) {
+    return PAGE_META[href] || null;
+  }
+
+  function getLastVisitedModuleIndex() {
+    var lastPath = "";
+    try {
+      lastPath = norm(localStorage.getItem(LAST_MODULE_KEY) || "");
+    } catch (err) {
+      lastPath = "";
+    }
+    for (var i = 0; i < MODULES.length; i += 1) {
+      if (MODULES[i].href === lastPath) return i;
+    }
+    return 0;
+  }
+
+  function rememberCurrentModule(idx) {
+    if (idx < 0 || idx >= MODULES.length) return;
+    try {
+      localStorage.setItem(LAST_MODULE_KEY, MODULES[idx].href);
+    } catch (err) {}
+  }
+
+  function getJourneyState(idx) {
+    var activeIndex = idx >= 0 ? idx : getLastVisitedModuleIndex();
+    if (activeIndex < 0) activeIndex = 0;
+    if (activeIndex >= MODULES.length) activeIndex = MODULES.length - 1;
+    var completedCount = Math.max(0, activeIndex);
+    var percent = Math.round((completedCount / MODULES.length) * 100);
+    var remainingCount = Math.max(1, MODULES.length - completedCount);
+    return {
+      activeIndex: activeIndex,
+      currentModule: MODULES[activeIndex],
+      completedCount: completedCount,
+      remainingCount: remainingCount,
+      percent: percent,
+      remainingMinutes: remainingCount * 15
+    };
   }
 
   function getAudioOverride(figureId) {
@@ -687,8 +733,159 @@
     body.dataset.bsGrouped = "1";
   }
 
+  function findSectionByHeading(stack, pattern) {
+    if (!stack) return null;
+    return Array.prototype.slice.call(stack.children).find(function (section) {
+      var heading = section.querySelector("h1, h2, h3, h4");
+      return heading && pattern.test(textOf(heading));
+    }) || null;
+  }
+
+  function buildHomeResumeCard(state) {
+    var section = create("section", "bs-panel bs-home-resume-card");
+    section.appendChild(create("div", "bs-panel-label", "Reprendre le parcours"));
+    section.appendChild(create("h3", "bs-home-card-title", "Continuer l'avancement"));
+    section.appendChild(create("p", "bs-home-card-copy", "Retrouve tout de suite la prochaine etape utile du parcours, avec un repere clair sur la suite."));
+
+    var stats = create("div", "bs-home-resume-stats");
+    var moduleStat = create("div", "bs-home-stat");
+    moduleStat.appendChild(create("span", "bs-home-stat-label", "Module actuel"));
+    moduleStat.appendChild(create("strong", "bs-home-stat-value", state.currentModule.title));
+    stats.appendChild(moduleStat);
+
+    var stepStat = create("div", "bs-home-stat");
+    stepStat.appendChild(create("span", "bs-home-stat-label", "Etape"));
+    stepStat.appendChild(create("strong", "bs-home-stat-value", String(state.activeIndex + 1) + " / " + MODULES.length));
+    stats.appendChild(stepStat);
+
+    var timeStat = create("div", "bs-home-stat");
+    timeStat.appendChild(create("span", "bs-home-stat-label", "Temps restant"));
+    timeStat.appendChild(create("strong", "bs-home-stat-value", "Env. " + state.remainingMinutes + " min"));
+    stats.appendChild(timeStat);
+
+    section.appendChild(stats);
+
+    var action = create("a", "bs-pill-btn bs-home-primary-action", state.activeIndex > 0 ? "Continuer \u2192" : "Commencer \u2192");
+    action.href = state.currentModule.href;
+    section.appendChild(action);
+    return section;
+  }
+
+  function buildHomeModuleCards(state) {
+    var section = create("section", "bs-home-section");
+    var heading = create("div", "bs-home-section-head");
+    heading.appendChild(create("div", "bs-panel-label", "Modules"));
+    heading.appendChild(create("h3", "bs-home-card-title", "Le parcours complet"));
+    heading.appendChild(create("p", "bs-home-card-copy", "Retrouve chaque module dans une grille claire, avec son statut et un acces direct."));
+    section.appendChild(heading);
+
+    var grid = create("div", "bs-home-modules-grid");
+    MODULES.forEach(function (module, moduleIndex) {
+      var card = create("article", "bs-panel bs-home-module-card");
+      if (moduleIndex === state.activeIndex) card.classList.add("is-current");
+      if (moduleIndex < state.activeIndex) card.classList.add("is-complete");
+      if (moduleIndex > state.activeIndex) card.classList.add("is-upcoming");
+
+      var top = create("div", "bs-home-module-top");
+      top.appendChild(create("span", "bs-module-index", String(moduleIndex + 1)));
+      top.appendChild(create("span", "bs-home-module-status", moduleIndex < state.activeIndex ? "Vu" : (moduleIndex === state.activeIndex ? "En cours" : "A ouvrir")));
+      card.appendChild(top);
+
+      card.appendChild(create("h4", "bs-home-module-title", module.title));
+      card.appendChild(create("p", "bs-home-module-copy", ((getModuleMeta(module.href) || {}).description) || "Une etape claire pour faire avancer ta marque avec coherence."));
+
+      var action = create("a", "bs-pill-btn bs-home-module-action", moduleIndex === state.activeIndex ? "Continuer" : (moduleIndex < state.activeIndex ? "Rouvrir" : "Ouvrir"));
+      action.href = module.href;
+      card.appendChild(action);
+      grid.appendChild(card);
+    });
+
+    section.appendChild(grid);
+    return section;
+  }
+
+  function buildHomeLearningCard(sourceSection) {
+    var section = create("section", "bs-home-section");
+    var heading = create("div", "bs-home-section-head");
+    heading.appendChild(create("div", "bs-panel-label", "Contenu pedagogique"));
+    heading.appendChild(create("h3", "bs-home-card-title", "Script video introductive"));
+    heading.appendChild(create("p", "bs-home-card-copy", "Le point d'entree editorial du parcours, conserve dans une carte simple et plus lisible."));
+    section.appendChild(heading);
+
+    var card = create("div", "bs-panel bs-home-learning-card");
+    var figure = sourceSection && sourceSection.querySelector ? sourceSection.querySelector("figure.bs-hero-story, figure.bs-figure-story") : null;
+    if (figure) {
+      card.appendChild(figure.cloneNode(true));
+    }
+    var paragraphs = sourceSection ? Array.prototype.slice.call(sourceSection.querySelectorAll("p")) : [];
+    var copy = paragraphs.map(function (node) { return textOf(node); }).filter(function (value) { return value && value.length > 20; }).slice(0, 2);
+    if (copy.length) {
+      var body = create("div", "bs-home-learning-copy");
+      copy.forEach(function (value) {
+        body.appendChild(create("p", "", value));
+      });
+      card.appendChild(body);
+    }
+    section.appendChild(card);
+    return section;
+  }
+
+  function buildHomeJourneyCard(state, sourceSection) {
+    var section = create("section", "bs-panel bs-home-journey-card");
+    section.appendChild(create("div", "bs-panel-label", "Ton parcours"));
+    section.appendChild(create("h3", "bs-home-card-title", "Progression globale"));
+    section.appendChild(create("p", "bs-home-card-copy", "Une vision claire de l'avancement global et des modules deja traverses."));
+
+    var row = create("div", "bs-progress-row");
+    row.appendChild(create("div", "bs-progress-value", state.percent + "%"));
+    row.appendChild(create("div", "bs-progress-copy", state.completedCount + " module(s) explores"));
+    section.appendChild(row);
+
+    var track = create("div", "bs-progress-track");
+    var bar = create("div", "bs-progress-bar");
+    bar.style.width = state.percent + "%";
+    track.appendChild(bar);
+    section.appendChild(track);
+
+    var list = create("div", "bs-home-journey-list");
+    Array.prototype.slice.call((sourceSection && sourceSection.querySelectorAll("ul li")) || []).slice(0, 6).forEach(function (item) {
+      list.appendChild(create("div", "bs-home-journey-item", textOf(item)));
+    });
+    if (!list.children.length) {
+      list.appendChild(create("div", "bs-home-journey-item", "Clarifier l'ADN de marque"));
+      list.appendChild(create("div", "bs-home-journey-item", "Definir le positionnement"));
+      list.appendChild(create("div", "bs-home-journey-item", "Structurer la direction artistique"));
+    }
+    section.appendChild(list);
+    return section;
+  }
+
+  function customizeHomePage(article, idx) {
+    if (!article || !isHomePage()) return;
+    var body = article.querySelector(".page-body");
+    var stack = body && body.querySelector(".bs-content-stack");
+    if (!stack || stack.dataset.bsHomeCustomized === "1") return;
+
+    var state = getJourneyState(idx);
+    var introSection = stack.querySelector(".bs-intro-card");
+    var journeySection = findSectionByHeading(stack, /Ce que vous allez construire ici/i);
+    var dashboard = create("div", "bs-home-dashboard");
+
+    dashboard.appendChild(buildHomeResumeCard(state));
+    dashboard.appendChild(buildHomeModuleCards(state));
+    dashboard.appendChild(buildHomeLearningCard(introSection));
+    dashboard.appendChild(buildHomeJourneyCard(state, journeySection));
+
+    stack.insertBefore(dashboard, stack.firstChild);
+
+    if (journeySection && journeySection.parentNode) journeySection.remove();
+    if (introSection && introSection.parentNode) introSection.remove();
+    stack.dataset.bsHomeCustomized = "1";
+  }
+
   function buildSidebar(idx) {
     var sidebar = create("aside", "bs-sidebar");
+    var journey = getJourneyState(idx);
 
     var brand = create("section", "bs-panel bs-brand-panel");
     var brandTag = create("div", "bs-brand-tag", "Espace de travail");
@@ -703,43 +900,44 @@
     brand.appendChild(brandCopy);
 
     var progress = create("section", "bs-panel bs-progress-panel");
-    progress.appendChild(create("div", "bs-panel-label", "Progression"));
+    progress.appendChild(create("div", "bs-panel-label", isHomePage() ? "Ton parcours" : "Progression"));
     var row = create("div", "bs-progress-row");
-    var value = create("div", "bs-progress-value", idx >= 0 ? String(Math.round(((idx + 1) / MODULES.length) * 100)) + "%" : "0%");
-    var copy = create("div", "bs-progress-copy", idx >= 0 ? "Module " + (idx + 1) + " sur " + MODULES.length : "Parcours");
+    var value = create("div", "bs-progress-value", idx >= 0 ? String(Math.round(((idx + 1) / MODULES.length) * 100)) + "%" : String(journey.percent) + "%");
+    var copy = create("div", "bs-progress-copy", idx >= 0 ? "Module " + (idx + 1) + " sur " + MODULES.length : (journey.completedCount + " module(s) explores"));
     row.appendChild(value);
     row.appendChild(copy);
     progress.appendChild(row);
     var track = create("div", "bs-progress-track");
     var bar = create("div", "bs-progress-bar");
-    bar.style.width = (idx >= 0 ? ((idx + 1) / MODULES.length) * 100 : 0) + "%";
+    bar.style.width = (idx >= 0 ? ((idx + 1) / MODULES.length) * 100 : journey.percent) + "%";
     track.appendChild(bar);
     progress.appendChild(track);
 
-    var modules = create("nav", "bs-panel bs-modules-panel");
-    modules.appendChild(create("div", "bs-panel-label", "Modules"));
-    var list = create("div", "bs-modules-list");
-    MODULES.forEach(function (module, moduleIndex) {
-      var link = create("a", "bs-module-link");
-      link.href = module.href;
-      if (moduleIndex === idx) link.classList.add("is-current");
-      if (moduleIndex < idx) link.classList.add("is-complete");
-      if (moduleIndex > idx) link.classList.add("is-upcoming");
-      var indexEl = create("span", "bs-module-index", String(moduleIndex + 1));
-      var textWrap = create("span");
-      textWrap.appendChild(create("span", "bs-module-kicker", moduleIndex === idx ? "Section active" : "Module"));
-      textWrap.appendChild(create("span", "bs-module-title", module.title));
-      var tail = create("span", "bs-module-kicker", moduleIndex < idx ? "Vu" : (moduleIndex === idx ? "En cours" : "Ouvrir"));
-      link.appendChild(indexEl);
-      link.appendChild(textWrap);
-      link.appendChild(tail);
-      list.appendChild(link);
-    });
-    modules.appendChild(list);
-
     sidebar.appendChild(brand);
     sidebar.appendChild(progress);
-    sidebar.appendChild(modules);
+    if (!isHomePage()) {
+      var modules = create("nav", "bs-panel bs-modules-panel");
+      modules.appendChild(create("div", "bs-panel-label", "Modules"));
+      var list = create("div", "bs-modules-list");
+      MODULES.forEach(function (module, moduleIndex) {
+        var link = create("a", "bs-module-link");
+        link.href = module.href;
+        if (moduleIndex === idx) link.classList.add("is-current");
+        if (moduleIndex < idx) link.classList.add("is-complete");
+        if (moduleIndex > idx) link.classList.add("is-upcoming");
+        var indexEl = create("span", "bs-module-index", String(moduleIndex + 1));
+        var textWrap = create("span");
+        textWrap.appendChild(create("span", "bs-module-kicker", moduleIndex === idx ? "Section active" : "Module"));
+        textWrap.appendChild(create("span", "bs-module-title", module.title));
+        var tail = create("span", "bs-module-kicker", moduleIndex < idx ? "Vu" : (moduleIndex === idx ? "En cours" : "Ouvrir"));
+        link.appendChild(indexEl);
+        link.appendChild(textWrap);
+        link.appendChild(tail);
+        list.appendChild(link);
+      });
+      modules.appendChild(list);
+      sidebar.appendChild(modules);
+    }
     return sidebar;
   }
 
@@ -808,6 +1006,59 @@
   }
 
   function buildAside(article, idx) {
+    if (isHomePage()) {
+      var homeAside = create("aside", "bs-aside");
+      var journey = getJourneyState(idx);
+      var currentMeta = getModuleMeta(journey.currentModule.href) || {};
+
+      var quick = create("section", "bs-panel bs-aside-card");
+      quick.appendChild(create("div", "bs-aside-label", "Apercu rapide"));
+      quick.appendChild(create("h3", "bs-aside-title", "Apercu rapide"));
+      quick.appendChild(create("p", "bs-aside-copy", "Une synthese compacte du point d'entree de ton espace Brand Studio."));
+      var quickBody = create("div", "bs-preview-card");
+      quickBody.appendChild(create("h4", "bs-preview-title", journey.currentModule.title));
+      var quickMeta = create("div", "bs-preview-meta");
+      quickMeta.appendChild(create("span", "bs-chip", "Etape " + (journey.activeIndex + 1)));
+      quickMeta.appendChild(create("span", "bs-chip", journey.remainingMinutes + " min env."));
+      quickMeta.appendChild(create("span", "bs-chip", journey.percent + "% parcours"));
+      quickBody.appendChild(quickMeta);
+      quick.appendChild(quickBody);
+
+      var focus = create("section", "bs-panel bs-aside-card bs-focus-card");
+      focus.appendChild(create("div", "bs-aside-label", "Focus"));
+      focus.appendChild(create("h3", "bs-aside-title", "Focus du moment"));
+      focus.appendChild(create("p", "bs-aside-copy", currentMeta.description || "Le prochain bloc a traiter pour garder une progression fluide et lisible."));
+      var focusBody = create("div", "bs-preview-card");
+      focusBody.appendChild(create("div", "bs-focus-kicker", "Module prioritaire"));
+      focusBody.appendChild(create("h4", "bs-preview-title bs-focus-title", journey.currentModule.title));
+      focusBody.appendChild(create("p", "bs-focus-copy", "Reprends ici pour conserver l'elan du parcours et avancer sans te disperser."));
+      var focusAction = create("a", "bs-pill-btn bs-home-module-action", "Continuer");
+      focusAction.href = journey.currentModule.href;
+      focusBody.appendChild(focusAction);
+      focus.appendChild(focusBody);
+
+      var progress = create("section", "bs-panel bs-aside-card");
+      progress.appendChild(create("div", "bs-aside-label", "Progression"));
+      progress.appendChild(create("h3", "bs-aside-title", "Progression globale"));
+      progress.appendChild(create("p", "bs-aside-copy", "Visualise l'avancement global du parcours en un coup d'oeil."));
+      var progressBody = create("div", "bs-preview-card");
+      var progressRow = create("div", "bs-progress-row");
+      progressRow.appendChild(create("div", "bs-progress-value", journey.percent + "%"));
+      progressRow.appendChild(create("div", "bs-progress-copy", journey.completedCount + " sur " + MODULES.length + " modules"));
+      progressBody.appendChild(progressRow);
+      var progressTrack = create("div", "bs-progress-track");
+      var progressBar = create("div", "bs-progress-bar");
+      progressBar.style.width = journey.percent + "%";
+      progressTrack.appendChild(progressBar);
+      progressBody.appendChild(progressTrack);
+      progress.appendChild(progressBody);
+
+      homeAside.appendChild(quick);
+      homeAside.appendChild(focus);
+      homeAside.appendChild(progress);
+      return homeAside;
+    }
+
     var aside = create("aside", "bs-aside");
     var title = textOf(article.querySelector(".page-title")) || "Brand Studio";
     var cover = article.querySelector(".page-cover-image");
@@ -1052,6 +1303,7 @@
     decorateBodyContent(article.querySelector(".page-body"));
     mountUploadSlots(article.querySelector(".page-body"));
     groupBodyContent(article.querySelector(".page-body"));
+    customizeHomePage(article, idx);
     var topbar = buildTopbar(article, idx);
     var aside = buildAside(article, idx);
     var bottomBar = buildBottomBar(idx);
@@ -1074,6 +1326,7 @@
     if (idx === 4) document.body.classList.add("bs-page-creation");
     if (idx === 5) document.body.classList.add("bs-page-bonus");
     if (currentPath() === norm(MENU_URL)) document.body.classList.add("bs-page-home");
+    if (idx >= 0) rememberCurrentModule(idx);
 
     moveUtilityButtons(topbar, bottomBar);
     refreshCompletionUI(article);
