@@ -1,7 +1,7 @@
 (function () {
   var MODULES = [
     { href: "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html", title: "Qui te propose cette offre ?" },
-    { href: "Vision & marque 295057792efe81b4ac90f13958e3abad.html", title: "Vision & marque" },
+    { href: "Vision & marque 295057792efe81b4ac90f13958e3abad.html", title: "Vision & Marque" },
     { href: "Positionnement 295057792efe810e98f4ffd60c74fad4.html", title: "Positionnement" },
     { href: "Personnalit\u00e9 & ton de marque 295057792efe81e6be2be44f4963e114.html", title: "Personnalit\u00e9 & ton de marque" },
     { href: "Cr\u00e9ation du document, \u00e0 toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html", title: "Cr\u00e9ation du document, \u00e0 toi de jouer !" },
@@ -220,6 +220,114 @@
     if (className) el.className = className;
     if (typeof text === "string") el.textContent = text;
     return el;
+  }
+
+  function setTextById(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function setHtmlById(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = value;
+  }
+
+  function removeBlockById(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var parent = el.parentElement;
+    if (parent && parent.style && parent.style.display === "contents") {
+      parent.remove();
+      return;
+    }
+    el.remove();
+  }
+
+  function injectPageOverrideStyle(id, css) {
+    if (document.getElementById(id)) return;
+    var style = document.createElement("style");
+    style.id = id;
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function addCheckboxMarker(node) {
+    if (!node || node.dataset.bsCheckboxApplied === "1") return;
+    node.dataset.bsCheckboxApplied = "1";
+    node.classList.add("bs-checkbox-label");
+  }
+
+  function applyHomeFinalAdjustments(article) {
+    if (!article || !isHomePage()) return;
+
+    var title = article.querySelector(".page-title");
+    if (title) title.textContent = "En route vers ta nouvelle identité de marque";
+
+    setHtmlById("30505779-2efe-80a0-9ef3-f598e802788a", "<span class=\"bs-home-pretitle\">En route vers ta nouvelle identité de marque</span>");
+    setTextById("2ee05779-2efe-8060-82a3-e1a38a03f3e3", "BRAND STUDIO");
+    setTextById("2f105779-2efe-80cd-896a-fb6cce1fd6d5", "Hello, ça y est, c’est le grand moment ! Je te remercie encore d’avoir choisi ce pack pour t’accompagner dans la belle mission de structurer ton identité de marque.");
+    setTextById("2ee05779-2efe-8039-8594-fb584c35549b", "Es-tu prêt à entrer dans la peau d’un Directeur Artistique ?");
+    setTextById("2ee05779-2efe-80af-b71c-f2250f658e20", "Ce guide est le document de référence de ton identité, un kit clé en main pour poser les bases d’une marque forte.");
+    setTextById("2ee05779-2efe-805a-bf59-c852e5a0922f", "");
+    setTextById("29505779-2efe-8198-9bdc-f19ce12ad42c", "Modules");
+
+    injectPageOverrideStyle("bs-home-final-style", ".bs-home-pretitle{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8e6134;font-weight:700}.bs-page-home .bs-topbar,.bs-page-home .bs-bottom-bar{display:none!important}");
+  }
+
+  function applyVisionFinalAdjustments(article) {
+    if (!article || currentPath() !== "Vision & marque 295057792efe81b4ac90f13958e3abad.html") return;
+
+    var title = article.querySelector(".page-title");
+    if (title) title.textContent = "Vision & Marque";
+
+    setHtmlById("29505779-2efe-81ae-ba49-fbe556fd9383", "L’ADN de marque, quésaco ?");
+    setTextById("2ee05779-2efe-80e5-89b7-db2ac448ccfa", "Prends maintenant le temps de poser une base simple, claire et honnête avant de travailler la suite.");
+    setTextById("30505779-2efe-80c9-8210-de72a1057622", "Bases de départ");
+    setTextById("2ee05779-2efe-80e6-b210-fff3552c7e5f", "Prends le temps de répondre avec des mots simples, concrets et sincères. Plus cette base est juste, plus les sections suivantes seront faciles à construire.");
+
+    setTextById("2ee05779-2efe-80b6-814d-e3b3a060b62f", "Réponds aux questions suivantes :");
+    setTextById("2ee05779-2efe-8003-9526-c3e442a8b036", "Complète la phrase suivante :");
+    setTextById("2ee05779-2efe-80e6-997e-d735fbce754e", "Travaille maintenant ta version finale :");
+    setTextById("30505779-2efe-8098-bdd0-ef4b6ae5d032", "Version explicative (3-4 lignes)");
+    setTextById("30505779-2efe-807b-aad3-fc976ef01d1d", "Version synthétique (1 phrase)");
+    setTextById("30505779-2efe-80c4-8a94-c04e6f588be9", "Transformation, la phrase essentielle");
+    setTextById("30505779-2efe-8033-86cf-e7829f3d719d", "Version synthétique (1 phrase)");
+    setTextById("30505779-2efe-8004-86fc-ea6905bd30eb", "Traduire les valeurs en actions");
+    setTextById("30505779-2efe-8027-b8a7-d3455582bb79", "Promesse VS Mission VS Baseline");
+    setTextById("30505779-2efe-804c-bb74-ca14433343a9", "Exercice : Avant / après");
+    setTextById("30505779-2efe-80f9-a835-d499382e4072", "Promesse tangible VS promesse vague");
+    setTextById("30505779-2efe-8090-8c71-f89f8d29d260", "Complète les phrases suivantes :");
+    setTextById("30505779-2efe-802b-bee5-f3c5f7c63118", "Clarifie les rôles :");
+    setTextById("30505779-2efe-8024-9c14-c7667c54c993", "Pour chaque valeur retenue, complète :");
+    setTextById("30505779-2efe-8035-b837-d122f411880b", "Travaille maintenant ta version finale :");
+    setTextById("30505779-2efe-80da-8a5c-f36c78fdbd93", "Une formulation intégrée naturellement dans ton discours.");
+    setTextById("30505779-2efe-809a-b297-d6c644dd4fbd", "C’est ce que ton client peut attendre de toi, de manière fiable et constante.");
+    setTextById("30505779-2efe-80fa-9756-d285d38e982a", "Sinon, il faut reformuler.");
+    setTextById("30505779-2efe-806f-a40d-cf0710648f56", "Ta promesse :");
+
+    removeBlockById("2ee05779-2efe-803e-ac68-f875659a4e52");
+
+    Array.prototype.slice.call(article.querySelectorAll("p, h3, h2, blockquote, li")).forEach(function (node) {
+      var value = textOf(node);
+      if (!value) return;
+      if (/STUDIO PROMPT/i.test(value)) {
+        removeBlockById(node.id);
+      }
+      if (/^\[Zone de texte\]$/.test(value) || /\[Zone de texte\]/.test(value)) {
+        var label = previousMeaningfulSibling(node);
+        if (label) addCheckboxMarker(label);
+      }
+      if (/^Valeur\s*:\s*\[Zone de texte\]$/i.test(value)) addCheckboxMarker(node);
+      if (/Cela signifie que je \[Zone de texte\]/i.test(value)) addCheckboxMarker(node);
+      if (/Concrètement, cela se traduit par \[Zone de texte\]/i.test(value)) addCheckboxMarker(node);
+      if (/Dans ma communication, cela donne \[Zone de texte\]/i.test(value)) addCheckboxMarker(node);
+    });
+
+    Array.prototype.slice.call(article.querySelectorAll("figure.callout, blockquote")).forEach(function (node) {
+      node.classList.add("bs-vision-field");
+    });
+
+    injectPageOverrideStyle("bs-vision-final-style", ".bs-page-vision figure.callout,.bs-page-vision blockquote{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;border-radius:24px!important;background:#fffdf9!important;border:1px solid #e7ddd2!important;box-shadow:none!important}.bs-page-vision figure.callout>div:first-child,.bs-page-vision .callout .icon{display:none!important}.bs-page-vision .column-list{grid-template-columns:1fr!important}.bs-page-vision .bs-checkbox-label{display:flex!important;align-items:flex-start;gap:10px}.bs-page-vision .bs-checkbox-label::before{content:'';display:inline-block;width:18px;height:18px;flex:0 0 18px;border:1px solid #d6c8b8;border-radius:6px;background:#fff;margin-top:.12em}.bs-page-vision figure.callout textarea.brand-zone-block,.bs-page-vision blockquote textarea.brand-zone-block{width:100%!important;max-width:none!important}.bs-page-vision #30505779-2efe-801d-bbc3-e98d8d9f3f68,.bs-page-vision #30505779-2efe-807a-a0f2-d399c65f8dbd{grid-template-columns:1fr!important}.bs-page-vision #30505779-2efe-8066-a532-e74a56c944b7,.bs-page-vision #30505779-2efe-807f-b0a6-f7886daa3061,.bs-page-vision #30505779-2efe-809b-b414-cb7c87a4dd23{width:100%!important}.bs-page-vision #30505779-2efe-8094-8104-ccd7b42f7ba4{background:#fff7ee!important;border:1px solid #e7ddd2!important;border-radius:24px!important;padding:18px!important}.bs-page-vision #30505779-2efe-8094-8104-ccd7b42f7ba4 p{font-weight:700;color:#3f3f49!important}");
   }
 
   function shouldSkipTextNode(node) {
@@ -743,8 +851,8 @@
 
   function buildHomeResumeCard(state) {
     var section = create("section", "bs-panel bs-home-resume-card");
-    section.appendChild(create("div", "bs-panel-label", "Reprendre le parcours"));
-    section.appendChild(create("h3", "bs-home-card-title", "Continuer l'avancement"));
+    section.appendChild(create("div", "bs-panel-label", "Ton point d'entree"));
+    section.appendChild(create("h3", "bs-home-card-title", "Commencer ta strategie de marque"));
     section.appendChild(create("p", "bs-home-card-copy", "Retrouve tout de suite la prochaine etape utile du parcours, avec un repere clair sur la suite."));
 
     var stats = create("div", "bs-home-resume-stats");
@@ -765,9 +873,28 @@
 
     section.appendChild(stats);
 
-    var action = create("a", "bs-pill-btn bs-home-primary-action", state.activeIndex > 0 ? "Continuer \u2192" : "Commencer \u2192");
+    var action = create("a", "bs-pill-btn bs-home-primary-action", state.activeIndex > 0 ? "Reprendre le parcours \u2192" : "Commencer ma strategie de marque \u2192");
     action.href = state.currentModule.href;
     section.appendChild(action);
+    return section;
+  }
+
+  function buildHomeAboutCard() {
+    var section = create("section", "bs-home-section");
+    var heading = create("div", "bs-home-section-head");
+    heading.appendChild(create("div", "bs-panel-label", "Introduction"));
+    heading.appendChild(create("h3", "bs-home-card-title", "Qui te propose cette offre"));
+    heading.appendChild(create("p", "bs-home-card-copy", "Decouvre le cadre, l'intention et l'approche derriere Brand Studio avant d'entrer dans les modules."));
+    section.appendChild(heading);
+
+    var card = create("article", "bs-panel bs-home-module-card");
+    card.appendChild(create("div", "bs-home-module-status", "Introduction"));
+    card.appendChild(create("h4", "bs-home-module-title", "Qui te propose cette offre"));
+    card.appendChild(create("p", "bs-home-module-copy", "Une presentation claire de l'accompagnement, pensee comme une entree independante avant le parcours de travail."));
+    var action = create("a", "bs-pill-btn bs-home-module-action", "Ouvrir");
+    action.href = MODULES[0].href;
+    card.appendChild(action);
+    section.appendChild(card);
     return section;
   }
 
@@ -780,7 +907,8 @@
     section.appendChild(heading);
 
     var grid = create("div", "bs-home-modules-grid");
-    MODULES.forEach(function (module, moduleIndex) {
+    MODULES.slice(1).forEach(function (module, gridIndex) {
+      var moduleIndex = gridIndex + 1;
       var card = create("article", "bs-panel bs-home-module-card");
       if (moduleIndex === state.activeIndex) card.classList.add("is-current");
       if (moduleIndex < state.activeIndex) card.classList.add("is-complete");
@@ -872,6 +1000,7 @@
     var dashboard = create("div", "bs-home-dashboard");
 
     dashboard.appendChild(buildHomeResumeCard(state));
+    dashboard.appendChild(buildHomeAboutCard());
     dashboard.appendChild(buildHomeModuleCards(state));
     dashboard.appendChild(buildHomeLearningCard(introSection));
     dashboard.appendChild(buildHomeJourneyCard(state, journeySection));
@@ -950,21 +1079,13 @@
     copy.appendChild(create("h2", "bs-topbar-title", title));
     copy.appendChild(create("p", "bs-topbar-subtitle", idx >= 0 ? "Module " + (idx + 1) + " | Brand Studio" : "Brand Studio"));
     var meta = create("div", "bs-topbar-meta");
-    meta.appendChild(create("span", "bs-topbar-chip", headings.length ? headings.length + " rep\u00e8res" : "Section libre"));
     var progressChip = create("span", "bs-topbar-chip", stats.percent + "% compl\u00e9t\u00e9");
     progressChip.setAttribute("data-bs-progress-chip", "1");
     meta.appendChild(progressChip);
     meta.appendChild(create("span", "bs-topbar-chip bs-topbar-chip-current", headings.length ? headings[0].text : "D\u00e9marrage"));
     copy.appendChild(meta);
 
-    var actions = create("div", "bs-topbar-actions");
-    var saveBtn = create("button", "bs-pill-btn bs-save-btn is-saved", "Enregistrement auto");
-    saveBtn.type = "button";
-    saveBtn.setAttribute("data-bs-save-indicator", "1");
-    actions.appendChild(saveBtn);
-
     topbar.appendChild(copy);
-    topbar.appendChild(actions);
     return topbar;
   }
 
@@ -1295,6 +1416,8 @@
     var shell = create("div", "bs-shell");
     var sidebar = buildSidebar(idx);
     var main = create("main", "bs-main");
+    applyHomeFinalAdjustments(article);
+    applyVisionFinalAdjustments(article);
     setPageDescription(article);
     repairCopy(article);
     normalizeLinks(article);
