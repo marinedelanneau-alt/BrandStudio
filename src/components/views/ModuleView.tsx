@@ -3,7 +3,7 @@ import { CoachTip } from "../blocks/CoachTip";
 import { ExampleBlock } from "../blocks/ExampleBlock";
 import { InsightBlock } from "../blocks/InsightBlock";
 import { SummaryBlock } from "../blocks/SummaryBlock";
-import { VisionPage } from "../brand-studio/VisionPage";
+import { VisionPage } from "../brand-studio/vision/VisionPage";
 import { FieldBlock } from "../forms/FieldBlock";
 import { Card } from "../ui/Card";
 

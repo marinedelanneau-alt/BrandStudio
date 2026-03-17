@@ -7,7 +7,12 @@ export function useBrandBookSections(data: BrandData) {
     ["Objectif du rebranding", data.goal],
     ["Mission", data.missionFinal || data.missionShort || data.missionFormula],
     ["Vision", data.visionFinal || data.visionShort || data.visionWhere],
-    ["Valeurs", [data.value1, data.value2, data.value3].filter(Boolean).join("\n\n")],
+    [
+      "Valeurs",
+      [data.value1Action, data.value2Action, data.value3Action]
+        .filter(Boolean)
+        .join("\n\n"),
+    ],
     ["Promesse", data.promiseFinal],
     ["Positionnement", data.positioningSentence],
     ["Personnalité", data.personaProfile],
