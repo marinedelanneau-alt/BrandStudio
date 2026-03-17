@@ -54,6 +54,8 @@ export function BrandStudioApp() {
     }));
   };
 
+  const showModuleHeader = activeModule.id !== "dashboard";
+
   const activeSubtitle =
     activeModule.id === "vision-marque"
       ? visionPageContent.subtitle
@@ -74,25 +76,30 @@ export function BrandStudioApp() {
     >
       <main className="min-w-0 px-6 py-8 lg:px-10">
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-8">
-          <section className="rounded-[32px] border border-[#E7DDD2] bg-[#FFFDF9] px-6 py-8 shadow-[0_10px_24px_rgba(25,25,25,0.04)] lg:px-8">
-            <div className="mb-3 text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
-              {activeModule.eyebrow}
-            </div>
-            <h1 className="font-display max-w-4xl text-4xl leading-tight text-[#3F3F49]">
-              {activeModule.title}
-            </h1>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-[#6A635B]">
-              {activeSubtitle}
-            </p>
-            {activeModule.quote ? (
-              <p className="mt-5 max-w-3xl text-sm leading-7 text-[#756F67]">
-                {activeModule.quote}
+          {showModuleHeader ? (
+            <section className="rounded-[32px] border border-[#E7DDD2] bg-[#FFFDF9] px-6 py-8 shadow-[0_10px_24px_rgba(25,25,25,0.04)] lg:px-8">
+              <div className="mb-3 text-[11px] font-black uppercase tracking-[0.16em] text-[#8A8379]">
+                {activeModule.eyebrow}
+              </div>
+              <h1 className="font-display max-w-4xl text-4xl leading-tight text-[#3F3F49]">
+                {activeModule.title}
+              </h1>
+              <p className="mt-4 max-w-3xl text-base leading-8 text-[#6A635B]">
+                {activeSubtitle}
               </p>
-            ) : null}
-          </section>
+              {activeModule.quote ? (
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-[#756F67]">
+                  {activeModule.quote}
+                </p>
+              ) : null}
+            </section>
+          ) : null}
 
           {activeModule.kind === "dashboard" ? (
-            <DashboardView modules={contentModules} />
+            <DashboardView
+              modules={contentModules}
+              onOpenModule={setActiveId}
+            />
           ) : null}
 
           {activeModule.kind === "module" ? (
