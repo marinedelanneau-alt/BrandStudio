@@ -271,6 +271,23 @@
     node.classList.add("bs-checkbox-label");
   }
 
+  function removeStudioPromptBlocks(root) {
+    if (!root || !root.querySelectorAll) return;
+
+    Array.prototype.slice.call(root.querySelectorAll(".studio-prompt")).forEach(function (node) {
+      node.remove();
+    });
+
+    Array.prototype.slice.call(root.querySelectorAll("div, figure.callout, blockquote, p, li, h2, h3")).forEach(function (node) {
+      var value = textOf(node);
+      if (!value) return;
+      if (/STUDIO PROMPT/i.test(value)) {
+        removeBlockById(node.id);
+        if (node.isConnected) node.remove();
+      }
+    });
+  }
+
   function applyHomeFinalAdjustments(article) {
     if (!article || !isHomePage()) return;
 
@@ -326,9 +343,6 @@
     Array.prototype.slice.call(article.querySelectorAll("p, h3, h2, blockquote, li")).forEach(function (node) {
       var value = textOf(node);
       if (!value) return;
-      if (/STUDIO PROMPT/i.test(value)) {
-        removeBlockById(node.id);
-      }
       if (/^\[Zone de texte\]$/.test(value) || /\[Zone de texte\]/.test(value)) {
         var label = previousMeaningfulSibling(node);
         if (label) addCheckboxMarker(label);
@@ -1432,6 +1446,7 @@
     var main = create("main", "bs-main");
     applyHomeFinalAdjustments(article);
     applyVisionFinalAdjustments(article);
+    removeStudioPromptBlocks(article);
     setPageDescription(article);
     repairCopy(article);
     normalizeLinks(article);
