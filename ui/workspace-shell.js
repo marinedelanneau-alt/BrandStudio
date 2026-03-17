@@ -288,6 +288,13 @@
     });
   }
 
+  function removeIconThree(root) {
+    if (!root || !root.querySelectorAll) return;
+    Array.prototype.slice.call(root.querySelectorAll(".icon-3")).forEach(function (node) {
+      node.remove();
+    });
+  }
+
   function buildMissionGuidanceBlock() {
     var block = create("div", "block bs-mission-guidance");
     var title = create("h3", "", "Ta mission");
@@ -1555,6 +1562,7 @@
     applyHomeFinalAdjustments(article);
     applyVisionFinalAdjustments(article);
     removeStudioPromptBlocks(article);
+    removeIconThree(article);
     setPageDescription(article);
     repairCopy(article);
     normalizeLinks(article);
