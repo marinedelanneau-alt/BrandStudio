@@ -4,6 +4,7 @@ type TextareaBlockProps = {
   value: string;
   onChange: (value: string) => void;
   placeholder: string;
+  withCheckbox?: boolean;
 };
 
 export function TextareaBlock({
@@ -12,10 +13,19 @@ export function TextareaBlock({
   value,
   onChange,
   placeholder,
+  withCheckbox = false,
 }: TextareaBlockProps) {
   return (
     <label className="block space-y-3">
-      <span className="text-sm font-medium text-stone-700">{label}</span>
+      <span className="flex items-center gap-3 text-sm font-medium text-stone-700">
+        {withCheckbox ? (
+          <span
+            aria-hidden="true"
+            className="h-5 w-5 rounded-md border border-stone-300 bg-white shadow-sm"
+          />
+        ) : null}
+        <span>{label}</span>
+      </span>
       <textarea
         id={id}
         value={value}

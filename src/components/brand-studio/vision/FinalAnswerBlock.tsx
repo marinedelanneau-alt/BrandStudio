@@ -20,6 +20,7 @@ export function FinalAnswerBlock({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        withCheckbox
       />
     </div>
   );

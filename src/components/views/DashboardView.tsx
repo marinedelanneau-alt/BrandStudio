@@ -24,9 +24,9 @@ export function DashboardView({ modules, onOpenModule }: DashboardViewProps) {
   return (
     <div className="space-y-8">
       <HeroSection
+        pretitle={homeContent.hero.pretitle}
         title={homeContent.hero.title}
         subtitle={homeContent.hero.subtitle}
-        support={homeContent.hero.support}
         primaryLabel={homeContent.hero.primaryCta}
         secondaryLabel={homeContent.hero.secondaryCta}
         onPrimaryClick={goToVision}
@@ -57,6 +57,17 @@ export function DashboardView({ modules, onOpenModule }: DashboardViewProps) {
           />
         </div>
         <ProblemList items={homeContent.promise.benefits} />
+      </SectionBlock>
+
+      <SectionBlock
+        title={homeContent.about.title}
+        intro={homeContent.about.intro}
+      >
+        <FeatureCard
+          title={homeContent.about.cardTitle}
+          description={homeContent.about.cardBody}
+          onClick={goToAbout}
+        />
       </SectionBlock>
 
       <section ref={parcoursRef}>
@@ -104,8 +115,8 @@ export function DashboardView({ modules, onOpenModule }: DashboardViewProps) {
         body={homeContent.cta.body}
         primaryLabel={homeContent.cta.primaryCta}
         secondaryLabel={homeContent.cta.secondaryCta}
-        onPrimaryClick={goToAbout}
-        onSecondaryClick={goToVision}
+        onPrimaryClick={goToVision}
+        onSecondaryClick={goToAbout}
       />
     </div>
   );

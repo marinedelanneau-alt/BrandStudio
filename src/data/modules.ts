@@ -6,7 +6,7 @@ export const modules: Module[] = [
     id: "dashboard",
     kind: "dashboard",
     eyebrow: "Accueil",
-    title: "En route vers ta nouvelle stratégie de marque",
+    title: "En route vers ta nouvelle identité de marque",
     subtitle:
       "Bienvenue dans le Brand Studio. Ce guide est le document de référence de ton identité, un kit clé en main pour poser les bases d’une marque forte.",
     accent: "yellow",
@@ -68,7 +68,7 @@ export const modules: Module[] = [
     id: "vision-marque",
     kind: "module",
     eyebrow: "Section 1",
-    title: "Vision & marque",
+    title: "Vision & Marque",
     subtitle:
       "Dans cette section, on va travailler sur l’ADN de ta marque. L’ADN, c’est le socle de tout : pourquoi ta marque existe, ce qu’elle défend, et ce qui la rend unique.",
     accent: "terracotta",

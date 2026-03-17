@@ -28,20 +28,12 @@ export const visionTrackedFields: Field[] = [
   { key: "missionShort", label: "Mission courte", type: "textarea" },
   { key: "missionInternal", label: "Mission interne", type: "textarea" },
   { key: "missionFinal", label: "Mission finale", type: "textarea" },
-  { key: "visionWhere", label: "Vision dans 3 à 5 ans", type: "textarea" },
+  { key: "visionWhere", label: "Vision dans 3-5 ans", type: "textarea" },
   { key: "visionImpact", label: "Impact visé", type: "textarea" },
   { key: "visionMarket", label: "Place sur le marché", type: "textarea" },
   { key: "visionClients", label: "Clients visés", type: "textarea" },
-  {
-    key: "transformationClientsValue",
-    label: "Transformation client",
-    type: "text",
-  },
-  {
-    key: "transformationImpactValue",
-    label: "Transformation globale",
-    type: "text",
-  },
+  { key: "transformationClientsValue", label: "Transformation client", type: "text" },
+  { key: "transformationImpactValue", label: "Transformation globale", type: "text" },
   { key: "transformationClients", label: "Transformation client - phrase", type: "textarea" },
   { key: "transformationImpact", label: "Transformation impact - phrase", type: "textarea" },
   { key: "visionLong", label: "Vision longue", type: "textarea" },
@@ -56,29 +48,17 @@ export const visionTrackedFields: Field[] = [
   { key: "value1", label: "Valeur 1", type: "text" },
   { key: "value1Meaning", label: "Valeur 1 - sens", type: "textarea" },
   { key: "value1Concrete", label: "Valeur 1 - concret", type: "textarea" },
-  {
-    key: "value1Communication",
-    label: "Valeur 1 - communication",
-    type: "textarea",
-  },
+  { key: "value1Communication", label: "Valeur 1 - communication", type: "textarea" },
   { key: "value1Action", label: "Valeur 1 - finale", type: "textarea" },
   { key: "value2", label: "Valeur 2", type: "text" },
   { key: "value2Meaning", label: "Valeur 2 - sens", type: "textarea" },
   { key: "value2Concrete", label: "Valeur 2 - concret", type: "textarea" },
-  {
-    key: "value2Communication",
-    label: "Valeur 2 - communication",
-    type: "textarea",
-  },
+  { key: "value2Communication", label: "Valeur 2 - communication", type: "textarea" },
   { key: "value2Action", label: "Valeur 2 - finale", type: "textarea" },
   { key: "value3", label: "Valeur 3", type: "text" },
   { key: "value3Meaning", label: "Valeur 3 - sens", type: "textarea" },
   { key: "value3Concrete", label: "Valeur 3 - concret", type: "textarea" },
-  {
-    key: "value3Communication",
-    label: "Valeur 3 - communication",
-    type: "textarea",
-  },
+  { key: "value3Communication", label: "Valeur 3 - communication", type: "textarea" },
   { key: "value3Action", label: "Valeur 3 - finale", type: "textarea" },
   { key: "beforeStateValue", label: "Avant", type: "text" },
   { key: "beforeState", label: "Avant - phrase", type: "textarea" },
@@ -87,6 +67,7 @@ export const visionTrackedFields: Field[] = [
   { key: "promisedResult", label: "Résultat promis", type: "textarea" },
   { key: "promisedExperience", label: "Expérience promise", type: "textarea" },
   { key: "promisedPosture", label: "Posture promise", type: "textarea" },
+  { key: "promiseWeakVsStrong", label: "Promesse tangible vs promesse vague", type: "textarea" },
   { key: "promiseExplicit", label: "Promesse explicite", type: "textarea" },
   { key: "promiseIntegrated", label: "Promesse intégrée", type: "textarea" },
   { key: "promiseFinal", label: "Promesse finale", type: "textarea" },
@@ -94,11 +75,14 @@ export const visionTrackedFields: Field[] = [
 
 export const visionPageContent = {
   subtitle:
-    "Dans cette section, on va travailler sur l'ADN de ta marque. L'ADN, c'est le socle de tout : pourquoi ta marque existe, ce qu'elle défend et ce qui la rend unique.",
+    "Dans cette section, tu poses l’ADN de ta marque pour clarifier ce qu’elle porte, ce qu’elle défend et ce qui la rend cohérente dans le temps.",
   intro: {
     title: "Introduction ADN de marque",
     intro:
-      "L'ADN de marque est la base de toute identité forte et cohérente. Quand il est clair, tes décisions deviennent plus simples, plus lisibles et plus durables.",
+      "L’ADN de marque est le socle de toute identité forte et cohérente. Quand il est clair, tes décisions deviennent plus simples, plus lisibles et plus durables.",
+    exerciseTitle: "L’ADN de marque, quésaco ?",
+    exerciseDescription:
+      "Lis ces quatre repères pour comprendre ce que l’ADN de marque rend possible.",
     highlights: [
       "Créer une identité visuelle cohérente et reconnaissable.",
       "Aligner la communication, le discours et les visuels.",
@@ -106,21 +90,23 @@ export const visionPageContent = {
       "Faire évoluer la marque sans la dénaturer.",
     ],
     takeaway:
-      "Un ADN clair transforme une suite d'idées en direction de marque solide.",
+      "Un ADN clair transforme une suite d’idées en direction de marque solide.",
   },
   basics: {
     title: "Bases de départ",
     intro:
       "Avant de formuler ta mission, ta vision et ta promesse, pose une base simple et honnête. Cette étape donne du relief à tout le reste.",
+    supportText:
+      "Prends le temps de répondre avec des mots simples, concrets et sincères. Plus cette base est juste, plus les sections suivantes seront faciles à construire.",
     exercises: [
       {
-        title: "Décrire ton activité",
+        title: "Décris ton activité",
         fieldKey: "activity",
         placeholder:
-          "Décris ton activité, ce que tu proposes et à qui tu t'adresses.",
+          "Décris ce que tu proposes, à qui tu t’adresses et dans quel contexte ton activité intervient.",
       },
       {
-        title: "Clarifier ton objectif",
+        title: "Clarifie ton objectif principal",
         fieldKey: "goal",
         placeholder:
           "Explique ce que tu veux obtenir grâce à ce travail de marque.",
@@ -131,48 +117,48 @@ export const visionPageContent = {
       placeholder: "Nom de la marque",
     },
     takeaway:
-      "Une base de départ claire t'aide à travailler le reste avec plus de précision.",
+      "Une base de départ claire t’aide à travailler le reste avec plus de précision.",
   },
   mission: {
     title: "Mission",
     intro:
-      "Ta mission exprime la raison d'être de ta marque. Elle explique pourquoi ton activité existe et ce qu'elle cherche à changer.",
+      "Ta mission exprime la raison d’être de ta marque. Elle explique pourquoi ton activité existe et ce qu’elle cherche à changer.",
     prompts: [
       "Pourquoi la marque existe-t-elle ?",
       "Pourquoi as-tu créé cette activité ?",
       "Quel problème cherches-tu à résoudre pour tes clients ?",
     ],
     example:
-      "Nous aidons les entrepreneurs à structurer une identité de marque claire et stratégique afin qu'ils puissent communiquer avec cohérence et confiance.",
+      "Nous aidons les entrepreneurs à structurer une identité de marque claire et stratégique afin qu’ils puissent communiquer avec cohérence et confiance.",
     versions: [
       {
         key: "missionLong",
-        label: "Version explicative (3 à 4 lignes)",
+        label: "Version explicative (3-4 lignes)",
         placeholder:
-          "Formule une version claire pour ton site ou ta présentation.",
+          "Formule une version claire pour ton site, ta présentation ou un support détaillé.",
       },
       {
         key: "missionShort",
         label: "Version synthétique (1 phrase)",
-        placeholder: "Formule une phrase courte et nette.",
+        placeholder: "Formule une phrase courte, nette et facile à réutiliser.",
       },
       {
         key: "missionInternal",
-        label: "Version interne (ultra claire)",
+        label: "Version interne",
         placeholder: "Formule une version qui guide vraiment tes décisions.",
       },
     ],
     finalKey: "missionFinal",
-    finalLabel: "Ta mission finale",
+    finalLabel: "Ta mission",
     finalPlaceholder: "Formule ici la version finale de ta mission.",
     takeaway:
       "Une mission claire transforme ton activité en engagement lisible.",
     consistencyCheck: {
       title: "Teste la cohérence avec cette question :",
       question:
-        "Si tu lances une nouvelle offre, est-elle alignée avec ta mission ?",
+        "Si tu lances une nouvelle offre, est-elle vraiment alignée avec ta mission ?",
       answer:
-        "Si la réponse reste floue, ta mission a encore besoin d'être clarifiée.",
+        "Si la réponse reste floue, ta mission a encore besoin d’être clarifiée.",
     },
   },
   vision: {
@@ -182,13 +168,13 @@ export const visionPageContent = {
     prompts: [
       {
         key: "visionWhere",
-        label: "Où aimerais-tu que ta marque soit dans 3 à 5 ans ?",
-        placeholder: "Projette ta marque dans 3 à 5 ans.",
+        label: "Où aimerais-tu que ta marque soit dans 3-5 ans ?",
+        placeholder: "Projette ta marque dans 3-5 ans.",
       },
       {
         key: "visionImpact",
         label: "Quel impact veux-tu avoir ?",
-        placeholder: "Décris l'impact que tu veux créer.",
+        placeholder: "Décris l’impact que tu veux créer.",
       },
       {
         key: "visionMarket",
@@ -201,16 +187,17 @@ export const visionPageContent = {
         placeholder: "Décris les clients avec qui tu veux travailler.",
       },
     ] as VisionPrompt[],
-    example: "Créer un studio aligné, structuré et durable.",
+    example:
+      "Créer un studio reconnu pour sa capacité à structurer des marques claires, désirables et durables.",
     versions: [
       {
         key: "visionLong",
-        label: "Version explicative (3 à 4 lignes)",
+        label: "Version explicative (3-4 lignes)",
         placeholder: "Formule une version développée de ta vision.",
       },
       {
         key: "visionShort",
-        label: "Version synthétique (1 phrase claire)",
+        label: "Version synthétique (1 phrase)",
         placeholder: "Formule une phrase courte et claire.",
       },
       {
@@ -228,13 +215,13 @@ export const visionPageContent = {
   values: {
     title: "Valeurs",
     intro:
-      "Les valeurs guident ton comportement et ta communication. Elles n'ont de sens que si elles influencent vraiment ta façon d'agir.",
+      "Les valeurs guident ton comportement et ta communication. Elles n’ont de sens que si elles influencent vraiment ta façon d’agir.",
     prompts: [
       "Est-ce que cette valeur influence mes décisions ?",
-      "Est-ce que je serais prêt(e) à perdre un client pour la respecter ?",
+      "Est-ce que je serais prêt à perdre un client pour la respecter ?",
       "Est-ce que mes clients la perçoivent réellement ?",
     ],
-    brainstormPlaceholder: "Ajoute un mot",
+    brainstormPlaceholder: "Ajoute un mot-clé",
     valueBlocks: [
       {
         valueKey: "value1",
@@ -264,39 +251,55 @@ export const visionPageContent = {
   promise: {
     title: "Promesse de marque",
     intro:
-      "Ta promesse, c'est ce que tes clients peuvent attendre de toi de manière fiable et constante.",
+      "Ta promesse exprime ce que tes clients peuvent attendre de toi de manière fiable, concrète et constante.",
+    comparison: [
+      "Mission : pourquoi ta marque agit.",
+      "Vision : où ta marque veut aller.",
+      "Baseline : comment ta marque se résume en quelques mots.",
+      "Promesse : ce que ton client peut réellement attendre de toi.",
+    ],
+    beforeAfterExamples: [
+      "Avant : mes clients avancent sans cadre clair.",
+      "Après : mes clients repartent avec une base de marque structurée et directement activable.",
+    ],
     examples: [
-      "Exemple faible : Je t'aide à améliorer ta communication.",
-      "Exemple plus fort : Je t'aide à structurer une identité de marque claire et exploitable en autonomie.",
+      "Promesse vague : Je t’aide à améliorer ta communication.",
+      "Promesse tangible : Je t’aide à structurer une identité de marque claire et exploitable en autonomie.",
     ],
     prompts: [
       {
         key: "promisedResult",
         label: "Résultat promis",
-        placeholder: "Formule le résultat concret promis.",
+        placeholder: "Formule le résultat concret que ton client peut attendre.",
       },
       {
         key: "promisedExperience",
         label: "Expérience promise",
-        placeholder: "Formule l'expérience que tu promets.",
+        placeholder: "Formule l’expérience que tu promets tout au long du parcours.",
       },
       {
         key: "promisedPosture",
         label: "Posture promise",
-        placeholder: "Formule la posture que ton client peut attendre.",
+        placeholder: "Formule la posture ou la qualité de relation que ton client peut attendre.",
       },
     ] as VisionPrompt[],
     versions: [
       {
+        key: "promiseWeakVsStrong",
+        label: "Promesse tangible VS promesse vague",
+        placeholder:
+          "Compare ici une formulation trop vague avec une formulation plus concrète et crédible.",
+      },
+      {
         key: "promiseExplicit",
         label: "Version explicite",
-        placeholder: "Formule une phrase claire et concrète.",
+        placeholder: "Formule une promesse claire, simple et tangible.",
       },
       {
         key: "promiseIntegrated",
         label: "Version intégrée",
         placeholder:
-          "Formule une version intégrée naturellement dans ton discours.",
+          "Formule une version qui s’intègre naturellement dans ton discours de marque.",
       },
     ],
     finalKey: "promiseFinal",

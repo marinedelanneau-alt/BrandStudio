@@ -1,7 +1,6 @@
 import type { ProgressSnapshot } from "../../types/brand";
 import { brandAssets } from "../../lib/brand-assets";
 import { Badge } from "../ui/Badge";
-import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 
 type TopbarProps = {
@@ -19,7 +18,6 @@ export function Topbar({ title, progress }: TopbarProps) {
           <Badge>{progress.percent}% complete</Badge>
         </div>
       </div>
-      <Button variant="secondary">Enregistrement auto</Button>
     </Card>
   );
 }

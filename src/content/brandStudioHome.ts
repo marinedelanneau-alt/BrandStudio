@@ -1,28 +1,27 @@
 export const homeContent = {
   hero: {
-    title: "Construis une stratégie de marque claire, solide et exploitable.",
+    pretitle: "En route vers ta nouvelle identité de marque",
+    title: "BRAND STUDIO",
     subtitle:
-      "Brand Studio t'aide à clarifier ton ADN, ton positionnement, ton ton et ton cadre de création pour faire évoluer ta marque avec cohérence.",
+      "Hello, ça y est, c’est le grand moment !\nJe te remercie encore d’avoir choisi ce pack pour t’accompagner dans la belle mission de structurer ton identité de marque.\n\nEs-tu prêt à entrer dans la peau d’un Directeur Artistique ?\n\nCe guide est le document de référence de ton identité, un kit clé en main pour poser les bases d’une marque forte.",
     primaryCta: "Commencer ma stratégie de marque",
     secondaryCta: "Voir le parcours",
-    support:
-      "Tu avances étape par étape, avec un cadre structuré, des exemples concrets et un rendu pensé pour être vraiment utilisé.",
   },
   problem: {
-    title: "Quand la base n'est pas claire",
+    title: "Quand la base n’est pas encore claire",
     intro:
-      "Tu peux vite sentir que ta marque existe, sans réussir à la formuler avec précision.",
+      "Avant d’avoir un cadre solide, il est facile de sentir que ta marque a du potentiel sans réussir à la formuler avec précision.",
     items: [
       "Tu manques de clarté sur ce que ta marque doit vraiment porter.",
-      "Ton positionnement reste flou ou change selon les contextes.",
-      "Ta communication manque de continuité d'un support à l'autre.",
-      "Tes décisions visuelles ou éditoriales reposent trop souvent sur l'intuition seule.",
+      "Ton positionnement reste flou ou bouge selon les contextes.",
+      "Ta communication manque de continuité d’un support à l’autre.",
+      "Tes choix visuels ou éditoriaux reposent trop souvent sur l’intuition seule.",
     ],
   },
   promise: {
-    title: "Ce que Brand Studio t'aide à construire",
+    title: "Ce que Brand Studio t’aide à construire",
     intro:
-      "Tu ne remplis pas un document de plus. Tu poses une base de marque claire, durable et directement exploitable.",
+      "Tu ne remplis pas un document de plus. Tu construis une base de marque claire, durable et directement exploitable.",
     beforeTitle: "Avant",
     beforeBody:
       "Une marque difficile à expliquer, à décliner et à faire évoluer avec constance.",
@@ -35,6 +34,14 @@ export const homeContent = {
       "Tu avances avec un cadre qui facilite les décisions futures.",
     ],
   },
+  about: {
+    title: "Qui te propose cette offre",
+    intro:
+      "Avant d’entrer dans les modules, prends un instant pour situer l’intention derrière Brand Studio et la manière dont ce parcours a été pensé pour toi.",
+    cardTitle: "Une approche pensée pour structurer ta marque avec justesse",
+    cardBody:
+      "Après une dizaine d’années dans la communication, Marine a conçu Brand Studio comme un cadre clair, pédagogique et activable pour t’aider à construire une identité de marque cohérente, durable et vraiment utilisable.",
+  },
   modules: {
     title: "Le parcours",
     intro:
@@ -43,16 +50,16 @@ export const homeContent = {
       {
         id: "vision-marque",
         eyebrow: "Module 1",
-        title: "Vision & marque",
+        title: "Vision & Marque",
         description:
-          "Tu clarifies l'ADN de ta marque, sa mission, sa vision, ses valeurs et sa promesse.",
+          "Tu clarifies l’ADN de ta marque, sa mission, sa vision, ses valeurs et sa promesse.",
       },
       {
         id: "positionnement",
         eyebrow: "Module 2",
         title: "Positionnement",
         description:
-          "Tu poses un positionnement plus net pour savoir à qui tu t'adresses et pourquoi on te choisit.",
+          "Tu poses un positionnement plus net pour savoir à qui tu t’adresses et pourquoi on te choisit.",
       },
       {
         id: "personnalite-ton",
@@ -73,7 +80,7 @@ export const homeContent = {
   method: {
     title: "Pourquoi ça fonctionne",
     intro:
-      "Le parcours t'aide à prendre du recul, à structurer ta réflexion et à transformer tes idées en base stratégique claire.",
+      "Le parcours t’aide à prendre du recul, à structurer ta réflexion et à transformer tes idées en base stratégique claire.",
     items: [
       {
         title: "Une progression logique",
@@ -85,17 +92,17 @@ export const homeContent = {
       },
       {
         title: "Une base durable",
-        body: "Le résultat sert autant à clarifier aujourd'hui qu'à guider les décisions à venir.",
+        body: "Le résultat sert autant à clarifier aujourd’hui qu’à guider les décisions à venir.",
       },
     ],
   },
   experience: {
     title: "Une expérience pensée pour avancer sereinement",
     intro:
-      "Brand Studio a été conçu pour rester accessible, lisible et rassurant, même si tu n'as jamais formalisé ta stratégie de marque.",
+      "Brand Studio a été conçu pour rester accessible, lisible et rassurant, même si tu n’as jamais formalisé ta stratégie de marque.",
     items: [
       "Tu avances à ton rythme, sans pression inutile.",
-      "Tu es guidé(e) avec des consignes claires et structurées.",
+      "Tu es guidé avec des consignes claires et structurées.",
       "Tu construis une base que tu peux relire, ajuster et faire évoluer.",
     ],
   },
@@ -104,6 +111,6 @@ export const homeContent = {
     body:
       "Tu peux commencer maintenant et construire une stratégie plus cohérente, plus lisible et plus facile à activer.",
     primaryCta: "Lancer mon Brand Studio",
-    secondaryCta: "Commencer par Vision & marque",
+    secondaryCta: "Découvrir qui te propose cette offre",
   },
 } as const;
