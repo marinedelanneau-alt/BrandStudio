@@ -9,7 +9,7 @@
   ];
   var MENU_URL = "En%20route%20vers%20ta%20nouvelle%20strat%C3%A9gie%20de%20marque%20295057792efe80aabdfeebdd4704fcac.html";
   var LOGO_SRC = "LAB_(17).png";
-  var COLLAGE_MAIN = "Elments_nouvelle_comm.png";
+  var COLLAGE_MAIN = "elements_nouvelle_comm_main.png";
   var USER_CODE_KEY = "brandstudio_user_code_v1";
   var LAST_MODULE_KEY = "brandstudio_last_module_v1";
   var PAGE_META = {

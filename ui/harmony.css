@@ -75,7 +75,7 @@ body::after {
   bottom: 110px;
   width: 220px;
   height: 180px;
-  background: url("../Elments_nouvelle_comm.png") center/contain no-repeat;
+  background: url("../elements_nouvelle_comm_main.png") center/contain no-repeat;
   opacity: 0.14;
 }
 

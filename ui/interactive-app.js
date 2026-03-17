@@ -416,7 +416,7 @@
       "brand-card": "Ta Brand Card assemble tout ce qui est deja bon, clair et partageable dans une page unique.",
       merci: "Ton travail de marque a maintenant une forme claire, partageable et utilisable."
     };
-    return '<section class="bs-card bs-main-hero"><div><div class="bs-label">' + escapeHtml(activeRoute.title) + '</div><h2>' + escapeHtml(activeRoute.title) + '</h2><p class="bs-main-copy">' + escapeHtml(copyMap[activeRoute.id] || "") + '</p></div><div><img src="/Elments_nouvelle_comm.png" alt="Brand Studio"></div></section>';
+    return '<section class="bs-card bs-main-hero"><div><div class="bs-label">' + escapeHtml(activeRoute.title) + '</div><h2>' + escapeHtml(activeRoute.title) + '</h2><p class="bs-main-copy">' + escapeHtml(copyMap[activeRoute.id] || "") + '</p></div><div><img src="/elements_nouvelle_comm_main.png" alt="Brand Studio"></div></section>';
   }
 
   function renderDashboard() {
@@ -428,7 +428,7 @@
         var statusClass = isRouteComplete(route.id) ? "is-done" : (route.id === next.id ? "is-current" : "");
         return '<article class="bs-module-card"><div class="bs-card-body"><div class="bs-nav-top"><span class="bs-index">' + (index + 1) + '</span><span class="bs-status ' + statusClass + '">' + status + '</span></div><h3 style="font-size:1.26rem; line-height:1.05; margin-top:8px;">' + escapeHtml(route.title) + '</h3><p class="bs-card-copy" style="margin-top:10px;">' + route.duration + ' minutes estimees pour produire un resultat concret.</p><div class="bs-actions" style="margin-top:14px;"><a class="bs-link-btn bs-link-btn-secondary" href="' + route.path + '">Ouvrir</a></div></div></article>';
       }).join("") + '</div></div></section>' +
-      '<section class="bs-card"><div class="bs-card-body"><div class="bs-label">Contenu pedagogique</div><h3 class="bs-card-title" style="margin-top:12px;">Script video introductive</h3><div class="bs-card-grid is-two" style="margin-top:18px;"><div class="bs-card" style="padding:0;"><img src="/Elments_nouvelle_comm.png" alt="Script video" style="width:100%; display:block; max-height:420px; object-fit:contain; padding:18px;"></div><div class="bs-note">Ce document va devenir la reference de toute ta communication. L\'objectif est simple : t\'aider a creer une marque plus claire, plus credible et plus simple a faire vivre dans le temps. Prends les modules dans l\'ordre, avance a ton rythme, et garde en tete qu\'ici tu produis des livrables utilisables des demain.</div></div></div></section>';
+      '<section class="bs-card"><div class="bs-card-body"><div class="bs-label">Contenu pedagogique</div><h3 class="bs-card-title" style="margin-top:12px;">Script video introductive</h3><div class="bs-card-grid is-two" style="margin-top:18px;"><div class="bs-card" style="padding:0;"><img src="/elements_nouvelle_comm_main.png" alt="Script video" style="width:100%; display:block; max-height:420px; object-fit:contain; padding:18px;"></div><div class="bs-note">Ce document va devenir la reference de toute ta communication. L\'objectif est simple : t\'aider a creer une marque plus claire, plus credible et plus simple a faire vivre dans le temps. Prends les modules dans l\'ordre, avance a ton rythme, et garde en tete qu\'ici tu produis des livrables utilisables des demain.</div></div></div></section>';
   }
 
   function renderDiagnostic() {
