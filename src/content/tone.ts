@@ -114,3 +114,98 @@ export const toneContent = {
     },
   ],
 } as const;
+
+import type { BrandModuleContent } from "./brandStudioSchema";
+
+export const toneModuleContent: BrandModuleContent = {
+  id: "tone",
+  eyebrow: "Module 3",
+  title: "Personnalité & ton",
+  description:
+    "Cadre l’expression relationnelle et éditoriale de la marque pour garantir une cohérence durable sur tous les supports.",
+  summary:
+    "La personnalité et le ton servent ensuite de filtre pour écrire, présenter et incarner la marque avec constance.",
+  requiredFields: ["tonePersona", "toneVoice", "toneDo", "toneDont", "baselineFinal"],
+  sections: [
+    {
+      id: "persona-section",
+      title: "Personnalité",
+      intro:
+        "Projette ta marque comme une présence identifiable, avec une allure, une attitude et un style reconnaissables.",
+      exercise: "Réponds aux questions suivantes :",
+      finalNote:
+        "Une personnalité claire rend ensuite les choix de ton et de visuels beaucoup plus cohérents.",
+      fields: [
+        {
+          id: "tonePersona",
+          label: "Si ta marque était une personne, comment la décrirais-tu ?",
+          type: "textarea",
+          placeholder: "Décris sa présence, sa posture, son énergie.",
+          required: true,
+        },
+        {
+          id: "toneRelationship",
+          label: "Quelle relation crée-t-elle avec ses clients ?",
+          type: "textarea",
+          placeholder: "Décris la qualité de lien ou d’accompagnement perçue.",
+        },
+      ],
+    },
+    {
+      id: "voice-section",
+      title: "Ton de voix",
+      intro:
+        "Traduis maintenant cette personnalité en règles éditoriales claires pour produire des messages cohérents.",
+      exercise: "Travaille maintenant ta ligne éditoriale :",
+      finalNote:
+        "Un bon ton de voix dit autant ce que la marque exprime que ce qu’elle choisit de ne pas exprimer.",
+      fields: [
+        {
+          id: "toneVoice",
+          label: "Comment ta marque doit-elle sonner ?",
+          type: "textarea",
+          placeholder: "Décris la voix, le rythme et la posture éditoriale.",
+          required: true,
+        },
+        {
+          id: "toneDo",
+          label: "Ce que ton ton de voix doit incarner",
+          type: "textarea",
+          placeholder: "Liste les qualités à faire ressentir.",
+          required: true,
+        },
+        {
+          id: "toneDont",
+          label: "Ce que ton ton de voix doit éviter",
+          type: "textarea",
+          placeholder: "Liste les travers ou styles à exclure.",
+          required: true,
+        },
+      ],
+    },
+    {
+      id: "baseline-section",
+      title: "Baseline",
+      intro:
+        "Condense enfin l’essentiel dans une phrase qui porte la promesse, la posture ou la transformation de la marque.",
+      exercise: "Travaille maintenant ta version finale :",
+      finalNote:
+        "Une baseline utile se comprend vite, reste juste dans le temps et peut vivre sur plusieurs supports.",
+      fields: [
+        {
+          id: "baselineDraft",
+          label: "Première formulation",
+          type: "textarea",
+          placeholder: "Écris une première version sans chercher à la rendre parfaite.",
+        },
+        {
+          id: "baselineFinal",
+          label: "Ta baseline finale",
+          type: "textarea",
+          placeholder: "Formule ici la version finale la plus claire.",
+          required: true,
+        },
+      ],
+    },
+  ],
+};
