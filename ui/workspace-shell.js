@@ -569,7 +569,7 @@
   function buildBlockZone(storageKey, placeholder) {
     var zone = document.createElement("textarea");
     zone.className = "brand-zone brand-zone-block";
-    zone.placeholder = placeholder || "Écris ici";
+    zone.placeholder = placeholder || "Ta réponse";
     zone.rows = 4;
     try {
       zone.value = localStorage.getItem(storageKey) || "";
@@ -594,7 +594,7 @@
     parts.forEach(function (part, index) {
       if (part) node.appendChild(document.createTextNode(part));
       if (index < parts.length - 1) {
-        node.appendChild(buildInlineZone(zoneStorageKey(node, "inline-" + index), "Compléter"));
+        node.appendChild(buildInlineZone(zoneStorageKey(node, "inline-" + index), "Ta réponse"));
       }
     });
     return true;
@@ -611,7 +611,7 @@
 
       if (text === token && /^(P|DIV|BLOCKQUOTE|TD|TH)$/i.test(node.tagName)) {
         node.textContent = "";
-        node.appendChild(buildBlockZone(zoneStorageKey(node, "block"), "Écris ici"));
+        node.appendChild(buildBlockZone(zoneStorageKey(node, "block"), "Ta réponse"));
         return;
       }
 
