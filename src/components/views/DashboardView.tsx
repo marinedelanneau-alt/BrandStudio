@@ -4,7 +4,7 @@ import { FeatureCard } from "../brand-studio/home/FeatureCard";
 import { HeroSection } from "../brand-studio/home/HeroSection";
 import { ProblemList } from "../brand-studio/home/ProblemList";
 import { SectionBlock } from "../brand-studio/home/SectionBlock";
-import { homeContent } from "../../content/brandStudioHome";
+import { homeContent } from "../../content/home";
 import type { Module } from "../../types/brand";
 
 type DashboardViewProps = {

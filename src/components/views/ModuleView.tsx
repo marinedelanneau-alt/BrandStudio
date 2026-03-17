@@ -3,6 +3,9 @@ import { CoachTip } from "../blocks/CoachTip";
 import { ExampleBlock } from "../blocks/ExampleBlock";
 import { InsightBlock } from "../blocks/InsightBlock";
 import { SummaryBlock } from "../blocks/SummaryBlock";
+import { CanvaPage } from "../brand-studio/CanvaPage";
+import { PositioningPage } from "../brand-studio/PositioningPage";
+import { TonePage } from "../brand-studio/TonePage";
 import { VisionPage } from "../brand-studio/vision/VisionPage";
 import { FieldBlock } from "../forms/FieldBlock";
 import { Card } from "../ui/Card";
@@ -16,6 +19,18 @@ type Props = {
 export function ModuleView({ module, data, onChange }: Props) {
   if (module.id === "vision-marque") {
     return <VisionPage data={data} onChange={onChange} />;
+  }
+
+  if (module.id === "positionnement") {
+    return <PositioningPage data={data} onChange={onChange} />;
+  }
+
+  if (module.id === "personnalite-ton") {
+    return <TonePage data={data} onChange={onChange} />;
+  }
+
+  if (module.id === "creation-document") {
+    return <CanvaPage data={data} onChange={onChange} />;
   }
 
   return (

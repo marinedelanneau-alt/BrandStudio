@@ -4,16 +4,16 @@ import {
   visionPageContent,
   type VisionPrompt,
   type VisionValueBlock,
-} from "../../../content/brandStudioVision";
+} from "../../../content/vision";
+import { ExampleBox } from "../ExampleBox";
+import { ExerciseBlock } from "../ExerciseBlock";
+import { FinalAnswerBlock } from "../FinalAnswerBlock";
+import { InlineInput } from "../InlineInput";
+import { PromptList } from "../PromptList";
+import { SectionIntro } from "../SectionIntro";
+import { SectionTitle } from "../SectionTitle";
+import { TextareaBlock } from "../TextareaBlock";
 import { ConsistencyCheck } from "./ConsistencyCheck";
-import { ExampleBox } from "./ExampleBox";
-import { ExerciseBlock } from "./ExerciseBlock";
-import { FinalAnswerBlock } from "./FinalAnswerBlock";
-import { InlineInput } from "./InlineInput";
-import { PromptList } from "./PromptList";
-import { SectionIntro } from "./SectionIntro";
-import { SectionTitle } from "./SectionTitle";
-import { TextareaBlock } from "./TextareaBlock";
 
 type VisionPageProps = {
   data: BrandData;

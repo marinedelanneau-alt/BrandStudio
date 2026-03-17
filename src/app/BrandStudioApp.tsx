@@ -4,7 +4,7 @@ import { Sidebar } from "../components/layout/Sidebar";
 import { DashboardView } from "../components/views/DashboardView";
 import { ExportView } from "../components/views/ExportView";
 import { ModuleView } from "../components/views/ModuleView";
-import { visionPageContent, visionTrackedFields } from "../content/brandStudioVision";
+import { visionPageContent, visionTrackedFields } from "../content/vision";
 import { modules } from "../data/modules";
 import { useBrandBookSections } from "../hooks/useBrandBookSections";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -59,7 +59,13 @@ export function BrandStudioApp() {
   const activeSubtitle =
     activeModule.id === "vision-marque"
       ? visionPageContent.subtitle
-      : activeModule.subtitle;
+      : activeModule.id === "positionnement"
+        ? "Dans cette section, tu clarifies à qui tu t'adresses, ce que cette cible traverse et ce qui rend ton positionnement plus net."
+        : activeModule.id === "personnalite-ton"
+          ? "Dans cette partie, tu donnes une personnalité à ta marque, tu précises son ton et tu poses les bases de sa cohérence visuelle."
+          : activeModule.id === "creation-document"
+            ? "Tu rassembles ici tout ce que tu as clarifié pour le transformer en document de marque prêt à être utilisé."
+            : activeModule.subtitle;
 
   return (
     <AppShell
