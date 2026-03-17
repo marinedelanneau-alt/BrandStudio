@@ -41,6 +41,16 @@
     }
   };
   var TEXT_REPLACEMENTS = [
+    [/STUDIO NOTE/gi, "BRAND STUDIO"],
+    [/\bVotre\b/g, "Ta"],
+    [/\bvotre\b/g, "ta"],
+    [/\bVos\b/g, "Tes"],
+    [/\bvos\b/g, "tes"],
+    [/\bVous\b/g, "Tu"],
+    [/\bvous\b/g, "tu"],
+    [/\bPrésentez\b/g, "Présente"],
+    [/\bTravaillez\b/g, "Travaille"],
+    [/\bComplétez\b/g, "Complète"],
     [/\bparle t-elle\b/gi, "parle-t-elle"],
     [/\bd[ée]gage t-elle\b/gi, "d\u00e9gage-t-elle"],
     [/\bquelle energie\b/gi, "quelle \u00e9nergie"],
@@ -63,7 +73,8 @@
     [/\bSynthese strategique\b/g, "Synth\u00e8se strat\u00e9gique"],
     [/\bDocument genere le\b/g, "Document g\u00e9n\u00e9r\u00e9 le"],
     [/\breponses client prioritaires\b/g, "r\u00e9ponses client prioritaires"],
-    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"]
+    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"],
+    [/\[Zone de texte\]/g, ""]
   ];
 
   function norm(value) {
@@ -408,7 +419,7 @@
     var zone = create("span", "brand-zone brand-zone-inline");
     zone.contentEditable = "true";
     zone.setAttribute("role", "textbox");
-    zone.setAttribute("data-placeholder", placeholder || "Votre réponse");
+    zone.setAttribute("data-placeholder", placeholder || "Ta réponse");
     zone.setAttribute("spellcheck", "true");
     try {
       zone.textContent = localStorage.getItem(storageKey) || "";
@@ -472,6 +483,13 @@
 
       if (/^(H2|H3|H4|P|LI|BLOCKQUOTE|TD|TH)$/i.test(node.tagName)) {
         replaceInlineTokens(node, token);
+      }
+    });
+
+    Array.prototype.slice.call(root.querySelectorAll("p, li, blockquote, td, th, h2, h3, h4")).forEach(function (node) {
+      if (node.querySelector && node.querySelector("textarea, .brand-zone-inline, [contenteditable='true']")) return;
+      if ((node.textContent || "").indexOf(token) !== -1) {
+        node.textContent = (node.textContent || "").replace(/\[Zone de texte\]/g, "").replace(/\s{2,}/g, " ").trim();
       }
     });
 
