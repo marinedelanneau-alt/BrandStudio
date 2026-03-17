@@ -1733,6 +1733,28 @@ article.page textarea {
   box-sizing: border-box !important;
 }
 
+.block {
+  background: #fff;
+  border: 1px solid #e7e3dc;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+article.page input:not([type="checkbox"]):not([type="radio"]),
+article.page textarea {
+  border: 1px solid #e7e3dc !important;
+  border-radius: 12px !important;
+  padding: 12px !important;
+  margin-top: 8px;
+}
+
+.input-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 article.page .brand-zone-inline {
   display: inline-flex !important;
   align-items: center;
