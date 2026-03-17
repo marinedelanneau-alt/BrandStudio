@@ -321,7 +321,7 @@
     setTextById("2ee05779-2efe-80e6-997e-d735fbce754e", "Travaille maintenant ta version finale :");
     setTextById("30505779-2efe-8026-acfa-cc0d9161f234", "Complète la phrase suivante :");
     setTextById("30505779-2efe-8058-908b-cda7519b1eed", "Réponds aux questions suivantes :");
-    setTextById("30505779-2efe-8098-bdd0-ef4b6ae5d032", "Version explicative (3-4 lignes)");
+    setTextById("30505779-2efe-8098-bdd0-ef4b6ae5d032", "Version explicative (3–4 lignes)");
     setTextById("30505779-2efe-807b-aad3-fc976ef01d1d", "Version synthétique (1 phrase)");
     setTextById("30505779-2efe-80c4-8a94-c04e6f588be9", "Transformation, la phrase essentielle");
     setTextById("30505779-2efe-8033-86cf-e7829f3d719d", "Version synthétique (1 phrase)");
