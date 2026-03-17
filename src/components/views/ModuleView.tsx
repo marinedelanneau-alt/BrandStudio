@@ -3,6 +3,7 @@ import { CoachTip } from "../blocks/CoachTip";
 import { ExampleBlock } from "../blocks/ExampleBlock";
 import { InsightBlock } from "../blocks/InsightBlock";
 import { SummaryBlock } from "../blocks/SummaryBlock";
+import { VisionPage } from "../brand-studio/VisionPage";
 import { FieldBlock } from "../forms/FieldBlock";
 import { Card } from "../ui/Card";
 
@@ -13,6 +14,10 @@ type Props = {
 };
 
 export function ModuleView({ module, data, onChange }: Props) {
+  if (module.id === "vision-marque") {
+    return <VisionPage data={data} onChange={onChange} />;
+  }
+
   return (
     <div className="space-y-8">
       {module.introNote ? (

@@ -8,7 +8,84 @@ import { ModuleView } from "../components/views/ModuleView";
 import { useBrandBookSections } from "../hooks/useBrandBookSections";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useModuleProgress } from "../hooks/useModuleProgress";
-import type { BrandData, Module } from "../types/brand";
+import type { BrandData, Field, Module } from "../types/brand";
+
+const visionMarqueFields: Field[] = [
+  { key: "brandName", label: "Nom de ta marque", type: "text" },
+  { key: "activity", label: "Décris ton activité", type: "textarea" },
+  { key: "goal", label: "Objectif principal", type: "textarea" },
+  { key: "missionAudience", label: "Mission - qui", type: "text" },
+  { key: "missionOutcome", label: "Mission - action", type: "text" },
+  { key: "missionMethod", label: "Mission - moyen", type: "text" },
+  { key: "missionWhy", label: "Pourquoi cette activité", type: "textarea" },
+  { key: "clientProblem", label: "Problème client", type: "textarea" },
+  { key: "missionLong", label: "Mission longue", type: "textarea" },
+  { key: "missionShort", label: "Mission courte", type: "textarea" },
+  { key: "missionInternal", label: "Mission interne", type: "textarea" },
+  { key: "missionFinal", label: "Mission finale", type: "textarea" },
+  { key: "visionWhere", label: "Vision à 3-5 ans", type: "textarea" },
+  { key: "visionImpact", label: "Impact visé", type: "textarea" },
+  { key: "visionMarket", label: "Place sur le marché", type: "textarea" },
+  { key: "visionClients", label: "Clients visés", type: "textarea" },
+  {
+    key: "transformationClientsValue",
+    label: "Transformation client",
+    type: "text",
+  },
+  {
+    key: "transformationImpactValue",
+    label: "Transformation globale",
+    type: "text",
+  },
+  { key: "visionLong", label: "Vision longue", type: "textarea" },
+  { key: "visionShort", label: "Vision courte", type: "textarea" },
+  { key: "visionInternal", label: "Vision interne", type: "textarea" },
+  { key: "visionFinal", label: "Vision finale", type: "textarea" },
+  ...Array.from({ length: 10 }, (_, index) => ({
+    key: `valuesBrainstorm${index + 1}`,
+    label: `Mot-clé ${index + 1}`,
+    type: "text" as const,
+  })),
+  { key: "value1", label: "Valeur 1", type: "text" },
+  { key: "value1Meaning", label: "Valeur 1 - sens", type: "textarea" },
+  { key: "value1Concrete", label: "Valeur 1 - concret", type: "textarea" },
+  {
+    key: "value1Communication",
+    label: "Valeur 1 - communication",
+    type: "textarea",
+  },
+  { key: "value1Action", label: "Valeur 1 - finale", type: "textarea" },
+  { key: "value2", label: "Valeur 2", type: "text" },
+  { key: "value2Meaning", label: "Valeur 2 - sens", type: "textarea" },
+  { key: "value2Concrete", label: "Valeur 2 - concret", type: "textarea" },
+  {
+    key: "value2Communication",
+    label: "Valeur 2 - communication",
+    type: "textarea",
+  },
+  { key: "value2Action", label: "Valeur 2 - finale", type: "textarea" },
+  { key: "value3", label: "Valeur 3", type: "text" },
+  { key: "value3Meaning", label: "Valeur 3 - sens", type: "textarea" },
+  { key: "value3Concrete", label: "Valeur 3 - concret", type: "textarea" },
+  {
+    key: "value3Communication",
+    label: "Valeur 3 - communication",
+    type: "textarea",
+  },
+  { key: "value3Action", label: "Valeur 3 - finale", type: "textarea" },
+  { key: "beforeStateValue", label: "Avant", type: "text" },
+  { key: "afterStateValue", label: "Après", type: "text" },
+  { key: "promisedResult", label: "Résultat promis", type: "textarea" },
+  {
+    key: "promisedExperience",
+    label: "Expérience promise",
+    type: "textarea",
+  },
+  { key: "promisedPosture", label: "Posture promise", type: "textarea" },
+  { key: "promiseExplicit", label: "Promesse explicite", type: "textarea" },
+  { key: "promiseIntegrated", label: "Promesse intégrée", type: "textarea" },
+  { key: "promiseFinal", label: "Promesse finale", type: "textarea" },
+];
 
 export function BrandStudioApp() {
   const [activeId, setActiveId] = useState(modules[0]?.id ?? "");
@@ -20,7 +97,7 @@ export function BrandStudioApp() {
   );
 
   const activeFields = useMemo(
-    () => activeModule?.steps?.flatMap((step) => step.fields) ?? [],
+    () => getTrackedFields(activeModule),
     [activeModule]
   );
 
@@ -56,6 +133,11 @@ export function BrandStudioApp() {
     }));
   };
 
+  const activeSubtitle =
+    activeModule.id === "vision-marque"
+      ? "Dans cette section, on va travailler sur l'ADN de ta marque. L'ADN, c'est le socle de tout : pourquoi ta marque existe, ce qu'elle défend et ce qui la rend unique."
+      : activeModule.subtitle;
+
   return (
     <AppShell
       sidebar={
@@ -79,7 +161,7 @@ export function BrandStudioApp() {
               {activeModule.title}
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-8 text-[#6A635B]">
-              {activeModule.subtitle}
+              {activeSubtitle}
             </p>
             {activeModule.quote ? (
               <p className="mt-5 max-w-3xl text-sm leading-7 text-[#756F67]">
@@ -106,7 +188,7 @@ export function BrandStudioApp() {
 }
 
 function isModuleComplete(module: Module, data: BrandData) {
-  const fields = module.steps?.flatMap((step) => step.fields) ?? [];
+  const fields = getTrackedFields(module);
 
   if (!fields.length) {
     return false;
@@ -121,4 +203,12 @@ function isModuleComplete(module: Module, data: BrandData) {
 
     return typeof value === "string" ? value.trim().length > 0 : Boolean(value);
   });
+}
+
+function getTrackedFields(module: Module) {
+  if (module.id === "vision-marque") {
+    return visionMarqueFields;
+  }
+
+  return module.steps?.flatMap((step) => step.fields) ?? [];
 }
