@@ -1,12 +1,12 @@
 (function () {
   var MODULES = [
-    { href: "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html", title: "Qui te propose cette offre ?" },
     { href: "Vision & marque 295057792efe81b4ac90f13958e3abad.html", title: "Vision & Marque" },
     { href: "Positionnement 295057792efe810e98f4ffd60c74fad4.html", title: "Positionnement" },
     { href: "Personnalit\u00e9 & ton de marque 295057792efe81e6be2be44f4963e114.html", title: "Personnalit\u00e9 & ton de marque" },
     { href: "Cr\u00e9ation du document, \u00e0 toi de jouer ! 2ee057792efe80899ba8ef2c7e90fe6e.html", title: "Cr\u00e9ation du document, \u00e0 toi de jouer !" },
     { href: "SUPPORTS BONUS 2fe057792efe801c9accfc2deb83190e.html", title: "Supports bonus" }
   ];
+  var ABOUT_PAGE = "Qui te propose cette offre 295057792efe81ffa620f0a50d9b1a35.html";
   var MENU_URL = "En%20route%20vers%20ta%20nouvelle%20strat%C3%A9gie%20de%20marque%20295057792efe80aabdfeebdd4704fcac.html";
   var LOGO_SRC = "LAB_(17).png";
   var COLLAGE_MAIN = "elements_nouvelle_comm_main.png";
@@ -903,21 +903,12 @@
   }
 
   function buildHomeAboutCard() {
-    var section = create("section", "bs-home-section");
-    var heading = create("div", "bs-home-section-head");
-    heading.appendChild(create("div", "bs-panel-label", "Introduction"));
-    heading.appendChild(create("h3", "bs-home-card-title", "Qui te propose cette offre"));
-    heading.appendChild(create("p", "bs-home-card-copy", "Decouvre le cadre, l'intention et l'approche derriere Brand Studio avant d'entrer dans les modules."));
-    section.appendChild(heading);
-
-    var card = create("article", "bs-panel bs-home-module-card");
-    card.appendChild(create("div", "bs-home-module-status", "Introduction"));
-    card.appendChild(create("h4", "bs-home-module-title", "Qui te propose cette offre"));
-    card.appendChild(create("p", "bs-home-module-copy", "Une presentation claire de l'accompagnement, pensee comme une entree independante avant le parcours de travail."));
-    var action = create("a", "bs-pill-btn bs-home-module-action", "Ouvrir");
-    action.href = MODULES[0].href;
-    card.appendChild(action);
-    section.appendChild(card);
+    var section = create("section", "intro-section bs-panel");
+    section.appendChild(create("h2", "bs-home-card-title", "Qui te propose cette offre ?"));
+    section.appendChild(create("p", "bs-home-card-copy", "Présentation de l’accompagnement, de l’intention du parcours et de la manière dont Brand Studio a été pensé pour t’aider à structurer ta marque avec plus de clarté."));
+    var action = create("a", "bs-pill-btn bs-home-module-action", "Découvrir l’accompagnement");
+    action.href = ABOUT_PAGE;
+    section.appendChild(action);
     return section;
   }
 
@@ -930,8 +921,8 @@
     section.appendChild(heading);
 
     var grid = create("div", "bs-home-modules-grid");
-    MODULES.slice(1).forEach(function (module, gridIndex) {
-      var moduleIndex = gridIndex + 1;
+    MODULES.forEach(function (module, gridIndex) {
+      var moduleIndex = gridIndex;
       var card = create("article", "bs-panel bs-home-module-card");
       if (moduleIndex === state.activeIndex) card.classList.add("is-current");
       if (moduleIndex < state.activeIndex) card.classList.add("is-complete");
