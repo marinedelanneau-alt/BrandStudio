@@ -1726,6 +1726,13 @@ article.page textarea {
   transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease !important;
 }
 
+article.page input:not([type="checkbox"]):not([type="radio"]),
+article.page textarea {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 article.page .brand-zone-inline {
   display: inline-flex !important;
   align-items: center;
