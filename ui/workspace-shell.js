@@ -76,8 +76,7 @@
     [/\bSynthese strategique\b/g, "Synth\u00e8se strat\u00e9gique"],
     [/\bDocument genere le\b/g, "Document g\u00e9n\u00e9r\u00e9 le"],
     [/\breponses client prioritaires\b/g, "r\u00e9ponses client prioritaires"],
-    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"],
-    [/\[Zone de texte\]/g, ""]
+    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"]
   ];
 
   function norm(value) {
@@ -305,6 +304,13 @@
       "ta communication",
       "ton offre",
       "l’expérience que tu proposes"
+    ];
+
+    items = [
+      "la création de vos offres",
+      "votre communication",
+      "votre discours commercial",
+      "vos décisions de développement"
     ];
 
     items.forEach(function (labelText, index) {
