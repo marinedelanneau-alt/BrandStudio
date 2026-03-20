@@ -1,5 +1,3 @@
-"use client";
-
 import type { BrandData, Field } from "../../types/brand";
 import { toneContent } from "../../content/tone";
 import { ExampleBox } from "./ExampleBox";
@@ -16,19 +14,8 @@ type TonePageProps = {
   onChange: (key: string, value: unknown) => void;
 };
 
-function getFieldType(field: object) {
-  return "type" in field ? field.type : undefined;
-}
-
-function getFieldPlaceholder(field: object) {
-  return "placeholder" in field && typeof field.placeholder === "string"
-    ? field.placeholder
-    : "";
-}
-
-function isSimpleField(field: object) {
-  const fieldType = getFieldType(field);
-  return fieldType === "text" || fieldType === "textarea";
+function isSimpleField(field: { type?: string }) {
+  return field.type === "text" || field.type === "textarea";
 }
 
 export function TonePage({ data, onChange }: TonePageProps) {
@@ -60,7 +47,7 @@ export function TonePage({ data, onChange }: TonePageProps) {
           <div className="space-y-5 rounded-3xl border border-stone-200 bg-white p-6 sm:p-8">
             {section.answers.map((field) =>
               isSimpleField(field) ? (
-                getFieldType(field) === "text" ? (
+                field.type === "text" ? (
                   <FieldBlock
                     key={field.key}
                     moduleId="personnalite-ton"
@@ -74,7 +61,7 @@ export function TonePage({ data, onChange }: TonePageProps) {
                     label={field.label}
                     value={getValue(field.key)}
                     onChange={(value) => onChange(field.key, value)}
-                    placeholder={getFieldPlaceholder(field)}
+                    placeholder={field.placeholder || ""}
                   />
                 )
               ) : (

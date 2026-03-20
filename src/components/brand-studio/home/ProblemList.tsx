@@ -1,5 +1,5 @@
 type ProblemListProps = {
-  items: readonly string[];
+  items: string[];
 };
 
 export function ProblemList({ items }: ProblemListProps) {

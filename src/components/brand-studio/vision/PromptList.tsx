@@ -1,6 +1,6 @@
 type PromptListProps = {
   title?: string;
-  items: readonly string[];
+  items: string[];
 };
 
 export function PromptList({ title, items }: PromptListProps) {

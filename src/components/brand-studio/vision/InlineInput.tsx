@@ -1,5 +1,3 @@
-"use client";
-
 type InlineInputProps = {
   value: string;
   onChange: (value: string) => void;

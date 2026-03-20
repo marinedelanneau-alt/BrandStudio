@@ -1,5 +1,3 @@
-"use client";
-
 import { brandAssets } from "../../../lib/brand-assets";
 import { Button } from "../../ui/Button";
 

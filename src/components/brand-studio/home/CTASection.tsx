@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "../../ui/Button";
 
 type CTASectionProps = {

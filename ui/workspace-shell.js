@@ -76,7 +76,8 @@
     [/\bSynthese strategique\b/g, "Synth\u00e8se strat\u00e9gique"],
     [/\bDocument genere le\b/g, "Document g\u00e9n\u00e9r\u00e9 le"],
     [/\breponses client prioritaires\b/g, "r\u00e9ponses client prioritaires"],
-    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"]
+    [/\bBlocs de synthese\b/g, "Blocs de synth\u00e8se"],
+    [/\[Zone de texte\]/g, ""]
   ];
 
   function norm(value) {
@@ -304,13 +305,6 @@
       "ta communication",
       "ton offre",
       "l’expérience que tu proposes"
-    ];
-
-    items = [
-      "la création de vos offres",
-      "votre communication",
-      "votre discours commercial",
-      "vos décisions de développement"
     ];
 
     items.forEach(function (labelText, index) {
@@ -575,7 +569,7 @@
   function buildBlockZone(storageKey, placeholder) {
     var zone = document.createElement("textarea");
     zone.className = "brand-zone brand-zone-block";
-    zone.placeholder = placeholder || "Ta réponse";
+    zone.placeholder = placeholder || "Écris ici";
     zone.rows = 4;
     try {
       zone.value = localStorage.getItem(storageKey) || "";
@@ -600,7 +594,7 @@
     parts.forEach(function (part, index) {
       if (part) node.appendChild(document.createTextNode(part));
       if (index < parts.length - 1) {
-        node.appendChild(buildInlineZone(zoneStorageKey(node, "inline-" + index), "Ta réponse"));
+        node.appendChild(buildInlineZone(zoneStorageKey(node, "inline-" + index), "Compléter"));
       }
     });
     return true;
@@ -617,7 +611,7 @@
 
       if (text === token && /^(P|DIV|BLOCKQUOTE|TD|TH)$/i.test(node.tagName)) {
         node.textContent = "";
-        node.appendChild(buildBlockZone(zoneStorageKey(node, "block"), "Ta réponse"));
+        node.appendChild(buildBlockZone(zoneStorageKey(node, "block"), "Écris ici"));
         return;
       }
 

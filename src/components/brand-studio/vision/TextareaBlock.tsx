@@ -1,5 +1,3 @@
-"use client";
-
 type TextareaBlockProps = {
   id?: string;
   label: string;

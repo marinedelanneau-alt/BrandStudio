@@ -1,5 +1,3 @@
-"use client";
-
 import type { Module } from "../../types/brand";
 
 type Props = {

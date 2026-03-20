@@ -1,5 +1,3 @@
-"use client";
-
 import type { BrandData, Field } from "../../types/brand";
 import { ColorGeneratorField } from "./ColorGeneratorField";
 import { ColorRowField } from "./ColorRowField";

@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef } from "react";
 import { CTASection } from "../brand-studio/home/CTASection";
 import { FeatureCard } from "../brand-studio/home/FeatureCard";

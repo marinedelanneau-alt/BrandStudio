@@ -1,35 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-[#f7f2ea] text-stone-900 antialiased;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
+html, body, #root {
+  margin: 0;
+  min-height: 100%;
 }
 
-@layer components {
-  .bs-surface {
-    @apply rounded-2xl border border-[#e7e3dc] bg-white shadow-[0_18px_40px_rgba(28,25,23,0.06)];
-  }
+body {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  background: #F7F3EC;
+  color: #3F3F49;
+}
 
-  .bs-input {
-    @apply w-full rounded-xl border border-[#e7e3dc] bg-white px-4 py-3 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-[#8b5e34] focus:ring-4 focus:ring-[#8b5e34]/10;
-  }
-
-  .bs-textarea {
-    @apply bs-input min-h-36 resize-y;
-  }
-
-  .bs-label {
-    @apply text-sm font-medium text-stone-800;
-  }
+.font-display {
+  font-family: Georgia, "Times New Roman", serif;
 }

@@ -1,5 +1,3 @@
-"use client";
-
 type Props = {
   id: string;
   checked: boolean;
