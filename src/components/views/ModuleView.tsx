@@ -1,3 +1,5 @@
+"use client";
+
 import type { BrandData, Module } from "../../types/brand";
 import { CoachTip } from "../blocks/CoachTip";
 import { ExampleBlock } from "../blocks/ExampleBlock";

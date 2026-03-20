@@ -1,3 +1,5 @@
+"use client";
+
 import type { BrandData } from "../../types/brand";
 import { ExampleBox } from "./ExampleBox";
 import { ExerciseBlock } from "./ExerciseBlock";

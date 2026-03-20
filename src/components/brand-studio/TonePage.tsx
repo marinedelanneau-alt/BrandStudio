@@ -1,3 +1,5 @@
+"use client";
+
 import type { BrandData, Field } from "../../types/brand";
 import { toneContent } from "../../content/tone";
 import { ExampleBox } from "./ExampleBox";

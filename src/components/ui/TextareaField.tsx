@@ -1,3 +1,5 @@
+"use client";
+
 type TextareaFieldProps = {
   label: string;
   value: string;

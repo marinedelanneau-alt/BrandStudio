@@ -1,3 +1,5 @@
+"use client";
+
 import { TextareaBlock } from "./TextareaBlock";
 
 type FinalAnswerBlockProps = {
