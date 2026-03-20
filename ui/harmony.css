@@ -2167,6 +2167,11 @@ body.bs-page-home article.page .page-title.is-written::after {
   content: none !important;
 }
 
+body.bs-page-vision article.page .page-header-icon,
+body.bs-page-vision article.page .page-header-icon-with-cover {
+  display: none !important;
+}
+
 body.bs-page-home article.page .page-description {
   width: auto !important;
   max-width: 44ch !important;
