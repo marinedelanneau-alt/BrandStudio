@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo, useState } from "react";
 import { AppShell } from "../components/layout/AppShell";
 import { Sidebar } from "../components/layout/Sidebar";
